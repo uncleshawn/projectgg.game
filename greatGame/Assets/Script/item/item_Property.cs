@@ -32,6 +32,7 @@ public class item_Property : MonoBehaviour {
 		switch(str){
 		default	: 		mType = itemType.none; 		break;
 		case "recover": mType = itemType.recover;	break;
+		case "inBag":	mType = itemType.inBag;  	break; 
 		}
 	}
 }
