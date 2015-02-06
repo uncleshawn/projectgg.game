@@ -1,0 +1,50 @@
+Initialize engine version: 4.6.0f3 (30840d631a27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 3000 (ID=0x116)
+    Vendor:   Intel
+    VRAM:     32 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\yaode\Documents\greatGame\bin_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\yaode\Documents\greatGame\bin_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\yaode\Documents\greatGame\bin_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\yaode\Documents\greatGame\bin_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\PlayMaker.dll (this message is harmless)
+Loading C:\Users\yaode\Documents\greatGame\bin_Data\Managed\PlayMaker.dll into Unity Child Domain
+- Completed reload, in  0.142 seconds
+desktop: 1600x900 60Hz; virtual: 2966x900 at -1366,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\yaode\Documents\greatGame\bin_Data\Managed\System.dll (this message is harmless)
+OnTriggerEnter Player
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+player enter
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Level 'titlescene' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 271)
+
+OnTriggerEnter Player
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+player enter
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Level 'titlescene' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 271)
+
