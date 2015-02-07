@@ -5,6 +5,6 @@
 #显示指定忽略名称为main的文件  
 /greatGame/Temp/*
 /greatGame/Library/*
-.csproj
-.sln
-version 0.0.3
+*.csproj
+*.sln
+#version 0.0.4
