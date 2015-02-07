@@ -5,4 +5,5 @@
 #显示指定忽略名称为main的文件  
 /greatGame/Temp/*
 /greatGame/Library/*
-#dose not working
+
+version 0.0.3
