@@ -15,21 +15,30 @@ public class enemylogic : MonoBehaviour {
 
 	public void beAttack(GameObject obj){
 		if (obj.tag.Equals ("Bullet")) {
-			bullet_property pro = obj.GetComponent<bullet_property>();
-
+			bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 			enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
-			if (!pro) {
-				Debug.Log ("error: lost bullet gameObject");
-			}
-			enemyProperty.Hp = enemyProperty.Hp - pro.mDamage;
-			Debug.Log ("damage: " + pro.mDamage);
+
+			getDamage(enemyProperty,bulletProperty);
 			
 			if(isDie()){
 				GameObject.Destroy(this.gameObject);
-				Debug.Log("enemy die");
 				constant.getMapLogic().checkOpenDoor();
 			}
 		}
+	}
+
+
+	public void getDamage(enemy_property enemyProperty,bullet_property bulletProperty){
+		Debug.Log("enemy get damage: " + bulletProperty.bulletDamage);
+		enemyProperty.Hp = enemyProperty.Hp - bulletProperty.bulletDamage;
+	}
+
+	public void getKnockBack(enemy_property enemyProperty){
+
+	}
+
+	public void getEffect(enemy_property enemyProperty){
+
 	}
 
 	public bool isDie(){

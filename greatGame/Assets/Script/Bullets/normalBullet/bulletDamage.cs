@@ -4,28 +4,37 @@ using System.Collections;
 public class bulletDamage : MonoBehaviour {
 
 	// Use this for initialization
-	//float damage;
+	float cTime;
+	bullet_property bulletPro;
 	public XInputVibrateTest vibrate;
+
+
+	void aWake(){
+
+	}
 	void Start () {
-		//damage = 50;
+		cTime = 5;
+		bulletPro = gameObject.GetComponent<bullet_property>();
 		if(vibrate = GameObject.Find("preLoad").GetComponent<XInputVibrateTest>()){
 		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		cTime += Time.deltaTime;
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerStay(Collider other)
 	{
-		Debug.Log("bullet碰撞到的物体的名字是：" + other.gameObject.name);
 		enemylogic logic = other.gameObject.GetComponent<enemylogic>();
 		if(logic){
-			//Debug.Log("enmey get damage: " + damage);
-			logic.beAttack(this.gameObject);
-			//vibrate.joystickVibrate(0.2f,1,1);
-
+			if(cTime >= bulletPro.bulletDamageRate) {
+				Debug.Log("bullet send damage to enemy.");
+				logic.beAttack(this.gameObject);
+				//vibrate.joystickVibrate(0.2f,1,1);
+				cTime = 0;
+			}
 		}
 	}
 }

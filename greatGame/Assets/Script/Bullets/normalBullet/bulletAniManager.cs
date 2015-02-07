@@ -58,7 +58,7 @@ public class bulletAniManager : MonoBehaviour {
 	public void hitEnemies() {
 		bulletStop();
 		//动画结束后子弹消失
-		Debug.Log ("collision: bullet hit enemy.");
+		Debug.Log ("bulletAnimation: bullet hit enemy.");
 		destroyAfterAni("hit");
 	}
 
@@ -76,7 +76,7 @@ public class bulletAniManager : MonoBehaviour {
 	//设置子弹的方向
 	void setBulletDireciton(tk2dSprite bulletSprite,tk2dSpriteAnimator bulletAni , Direction bulletDirection)
 	{
-		Debug.Log ("setting bullet direction!: " + bulletDirection);
+		//Debug.Log ("setting bullet direction!: " + bulletDirection);
 		switch(bulletDirection) 
 		{ 
 		default: 

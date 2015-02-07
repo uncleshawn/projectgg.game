@@ -33,7 +33,11 @@ public enum itemType
 	special = 5
 }
 
-
+public enum ElementType
+{
+	normal		= 1,
+	fire		= 2
+}
 
 public class gameNames : MonoBehaviour {
 

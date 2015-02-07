@@ -3,15 +3,15 @@ using System.Collections;
 
 public class bullet_property : MonoBehaviour {
 
-	public int mDamage;
-	public int mNoknock;
-	public int mRate;
+	public int bulletDamage;
+	public int bulletknock;
+	public float bulletDamageRate;
+	public ElementType bulletElement;
+
 
 	// Use this for initialization
 	void Awake(){
-		mDamage = 50;
-		mNoknock = 1;
-		mRate = 1;
+
 	}
 	void Start () {
 	}
@@ -20,7 +20,10 @@ public class bullet_property : MonoBehaviour {
 	void Update () {
 	
 	}
-	public void setProperty(GameObject player){
-
+	public void setProperty(int damage, int knock, float damamgeRate, ElementType element){
+		bulletDamage = damage;
+		bulletknock = knock ;
+		bulletDamageRate = damamgeRate ; 
+		bulletElement = element;
 	}
 }
