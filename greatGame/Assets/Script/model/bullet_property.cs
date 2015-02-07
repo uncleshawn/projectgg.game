@@ -20,4 +20,7 @@ public class bullet_property : MonoBehaviour {
 	void Update () {
 	
 	}
+	public void setProperty(GameObject player){
+
+	}
 }
