@@ -8,10 +8,12 @@ public class bullet_property : MonoBehaviour {
 	public int mRate;
 
 	// Use this for initialization
-	void Start () {
+	void Awake(){
 		mDamage = 50;
 		mNoknock = 1;
 		mRate = 1;
+	}
+	void Start () {
 	}
 	
 	// Update is called once per frame

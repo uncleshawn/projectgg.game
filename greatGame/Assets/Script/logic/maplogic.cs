@@ -198,14 +198,14 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	public void playOpenDoorAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-		Debug.Log ("playOpenDoorAni");
+		//Debug.Log ("playOpenDoorAni");
 		BoxCollider box = animator.gameObject.GetComponent<BoxCollider> ();
 		box.isTrigger = true;
 	}
 
 	public void checkOpenDoor(){
 		GameObject[] enemys = GameObject.FindGameObjectsWithTag ("Enemy");
-		Debug.Log ("checkOpenDoor: " +  enemys.Length);
+		//Debug.Log ("checkOpenDoor: " +  enemys.Length);
 		if (enemys.Length == 0) {
 			openDoor();
 		}

@@ -17,8 +17,10 @@ public class bulletAniManager : MonoBehaviour {
 		bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
 	}
 	void Start () {
-		bulletDirection = getDirection();
-		setBulletDireciton(bulletSprite,bulletAni,bulletDirection);
+		if(bulletDie == false) {
+			bulletDirection = getDirection();
+			setBulletDireciton(bulletSprite,bulletAni,bulletDirection);
+		}
 	}
 	
 	// Update is called once per frame
@@ -48,6 +50,7 @@ public class bulletAniManager : MonoBehaviour {
 	//子弹击中墙壁
 	public void hitWall() {
 		bulletStop();
+		Debug.Log ("collision: bullet hit wall.");
 		destroyAfterAni("hit");
 	}
 
@@ -55,6 +58,7 @@ public class bulletAniManager : MonoBehaviour {
 	public void hitEnemies() {
 		bulletStop();
 		//动画结束后子弹消失
+		Debug.Log ("collision: bullet hit enemy.");
 		destroyAfterAni("hit");
 	}
 
