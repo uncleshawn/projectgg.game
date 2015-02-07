@@ -35,4 +35,6 @@ public class item_Property : MonoBehaviour {
 		case "inBag":	mType = itemType.inBag;  	break; 
 		}
 	}
+
+
 }
