@@ -18,7 +18,7 @@ public class collipse_script : MonoBehaviour {
 
 		if (collision.gameObject.tag.Equals ("Player")) {
 			charlogic charLogic = collision.gameObject.GetComponent<charlogic>();
-			charLogic.beAttack(this.gameObject);
+			//charLogic.beAttack(this.gameObject);
 		}
 	}
 

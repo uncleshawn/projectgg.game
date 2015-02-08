@@ -186,7 +186,7 @@ public class maplogic : MonoBehaviour  {
 
 	public void openDoor(){
 		GameObject[] doors = GameObject.FindGameObjectsWithTag ("normalDoors");
-		Debug.Log ("openDoor");
+		//Debug.Log ("openDoor");
 		foreach (GameObject door in doors) {
 			tk2dSpriteAnimator ani = door.GetComponent<tk2dSpriteAnimator>();
 			BoxCollider box = ani.gameObject.GetComponent<BoxCollider> ();

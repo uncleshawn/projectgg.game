@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class charlogic : MonoBehaviour {
+public class charlogic : monsterbaselogic {
 
 	// Use this for initialization
 	void Start () {

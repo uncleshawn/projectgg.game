@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class enemylogic : MonoBehaviour {
+public class enemylogic : monsterbaselogic {
 
 	// Use this for initialization
 	void Start () {
