@@ -3,6 +3,6 @@
 
 *.csproj
 
-*.orig
-
-*.orig
+*.sln
+/greatGame/Temp/*
+/greatGame/Library/*
