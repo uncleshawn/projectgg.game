@@ -1,5 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench />
+=======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\accl_script.cs">
     <Files>
       <File FileName="Assets\Script\ui\accl_script.cs" Line="55" Column="46" />
@@ -13,6 +16,7 @@
       <File FileName="Assets\Script\ui\collipse_script.cs" Line="7" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+>>>>>>> branch_ds
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
