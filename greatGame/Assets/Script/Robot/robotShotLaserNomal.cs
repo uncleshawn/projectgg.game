@@ -11,16 +11,21 @@ public class robotShotLaserNomal : MonoBehaviour {
 	public float flyingTime;
 	public float coldDown;
 	float mcoldDown;
+	public int laserDamage;
+	int mbulletDamage;
+
+	public float damageRate; 
 
 	Direction bulletDirection;
 
-
-	// Use this for initialization
-	void Start () {
-
+	void Awake(){
 		coldDown = 1;
 		laserRate = preTime + flyingTime + mcoldDown;
 		laserPath = "Prefabs/bullets/normalLaser";
+	}
+
+	// Use this for initialization
+	void Start () {
 		delayTime = laserRate;
 
 	}
@@ -77,5 +82,6 @@ public class robotShotLaserNomal : MonoBehaviour {
 	public void upgradeProperties(char_property property){
 		mcoldDown = coldDown - property.AttackRate*0.1f;
 		laserRate = preTime + flyingTime + mcoldDown;
+		mbulletDamage = laserDamage + property.Damage*5;
 	}
 }

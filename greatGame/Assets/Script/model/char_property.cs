@@ -44,9 +44,7 @@ public class char_property : base_property {
 
 
 
-	// Use this for initialization
-	void Start () {
-
+	void Awake() {
 		mHp = 5;
 		mMoveSpeed = 10;
 		mDamage = 1;
@@ -54,13 +52,18 @@ public class char_property : base_property {
 		mAttackRate = 1;
 		mAttackDistance = 0;
 		upgradeShootProperties();
-
+		
 		mMaxHp = 5;
 		mMaxMoveSpeed = 10;
 		mMaxDamage = 1;
 		mMaxAttackSpeed = 1;
 		mMaxAttackRate = 1;
 		mMaxAttackDistance = 0;
+	}
+	// Use this for initialization
+	void Start () {
+
+
 
 		upgradeShootProperties();
 	}

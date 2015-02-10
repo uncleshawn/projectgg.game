@@ -1,16 +1,35 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\monsterbaselogic.cs">
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/enemylogic.cs">
+    <Files>
+      <File FileName="Assets/Script/Robot/robotShotNormalBullet.cs" Line="178" Column="29" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="16" Column="39" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="61" Column="32" />
+      <File FileName="Assets/Script/ui/collipse_script.cs" Line="28" Column="1" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletDamage.cs" Line="31" Column="13" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\move_script.cs">
+>>>>>>> 3050d926ae0d8b2fd5dead58155df140180d42f7
     <Files>
       <File FileName="Assets\Script\logic\char\charlogic.cs" Line="5" Column="34" />
       <File FileName="Assets\Script\ui\move_script.cs" Line="7" Column="29" />
       <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="31" Column="1" />
       <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\logic\maplogic.cs" Line="1" Column="1" />
+<<<<<<< HEAD
       <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\model\base_property.cs" Line="12" Column="17" />
       <File FileName="Assets\Script\model\enemy_property.cs" Line="17" Column="38" />
       <File FileName="Assets\Script\model\item_property.cs" Line="14" Column="3" />
+=======
+      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="7" Column="17" />
+>>>>>>> FETCH_HEAD
+>>>>>>> 3050d926ae0d8b2fd5dead58155df140180d42f7
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
