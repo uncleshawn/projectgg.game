@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class enemy_property : MonoBehaviour {
+public class enemy_property : base_property {
 
 	private int mHp;
 	private float mMoveSpeed;

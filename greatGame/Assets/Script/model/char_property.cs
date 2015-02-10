@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class char_property : MonoBehaviour {
+public class char_property : base_property {
 	
 	//originProperties
 	private int mMaxHp;

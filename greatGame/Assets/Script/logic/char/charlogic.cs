@@ -112,5 +112,17 @@ public class charlogic : monsterbaselogic {
 		return false;
 	}
 
+	override public Vector3 getMoveAcc(){
+		Vector3 v = new Vector3 ();
+		v.x = 0;
+		v.y = 0;
+		v.z = 0;
+
+		float x = Input.GetAxisRaw ("Horizontal");
+		float y = Input.GetAxisRaw ("Vertical");
+		v.x = x*50.0f;
+		v.y = y*50.0f;
+		return v;
+	}
 
 }

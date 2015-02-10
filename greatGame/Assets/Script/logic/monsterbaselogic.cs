@@ -3,7 +3,7 @@ using System.Collections;
 
 public class monsterbaselogic : MonoBehaviour {
 
-	private float mFAcc = 2.0f;
+	//private float mFAcc = 20.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,7 +14,7 @@ public class monsterbaselogic : MonoBehaviour {
 	
 	}
 
-	public Vector3 getMoveAcc(){
+	virtual public Vector3 getMoveAcc(){
 		Vector3 v = new Vector3 ();
 		v.x = 0;
 		v.y = 0;
@@ -22,10 +22,14 @@ public class monsterbaselogic : MonoBehaviour {
 		return v;
 	}
 
-	public Vector3 getFAcc(){
+	virtual public Vector3 getFAcc(){
 		Vector3 v = new Vector3 ();
-		v.x = mFAcc;
-		v.y = mFAcc;
+
+		base_property pro = gameObject.GetComponent<base_property> ();
+
+
+		v.x = pro.FAcc * pro.Mass;
+		v.y = pro.FAcc * pro.Mass;
 		v.z = 0;
 		return v;
 	}
