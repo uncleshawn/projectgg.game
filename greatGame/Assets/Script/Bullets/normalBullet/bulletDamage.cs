@@ -13,7 +13,7 @@ public class bulletDamage : MonoBehaviour {
 
 	}
 	void Start () {
-		cTime = 5;
+		cTime = 99;
 		bulletPro = gameObject.GetComponent<bullet_property>();
 		if(vibrate = GameObject.Find("preLoad").GetComponent<XInputVibrateTest>()){
 		}
