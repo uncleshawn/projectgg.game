@@ -21,6 +21,7 @@ public class move_script : MonoBehaviour {
 		//Debug.Log("self_acc:" + self_acc.x + "," + self_acc.y + "," + self_acc.z);
 		bool isXZero = false;
 		bool isYZero = false;
+		Vector3 actual_acc = new Vector3 ();
 		{
 			Vector3 speed = rigidbody.velocity;
 			//Debug.Log("speed:" + speed.x + "," + speed.y + "," + speed.z);
@@ -40,7 +41,7 @@ public class move_script : MonoBehaviour {
 				f_acc.y = Mathf.Abs(f_acc.y);
 			}
 			
-			Vector3 actual_acc = self_acc + f_acc;
+			actual_acc = self_acc + f_acc;
 			if( (actual_acc.x*mFps+speed.x)*speed.x < 0 ){
 				isXZero = true;
 				f_acc.x = 0;
@@ -56,19 +57,24 @@ public class move_script : MonoBehaviour {
 		}
 
 		{
+			float maxSpeed = mSpeed;
+			if(Mathf.Abs(self_acc.x)>0 && Mathf.Abs(self_acc.y)>0){
+				maxSpeed = mSpeed*0.7f;
+			}
 			//速度上限
 			Vector3 speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
-			if (speed.x > mSpeed) {
-				speed.x = mSpeed;
-			}else if(speed.x < -mSpeed){
-				speed.x = -mSpeed; 
+			if (speed.x > maxSpeed) {
+				speed.x = maxSpeed;
+			}else if(speed.x < -maxSpeed){
+				speed.x = -maxSpeed; 
 			}
 			
-			if (speed.y > mSpeed) {
-				speed.y = mSpeed;
-			}else if(speed.y < -mSpeed){
-				speed.y = -mSpeed;
+			if (speed.y > maxSpeed) {
+				speed.y = maxSpeed;
+			}else if(speed.y < -maxSpeed){
+				speed.y = -maxSpeed;
 			}
+
 			rigidbody.velocity = speed;
 		}
 
