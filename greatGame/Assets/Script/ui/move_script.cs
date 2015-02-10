@@ -3,7 +3,7 @@ using System.Collections;
 
 public class move_script : MonoBehaviour {
 
-	private float mSpeed = 25.0f;	//最快速度
+	private float mSpeed = 15.0f;	//最快速度
 	private float mFps = 0.02f;
 
 	// Use this for initialization
@@ -18,17 +18,17 @@ public class move_script : MonoBehaviour {
 
 		Vector3 self_acc = baseLogic.getMoveAcc ();//new Vector3();	//加速度
 		Vector3 f_acc = baseLogic.getFAcc ();//new Vector3 ();		//阻力减速度
-
+		//Debug.Log("self_acc:" + self_acc.x + "," + self_acc.y + "," + self_acc.z);
 		bool isXZero = false;
 		bool isYZero = false;
 		{
 			Vector3 speed = rigidbody.velocity;
-			Debug.Log("speed:" + speed.x + "," + speed.y + "," + speed.z);
+			//Debug.Log("speed:" + speed.x + "," + speed.y + "," + speed.z);
 			if (speed.x == 0) {
 				f_acc.x = 0;
 			} else if (speed.x > 0) {
 				f_acc.x = -Mathf.Abs(f_acc.x);
-			}else{
+			}else {
 				f_acc.x = Mathf.Abs(f_acc.x);
 			}
 
@@ -51,7 +51,7 @@ public class move_script : MonoBehaviour {
 			}
 			actual_acc = self_acc + f_acc;
 
-			Debug.Log("actual_acc:" + actual_acc.x + "," + actual_acc.y + "," + actual_acc.z);
+			//Debug.Log("actual_acc:" + actual_acc.x + "," + actual_acc.y + "," + actual_acc.z);
 			rigidbody.AddForce(actual_acc);
 		}
 
