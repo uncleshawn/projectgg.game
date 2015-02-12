@@ -3,9 +3,12 @@ using System.Collections;
 
 public class bat_logic : enemylogic {
 
+	float deltaTime;
+	float mIntervalTime = 1;
+	float mWaitTime = 1;
 	// Use this for initialization
 	void Start () {
-	
+		deltaTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -14,6 +17,7 @@ public class bat_logic : enemylogic {
 //		enemy_property pro = this.gameObject.GetComponent<>enemy_property();
 
 //		pro.MoveSpeed;
+		deltaTime = deltaTime + Time.fixedDeltaTime;
 	}
 
 	override public Vector3 getMoveAcc(){
@@ -21,6 +25,11 @@ public class bat_logic : enemylogic {
 		//Debug.Log ("bat getMoveAcc");
 		GameObject obj  = constant.getPlayer ();
 		if (obj == null) {
+			return v;
+		}
+
+		deltaTime = deltaTime % (mIntervalTime + mWaitTime);
+		if (deltaTime <= mWaitTime) {
 			return v;
 		}
 
