@@ -14,7 +14,9 @@ public class robotShotLaserNomal : MonoBehaviour {
 	public int laserDamage;
 	int mbulletDamage;
 
-	public float damageRate; 
+	public float mdamageRate; 
+	public int mknockBack;
+	public ElementType mType;
 
 	Direction bulletDirection;
 
@@ -46,6 +48,9 @@ public class robotShotLaserNomal : MonoBehaviour {
 
 		GameObject laserClone = (GameObject)Instantiate(Resources.Load(laserPath),transform.position,Quaternion.identity);
 		laserClone.GetComponent<laserAniManager>().setShooter(this.transform.parent.gameObject,preTime,flyingTime);
+
+		//SET BULLET PROPERTY
+		setBulletProperty(laserClone);
 	}
 
 	void getBulletDirection()
@@ -79,9 +84,16 @@ public class robotShotLaserNomal : MonoBehaviour {
 		this.enabled = false;
 	}
 
+	//UPGRADE SHOOTER PROPERTY FROM CHARACTER PROPERTY
 	public void upgradeProperties(char_property property){
 		mcoldDown = coldDown - property.AttackRate*0.1f;
 		laserRate = preTime + flyingTime + mcoldDown;
 		mbulletDamage = laserDamage + property.Damage*5;
+	}
+
+	//SEND PROPERTY TO BULLETS
+	public void setBulletProperty(GameObject bulletClone){
+		if(mdamageRate == 0) {mdamageRate = 10;}
+		bulletClone.GetComponent<bullet_property>().setProperty(mbulletDamage,mknockBack,mdamageRate,mType);
 	}
 }
