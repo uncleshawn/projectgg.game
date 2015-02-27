@@ -7,14 +7,14 @@ public class bulletDamage : MonoBehaviour {
 	float cTime;
 	bullet_property bulletPro;
 	public XInputVibrateTest vibrate;
+	public bool doDamage = true;
 
 
 	void aWake(){
 
 	}
 	void Start () {
-		cTime = 5;
-		bulletPro = gameObject.GetComponent<bullet_property>();
+		cTime = 99;
 		if(vibrate = GameObject.Find("preLoad").GetComponent<XInputVibrateTest>()){
 		}
 
@@ -27,13 +27,18 @@ public class bulletDamage : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		enemylogic logic = other.gameObject.GetComponent<enemylogic>();
-		if(logic){
-			if(cTime >= bulletPro.bulletDamageRate) {
-				Debug.Log("bullet send damage to enemy.");
-				logic.beAttack(this.gameObject);
-				//vibrate.joystickVibrate(0.2f,1,1);
-				cTime = 0;
+		if(doDamage){
+			//Debug.Log("bullet: touch object= " + other.name);
+			bulletPro = gameObject.GetComponent<bullet_property>();
+			enemylogic logic = other.gameObject.GetComponent<enemylogic>();
+			if(logic){ 
+				//Debug.Log("CurrentTime : damageRate = " + cTime +" : "+bulletPro.bulletDamageRate);
+				if(cTime >= bulletPro.bulletDamageRate) {
+					//Debug.Log("bullet send damage to enemy.");
+					logic.beAttack(this.gameObject);
+					//vibrate.joystickVibrate(0.2f,1,1);
+					cTime = 0;
+				}
 			}
 		}
 	}

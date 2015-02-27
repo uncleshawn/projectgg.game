@@ -15,7 +15,7 @@ public class robotWeaponSwitch : MonoBehaviour {
 		laserNormal = transform.FindChild("shoot").GetComponent<robotShotLaserNomal>();
 		bulletNormal = transform.FindChild("shoot").GetComponent<robotShotNormalBullet>();
 		disableAllWeapon();
-		enableComponent(bulletNormal);
+		enableComponent(laserNormal);
 	}
 	
 	// Update is called once per frame

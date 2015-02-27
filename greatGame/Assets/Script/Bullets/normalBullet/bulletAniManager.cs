@@ -107,21 +107,7 @@ public class bulletAniManager : MonoBehaviour {
 	}
 
 
-
-	void OnTriggerEnter(Collider other){
-		if(!bulletDie){
-			if(other.gameObject.layer == 8){
-				hitWall();
-				return ;
-			}
-			enemy_property enemyPro = other.gameObject.GetComponent<enemy_property>();
-			if(enemyPro){
-				hitEnemies();
-			}
-		}
-	}
 	
-
 	public void afterAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
 		GameObject.Destroy(this.gameObject);
 	}
@@ -138,5 +124,18 @@ public class bulletAniManager : MonoBehaviour {
 	void bulletStop(){
 		bulletDie = true;
 		rigidbody.velocity = new Vector3(0,0,0);
+	}
+
+	void OnTriggerEnter(Collider other){
+		if(!bulletDie){
+			if(other.gameObject.layer == 8){
+				hitWall();
+				return ;
+			}
+			enemy_property enemyPro = other.gameObject.GetComponent<enemy_property>();
+			if(enemyPro){
+				hitEnemies();
+			}
+		}
 	}
 }
