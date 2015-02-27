@@ -1,17 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\accl_script.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/ui/move_script.cs">
     <Files>
-      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="73" Column="11" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="199" Column="1" />
-      <File FileName="Assets\TK2DROOT\tk2d\Code\Sprites\tk2dSpriteAnimator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" Line="139" Column="1" />
-      <File FileName="Assets\Script\ui\collipse_script.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\data\constant.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\model\char_property.cs" Line="83" Column="1" />
-      <File FileName="Assets\Script\Robot\robotAniManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\ui\accl_script.cs" Line="43" Column="24" />
+      <File FileName="Assets/Script/ui/move_script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/model/char_property.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="51" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -17,8 +17,10 @@ public class bulletAniManager : MonoBehaviour {
 		bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
 	}
 	void Start () {
-		bulletDirection = getDirection();
-		setBulletDireciton(bulletSprite,bulletAni,bulletDirection);
+		if(bulletDie == false) {
+			bulletDirection = getDirection();
+			setBulletDireciton(bulletSprite,bulletAni,bulletDirection);
+		}
 	}
 	
 	// Update is called once per frame
@@ -48,6 +50,7 @@ public class bulletAniManager : MonoBehaviour {
 	//子弹击中墙壁
 	public void hitWall() {
 		bulletStop();
+		Debug.Log ("collision: bullet hit wall.");
 		destroyAfterAni("hit");
 	}
 
@@ -55,6 +58,7 @@ public class bulletAniManager : MonoBehaviour {
 	public void hitEnemies() {
 		bulletStop();
 		//动画结束后子弹消失
+		Debug.Log ("bulletAnimation: bullet hit enemy.");
 		destroyAfterAni("hit");
 	}
 
@@ -72,7 +76,7 @@ public class bulletAniManager : MonoBehaviour {
 	//设置子弹的方向
 	void setBulletDireciton(tk2dSprite bulletSprite,tk2dSpriteAnimator bulletAni , Direction bulletDirection)
 	{
-		Debug.Log ("setting bullet direction!: " + bulletDirection);
+		//Debug.Log ("setting bullet direction!: " + bulletDirection);
 		switch(bulletDirection) 
 		{ 
 		default: 
@@ -103,21 +107,7 @@ public class bulletAniManager : MonoBehaviour {
 	}
 
 
-
-	void OnTriggerEnter(Collider other){
-		if(!bulletDie){
-			if(other.gameObject.layer == 8){
-				hitWall();
-				return ;
-			}
-			enemy_property enemyPro = other.gameObject.GetComponent<enemy_property>();
-			if(enemyPro){
-				hitEnemies();
-			}
-		}
-	}
 	
-
 	public void afterAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
 		GameObject.Destroy(this.gameObject);
 	}
@@ -134,5 +124,18 @@ public class bulletAniManager : MonoBehaviour {
 	void bulletStop(){
 		bulletDie = true;
 		rigidbody.velocity = new Vector3(0,0,0);
+	}
+
+	void OnTriggerEnter(Collider other){
+		if(!bulletDie){
+			if(other.gameObject.layer == 8){
+				hitWall();
+				return ;
+			}
+			enemy_property enemyPro = other.gameObject.GetComponent<enemy_property>();
+			if(enemyPro){
+				hitEnemies();
+			}
+		}
 	}
 }

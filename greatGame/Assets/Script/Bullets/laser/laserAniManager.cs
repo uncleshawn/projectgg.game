@@ -41,6 +41,9 @@ public class laserAniManager : MonoBehaviour {
 			this.transform.position = shoot.transform.position;
 			}
 		}
+		else{
+			Destroy(this.gameObject);
+		}
 	}
 
 	public void setShooter(GameObject shooter, float preTime, float flyingTime){
@@ -116,14 +119,20 @@ public class laserAniManager : MonoBehaviour {
 	}
 
 	void laserPre(){
+		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletEnable.doDamage = false;
 		StartCoroutine(shotAfterPre());
 	}
 
 	void laserFlying(){
+		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletEnable.doDamage = true;
 		StartCoroutine(endAfterShot());
 	}
 
 	void laserEnd(){
+		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletEnable.doDamage = false;
 		destroyAfterAni("end");
 	}
 
@@ -132,10 +141,6 @@ public class laserAniManager : MonoBehaviour {
 	IEnumerator shotAfterPre(){
 		bulletAni.Play("pre");
 		yield return new WaitForSeconds(preTime);
-		if(player==null)
-		{
-			Destroy(this.gameObject);
-		}
 		laserFlying();
 	}
 	IEnumerator endAfterShot(){
@@ -145,7 +150,7 @@ public class laserAniManager : MonoBehaviour {
 	}
 
 	public void afterAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-		Destroy(animator.gameObject);
+		Destroy(this.gameObject);
 	}
 	
 	public void destroyAfterAni(string aniName){

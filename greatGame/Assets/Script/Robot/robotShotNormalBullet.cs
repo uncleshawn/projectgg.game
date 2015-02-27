@@ -8,12 +8,18 @@ public class robotShotNormalBullet : MonoBehaviour {
 	bulletGetSpeed shotScript;				//子弹用script(设定速度)
 	Direction bulletDirection;				//子弹的射出方向
 			
-	public float bulletRate = 0.5f;			//子弹间隔时间
+	public float bulletRate = 0.5f;			//子弹origin间隔时间
 	float mbulletRate;
-	public float bulletSpeed;				//子弹的速度
+	public float bulletSpeed;				//子弹的origin速度
 	float mbulletSpeed;
-	public float bulletDistance;			//子弹的距离
+	public float bulletDistance;			//子弹的origin距离
 	float mbulletDistance;
+	public int bulletDamage;				//bullet damage
+	int mbulletDamage;
+
+	public int mknockBack;
+	public float mdamageRate;
+	public ElementType mType;
 
 	float delayTime=0;	
 
@@ -37,6 +43,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 		mbulletRate = bulletRate;
 		mbulletSpeed = bulletSpeed;
 		mbulletDistance = bulletDistance;
+		mbulletDamage = bulletDamage;
 
 		posUp = transform.FindChild("up").gameObject;
 		posDown = transform.FindChild("down").gameObject;
@@ -71,10 +78,14 @@ public class robotShotNormalBullet : MonoBehaviour {
 		getBulletDirection();			//按键设定子弹的飞行方向
 		setShotPosition();				//设置子弹的发射位置
 		GameObject bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),shotPosition,Quaternion.identity);
+		//set bullet end distance
 		bulletClone.GetComponent<bulletCheckDistance>().setDistance(mbulletDistance);
-		//子弹的速度和方向
+		//子弹的damage + 速度 +方向
+		setBulletProperty(bulletClone);
 		shotScript = bulletClone.GetComponent<bulletGetSpeed>();
 		setBulletSpeed(shotScript,mbulletSpeed);
+
+
 
 	}
 	
@@ -144,20 +155,30 @@ public class robotShotNormalBullet : MonoBehaviour {
 		}
 	}
 
+	//only being used by other scripts
 	public void setEnabled(name_bool other){
 		if(other.name == this.GetType().ToString()  ){
 			this.enabled = other.choose;
 		}
 	}
-
+	//only being used by other scripts
 	public void disableAll(){
 		this.enabled = false;
 	}
 
+	//only being used by other scripts
 	public void upgradeProperties(char_property property){
 		mbulletSpeed = bulletSpeed + property.AttackSpeed;
 		mbulletRate = bulletRate - (bulletRate-0.1f)*property.AttackRate/10;
 		mbulletDistance = bulletDistance + property.AttackDistance;
+		mbulletDamage = bulletDamage + property.Damage*5;
+
+	}
+
+	//using when shoot a bullet
+	public void setBulletProperty(GameObject bulletClone){
+		if(mdamageRate == 0) {mdamageRate = 10;}
+		bulletClone.GetComponent<bullet_property>().setProperty(mbulletDamage,mknockBack,mdamageRate,mType);
 	}
 }
 
