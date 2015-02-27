@@ -3,3 +3,5 @@
 *.sln
 /greatGame/Temp/*
 /greatGame/Library/*
+
+*.meta

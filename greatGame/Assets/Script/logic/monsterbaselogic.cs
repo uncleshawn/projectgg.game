@@ -33,4 +33,8 @@ public class monsterbaselogic : MonoBehaviour {
 		v.z = 0;
 		return v;
 	}
+
+	virtual public void beAttack(GameObject obj){
+
+	}
 }

@@ -181,7 +181,7 @@ public class maplogic : MonoBehaviour  {
 		DontDestroyOnLoad (role);
 		//Application.LoadLevel(0);
 		roominfo roomInfo = mapfactory.getNextRoom (mMapInfo, doorInfo);
-		Application.LoadLevel(roomInfo.mSceneIndex);
+		Application.LoadLevelAdditive(roomInfo.mSceneIndex);
 	}
 
 	public void openDoor(){

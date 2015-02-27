@@ -26,7 +26,10 @@ public class collipse_script : MonoBehaviour {
 		//other.GetComponent
 		//Debug.Log ("OnTriggerEnter "+other.gameObject.tag);
 		Debug.Log ("OnTriggerEnter " + other.gameObject.tag);		
-
+		if (other.gameObject.tag.Equals ("Bullet")) {
+			monsterbaselogic monsterLogic = this.gameObject.GetComponent<monsterbaselogic>();
+			monsterLogic.beAttack(other.gameObject);
+		}
 		//Component charProperty = obj.GetComponent<"char_property">();
 	}
 
