@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class charlogic : MonoBehaviour {
+public class charlogic : monsterbaselogic {
 
 	// Use this for initialization
 	void Start () {
@@ -112,5 +112,17 @@ public class charlogic : MonoBehaviour {
 		return false;
 	}
 
+	override public Vector3 getMoveAcc(){
+		Vector3 v = new Vector3 ();
+		v.x = 0;
+		v.y = 0;
+		v.z = 0;
+
+		float x = Input.GetAxisRaw ("Horizontal");
+		float y = Input.GetAxisRaw ("Vertical");
+		v.x = x*50.0f;
+		v.y = y*50.0f;
+		return v;
+	}
 
 }

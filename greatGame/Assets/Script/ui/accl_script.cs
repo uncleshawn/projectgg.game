@@ -88,7 +88,7 @@ public class accl_script : MonoBehaviour {
 		if (speed.x > mSpeed) {
 			speed.x = mSpeed;
 		}else if(speed.x < -mSpeed){
-			speed.x = -mSpeed;
+			speed.x = -mSpeed; 
 		}
 
 		if (speed.y > mSpeed) {

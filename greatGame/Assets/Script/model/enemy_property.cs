@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
-public class enemy_property : MonoBehaviour {
+public class enemy_property : base_property {
 
 	private int mHp;
 	private float mMoveSpeed;
@@ -20,7 +21,7 @@ public class enemy_property : MonoBehaviour {
 	public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
 	// Use this for initialization
 	void Start () {
-		mHp = 5;
+		mHp = 22;
 		mMoveSpeed = 10;
 		mDamage = 1;
 		mAttackSpeed = 1;

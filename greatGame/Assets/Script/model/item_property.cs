@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bat_script : MonoBehaviour {
+public class item_property : base_property {
 
 	// Use this for initialization
 	void Start () {
