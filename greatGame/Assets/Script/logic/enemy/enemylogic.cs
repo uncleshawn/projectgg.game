@@ -13,7 +13,7 @@ public class enemylogic : monsterbaselogic {
 	
 	}
 
-	public void beAttack(GameObject obj){
+	override public void beAttack(GameObject obj){
 		if (obj.tag.Equals ("Bullet")) {
 			bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 			enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();

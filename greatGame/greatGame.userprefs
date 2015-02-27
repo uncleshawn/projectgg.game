@@ -1,15 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\enemy\bat_logic.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\uilogic.cs">
     <Files>
-      <File FileName="Assets\Script\logic\enemy\bat_logic.cs" Line="26" Column="3" />
-      <File FileName="Assets\Script\logic\data\constant.cs" Line="51" Column="36" />
-      <File FileName="Assets\Script\model\enemy_property.cs" Line="24" Column="13" />
-      <File FileName="Assets\Script\model\char_property.cs" Line="18" Column="18" />
-      <File FileName="Assets\Script\model\base_property.cs" Line="18" Column="2" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="4" Column="43" />
-      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="17" Column="2" />
-      <File FileName="Assets\Script\ui\move_script.cs" Line="69" Column="16" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="22" Column="46" />
+      <File FileName="Assets\Script\logic\notifylogic.cs" Line="8" Column="1" />
+      <File FileName="Assets\Script\logic\uilogic.cs" Line="8" Column="32" />
+      <File FileName="Assets\Script\model\enemy_property.cs" Line="2" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
