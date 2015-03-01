@@ -211,4 +211,8 @@ public class maplogic : MonoBehaviour  {
 		}
 	}
 
+	public void showDamage(){
+
+	}
+
 }

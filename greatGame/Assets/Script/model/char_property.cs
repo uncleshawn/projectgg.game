@@ -45,9 +45,9 @@ public class char_property : base_property {
 
 
 	void Awake() {
-		mHp = 5;
+		mHp = 4;
 		mMoveSpeed = 10;
-		mDamage = 100;
+		mDamage = 1;
 		mAttackSpeed = 1;
 		mAttackRate = 1;
 		mAttackDistance = 0;
@@ -55,7 +55,7 @@ public class char_property : base_property {
 		
 		mMaxHp = 5;
 		mMaxMoveSpeed = 10;
-		mMaxDamage = 100;
+		mMaxDamage = 1;
 		mMaxAttackSpeed = 1;
 		mMaxAttackRate = 1;
 		mMaxAttackDistance = 0;

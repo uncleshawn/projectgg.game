@@ -1,8 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Bullets/normalBullet/bulletDamage.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/bat_logic.cs">
     <Files>
-      <File FileName="Assets/Script/Bullets/normalBullet/bulletDamage.cs" Line="46" Column="1" />
+      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="48" Column="110" />
+      <File FileName="Assets/Script/model/item_property.cs" Line="17" Column="17" />
+      <File FileName="Assets/Script/model/char_property.cs" Line="37" Column="1" />
+      <File FileName="Assets/Script/EnemyAI/followPlayer.cs" Line="12" Column="2" />
+      <File FileName="Assets/Plugins/Pixelplacement/iTween/Sample/MoveSample.cs" Line="11" Column="1" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletDamage.cs" Line="33" Column="63" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="43" Column="65" />
+      <File FileName="Assets/Script/logic/maplogic.cs" Line="215" Column="3" />
+      <File FileName="Assets/iTween/iTween.cs" Line="7035" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="51" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -97,26 +97,26 @@ public class laserAniManager : MonoBehaviour {
 		{ 
 		default: 
 			break; 
-		case Direction.up:	 	setSpriteDirection(bulletDirection); 	bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x),bulletSprite.scale.y,bulletSprite.scale.z);	  	break;	
-		case Direction.down:	setSpriteDirection(bulletDirection); 	bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);  	break;	
-		case Direction.left: 	setSpriteDirection(bulletDirection); 	bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);		break;		
-		case Direction.right: 	setSpriteDirection(bulletDirection); 	bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x),bulletSprite.scale.y,bulletSprite.scale.z);	  	break;	
+		case Direction.up:	 	transform.rotation = Quaternion.identity; transform.Rotate(0,0,90);  	break;	
+		case Direction.down:	transform.rotation = Quaternion.identity; transform.Rotate(0,0,270);  	break;	
+		case Direction.left: 	transform.rotation = Quaternion.identity; transform.Rotate(0,0,180); 	break;		
+		case Direction.right: 	transform.rotation = Quaternion.identity; 							  	break;	
 			break; 
 		} 
 		
 	}
 	
-	void setSpriteDirection(Direction direction){
-
-		if(direction == Direction.left || direction == Direction.right){
-			//Debug.Log ("横向子弹");
-			transform.rotation = Quaternion.identity;
-		}
-		else{
-			transform.rotation = Quaternion.identity;
-			transform.Rotate(0,0,90);
-		}
-	}
+//	void setSpriteDirection(Direction direction){
+//
+//		if(direction == Direction.left || direction == Direction.right){
+//			//Debug.Log ("横向子弹");
+//			transform.rotation = Quaternion.identity;
+//		}
+//		else{
+//			transform.rotation = Quaternion.identity;
+//			transform.Rotate(0,0,90);
+//		}
+//	}
 
 	void laserPre(){
 		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
