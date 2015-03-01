@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class charlogic : monsterbaselogic {
 
+	private float mHurtTime = 0;
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("charlogic start");
@@ -11,7 +12,12 @@ public class charlogic : monsterbaselogic {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (mHurtTime > 0) {
+			mHurtTime = mHurtTime - Time.deltaTime ;
+		}
+		if (mHurtTime < 0) {
+			mHurtTime = 0;
+		}
 	}
 
 	//player touch "item" logic
@@ -54,8 +60,20 @@ public class charlogic : monsterbaselogic {
 
 	}
 
-	public void beAttack(GameObject obj){
+	public bool isWUDI(){
+		return mHurtTime > 0;
+	}
+
+	public void setWUDI(){
+		char_property pro = this.gameObject.GetComponent<char_property> ();
+		mHurtTime = pro.HurtTime;
+	}
+
+	override public void beAttack(GameObject obj){
 		Debug.Log ("char beAttack");
+		if (isWUDI ()) {
+			return;
+		}
 		enemy_property enemyProperty = obj.GetComponent<enemy_property>();
 		if(enemyProperty != null){
 			char_property charProperty = gameObject.GetComponent<char_property>();
@@ -64,6 +82,8 @@ public class charlogic : monsterbaselogic {
 			if(isDie()){
 				constant.getGameLogic().Die();
 			}
+
+			setWUDI();
 		}
 	}
 

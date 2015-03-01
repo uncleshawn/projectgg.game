@@ -37,4 +37,9 @@ public class monsterbaselogic : MonoBehaviour {
 	virtual public void beAttack(GameObject obj){
 
 	}
+
+	virtual public void destroy(){
+		Destroy (this.gameObject);
+	}
+
 }

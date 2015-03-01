@@ -254,6 +254,7 @@ public class robotAniManager : MonoBehaviour {
 
 
 	/////////////OnCollisionEnter//////////
+	/*
 	void OnCollisionEnter (Collision other) {
 		//Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
 		
@@ -265,4 +266,5 @@ public class robotAniManager : MonoBehaviour {
 			}
 		}
 	}
+	*/
 }

@@ -178,7 +178,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 	//using when shoot a bullet
 	public void setBulletProperty(GameObject bulletClone){
 		if(mdamageRate == 0) {mdamageRate = 10;}
-		bulletClone.GetComponent<bullet_property>().setProperty(mbulletDamage,mknockBack,mdamageRate,mType);
+		bulletClone.GetComponent<bullet_property>().setProperty(mbulletDamage,mknockBack,mdamageRate,mType, constant.getBattleType(this.gameObject));
 	}
 }
 
