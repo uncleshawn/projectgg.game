@@ -239,7 +239,7 @@ public class maplogic : MonoBehaviour  {
 				eatItem(collider, beCollider);
 			}
 		}
-
+		/*
 		if (colliderTag.Equals (constant.TAG_BULLET)) {
 			if(beColliderTag.Equals(constant.TAG_ENEMY)){
 				if(constant.isConflict(collider, beCollider)){
@@ -247,6 +247,7 @@ public class maplogic : MonoBehaviour  {
 				}
 			}
 		}
+		*/
 	}
 
 	//攻击
@@ -258,11 +259,15 @@ public class maplogic : MonoBehaviour  {
 	//吃东西	
 	private void eatItem(GameObject player, GameObject item){
 		Debug.Log ("mapLogic eatItem");
-		charlogic charLogic = player.GetComponent<charlogic>();
+		charlogic charLogic = player.GetComponent<charlogic> ();
 		if (charLogic.grapItem (item.gameObject)) {
-			monsterbaselogic baseLogic = item.GetComponent<monsterbaselogic> ();
-			baseLogic.destroy ();
+				monsterbaselogic baseLogic = item.GetComponent<monsterbaselogic> ();
+				baseLogic.destroy ();
 		}
+	}
+
+	public void showDamage(){
+
 	}
 
 }

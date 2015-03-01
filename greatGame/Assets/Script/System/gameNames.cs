@@ -28,7 +28,7 @@ public enum itemType
 {	
 	none 		= 1,
 	recover 	= 2,
-	inBag		= 3,
+	enforce		= 3,
 	onBody 		= 4,
 	special = 5
 }
