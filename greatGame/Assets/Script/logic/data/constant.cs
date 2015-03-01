@@ -11,6 +11,19 @@ public static class constant {
 		south = 4,
 	}
 
+	public enum BattleType
+	{
+		Player = 1,
+		Enemy = 2,
+		Other = 3,
+	}
+
+	public static string TAG_ENEMY = "Enemy";
+	public static string TAG_PLAYER = "Player";
+	public static string TAG_BULLET = "Bullet";
+	public static string TAG_WALL = "Wall";
+	public static string TAG_ITEM = "Item";
+
 	public static Direction getOppsiteDir(Direction dir){
 		switch (dir) {
 		case Direction.east:
@@ -58,6 +71,26 @@ public static class constant {
 
 	public static GameObject getRightUpPoint(){
 		return GameObject.FindGameObjectWithTag("RightUpPoint");
+	}
+
+	public static BattleType getBattleType(GameObject obj){
+		if (obj.tag.Equals (constant.TAG_PLAYER)) {
+			return BattleType.Player;
+		}
+		if (obj.tag.Equals (constant.TAG_ENEMY)) {
+			return BattleType.Enemy;
+		}
+		return BattleType.Other;
+	}
+
+	public static bool isConflict(GameObject obj1, GameObject obj2){
+		base_property pro1 = obj1.GetComponent<base_property> ();
+		base_property pro2 = obj2.GetComponent<base_property> ();
+		return isConflict (pro1, pro2);
+	}
+
+	private static bool isConflict(base_property pro1, base_property pro2){
+		return pro1.isConflict (pro2);
 	}
 
 }

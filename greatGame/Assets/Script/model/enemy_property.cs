@@ -27,6 +27,8 @@ public class enemy_property : base_property {
 		mAttackSpeed = 1;
 		mAttackRate = 1;
 		mAttackDistance = 0;
+
+		mBattleType = constant.BattleType.Enemy;
 	}
 	
 	// Update is called once per frame

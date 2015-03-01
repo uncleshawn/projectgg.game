@@ -1,17 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/bat_logic.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Robot\robotAniManager.cs">
     <Files>
-      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="48" Column="110" />
-      <File FileName="Assets/Script/model/item_property.cs" Line="17" Column="17" />
-      <File FileName="Assets/Script/model/char_property.cs" Line="37" Column="1" />
-      <File FileName="Assets/Script/EnemyAI/followPlayer.cs" Line="12" Column="2" />
-      <File FileName="Assets/Plugins/Pixelplacement/iTween/Sample/MoveSample.cs" Line="11" Column="1" />
-      <File FileName="Assets/Script/Bullets/normalBullet/bulletDamage.cs" Line="33" Column="63" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="43" Column="65" />
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="215" Column="3" />
-      <File FileName="Assets/iTween/iTween.cs" Line="7035" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="51" Column="2" />
+      <File FileName="Assets\Script\Robot\robotAniManager.cs" Line="271" Column="1" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="249" Column="5" />
+      <File FileName="Assets\Script\logic\data\constant.cs" Line="97" Column="1" />
+      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="11" Column="29" />
+      <File FileName="Assets\Script\logic\enemy\bat_logic.cs" Line="52" Column="1" />
+      <File FileName="Assets\Script\ui\collipse_script.cs" Line="48" Column="1" />
+      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="129" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -253,5 +253,18 @@ public class robotAniManager : MonoBehaviour {
 	}
 
 
-
+	/////////////OnCollisionEnter//////////
+	/*
+	void OnCollisionEnter (Collision other) {
+		//Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
+		
+		if (other.gameObject.tag.Equals ("Item")) {
+			Debug.Log("player touch item");
+			charlogic charLogic = transform.gameObject.GetComponent<charlogic>();
+			if(charLogic.grapItem(other.gameObject)){
+				Destroy(other.gameObject);
+			}
+		}
+	}
+	*/
 }

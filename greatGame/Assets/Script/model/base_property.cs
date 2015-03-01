@@ -8,6 +8,9 @@ public class base_property : MonoBehaviour {
 	public float FAcc { get { return mFAcc; } set { mFAcc = value; }}
 	public float Mass { get { return mMass; } set { mMass = value; }}
 
+	protected constant.BattleType mBattleType;
+	public constant.BattleType BattleType { get {return mBattleType; } set { mBattleType = value; } }
+
 	// Use this for initialization
 	void Start () {
 		mMass = this.rigidbody.mass;
@@ -17,4 +20,13 @@ public class base_property : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public bool isConflict(base_property v){
+		if (mBattleType == v.BattleType) {
+			return false;
+		}
+
+		return true;
+	}
+
 }

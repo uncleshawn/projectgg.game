@@ -45,7 +45,7 @@ public class maplogic : MonoBehaviour  {
 			
 			
 			if (door != null) {
-				GameObject role = GameObject.FindGameObjectWithTag("Player");
+				GameObject role = GameObject.FindGameObjectWithTag(constant.TAG_PLAYER);
 				role.gameObject.transform.position = new Vector3 (door.transform.position.x+x, door.transform.position.y+y, -1);
 			}
 		}
@@ -124,7 +124,7 @@ public class maplogic : MonoBehaviour  {
 
 		isFinishScene = true;
 		mDoorSprs = GameObject.FindGameObjectsWithTag("normalDoors");
-		mChar = GameObject.FindGameObjectWithTag("Player");
+		mChar = GameObject.FindGameObjectWithTag(constant.TAG_PLAYER);
 		
 		initRoomInfo ();
 		initCharPos ();
@@ -204,10 +204,65 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	public void checkOpenDoor(){
-		GameObject[] enemys = GameObject.FindGameObjectsWithTag ("Enemy");
+		GameObject[] enemys = GameObject.FindGameObjectsWithTag (constant.TAG_ENEMY);
 		//Debug.Log ("checkOpenDoor: " +  enemys.Length);
 		if (enemys.Length == 0) {
 			openDoor();
+		}
+	}
+
+	//碰撞， 不能穿过的物体， 例如人物，怪物，道具
+	public void collideEnter(GameObject collider, GameObject beCollider){
+		touchEnter (collider, beCollider);
+	}
+
+	//触发，可以穿过的物体，例如子弹
+	public void triggerEnter(GameObject collider, GameObject beCollider){
+		touchEnter (collider, beCollider);
+	}
+
+	private void touchEnter(GameObject collider, GameObject beCollider){
+		string colliderTag = collider.tag;
+		string beColliderTag = beCollider.tag;
+		Debug.Log ("colliderTag:" + colliderTag);
+		Debug.Log ("beColliderTag:" + beColliderTag);
+		if (colliderTag.Equals (constant.TAG_ENEMY)) {
+			if(beColliderTag.Equals(constant.TAG_PLAYER)){
+				if(constant.isConflict(collider, beCollider)){
+					attack(collider, beCollider);
+				}
+			}
+		}
+		
+		if (colliderTag.Equals (constant.TAG_PLAYER)) {
+			if(beColliderTag.Equals(constant.TAG_ITEM)){
+				eatItem(collider, beCollider);
+			}
+		}
+		/*
+		if (colliderTag.Equals (constant.TAG_BULLET)) {
+			if(beColliderTag.Equals(constant.TAG_ENEMY)){
+				if(constant.isConflict(collider, beCollider)){
+					attack(collider, beCollider);
+				}
+			}
+		}
+		*/
+	}
+
+	//攻击
+	private void attack(GameObject atker, GameObject beAtker){
+		monsterbaselogic monsterLogic = beAtker.GetComponent<monsterbaselogic>();
+		monsterLogic.beAttack(atker);
+	}
+
+	//吃东西	
+	private void eatItem(GameObject player, GameObject item){
+		Debug.Log ("mapLogic eatItem");
+		charlogic charLogic = player.GetComponent<charlogic> ();
+		if (charLogic.grapItem (item.gameObject)) {
+				monsterbaselogic baseLogic = item.GetComponent<monsterbaselogic> ();
+				baseLogic.destroy ();
 		}
 	}
 

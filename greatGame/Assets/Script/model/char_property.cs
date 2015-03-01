@@ -11,7 +11,7 @@ public class char_property : base_property {
 	private int mMaxAttackSpeed;
 	private int mMaxAttackRate;
 	private float mMaxAttackDistance;
-
+	private float mHurtTime;	//被攻击后的无敌时间
 
 
 	//tempProperties
@@ -32,6 +32,7 @@ public class char_property : base_property {
 	public int MaxAttackSpeed { get { return mMaxAttackSpeed; } set { mMaxAttackSpeed = value; }}
 	public int MaxAttackRate { get { return mMaxAttackRate; } set { mMaxAttackRate = value; }}
 	public float MaxAttackDistance { get { return mMaxAttackDistance; } set { mMaxAttackDistance = value; }}
+	public float HurtTime { get { return mHurtTime; } set { mHurtTime = value; }}
 
 	public int Hp { get { return mHp; } set { mHp = value; }}
 	public int Np { get { return mNp; } set { mNp = value; }}
@@ -59,6 +60,10 @@ public class char_property : base_property {
 		mMaxAttackSpeed = 1;
 		mMaxAttackRate = 1;
 		mMaxAttackDistance = 0;
+
+		mHurtTime = 2;
+
+		mBattleType = constant.BattleType.Player;
 	}
 	// Use this for initialization
 	void Start () {
