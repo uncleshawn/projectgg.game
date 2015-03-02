@@ -20,45 +20,6 @@ public class charlogic : monsterbaselogic {
 		}
 	}
 
-	//玩家是否捡起道具
-	public bool grapItem(GameObject item){
-		bool boolGrap = false;
-		item_property itemProperty = item.GetComponent<item_property>();
-
-		if(itemProperty){
-			List<itemType> itype = itemProperty.iType;
-
-			if(itype.Count == 0){
-				Debug.Log ("item has no property!");
-				return false;
-			}
-
-			//find each tpye property 
-			for(int index = 0; index < itype.Count ; index++){
-
-				if(itemProperty.iType[index] == itemType.recover){
-					if(recoverChar(item)){
-						boolGrap = true;
-					}
-				}
-				if(itemProperty.iType[index] == itemType.enforce){
-					if(enforceChar(item)){
-						boolGrap = true;
-					}
-				}
-			}
-
-		}
-
-		//check item function if used
-		if(boolGrap) {
-			return true;
-		}
-
-		//can not grap this item
-		return false;
-
-	}
 
 	public bool isWUDI(){
 		return mHurtTime > 0;
@@ -69,6 +30,7 @@ public class charlogic : monsterbaselogic {
 		mHurtTime = pro.HurtTime;
 	}
 
+	//player beattacked must edit in next 玩家收到伤害 将要修改
 	override public void beAttack(GameObject obj){
 		Debug.Log ("char beAttack");
 		if (isWUDI ()) {
@@ -86,6 +48,59 @@ public class charlogic : monsterbaselogic {
 			setWUDI();
 		}
 	}
+
+
+	//玩家是否捡起道具
+	public bool grapItem(GameObject item){
+		bool boolGrap = false;
+		bool inbagAlright = false;
+		item_property itemProperty = item.GetComponent<item_property>();
+		
+		if(itemProperty){
+			List<itemType> itype = itemProperty.iType;
+			
+			if(itype.Count == 0){
+				Debug.Log ("item has no property!");
+				return false;
+			}
+			
+			//find each tpye property 
+			for(int index = 0; index < itype.Count ; index++){
+				
+				if(itemProperty.iType[index] == itemType.recover){
+					if(recoverChar(item)){
+						boolGrap = true;
+					}
+				}
+				if(itemProperty.iType[index] == itemType.enforce){
+					if(enforceChar(item)){
+						putInBag(item,inbagAlright);
+						inbagAlright = true;
+						boolGrap = true;
+					}
+				}
+				if(itemProperty.iType[index] == itemType.equipment){
+					if(enforceChar(item)){
+						putInBag(item,inbagAlright);
+						inbagAlright = true;
+						boolGrap = true;
+					}
+				}
+			}
+			
+		}
+		
+		//check item function if used
+		if(boolGrap) {
+			return true;
+		}
+		
+		//can not grap this item
+		return false;
+		
+	}
+
+
 
 	//恢复玩家生命或者能量
 	public bool recoverChar(GameObject obj){
@@ -128,11 +143,21 @@ public class charlogic : monsterbaselogic {
 		char_property charProperty = gameObject.GetComponent<char_property>();
 		if(enforceProperty){
 			charProperty.MaxHp += enforceProperty.MaxHp;
+			charProperty.Hp += enforceProperty.MaxHp;
+			charProperty.MaxNp += enforceProperty.MaxNp;
+			charProperty.Np += enforceProperty.MaxNp;
 			charProperty.MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
+			charProperty.MoveSpeed += enforceProperty.MaxMoveSpeed;
 			charProperty.MaxDamage += enforceProperty.MaxDamage;
+			charProperty.Damage += enforceProperty.MaxDamage;
 			charProperty.MaxAttackSpeed += enforceProperty.MaxAttackSpeed;
+			charProperty.AttackSpeed += enforceProperty.MaxAttackSpeed;
 			charProperty.MaxAttackRate += enforceProperty.MaxAttackRate;
+			charProperty.AttackRate += enforceProperty.MaxAttackRate;
 			charProperty.MaxAttackDistance += enforceProperty.MaxAttackDistance; 
+			charProperty.AttackDistance += enforceProperty.MaxAttackDistance; 
+
+			charProperty.upgradeShootProperties();
 			graped += 1; 
 		}
 		
@@ -144,10 +169,24 @@ public class charlogic : monsterbaselogic {
 
 	}
 
-	//在玩家背包里留下物品的图标
-	public bool putInBag(GameObject obj){
-		return false;
+
+
+
+	public void equipItem(GameObject obj){
+		int itemId = obj.GetComponent<item_property>().itemId;
+		constant.getMapLogic().playerAddEquipment(itemId);
 	}
+
+	//在玩家背包里留下物品的图标
+	public bool putInBag(GameObject obj, bool checkBag){
+		if(checkBag){
+			return false;
+		}
+		int itemId = obj.GetComponent<item_property>().itemId;
+		constant.getMapLogic().bagAddIcon(itemId);
+		return true;
+	}
+
 
 	//玩家是否失败
 	public bool isDie(){
@@ -171,17 +210,6 @@ public class charlogic : monsterbaselogic {
 		return v;
 	}
 
-	/////////////OnCollisionEnter//////////
-	void OnCollisionEnter (Collision other) {
-		//Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
-		
-		if (other.gameObject.tag.Equals ("Item")) {
-			Debug.Log("player touch item");
-			charlogic charLogic = transform.gameObject.GetComponent<charlogic>();
-			if(charLogic.grapItem(other.gameObject)){
-				Destroy(other.gameObject);
-			}
-		}
-	}
+
 
 }

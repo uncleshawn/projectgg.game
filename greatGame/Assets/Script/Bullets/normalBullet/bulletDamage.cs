@@ -35,7 +35,9 @@ public class bulletDamage : MonoBehaviour {
 				//Debug.Log("CurrentTime : damageRate = " + cTime +" : "+bulletPro.bulletDamageRate);
 				if(cTime >= bulletPro.bulletDamageRate) {
 					//Debug.Log("bullet send damage to enemy.");
-					logic.beAttack(this.gameObject);
+
+					//use maplogic to deal damage
+					constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
 					//vibrate.joystickVibrate(0.2f,1,1);
 					cTime = 0;
 				}

@@ -8,8 +8,8 @@ public class item_property : base_property {
 	public List<itemType> iType ;
 	public itemType mType;
 	public string itemName;
-	public int itemId;
-	
+	public int id;
+	public int itemId { get { return id; } set { itemId = id; }}
 	// Use this for initialization
 	void Awake() {
 		this.gameObject.tag = "Item";
@@ -27,6 +27,11 @@ public class item_property : base_property {
 			mType = itemType.enforce;
 			iType.Add(mType);
 		}
+		if(transform.gameObject.GetComponent<equipItem_Property>()){
+			Debug.Log("item has equip property!");
+			mType = itemType.equipment;
+			iType.Add(mType);
+		}
 		
 	}
 	
@@ -34,15 +39,6 @@ public class item_property : base_property {
 	void Update () {
 		
 	}
-	
-	public void selectItemType(string str){
-		switch(str){
-		default	: 		mType = itemType.none; 		break;
-		case "recover": mType = itemType.recover;	break;
-		case "enforce":	mType = itemType.enforce;  	break; 
-		}
-	}
-	
 	
 }
 

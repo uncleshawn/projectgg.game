@@ -38,14 +38,14 @@ public class enemy_showDamage : MonoBehaviour {
 	public void setDamageText(){
 
 		textMesh.text = damageNum;
-		textMesh.color = damageButtom;
-		textMesh.color2 = damageTop;
+		textMesh.color2 = damageButtom;
+		textMesh.color = damageTop;
 
 
 	}
 
 	public void moveFont(){
-		iTween.MoveBy(gameObject, iTween.Hash("y", 2,  "easeType", "easeInOutQuad", "loopType", "none" , "time" , 1 , "oncomplete" , "finishMove" , "oncompletetarget" , gameObject ));
+		iTween.MoveBy(gameObject, iTween.Hash("y", 2,  "easeType", "easeInOutQuad", "loopType", "none" , "time" , 1 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
 		//iTween.FadeTo(gameObject, iTween.Hash( "easeType", "linear", "loopType", "once" , "time" , 1 , "delay" , 1 , "amount", 0 ) );
 	}
 

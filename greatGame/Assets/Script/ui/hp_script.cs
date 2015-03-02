@@ -37,9 +37,10 @@ public class hp_script : MonoBehaviour {
 				Destroy(hpObj);
 			}
 		}else if (mHps.Count < pro.MaxHp){
+			int oldnum = mHps.Count;
 			int num = pro.MaxHp - mHps.Count;
 			for(int i = 0 ; i < num; ++i){
-				Vector3 v = getPosition(i);
+				Vector3 v = getPosition(i+oldnum);
 				//GameObject hpObj = (GameObject)Instantiate(Resources.Load(hpPath),v,Quaternion.identity);
 				GameObject prefab = Resources . Load < GameObject > ( hpPath ) ;
 				GameObject hpObj = Instantiate ( prefab ) as GameObject ;

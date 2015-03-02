@@ -1,16 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\hp_script.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/model/item_property.cs">
     <Files>
-      <File FileName="Assets\Script\ui\hp_script.cs" Line="65" Column="57" />
-      <File FileName="Assets\Script\model\char_property.cs" Line="7" Column="20" />
-      <File FileName="Assets\Script\logic\data\roominfo.cs" Line="21" Column="3" />
-      <File FileName="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" Line="20" Column="27" />
-      <File FileName="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" Line="23" Column="3" />
-      <File FileName="Assets\Script\Bullets\laser\laserAniManager.cs" Line="23" Column="30" />
-      <File FileName="Assets\Script\Robot\robotShotLaserNomal.cs" Line="30" Column="17" />
-      <File FileName="Assets\Script\Robot\robotShotNormalBullet.cs" Line="80" Column="25" />
-      <File FileName="Assets\Script\logic\uilogic.cs" Line="40" Column="44" />
+      <File FileName="Assets/Script/logic/maplogic.cs" Line="281" Column="3" />
+      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/Pixelplacement/iTween/iTween.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/ui/collipse_script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="178" Column="3" />
+      <File FileName="Assets/Script/model/char_property.cs" Line="28" Column="68" />
+      <File FileName="Assets/Script/model/item_property.cs" Line="25" Column="61" />
+      <File FileName="Assets/Script/item/equipItem_Property.cs" Line="19" Column="3" />
+      <File FileName="Assets/Script/System/gameNames.cs" Line="51" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
