@@ -1,17 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\enemy\enemylogic.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\hp_script.cs">
     <Files>
-      <File FileName="Assets\Script\Robot\robotAniManager.cs" Line="271" Column="1" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="244" Column="23" />
-      <File FileName="Assets\Script\logic\data\constant.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\enemy\bat_logic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\ui\collipse_script.cs" Line="43" Column="76" />
-      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="43" Column="49" />
-      <File FileName="Assets\Script\Bullets\laser\laserAniManager.cs" Line="159" Column="3" />
-      <File FileName="Assets\Script\Bullets\normalBullet\bulletDamage.cs" Line="30" Column="16" />
+      <File FileName="Assets\Script\ui\hp_script.cs" Line="65" Column="57" />
+      <File FileName="Assets\Script\model\char_property.cs" Line="7" Column="20" />
+      <File FileName="Assets\Script\logic\data\roominfo.cs" Line="21" Column="3" />
+      <File FileName="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" Line="20" Column="27" />
+      <File FileName="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" Line="23" Column="3" />
+      <File FileName="Assets\Script\Bullets\laser\laserAniManager.cs" Line="23" Column="30" />
+      <File FileName="Assets\Script\Robot\robotShotLaserNomal.cs" Line="30" Column="17" />
+      <File FileName="Assets\Script\Robot\robotShotNormalBullet.cs" Line="80" Column="25" />
+      <File FileName="Assets\Script\logic\uilogic.cs" Line="40" Column="44" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
