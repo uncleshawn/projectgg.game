@@ -47,6 +47,7 @@ public class char_property : base_property {
 
 	void Awake() {
 		mHp = 4;
+		mNp = 2;
 		mMoveSpeed = 10;
 		mDamage = 1;
 		mAttackSpeed = 1;
@@ -55,6 +56,7 @@ public class char_property : base_property {
 		upgradeShootProperties();
 		
 		mMaxHp = 5;
+		mMaxNp = 2;
 		mMaxMoveSpeed = 10;
 		mMaxDamage = 1;
 		mMaxAttackSpeed = 1;
@@ -78,7 +80,7 @@ public class char_property : base_property {
 	
 	}
 
-	void upgradeShootProperties(){
+	public void upgradeShootProperties(){
 		GameObject shoot = this.transform.FindChild("shoot").gameObject;
 		if(shoot){
 			shoot.SendMessage("upgradeProperties",this);

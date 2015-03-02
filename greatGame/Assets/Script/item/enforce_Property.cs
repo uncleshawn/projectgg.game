@@ -4,6 +4,7 @@ using System.Collections;
 public class enforce_Property : MonoBehaviour {
 
 	public int 	 MaxHp;
+	public int   MaxNp;
 	public float MaxMoveSpeed;
 	public int 	 MaxDamage;
 	public int 	 MaxAttackSpeed;

@@ -29,7 +29,7 @@ public enum itemType
 	none 		= 1,
 	recover 	= 2,
 	enforce		= 3,
-	onBody 		= 4,
+	equipment   = 4,
 	special = 5
 }
 

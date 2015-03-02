@@ -239,15 +239,15 @@ public class maplogic : MonoBehaviour  {
 				eatItem(collider, beCollider);
 			}
 		}
-		/*
-		if (colliderTag.Equals (constant.TAG_BULLET)) {
-			if(beColliderTag.Equals(constant.TAG_ENEMY)){
+
+		if (colliderTag.Equals (constant.TAG_ENEMY)) {
+			if(beColliderTag.Equals(constant.TAG_BULLET)){
 				if(constant.isConflict(collider, beCollider)){
-					attack(collider, beCollider);
+					attack(beCollider, collider);
 				}
 			}
 		}
-		*/
+
 	}
 
 	//攻击
@@ -267,6 +267,17 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	public void showDamage(){
+
+	}
+
+
+	////背包相关//////
+	public void bagAddIcon(int id){
+
+	}
+
+	////装备相关//////
+	public void playerAddEquipment(int id){
 
 	}
 
