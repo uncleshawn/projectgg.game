@@ -173,7 +173,7 @@ public class charlogic : monsterbaselogic {
 
 
 	public void equipItem(GameObject obj){
-		int itemId = obj.GetComponent<item_property>().itemId;
+		int itemId = obj.GetComponent<item_property>().ID;
 		constant.getMapLogic().playerAddEquipment(itemId);
 	}
 
@@ -182,7 +182,7 @@ public class charlogic : monsterbaselogic {
 		if(checkBag){
 			return false;
 		}
-		int itemId = obj.GetComponent<item_property>().itemId;
+		int itemId = obj.GetComponent<item_property>().ID;
 		constant.getMapLogic().bagAddIcon(itemId);
 		return true;
 	}

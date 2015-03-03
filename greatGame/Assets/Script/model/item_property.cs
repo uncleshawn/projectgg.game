@@ -8,8 +8,8 @@ public class item_property : base_property {
 	public List<itemType> iType ;
 	public itemType mType;
 	public string itemName;
-	public int id;
-	public int itemId { get { return id; } set { itemId = id; }}
+	public int mID;
+	public int ID { get { return mID; } set { ID = mID; }}
 	// Use this for initialization
 	void Awake() {
 		this.gameObject.tag = "Item";
