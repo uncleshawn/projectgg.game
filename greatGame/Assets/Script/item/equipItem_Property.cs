@@ -7,15 +7,22 @@ using System.Collections;
 
 public class equipItem_Property : MonoBehaviour {
 
-	public int id;
-	public int itemId { get { return id; } set { itemId = id; }}
+	public int mID;
+	public int ID { get { return mID; } set { ID = mID; }}
+	string equipPath;
 	// Use this for initialization
 	void Awake(){
 		item_property itemProperty = gameObject.GetComponent<item_property>();
-		id = itemProperty.itemId;
+		mID = itemProperty.ID;
+
 	}
 	void Start () {
-	
+		if(mID!=0){
+			equipPath = "Prefabs/equipment/equip"+mID;
+		}
+		else{
+			Debug.Log("error: item do not have ID, please give an ID!");
+		}
 	}
 	
 	// Update is called once per frame
