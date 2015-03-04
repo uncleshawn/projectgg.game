@@ -1,12 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\move_script.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="20" Column="11" />
-      <File FileName="Assets\Script\ui\move_script.cs" Line="9" Column="32" />
-      <File FileName="Assets\Script\model\base_property.cs" Line="6" Column="9" />
-      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="9" Column="35" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="9" Column="26" />
+      <File FileName="Assets\Script\ui\move_script.cs" Line="56" Column="17" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="28" Column="11" />
+      <File FileName="Assets\Script\model\base_property.cs" Line="4" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
