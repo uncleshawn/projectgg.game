@@ -7,9 +7,10 @@ using System.Collections;
 
 public class equipItem_Property : MonoBehaviour {
 
-	public int mID;
-	public int ID { get { return mID; } set { ID = mID; }}
-	string equipPath;
+	private int mID;
+	private string mEquipPath;
+	public int ID { get { return mID; } set { mID = value; }}
+	public string EquipPath { get { return mEquipPath;}  set { mEquipPath = value; }}
 	// Use this for initialization
 	void Awake(){
 		item_property itemProperty = gameObject.GetComponent<item_property>();
@@ -18,7 +19,7 @@ public class equipItem_Property : MonoBehaviour {
 	}
 	void Start () {
 		if(mID!=0){
-			equipPath = "Prefabs/equipment/equip"+mID;
+			mEquipPath = "Prefabs/equipment/equipment"+mID;
 		}
 		else{
 			Debug.Log("error: item do not have ID, please give an ID!");

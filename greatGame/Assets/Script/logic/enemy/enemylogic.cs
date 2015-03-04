@@ -30,7 +30,7 @@ public class enemylogic : monsterbaselogic {
 
 
 	public void getDamage(enemy_property enemyProperty,bullet_property bulletProperty){
-		Debug.Log("enemy get damage: " + bulletProperty.bulletDamage);
+		//Debug.Log("enemy get damage: " + bulletProperty.bulletDamage);
 		enemyProperty.Hp = enemyProperty.Hp - bulletProperty.bulletDamage;
 
 		Vector3 objectPos = this.transform.position;
@@ -39,8 +39,9 @@ public class enemylogic : monsterbaselogic {
 		string showDamagePath = "Prefabs/ui/UI_showDamage";
 		GameObject showDamageClone = (GameObject)Instantiate(Resources.Load(showDamagePath),objectPos,Quaternion.identity);
 		if(showDamageClone){
+
 			string damage = "-" + bulletProperty.bulletDamage.ToString();
-			showDamageClone.GetComponent<enemy_showDamage>().Num = damage;
+			showDamageClone.GetComponent<enemy_showDamage>().mNum = damage;
 			showDamageClone.GetComponent<enemy_showDamage>().showDamage();
 		}
 	}

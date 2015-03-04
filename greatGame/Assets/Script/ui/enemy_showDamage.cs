@@ -3,14 +3,14 @@ using System.Collections;
 
 public class enemy_showDamage : MonoBehaviour {
 
-	public string damageNum;
-	public tk2dTextMesh textMesh;
-	public Color damageButtom;
-	public Color damageTop;
+	private string damageNum;
+	tk2dTextMesh textMesh;
+	private Color damageButtom;
+	private Color damageTop;
 
-	public string Num { get { return damageNum; } set { damageNum = value; }}
-	public Color buttonColor { get { return damageButtom; } set { damageButtom = value; }}
-	public Color topColor  { get { return damageTop; } set { damageTop = value; }}
+	public string mNum { get { return damageNum; } set { damageNum = value; }}
+	public Color mButtonColor { get { return damageButtom; } set { damageButtom = value; }}
+	public Color mTopColor  { get { return damageTop; } set { damageTop = value; }}
 
 	Vector3 startPos;
 	Vector3 endPos;

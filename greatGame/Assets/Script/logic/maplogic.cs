@@ -277,7 +277,12 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	////装备相关//////
-	public void playerAddEquipment(int id){
+	public void playerAddEquipment(GameObject player, GameObject item){
+		charlogic charLogic = player.GetComponent<charlogic> ();
+		if (charLogic.equipItem (item)) {
+			monsterbaselogic baseLogic = item.GetComponent<monsterbaselogic> ();
+			baseLogic.destroy ();
+		}
 
 	}
 
