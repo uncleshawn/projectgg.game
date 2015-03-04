@@ -15,7 +15,9 @@ public class move_script : MonoBehaviour {
 	void FixedUpdate () {
 
 		monsterbaselogic baseLogic = gameObject.GetComponent<monsterbaselogic>();
-
+		if (baseLogic == null) {
+			return;
+		}
 		Vector3 self_acc = baseLogic.getMoveAcc ();//new Vector3();	//加速度
 		Vector3 f_acc = baseLogic.getFAcc ();//new Vector3 ();		//阻力减速度
 		//Debug.Log("self_acc:" + self_acc.x + "," + self_acc.y + "," + self_acc.z);

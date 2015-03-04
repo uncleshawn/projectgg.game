@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\move_script.cs">
     <Files>
-      <File FileName="Assets\Script\ui\move_script.cs" Line="56" Column="17" />
-      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="28" Column="11" />
-      <File FileName="Assets\Script\model\base_property.cs" Line="4" Column="1" />
+      <File FileName="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" Line="801" Column="1" />
+      <File FileName="Assets\Script\ui\move_script.cs" Line="24" Column="39" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\model\base_property.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
