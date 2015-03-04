@@ -15,10 +15,10 @@ public class pos_update_script : MonoBehaviour {
 	
 	void FixedUpdate(){
 		Transform parentTransform = this.GetComponentInParent<Transform>();
-		float z = parentTransform.position.y*0.01f;
+		float z = parentTransform.localPosition.y*0.01f;
 		//m_transform.position.Set (m_transform.position.x, m_transform.position.y, 100);
 
 		GameObject obj = this.gameObject;
-		obj.transform.position = new Vector3 (obj.transform.position.x, obj.transform.position.y, z);
+		obj.transform.localPosition = new Vector3 (obj.transform.localPosition.x, obj.transform.localPosition.y, z);
 	}
 }
