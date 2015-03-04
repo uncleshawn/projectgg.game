@@ -3,7 +3,7 @@ using System.Collections;
 
 public class base_property : MonoBehaviour {
 
-	protected float mFAcc = 20.0f; //摩擦力
+	private float mFAcc = 60.0f; //摩擦力
 	protected float mMass = 1.0f;
 	public float FAcc { get { return mFAcc; } set { mFAcc = value; }}
 	public float Mass { get { return mMass; } set { mMass = value; }}

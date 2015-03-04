@@ -258,7 +258,7 @@ public class maplogic : MonoBehaviour  {
 
 	//吃东西	
 	private void eatItem(GameObject player, GameObject item){
-		Debug.Log ("mapLogic eatItem");
+		//Debug.Log ("mapLogic eatItem");
 		charlogic charLogic = player.GetComponent<charlogic> ();
 		if (charLogic.grapItem (item.gameObject)) {
 				monsterbaselogic baseLogic = item.GetComponent<monsterbaselogic> ();
