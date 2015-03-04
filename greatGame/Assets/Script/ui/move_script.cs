@@ -3,7 +3,7 @@ using System.Collections;
 
 public class move_script : MonoBehaviour {
 
-	private float mSpeed = 15.0f;	//最快速度
+	private float mSpeed = 10.0f;	//最快速度
 	private float mFps = 0.02f;
 
 	// Use this for initialization

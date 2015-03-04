@@ -28,8 +28,8 @@ public class monsterbaselogic : MonoBehaviour {
 		base_property pro = gameObject.GetComponent<base_property> ();
 
 
-		v.x = pro.FAcc * pro.Mass;
-		v.y = pro.FAcc * pro.Mass;
+		v.x = pro.FAcc * this.rigidbody.mass;
+		v.y = pro.FAcc * this.rigidbody.mass;
 		v.z = 0;
 		return v;
 	}

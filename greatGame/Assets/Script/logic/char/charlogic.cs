@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class charlogic : monsterbaselogic {
 
 	private float mHurtTime = 0;
+
+	private float mAccSpeed = 160.0f;
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("charlogic start");
@@ -60,7 +62,7 @@ public class charlogic : monsterbaselogic {
 			List<itemType> itype = itemProperty.iType;
 			
 			if(itype.Count == 0){
-				Debug.Log ("item has no property!");
+				//Debug.Log ("item has no property!");
 				return false;
 			}
 			
@@ -173,7 +175,7 @@ public class charlogic : monsterbaselogic {
 
 
 	public void equipItem(GameObject obj){
-		int itemId = obj.GetComponent<item_property>().itemId;
+		int itemId = obj.GetComponent<item_property>().ID;
 		constant.getMapLogic().playerAddEquipment(itemId);
 	}
 
@@ -182,7 +184,7 @@ public class charlogic : monsterbaselogic {
 		if(checkBag){
 			return false;
 		}
-		int itemId = obj.GetComponent<item_property>().itemId;
+		int itemId = obj.GetComponent<item_property>().ID;
 		constant.getMapLogic().bagAddIcon(itemId);
 		return true;
 	}
@@ -205,8 +207,8 @@ public class charlogic : monsterbaselogic {
 
 		float x = Input.GetAxisRaw ("Horizontal");
 		float y = Input.GetAxisRaw ("Vertical");
-		v.x = x*50.0f;
-		v.y = y*50.0f;
+		v.x = x*mAccSpeed;
+		v.y = y*mAccSpeed;
 		return v;
 	}
 
