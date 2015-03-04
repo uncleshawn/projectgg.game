@@ -8,7 +8,7 @@ enum Direction
 	right	= 4
 }
 
-enum weaponType
+public enum weaponType
 {
 	bulletNormal = 1,
 	laserNormal	 = 2
