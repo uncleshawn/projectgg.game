@@ -5,7 +5,7 @@ public class followWaitType : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		startMove();
+		//startMove();
 	}
 
 	// Update is called once per frame
@@ -14,6 +14,6 @@ public class followWaitType : MonoBehaviour {
 	}
 
 	public void startMove(){
-		//iTween.MoveBy(gameObject, iTween.Hash("y", 0.5,  "easeType", "linear", "loopType", "pingpong" , "time" , 0.7 ));
+		//iTween.MoveBy(gameObject, iTween.Hash("y", 0.5,  "easeType", "linear", "loopType", "pingpong" , "time" , 0.7 ,  "islocal" , true ));
 	}
 }
