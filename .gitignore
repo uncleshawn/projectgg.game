@@ -1,5 +1,4 @@
 *.orig
-*.csproj
 *.sln
 /greatGame/Temp/*
 /greatGame/Library/*
