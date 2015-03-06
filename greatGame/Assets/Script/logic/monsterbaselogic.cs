@@ -25,11 +25,9 @@ public class monsterbaselogic : MonoBehaviour {
 	virtual public Vector3 getFAcc(){
 		Vector3 v = new Vector3 ();
 
-		base_property pro = gameObject.GetComponent<base_property> ();
-
-
-		v.x = pro.FAcc * this.rigidbody.mass;
-		v.y = pro.FAcc * this.rigidbody.mass;
+		maplogic logic = constant.getMapLogic ();
+		v.x = logic.getRoomInfoFAcc() * this.rigidbody.mass;
+		v.y = logic.getRoomInfoFAcc() * this.rigidbody.mass;
 		v.z = 0;
 		return v;
 	}

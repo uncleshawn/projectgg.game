@@ -32,7 +32,8 @@ public class item_property : base_property {
 			mType = itemType.equipment;
 			iType.Add(mType);
 		}
-		
+
+		mBaseMoveSpeed = 15.0f;
 	}
 	
 	// Update is called once per frame

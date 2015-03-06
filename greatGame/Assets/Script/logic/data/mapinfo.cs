@@ -15,6 +15,11 @@ public class mapinfo {
 
 	}
 
+	public float getRoomInfoFAcc(){
+		roominfo info = getCurRoom ();
+		return info.mFAcc;
+	}
+
 	public roominfo getCurRoom(){
 		foreach (roominfo roomInfo in mRoomInfos) {
 			if(roomInfo.mId == mCurRoomId){

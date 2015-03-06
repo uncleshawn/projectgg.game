@@ -17,6 +17,8 @@ public class roominfo  {
 
 	public List<doorinfo> mDoorInfos;
 
+	public float mFAcc; //场地摩擦力
+
 	public roominfo(){
 		mDoorInfos = new List<doorinfo> ();
 
@@ -26,6 +28,7 @@ public class roominfo  {
 		mDoorInfos.Add (doorInfo);
 
 		mSceneIndex = 0;
+		mFAcc = 60.0f;
 	}
 
 	public doorinfo getDoorInfo(int doorId){

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class move_script : MonoBehaviour {
 
-	private float mSpeed = 10.0f;	//最快速度
+	//private float mSpeed = 10.0f;	//最快速度
 	private float mFps = 0.02f;
 
 	// Use this for initialization
@@ -18,6 +18,12 @@ public class move_script : MonoBehaviour {
 		if (baseLogic == null) {
 			return;
 		}
+
+		base_property pro = gameObject.GetComponent<base_property> ();
+		if (pro == null) {
+			return;
+		}
+
 		Vector3 self_acc = baseLogic.getMoveAcc ();//new Vector3();	//加速度
 		Vector3 f_acc = baseLogic.getFAcc ();//new Vector3 ();		//阻力减速度
 		//Debug.Log("self_acc:" + self_acc.x + "," + self_acc.y + "," + self_acc.z);
@@ -59,12 +65,13 @@ public class move_script : MonoBehaviour {
 		}
 
 		{
-			float maxSpeed = mSpeed;
+			float maxSpeed = pro.BaseMoveSpeed;
 			if(Mathf.Abs(self_acc.x)>0 && Mathf.Abs(self_acc.y)>0){
-				maxSpeed = mSpeed*0.7f;
+				maxSpeed = pro.BaseMoveSpeed*0.7f;
 			}
 			//速度上限
 			Vector3 speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
+			Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
 			if (speed.x > maxSpeed) {
 				speed.x = maxSpeed;
 			}else if(speed.x < -maxSpeed){
