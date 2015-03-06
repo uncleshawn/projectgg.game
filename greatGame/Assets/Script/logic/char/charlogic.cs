@@ -82,7 +82,7 @@ public class charlogic : monsterbaselogic {
 					}
 				}
 				if(itemProperty.iType[index] == itemType.equipment){
-					if(enforceChar(item)){
+					if(equipItem(item)){
 						putInBag(item,inbagAlright);
 						inbagAlright = true;
 						boolGrap = true;
@@ -174,9 +174,23 @@ public class charlogic : monsterbaselogic {
 
 
 
-	public void equipItem(GameObject obj){
-		int itemId = obj.GetComponent<item_property>().ID;
-		constant.getMapLogic().playerAddEquipment(itemId);
+	public bool equipItem(GameObject obj){
+		string equipmentPath = obj.GetComponent<equipItem_Property>().EquipPath;
+		Debug.Log("玩家获得装备: " + equipmentPath);
+		//GameObject equipmentClone = (GameObject)Instantiate(Resources.Load(equipmentPath),this.transform.position,Quaternion.identity);
+		GameObject prefab = Resources . Load < GameObject > ( equipmentPath ) ;
+		GameObject equipmentClone = Instantiate ( prefab ) as GameObject ;
+
+		if(equipmentClone){
+			GameObject head = transform.FindChild("ui").FindChild("robotHead").gameObject;
+
+			
+			equipmentClone.transform.parent = head.gameObject.transform;
+			equipmentClone.transform.localPosition = new Vector3(0,0,0);
+			equipmentClone.GetComponent<followerlogic>().startWork();
+			return true;
+		}
+		return false;
 	}
 
 	//在玩家背包里留下物品的图标
