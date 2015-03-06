@@ -52,6 +52,10 @@ public class maplogic : MonoBehaviour  {
 
 	}
 
+	public float getRoomInfoFAcc(){
+		return mMapInfo.getRoomInfoFAcc ();
+	}
+
 	public GameObject getDoorTouchObj(int doorId){
 		List<string> doornames = new List<string>();
 		doornames.Add ("UpRoom");

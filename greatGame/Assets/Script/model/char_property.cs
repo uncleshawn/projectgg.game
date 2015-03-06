@@ -66,6 +66,8 @@ public class char_property : base_property {
 		mHurtTime = 2;
 
 		mBattleType = constant.BattleType.Player;
+
+		mBaseMoveSpeed = 10.0f;
 	}
 	// Use this for initialization
 	void Start () {
