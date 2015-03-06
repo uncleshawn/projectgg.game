@@ -8,7 +8,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 	bulletGetSpeed shotScript;				//子弹用script(设定速度)
 	Direction bulletDirection;				//子弹的射出方向
 			
-	public float baseBulletRate = 0.5f;			//子弹origin间隔时间
+	public float baseBulletRate;			//子弹origin间隔时间
 	float mbulletRate;
 	public float baseBulletSpeed;				//子弹的origin速度
 	float mbulletSpeed;
@@ -38,6 +38,8 @@ public class robotShotNormalBullet : MonoBehaviour {
 	
 	void Start () {
 
+		checkForget();
+	
 		player = this.transform.parent.gameObject;
 		shotPosition = new Vector3(0,0,0);
 		mbulletRate = baseBulletRate;
@@ -67,6 +69,22 @@ public class robotShotNormalBullet : MonoBehaviour {
 			}
 		}
 		
+	}
+
+
+	public void checkForget(){
+		if(baseBulletDamage==0){
+			baseBulletDamage = 1;
+		}
+		if(baseBulletSpeed==0){
+			baseBulletSpeed = 10;
+		}
+		if(baseBulletDistance==0){
+			baseBulletDistance = 10;
+		}
+		if(baseBulletRate==0){
+			baseBulletRate = 0.5f;
+		}
 	}
 
 	public void upgradeBulletProperties(){
@@ -114,7 +132,12 @@ public class robotShotNormalBullet : MonoBehaviour {
 	
 	void setBulletSpeed(bulletGetSpeed anyScript,float Speed){
 		Vector3 speed = new Vector3(0,0,0);
-		playerVelocity = player.rigidbody.velocity;
+		if(player.rigidbody){
+			playerVelocity = player.rigidbody.velocity;
+		}
+		else{
+			playerVelocity = new Vector3(0,0,0);
+		}
 		//Debug.Log("人物移动速度: " +playerVelocity );
 		getBulletDirection();
 		switch(bulletDirection) 
@@ -173,6 +196,13 @@ public class robotShotNormalBullet : MonoBehaviour {
 		mbulletDistance = baseBulletDistance + property.AttackDistance;
 		mbulletDamage = baseBulletDamage + property.Damage*5;
 
+	}
+
+	public void upgradeFollowProperties(follow_property property){
+		mbulletSpeed = baseBulletSpeed + property.AttackSpeed;
+		mbulletRate = baseBulletRate - (baseBulletRate-0.1f)*property.AttackRate/10;
+		mbulletDistance = baseBulletDistance + property.AttackDistance;
+		mbulletDamage = baseBulletDamage + property.Damage*5;
 	}
 
 	//using when shoot a bullet

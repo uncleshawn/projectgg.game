@@ -1,10 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class follow_property : char_property {
+public class follow_property : base_property {
 
 	public weaponType bulletType;
-	
+
+	public int mDamage;
+	public int mAttackSpeed;
+	public int mAttackRate;
+	public float mAttackDistance;
+
+
+	public int Damage { get { return mDamage; } set { mDamage = value; }}
+	public int AttackSpeed { get { return mAttackSpeed; } set { mAttackSpeed = value; }}
+	public int AttackRate { get { return mAttackRate; } set { mAttackRate = value; }}
+	public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
+
 	// Use this for initialization
 
 	void Start () {
@@ -19,7 +30,10 @@ public class follow_property : char_property {
 	public void upgradeShootProperties(){
 		GameObject shoot = this.transform.FindChild("shoot").gameObject;
 		if(shoot){
-			shoot.SendMessage("upgradeProperties",this);
+			shoot.GetComponent<shootlogic>().selectWeapon(bulletType);
+			shoot.SendMessage("upgradeFollowProperties",this);
 		}
 	}
+
+
 }

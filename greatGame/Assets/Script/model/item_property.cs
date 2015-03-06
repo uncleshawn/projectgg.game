@@ -9,7 +9,7 @@ public class item_property : base_property {
 	public itemType mType;
 	public string itemName;
 	public int mID;
-	public int ID { get { return mID; } set { ID = mID; }}
+	public int ID { get { return mID; } set { mID = value; }}
 	// Use this for initialization
 	void Awake() {
 		this.gameObject.tag = "Item";

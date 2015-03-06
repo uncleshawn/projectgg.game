@@ -119,19 +119,19 @@ public class laserAniManager : MonoBehaviour {
 //	}
 
 	void laserPre(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = false;
 		StartCoroutine(shotAfterPre());
 	}
 
 	void laserFlying(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = true;
 		StartCoroutine(endAfterShot());
 	}
 
 	void laserEnd(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = false;
 		destroyAfterAni("end");
 	}

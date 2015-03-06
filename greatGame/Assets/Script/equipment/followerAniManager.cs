@@ -46,6 +46,7 @@ public class followerAniManager : MonoBehaviour {
 	public void robotHeadMove()
 	{
 		robotTurnHead();
+		headWait(robotDirection);
 //		if( (Input.GetAxis("Horizontal")!=0) || (Input.GetAxis("Vertical")!=0)){
 //			headRun(robotDirection);
 //			

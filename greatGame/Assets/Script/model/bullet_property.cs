@@ -7,7 +7,7 @@ public class bullet_property : base_property {
 	public int bulletknock;
 	public float bulletDamageRate;
 	public ElementType bulletElement;
-
+	
 	// Use this for initialization
 	void Awake(){
 		mBattleType = constant.BattleType.Other;
