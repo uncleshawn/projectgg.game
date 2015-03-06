@@ -182,10 +182,10 @@ public class charlogic : monsterbaselogic {
 		GameObject equipmentClone = Instantiate ( prefab ) as GameObject ;
 
 		if(equipmentClone){
-			GameObject head = transform.FindChild("ui").FindChild("robotHead").gameObject;
+			GameObject player = this.gameObject;
 
 			
-			equipmentClone.transform.parent = head.gameObject.transform;
+			equipmentClone.transform.parent = player.gameObject.transform;
 			equipmentClone.transform.localPosition = new Vector3(0,0,0);
 			equipmentClone.GetComponent<followerlogic>().startWork();
 			return true;
