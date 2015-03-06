@@ -18,7 +18,7 @@ public class robotAniManager : MonoBehaviour {
 	Direction robotDirection;
 	Direction feetDirection;
 	
-
+	private float mWUDIInterval = 0.15f;
 	
 	void Start () {
 
@@ -252,19 +252,22 @@ public class robotAniManager : MonoBehaviour {
 		bodySprite.color = color;
 	}
 
-
-	/////////////OnCollisionEnter//////////
-	/*
-	void OnCollisionEnter (Collision other) {
-		//Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
-		
-		if (other.gameObject.tag.Equals ("Item")) {
-			Debug.Log("player touch item");
-			charlogic charLogic = transform.gameObject.GetComponent<charlogic>();
-			if(charLogic.grapItem(other.gameObject)){
-				Destroy(other.gameObject);
-			}
-		}
+	public void stopWUDI(){
+		GameObject uiObj = transform.FindChild ("ui").gameObject;
+		//uiObj.renderer.enabled = true;
+		uiObj.SetActive (true);
+		CancelInvoke();
 	}
-	*/
+
+	//播放无敌动画
+	public void playWUDI(){
+		CancelInvoke();
+		InvokeRepeating ("playWUDIAni", mWUDIInterval, mWUDIInterval);
+	}
+
+	private void playWUDIAni(){
+		GameObject uiObj = transform.FindChild ("ui").gameObject;
+		//uiObj.renderer.enabled = !uiObj.renderer.enabled;
+		uiObj.SetActive (!uiObj.activeSelf);
+	}
 }

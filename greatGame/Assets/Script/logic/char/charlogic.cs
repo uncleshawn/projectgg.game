@@ -16,9 +16,11 @@ public class charlogic : monsterbaselogic {
 	void Update () {
 		if (mHurtTime > 0) {
 			mHurtTime = mHurtTime - Time.deltaTime ;
-		}
-		if (mHurtTime < 0) {
-			mHurtTime = 0;
+
+			if (mHurtTime <= 0) {
+				mHurtTime = 0;
+				stopWUDI();
+			}
 		}
 	}
 
@@ -27,9 +29,17 @@ public class charlogic : monsterbaselogic {
 		return mHurtTime > 0;
 	}
 
+	public void stopWUDI(){
+		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+		mgr.stopWUDI ();
+	}
+
 	public void setWUDI(){
 		char_property pro = this.gameObject.GetComponent<char_property> ();
 		mHurtTime = pro.HurtTime;
+
+		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+		mgr.playWUDI ();
 	}
 
 	//player beattacked must edit in next 玩家收到伤害 将要修改
