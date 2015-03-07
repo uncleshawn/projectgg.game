@@ -71,7 +71,7 @@ public class move_script : MonoBehaviour {
 			}
 			//速度上限
 			Vector3 speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
-			Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
+			//Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
 			if (speed.x > maxSpeed) {
 				speed.x = maxSpeed;
 			}else if(speed.x < -maxSpeed){

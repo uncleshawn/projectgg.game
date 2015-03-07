@@ -4,7 +4,7 @@ using System.Collections;
 public class uilogic : MonoBehaviour, notifylogic {
 
 	public GameObject mDieMenuPrefabs;		//主角prefab
-
+	public bool debugText;
 	// Use this for initialization
 	void Start () {
 		
