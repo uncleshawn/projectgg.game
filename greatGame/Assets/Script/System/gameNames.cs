@@ -30,7 +30,8 @@ public enum itemType
 	recover 	= 2,
 	enforce		= 3,
 	equipment   = 4,
-	special = 5
+	treasure	= 5,
+	special = 6
 }
 
 public enum ElementType
