@@ -20,6 +20,13 @@ public class mapinfo {
 		return info.mFAcc;
 	}
 
+	public roominfo getFirstRoom(){
+		if (mRoomInfos != null && mRoomInfos.Count > 0) {
+			return mRoomInfos[0];
+		}
+		return null;
+	}
+
 	public roominfo getCurRoom(){
 		foreach (roominfo roomInfo in mRoomInfos) {
 			if(roomInfo.mId == mCurRoomId){

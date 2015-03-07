@@ -22,7 +22,7 @@ public class uilogic : MonoBehaviour, notifylogic {
 	void MyDelegateFunc(tk2dButton source)
 	{
 		Debug.Log ("delegate function...");
-
+		Debug.Log ("application loadlevel");
 		constant.getMapLogic ().resetStartGame ();
 		Application.LoadLevel(0);
 	}  

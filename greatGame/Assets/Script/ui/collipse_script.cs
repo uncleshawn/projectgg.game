@@ -14,7 +14,7 @@ public class collipse_script : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision collision){
-		Debug.Log ("onCollisionStay");
+		//Debug.Log ("onCollisionStay");
 		constant.getMapLogic ().collideEnter (this.gameObject, collision.gameObject);
 	}
 
