@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-enum Direction
+
+public enum Direction
 { 
 	up 		= 1,
 	down 	= 2,
@@ -14,7 +15,7 @@ public enum weaponType
 	laserNormal	 = 2
 }
 
-public struct name_bool{
+public struct select_name_bool{
 	public string name;
 	public bool choose;
 }
@@ -31,7 +32,8 @@ public enum itemType
 	enforce		= 3,
 	equipment   = 4,
 	treasure	= 5,
-	special = 6
+	weapon 		= 6,
+	special = 7
 }
 
 public enum ElementType

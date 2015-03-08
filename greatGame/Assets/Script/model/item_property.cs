@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class item_property : base_property {
+class item_property : base_property {
 
 		//public string typeName;
 		public List<itemType> iType ;
@@ -40,7 +40,11 @@ public class item_property : base_property {
 						mType = itemType.treasure;
 						iType.Add(mType);
 				}
-
+				if(transform.gameObject.GetComponent<weaponItem_property>()){
+						Debug.Log("item has weapon property!");
+						mType = itemType.weapon;
+						iType.Add(mType);
+				}
 
 				mBaseMoveSpeed = 15.0f;
 		}

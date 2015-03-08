@@ -257,8 +257,8 @@ public class maplogic : MonoBehaviour  {
 
 	//攻击
 	private void attack(GameObject atker, GameObject beAtker){
-		monsterbaselogic monsterLogic = beAtker.GetComponent<monsterbaselogic>();
-		monsterLogic.beAttack(atker);
+		monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
+		beAtkerLogic.beAttack(atker);
 	}
 
 	//捡道具	

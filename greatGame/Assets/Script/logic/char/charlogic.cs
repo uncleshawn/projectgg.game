@@ -93,6 +93,12 @@ public class charlogic : monsterbaselogic {
 												boolGrap = true;
 										}
 								}
+								if (itemProperty.iType [index] == itemType.weapon) {
+										if(switchWeapon(item)){
+												putInBag(item,inbagAlright);
+												boolGrap = true;
+										}
+								}
 						}
 
 				}
@@ -223,7 +229,24 @@ public class charlogic : monsterbaselogic {
 						break;
 
 				}
+			return true;
 		
+		}
+
+		//玩家获得武器道具,更换武器
+		public bool switchWeapon(GameObject obj){
+				weaponItem_property weaponProperty = obj.GetComponent<weaponItem_property> ();
+				char_property playerProperty = gameObject.GetComponent<char_property> ();
+				robotWeaponSwitch weaponSwitch = gameObject.GetComponent<robotWeaponSwitch> ();
+				if (weaponSwitch.switchWeapon (weaponProperty)) {
+						if (playerProperty) {
+								playerProperty.upgradeShootProperties ();
+						}
+						return true;
+				}
+				Debug.Log ("error: 无法在玩家身上找到相应的武器系统!");
+				return false;
+
 		}
 
 		//在玩家背包里留下物品的图标

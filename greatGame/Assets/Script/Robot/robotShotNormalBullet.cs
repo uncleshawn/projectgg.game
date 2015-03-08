@@ -5,9 +5,12 @@ public class robotShotNormalBullet : MonoBehaviour {
 
 	// Use this for initialization
 	string  bulletPath = "Prefabs/bullets/normalBullet";	//子弹prefab
+	weaponType weapontype;
+
 	bulletGetSpeed shotScript;				//子弹用script(设定速度)
 	Direction bulletDirection;				//子弹的射出方向
 			
+	//子弹的属性
 	public float baseBulletRate;			//子弹origin间隔时间
 	float mbulletRate;
 	public float baseBulletSpeed;				//子弹的origin速度
@@ -16,11 +19,13 @@ public class robotShotNormalBullet : MonoBehaviour {
 	float mbulletDistance;
 	public int baseBulletDamage;				//bullet damage
 	int mbulletDamage;
-
+	
+	//子弹的击退效果
 	public int mknockBack;
 	public float mdamageRate;
 	public ElementType mType;
 
+	
 	float delayTime=0;	
 
 	GameObject player;						//获得玩家gameobject
@@ -35,6 +40,10 @@ public class robotShotNormalBullet : MonoBehaviour {
 	GameObject posDown;
 	GameObject posLeft;
 	GameObject posRight;
+
+		void Awake(){
+				weapontype = weaponType.bulletNormal;
+		}
 	
 	void Start () {
 
@@ -179,11 +188,11 @@ public class robotShotNormalBullet : MonoBehaviour {
 	}
 
 	//only being used by other scripts
-	public void setEnabled(name_bool other){
-		if(other.name == this.GetType().ToString()  ){
-			this.enabled = other.choose;
+		public void setEnabled(select_name_bool other){
+				if(other.name == this.GetType().ToString()  ){
+						this.enabled = other.choose;
+				}
 		}
-	}
 	//only being used by other scripts
 	public void disableAll(){
 		this.enabled = false;
@@ -205,10 +214,25 @@ public class robotShotNormalBullet : MonoBehaviour {
 		mbulletDamage = baseBulletDamage + property.Damage*5;
 	}
 
+	public void setBaseProperty(weaponItem_property weapon){
+				baseBulletDamage = weapon.baseBulletDamage;
+				if (weapon.baseBulletDistance != 0) {
+						baseBulletDistance = weapon.baseBulletDistance;
+				}
+				if (weapon.baseBulletRate != 0) {
+						baseBulletRate = weapon.baseBulletRate;
+				}
+				if(weapon.baseBulletSpeed!=0){
+					baseBulletSpeed = weapon.baseBulletSpeed;
+				}
+				mknockBack =	weapon.mknockBack;
+				mType = weapon.elementType;
+	}
+
 	//using when shoot a bullet
 	public void setBulletProperty(GameObject bulletClone){
 		if(mdamageRate == 0) {mdamageRate = 10;}
-		bulletClone.GetComponent<bullet_property>().setProperty(mbulletDamage,mknockBack,mdamageRate,mType, constant.getBattleType(this.gameObject));
+				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,mType, constant.getBattleType(this.gameObject));
 	}
 }
 
