@@ -10,7 +10,7 @@ public class maplogic : MonoBehaviour  {
 	GameObject[] mDoorSprs;
 	
 	//public GameObject mCharPrefabs;		//主角prefab
-	private string mPrefabStr;
+	private string mPrefabStr = "Prefabs/char/robot";
 	public GameObject mChar;
 	
 	public static bool mIsStartGame = false;
@@ -144,7 +144,7 @@ public class maplogic : MonoBehaviour  {
 
 		}
 
-		initRoomSceneInfo (roomInfo);
+		//initRoomSceneInfo (roomInfo);
 	}
 
 	//生成房间的道具或者怪物的prefabs的gameobject

@@ -20,6 +20,7 @@ public class itemlogic : monsterbaselogic {
 		if(GameObject.FindGameObjectWithTag("GameLogic").GetComponent<uilogic>().debugText == true){
 			string itemName = this.gameObject.GetComponent<item_property>().itemName;
 			GameObject debugText = transform.FindChild("debugMode_itemName").gameObject;
+			Debug.Log("道具： " + itemName);
 			if(debugText){
 				debugText.GetComponent<tk2dTextMesh>().text = itemName;
 			}

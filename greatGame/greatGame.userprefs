@@ -1,18 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\enemy\enemylogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\mapfactory.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="230" Column="14" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="294" Column="25" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="82" Column="24" />
-=======
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="155" Column="27" />
-      <File FileName="Assets\Script\logic\startmap.cs" Line="9" Column="21" />
-      <File FileName="Assets\Script\logic\mapfactory.cs" Line="46" Column="52" />
-      <File FileName="Assets\Script\logic\data\SceneTemplate.cs" Line="21" Column="36" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="44" Column="49" />
->>>>>>> branch_ds
+      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="220" Column="34" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="150" Column="34" />
+      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="42" Column="54" />
+      <File FileName="Assets\TK2DROOT\tk2d\Code\Fonts\tk2dTextMesh.cs" Line="269" Column="1" />
+      <File FileName="Assets\Script\logic\mapfactory.cs" Line="69" Column="24" />
+      <File FileName="Assets\Script\logic\data\itemtemplate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\data\itemfactory.cs" Line="28" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

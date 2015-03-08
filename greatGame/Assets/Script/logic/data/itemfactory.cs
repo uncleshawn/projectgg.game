@@ -21,8 +21,11 @@ public class itemfactory {
 	public void initTemplate(){
 		mPrefabs = new itemtemplate[]{
 			new itemtemplate("Prefabs/item/item1"),
+			new itemtemplate("Prefabs/item/item10"),
+			new itemtemplate("Prefabs/item/item11"),
 			new itemtemplate("Prefabs/item/item20"),
 			new itemtemplate("Prefabs/item/item100"),
+			new itemtemplate("Prefabs/item/item200"),
 		};
 	}
 

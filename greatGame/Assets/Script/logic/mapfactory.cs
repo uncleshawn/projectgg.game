@@ -129,7 +129,7 @@ public class mapfactory {
 		for(int i = 0; i < itemRoomNum; ++i){
 
 			//随机选择一个房间
-			int nextRoomIndex = Random.Range(0,mMonsterRoomIds.Count-1);
+			int nextRoomIndex = 0;//Random.Range(0,mMonsterRoomIds.Count-1);
 			int nextRoomId = mMonsterRoomIds[nextRoomIndex];
 			mMonsterRoomIds.RemoveAt(nextRoomIndex);
 			roominfo nextRoomInfo = null;
@@ -154,7 +154,8 @@ public class mapfactory {
 				{
 					//随机选择一个门
 					List<constant.Direction> dirs = nextRoomInfo.getRemainDirs();
-					constant.Direction enterDir = dirs[Random.Range(0,dirs.Count-1)];
+					constant.Direction enterDir = dirs[Random.Range(0,dirs.Count-1)]; 
+					Debug.Log("随机选择一个门:" + enterDir);
 					//加一个门给monster房间
 					{
 						doorinfo doorInfo = new doorinfo();
@@ -252,7 +253,7 @@ public class mapfactory {
 				foreach(Vector3 v in template.BaseMonsterPos){
 					poss.Add(v);
 				}
-				Debug.Log("count:" + poss.Count);
+				//Debug.Log("count:" + poss.Count);
 				for(int i = 0; i < monsterNum; ++i){
 					monstertemplate monster = constant.getMonsterFactory().getRandomTemplate(roomInfo, mapInfo);
 					int index = Random.Range(0, poss.Count-1);
@@ -315,7 +316,7 @@ public class mapfactory {
 	public float getDoorX(roominfo info , constant.Direction dir){
 		switch (dir) {
 		case constant.Direction.east:
-			return 1;
+			return 0;
 			break;
 		case constant.Direction.north:
 			return 0.5f;
@@ -324,7 +325,7 @@ public class mapfactory {
 			return 0.5f;
 			break;
 		case constant.Direction.west:
-			return 0;
+			return 1;
 			break;
 		}
 		return 0;
