@@ -254,13 +254,14 @@ public class maplogic : MonoBehaviour  {
 
 	}
 
+
 	//攻击
 	private void attack(GameObject atker, GameObject beAtker){
-		monsterbaselogic monsterLogic = beAtker.GetComponent<monsterbaselogic>();
-		monsterLogic.beAttack(atker);
+		monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
+		beAtkerLogic.beAttack(atker);
 	}
 
-	//吃东西	
+	//捡道具	
 	private void eatItem(GameObject player, GameObject item){
 		//Debug.Log ("mapLogic eatItem");
 		charlogic charLogic = player.GetComponent<charlogic> ();
@@ -289,5 +290,22 @@ public class maplogic : MonoBehaviour  {
 		}
 
 	}
+		//背包增加金币
+		public void bagAddGold(int amount){
+
+		}
+		//背包增加宝石
+		public void bagAddDiamond(int amount){
+
+		}
+
+		//背包增加普通钥匙
+		public void bagAddKey(int amount){
+		}
+
+		//背包增加金钥匙
+		public void bagAddGoldenKey(int amount){
+
+		}
 
 }

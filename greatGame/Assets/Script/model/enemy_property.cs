@@ -4,6 +4,9 @@ using System.Collections;
 
 public class enemy_property : base_property {
 
+	public string enemyName;
+	public int enemyId;
+
 	private int mHp;
 	private float mMoveSpeed;
 	private int mDamage;

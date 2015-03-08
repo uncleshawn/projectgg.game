@@ -22,6 +22,8 @@ public class laserAniManager : MonoBehaviour {
 	float preTime = 0.25f;							//激光蓄力时间
 	float flyingTime = 1.5f;						//激光持续时间
 
+	public Direction BulletDirection { get { return bulletDirection; } set { bulletDirection = value; }}
+
 	void Start () {
 			//use setShooterFirst() !!!
 	}
