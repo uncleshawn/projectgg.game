@@ -4,32 +4,40 @@ using System.Collections.Generic;
 
 public class charlogic : monsterbaselogic {
 
-		private float mHurtTime = 0;
+	private float mHurtTime = 0;
 
-		private float mAccSpeed = 16000.0f;
-		// Use this for initialization
-		void Start () {
-				Debug.Log ("charlogic start");
-		}
+	private float mAccSpeed = 16000.0f;
+	// Use this for initialization
+	void Start () {
+		Debug.Log ("charlogic start");
+	}
+	
+	// Update is called once per frame
+	void Update () {
+			if (mHurtTime > 0) {
+					mHurtTime = mHurtTime - Time.deltaTime;
 
-		// Update is called once per frame
-		void Update () {
-				if (mHurtTime > 0) {
-						mHurtTime = mHurtTime - Time.deltaTime ;
-				}
-				if (mHurtTime < 0) {
-						mHurtTime = 0;
-				}
-		}
+					if (mHurtTime <= 0) {
+							mHurtTime = 0;
+							stopWUDI ();
+					}
+			}
+	}
 
+	public void stopWUDI(){
+		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+		mgr.stopWUDI ();
+	}
 
+	public void setWUDI(){
+		char_property pro = this.gameObject.GetComponent<char_property> ();
+		mHurtTime = pro.HurtTime;
+
+		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+		mgr.playWUDI ();
+	}
 		public bool isWUDI(){
 				return mHurtTime > 0;
-		}
-
-		public void setWUDI(){
-				char_property pro = this.gameObject.GetComponent<char_property> ();
-				mHurtTime = pro.HurtTime;
 		}
 
 		//player beattacked must edit in next 玩家收到伤害 将要修改
