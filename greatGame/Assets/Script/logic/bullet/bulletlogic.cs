@@ -4,9 +4,10 @@ using System.Collections;
 public class bulletlogic : MonoBehaviour {
 
 	// Use this for initialization
+	//public XInputVibrateTest vibrate;
 	float cTime;
 	bullet_property bulletPro;
-	public XInputVibrateTest vibrate;
+
 	public bool doDamage = true;
 	
 	
@@ -15,8 +16,8 @@ public class bulletlogic : MonoBehaviour {
 	}
 	void Start () {
 		cTime = 99;
-		if(vibrate = GameObject.Find("preLoad").GetComponent<XInputVibrateTest>()){
-		}
+//		if(vibrate = GameObject.Find("preLoad").GetComponent<XInputVibrateTest>()){
+//		}
 		
 	}
 	

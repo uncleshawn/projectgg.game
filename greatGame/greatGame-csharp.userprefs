@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/char/charlogic.cs">
+    <Files>
+      <File FileName="Assets/Script/packback/backpackData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/VibrateTest/XInputVibrateTest.cs" Line="31" Column="31" />
+      <File FileName="Assets/Script/System/gameNames.cs" Line="13" Column="13" />
+      <File FileName="Assets/Script/model/item_property.cs" Line="24" Column="24" />
+      <File FileName="Assets/Script/item/treasure_property.cs" Line="17" Column="17" />
+      <File FileName="Assets/Script/item/equipItem_Property.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/maplogic.cs" Line="12" Column="12" />
+      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="7" Column="7" />
+      <File FileName="Assets/Script/Robot/robotAniManager.cs" Line="4" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

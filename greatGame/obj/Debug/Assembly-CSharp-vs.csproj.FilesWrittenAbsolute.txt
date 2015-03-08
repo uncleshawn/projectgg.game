@@ -1,0 +1,11 @@
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/UnityEngine.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/UnityEditor.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/Photon3Unity3D.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/PlayMaker.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/Mono.Cecil.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/nunit.framework.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/Unity.DataContract.dll
+/Users/xiaoxiao/Documents/githubFold/projectgg.game/greatGame/Temp/bin/Debug/ICSharpCode.NRefactory.dll
