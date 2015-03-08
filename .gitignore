@@ -2,7 +2,4 @@
 *.sln
 /greatGame/Temp/*
 /greatGame/Library/*
-
-*.meta
-
 greatGame/greatGame.userprefs
