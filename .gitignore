@@ -2,5 +2,8 @@
 *.sln
 /greatGame/Temp/*
 /greatGame/Library/*
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 greatGame/greatGame.userprefs

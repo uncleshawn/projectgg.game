@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6d87f077a94314c41b6f2cb107a3a19e
+=======
+guid: f6a95d53d55f14c5f89ed69949949851
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -21,10 +25,17 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
+=======
+  textureFormat: -2
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+>>>>>>> origin/master
     aniso: -1
     mipBias: -1
     wrapMode: -1
@@ -39,7 +50,11 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 0
+<<<<<<< HEAD
   textureType: -1
+=======
+  textureType: 0
+>>>>>>> origin/master
   buildTargetSettings: []
   spriteSheet:
     sprites: []
