@@ -683,6 +683,7 @@
      <Compile Include="Assets\Script\Robot\robotWeaponSwitch.cs" />
      <Compile Include="Assets\Script\System\gameNames.cs" />
      <Compile Include="Assets\Script\VibrateTest\XInputVibrateTest.cs" />
+     <Compile Include="Assets\Script\debug\debug_script.cs" />
      <Compile Include="Assets\Script\equipment\followWaitType.cs" />
      <Compile Include="Assets\Script\equipment\followerAniManager.cs" />
      <Compile Include="Assets\Script\item\enforce_Property.cs" />
@@ -695,13 +696,17 @@
      <Compile Include="Assets\Script\logic\bullet\shootlogic.cs" />
      <Compile Include="Assets\Script\logic\char\charlogic.cs" />
      <Compile Include="Assets\Script\logic\char\followerlogic.cs" />
+     <Compile Include="Assets\Script\logic\data\SceneTemplate.cs" />
      <Compile Include="Assets\Script\logic\data\constant.cs" />
      <Compile Include="Assets\Script\logic\data\doorinfo.cs" />
      <Compile Include="Assets\Script\logic\data\itemSheet.cs" />
+     <Compile Include="Assets\Script\logic\data\itemfactory.cs" />
      <Compile Include="Assets\Script\logic\data\itemlogic.cs" />
+     <Compile Include="Assets\Script\logic\data\itemtemplate.cs" />
      <Compile Include="Assets\Script\logic\data\mapinfo.cs" />
+     <Compile Include="Assets\Script\logic\data\monsterfactory.cs" />
+     <Compile Include="Assets\Script\logic\data\monstertemplate.cs" />
      <Compile Include="Assets\Script\logic\data\roominfo.cs" />
-     <Compile Include="Assets\Script\logic\data\scenetemplateinfo.cs" />
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemylogic.cs" />
      <Compile Include="Assets\Script\logic\gamelogic.cs" />

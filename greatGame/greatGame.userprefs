@@ -2,9 +2,17 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\enemy\enemylogic.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets\Script\logic\char\charlogic.cs" Line="230" Column="14" />
       <File FileName="Assets\Script\logic\maplogic.cs" Line="294" Column="25" />
       <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="82" Column="24" />
+=======
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="155" Column="27" />
+      <File FileName="Assets\Script\logic\startmap.cs" Line="9" Column="21" />
+      <File FileName="Assets\Script\logic\mapfactory.cs" Line="46" Column="52" />
+      <File FileName="Assets\Script\logic\data\SceneTemplate.cs" Line="21" Column="36" />
+      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="44" Column="49" />
+>>>>>>> branch_ds
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
