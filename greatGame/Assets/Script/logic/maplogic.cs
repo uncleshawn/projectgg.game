@@ -144,7 +144,7 @@ public class maplogic : MonoBehaviour  {
 
 		}
 
-		//initRoomSceneInfo (roomInfo);
+		initRoomSceneInfo (roomInfo);
 	}
 
 	//生成房间的道具或者怪物的prefabs的gameobject

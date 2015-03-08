@@ -103,7 +103,8 @@ public class charlogic : monsterbaselogic {
 								}
 								if (itemProperty.iType [index] == itemType.weapon) {
 										if(switchWeapon(item)){
-												putInBag(item,inbagAlright);
+												dropWeapon();
+												changeWeapon(item,inbagAlright);
 												boolGrap = true;
 										}
 								}
@@ -218,20 +219,24 @@ public class charlogic : monsterbaselogic {
 				treasure_property objproperty = obj.GetComponent<treasure_property> ();
 				int itemId = objproperty.ID;
 				int amount = objproperty.Num;
+
+				char_property pro = gameObject.GetComponent<char_property> ();
 				switch (itemId) {
 				default:
 						break;
 				case 200:
-						constant.getMapLogic ().bagAddGold (amount);
+						//constant.getMapLogic ().bagAddGold (amount);
+						pro.addGold(amount);
 						break;
 				case 201:
-						constant.getMapLogic().bagAddDiamond(amount);
+						//constant.getMapLogic().bagAddDiamond(amount);
 						break;
 				case 202:
-						constant.getMapLogic ().bagAddKey (amount);
+						//constant.getMapLogic ().bagAddKey (amount);
+						pro.addKey(amount);
 						break;
 				case 203:
-						constant.getMapLogic ().bagAddGoldenKey (amount);
+						//constant.getMapLogic ().bagAddGoldenKey (amount);
 						break;
 
 						break;
@@ -257,13 +262,29 @@ public class charlogic : monsterbaselogic {
 
 		}
 
-		//在玩家背包里留下物品的图标
+	//在玩家背包里留下物品的图标
+	public bool changeWeapon(GameObject obj, bool checkBag){
+		if(checkBag){
+			return false;
+		}
+		item_property itemProperty = obj.GetComponent<item_property>();
+		int itemId = itemProperty.ID;
+		//constant.getMapLogic().bagAddIcon(itemId);
+		char_property charProperty = gameObject.GetComponent<char_property>();
+		charProperty.Weapon = constant.getItemFactory().getItemTemplate(itemId);
+		return true;
+	}
+	
+	//在玩家背包里留下物品的图标
 		public bool putInBag(GameObject obj, bool checkBag){
 				if(checkBag){
 						return false;
 				}
-				int itemId = obj.GetComponent<item_property>().ID;
-				constant.getMapLogic().bagAddIcon(itemId);
+				item_property itemProperty = obj.GetComponent<item_property>();
+				int itemId = itemProperty.ID;
+				//constant.getMapLogic().bagAddIcon(itemId);
+				char_property charProperty = gameObject.GetComponent<char_property>();
+				charProperty.addItem (constant.getItemFactory().getItemTemplate(itemId));
 				return true;
 		}
 
@@ -290,6 +311,9 @@ public class charlogic : monsterbaselogic {
 				return v;
 		}
 
-
+	public void dropWeapon(){
+		char_property charProperty = gameObject.GetComponent<char_property>();
+		itemtemplate oldWeapon = charProperty.Weapon;
+	}
 
 }

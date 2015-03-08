@@ -29,6 +29,15 @@ public class itemfactory {
 		};
 	}
 
+	public itemtemplate getItemTemplate(int itemId){
+		foreach (itemtemplate template in mPrefabs) {
+			if(template.Id == itemId){
+				return template;
+			}
+		}
+		return null;
+	}
+
 	public itemtemplate getRandomTemplate(roominfo roomInfo, mapinfo mapInfo){
 		int index = Random.Range (0, mPrefabs.Length);
 		return mPrefabs [index];

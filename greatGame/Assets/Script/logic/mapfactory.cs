@@ -129,7 +129,7 @@ public class mapfactory {
 		for(int i = 0; i < itemRoomNum; ++i){
 
 			//随机选择一个房间
-			int nextRoomIndex = 0;//Random.Range(0,mMonsterRoomIds.Count-1);
+			int nextRoomIndex = Random.Range(0,mMonsterRoomIds.Count-1);
 			int nextRoomId = mMonsterRoomIds[nextRoomIndex];
 			mMonsterRoomIds.RemoveAt(nextRoomIndex);
 			roominfo nextRoomInfo = null;

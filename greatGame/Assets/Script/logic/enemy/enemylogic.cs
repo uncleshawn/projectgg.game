@@ -15,7 +15,7 @@ public class enemylogic : monsterbaselogic {
 
 		override public void beAttack(GameObject obj){
 				if (obj.tag.Equals ("Bullet")) {
-						Debug.Log("enemy be attacked by bullet.");
+						//Debug.Log("enemy be attacked by bullet.");
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 						getDamage(enemyProperty,bulletProperty);
