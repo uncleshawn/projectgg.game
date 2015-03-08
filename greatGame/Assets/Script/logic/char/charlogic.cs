@@ -14,13 +14,15 @@ public class charlogic : monsterbaselogic {
 	
 	// Update is called once per frame
 	void Update () {
-		if (mHurtTime > 0) {
-			mHurtTime = mHurtTime - Time.deltaTime ;
+			if (mHurtTime > 0) {
+					mHurtTime = mHurtTime - Time.deltaTime;
 
-			if (mHurtTime <= 0) {
-				mHurtTime = 0;
-				stopWUDI();
+					if (mHurtTime <= 0) {
+							mHurtTime = 0;
+							stopWUDI ();
+					}
 			}
+	}
 
 	public void stopWUDI(){
 		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
