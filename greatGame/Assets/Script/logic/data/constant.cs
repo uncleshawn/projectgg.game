@@ -3,6 +3,7 @@ using System.Collections;
 
 public static class constant {
 
+	//门的朝向
 	public enum Direction
 	{
 		west = 1,
@@ -11,11 +12,20 @@ public static class constant {
 		south = 4,
 	}
 
+	//战斗类别
 	public enum BattleType
 	{
 		Player = 1,
 		Enemy = 2,
 		Other = 3,
+	}
+
+	//房间类型
+	public enum RoomType
+	{
+		Start = 1,
+		Monster = 2,
+		Item = 3,
 	}
 
 	public static string TAG_ENEMY = "Enemy";
@@ -40,6 +50,16 @@ public static class constant {
 			return Direction.east;
 		}
 	}
+
+	/*
+	public static bool isEqualEnum(constant.Direction dir1, constant.Direction dir2){
+		return (int)dir1 == (int)dir2;
+	}
+
+	public static bool isEqualEnum(constant.RoomType dir1, constant.RoomType dir2){
+		return (int)dir1 == (int)dir2;
+	}
+	*/
 
 	public static GameObject getGameLogicObj(){
 		return GameObject.FindGameObjectWithTag("GameLogic");
@@ -72,6 +92,18 @@ public static class constant {
 
 	public static GameObject getRightUpPoint(){
 		return GameObject.FindGameObjectWithTag("RightUpPoint");
+	}
+
+	public static mapfactory getMapFactory(){
+		return mapfactory.getInstance ();
+	}
+
+	public static itemfactory getItemFactory(){
+		return itemfactory.getInstance ();
+	}
+
+	public static monsterfactory getMonsterFactory(){
+		return monsterfactory.getInstance ();
 	}
 
 	public static BattleType getBattleType(GameObject obj){

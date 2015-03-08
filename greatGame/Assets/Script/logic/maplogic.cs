@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class maplogic : MonoBehaviour  {
-
+	
 	public mapinfo mMapInfo;
 	public bool isFinishScene = false;
 	public GameObject mDoor;
@@ -47,31 +47,33 @@ public class maplogic : MonoBehaviour  {
 
 		doorinfo doorInfo = roomInfo.getDoorInfo (roomInfo.mEnterDoorId);
 		if (doorInfo != null) {
-			Debug.Log ("roomInfoEnterDoorId: " + roomInfo.mEnterDoorId + "，doorInfo:" + doorInfo.mId);
-			Debug.Log("doorInfo.mDir:" + doorInfo.mDir);
+				//Debug.Log ("roomInfoEnterDoorId: " + roomInfo.mEnterDoorId + "，doorInfo:" + doorInfo.mId);
+				//Debug.Log ("doorInfo.mDir:" + doorInfo.mDir);
 
-			switch (doorInfo.mDir) {
-			case constant.Direction.east:
-				x = 4;
-				break;
-			case constant.Direction.west:
-				x = -4;
-				break;
-			case constant.Direction.south:
-				y = -4;
-				break;
-			case constant.Direction.north:
-				y = 4;
-				break;
-			}
+				switch (doorInfo.mDir) {
+				case constant.Direction.east:
+						x = 4;
+						break;
+				case constant.Direction.west:
+						x = -4;
+						break;
+				case constant.Direction.south:
+						y = -4;
+						break;
+				case constant.Direction.north:
+						y = 4;
+						break;
+				}
 
-			GameObject door = getDoorTouchObj (doorInfo.mId);
-			
-			
-			if (door != null) {
-				GameObject role = GameObject.FindGameObjectWithTag(constant.TAG_PLAYER);
-				role.gameObject.transform.position = new Vector3 (door.transform.position.x+x, door.transform.position.y+y, -1);
-			}
+				GameObject door = getDoorTouchObj (doorInfo.mId);
+	
+	
+				if (door != null) {
+						GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+						role.gameObject.transform.position = new Vector3 (door.transform.position.x + x, door.transform.position.y + y, -1);
+				}
+		} else {
+			//Debug.Log("error roomInfo.mEnterDoorId:" + roomInfo.mEnterDoorId );
 		}
 
 	}
@@ -142,11 +144,27 @@ public class maplogic : MonoBehaviour  {
 
 		}
 
+		initRoomSceneInfo (roomInfo);
+	}
+
+	//生成房间的道具或者怪物的prefabs的gameobject
+	public void initRoomSceneInfo(roominfo info){
+		Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
+		Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
+		foreach (KeyValuePair<itemtemplate, Vector3> pair in info.mItemPrefabs) {
+			Vector3 v = pair.Value;
+			GameObject clone = (GameObject)Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+		}
+
+		foreach (KeyValuePair<monstertemplate, Vector3> pair in info.mMonsterPrefabs) {
+			Vector3 v = pair.Value;
+			GameObject clone = (GameObject)Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+		}
 	}
 
 	public void initMapInfo(){
 		mFloorIndex = 1;
-		mMapInfo = mapfactory.getRandomMap (this);
+		mMapInfo = constant.getMapFactory().getRandomMap (this);
 	}
 
 	void Start () {
@@ -203,7 +221,7 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	void loadRoom(roominfo info){
-		Debug.Log ("enterRoom " + info.mSceneIndex);
+		//Debug.Log ("enterRoom " + info.mId);
 		Application.LoadLevel(info.mSceneIndex);
 	}
 	
@@ -222,11 +240,11 @@ public class maplogic : MonoBehaviour  {
 
 	public void enterRoom(GameObject door, GameObject role){
 		doorinfo doorInfo = door.GetComponent<room_property>().mDoorInfo;
-		Debug.Log ("enterRoom doorInfo:" + doorInfo.mX + ","
-		           + doorInfo.mY + "," 
-		           + doorInfo.mDir + ","
-		           + doorInfo.mNextRoomId + ","
-		           + doorInfo.mNextDoorId );
+		//Debug.Log ("enterRoom doorInfo:" + doorInfo.mX + ","
+		//           + doorInfo.mY + "," 
+		//           + doorInfo.mDir + ","
+		//           + doorInfo.mNextRoomId + ","
+		//           + doorInfo.mNextDoorId );
 
 		role.gameObject.rigidbody.velocity = new Vector3 (0,0,0);
 		//role.gameObject.transform.position = new Vector3 (-6, 0, -1);
@@ -236,7 +254,7 @@ public class maplogic : MonoBehaviour  {
 		 
 		DontDestroyOnLoad (this.gameObject);
 		DontDestroyOnLoad (role);
-		roominfo roomInfo = mapfactory.getNextRoom (mMapInfo, doorInfo);
+		roominfo roomInfo = constant.getMapFactory().getNextRoom (mMapInfo, doorInfo);
 		loadRoom(roomInfo);
 	}
 

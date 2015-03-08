@@ -10,11 +10,13 @@ public class doorinfo {
 
 	public float mX;
 	public float mY;
+	public bool mMain;
 
 	public doorinfo(){
 		mDir = constant.Direction.east;
 		mId = 0;
 		mNextRoomId = 0;
+		mMain = false;
 	}
 
 	public override string ToString ()
