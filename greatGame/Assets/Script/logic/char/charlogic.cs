@@ -163,22 +163,7 @@ public class charlogic : monsterbaselogic {
 				enforce_Property enforceProperty = obj.GetComponent<enforce_Property>();
 				char_property charProperty = gameObject.GetComponent<char_property>();
 				if(enforceProperty){
-						charProperty.MaxHp += enforceProperty.MaxHp;
-						charProperty.Hp += enforceProperty.MaxHp;
-						charProperty.MaxNp += enforceProperty.MaxNp;
-						charProperty.Np += enforceProperty.MaxNp;
-						charProperty.MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
-						charProperty.MoveSpeed += enforceProperty.MaxMoveSpeed;
-						charProperty.MaxDamage += enforceProperty.MaxDamage;
-						charProperty.Damage += enforceProperty.MaxDamage;
-						charProperty.MaxAttackSpeed += enforceProperty.MaxAttackSpeed;
-						charProperty.AttackSpeed += enforceProperty.MaxAttackSpeed;
-						charProperty.MaxAttackRate += enforceProperty.MaxAttackRate;
-						charProperty.AttackRate += enforceProperty.MaxAttackRate;
-						charProperty.MaxAttackDistance += enforceProperty.MaxAttackDistance; 
-						charProperty.AttackDistance += enforceProperty.MaxAttackDistance; 
-
-						charProperty.upgradeShootProperties();
+						charProperty.upgradePlayerProperty (enforceProperty);
 						graped += 1; 
 				}
 

@@ -685,6 +685,7 @@
      <Compile Include="Assets\Script\VibrateTest\XInputVibrateTest.cs" />
      <Compile Include="Assets\Script\equipment\followWaitType.cs" />
      <Compile Include="Assets\Script\equipment\followerAniManager.cs" />
+     <Compile Include="Assets\Script\item\buyItem_Property.cs" />
      <Compile Include="Assets\Script\item\enforce_Property.cs" />
      <Compile Include="Assets\Script\item\equipItem_Property.cs" />
      <Compile Include="Assets\Script\item\itemAniManager.cs" />

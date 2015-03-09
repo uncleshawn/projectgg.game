@@ -48,7 +48,7 @@ public class char_property : base_property {
 	void Awake() {
 		mHp = 4;
 		mNp = 2;
-		mMoveSpeed = 10;
+		mMoveSpeed = 1;
 		mDamage = 1;
 		mAttackSpeed = 1;
 		mAttackRate = 1;
@@ -57,7 +57,7 @@ public class char_property : base_property {
 		
 		mMaxHp = 5;
 		mMaxNp = 2;
-		mMaxMoveSpeed = 10;
+		mMaxMoveSpeed = 1;
 		mMaxDamage = 1;
 		mMaxAttackSpeed = 1;
 		mMaxAttackRate = 1;
@@ -67,7 +67,7 @@ public class char_property : base_property {
 
 		mBattleType = constant.BattleType.Player;
 
-		mBaseMoveSpeed = 10.0f;
+		mBaseMoveSpeed = 5.0f;
 	}
 	// Use this for initialization
 	void Start () {
@@ -81,6 +81,28 @@ public class char_property : base_property {
 	void Update () {
 	
 	}
+
+	public void upgradePlayerProperty(enforce_Property enforceProperty){
+
+				MaxHp += enforceProperty.MaxHp;
+				Hp += enforceProperty.MaxHp;
+				MaxNp += enforceProperty.MaxNp;
+				Np += enforceProperty.MaxNp;
+				MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
+				MoveSpeed += enforceProperty.MaxMoveSpeed;
+				MaxDamage += enforceProperty.MaxDamage;
+				Damage += enforceProperty.MaxDamage;
+				MaxAttackSpeed += enforceProperty.MaxAttackSpeed;
+				AttackSpeed += enforceProperty.MaxAttackSpeed;
+				MaxAttackRate += enforceProperty.MaxAttackRate;
+				AttackRate += enforceProperty.MaxAttackRate;
+				MaxAttackDistance += enforceProperty.MaxAttackDistance; 
+				AttackDistance += enforceProperty.MaxAttackDistance; 
+
+				mBaseMoveSpeed = 5 + MaxMoveSpeed;
+
+				upgradeShootProperties ();
+		}
 
 	public void upgradeShootProperties(){
 		GameObject shoot = this.transform.FindChild("shoot").gameObject;

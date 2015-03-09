@@ -1,32 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< Updated upstream
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/enemylogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/item/buyItem_Property.cs">
     <Files>
-      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="50" Column="50" />
-      <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="38" Column="38" />
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="72" Column="72" />
-      <File FileName="Assets/Script/logic/monsterbaselogic.cs" Line="30" Column="30" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="112" Column="112" />
-      <File FileName="Assets/Script/model/char_property.cs" Line="2" Column="2" />
-      <File FileName="Assets/Script/model/bullet_property.cs" Line="7" Column="7" />
-      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="36" Column="36" />
-      <File FileName="Assets/Script/Robot/robotWeaponSwitch.cs" Line="37" Column="37" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Robot/robotShotLaserNomal.cs">
-    <Files>
-      <File FileName="Assets/Script/packback/backpackData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/VibrateTest/XInputVibrateTest.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/model/char_property.cs" Line="38" Column="38" />
+      <File FileName="Assets/Script/model/enemy_property.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/model/base_property.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/item/buyItem_Property.cs" Line="59" Column="59" />
+      <File FileName="Assets/Script/logic/data/itemlogic.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/model/item_property.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/item/treasure_property.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/item/equipItem_Property.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="7" Column="7" />
-      <File FileName="Assets/Script/Robot/robotAniManager.cs" Line="4" Column="4" />
-      <File FileName="Assets/Script/Robot/robotShotBullet.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="3" Column="3" />
->>>>>>> Stashed changes
+      <File FileName="Assets/Script/logic/iconlogic.cs" Line="24" Column="24" />
+      <File FileName="Assets/Script/Robot/robotWeaponSwitch.cs" Line="69" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
