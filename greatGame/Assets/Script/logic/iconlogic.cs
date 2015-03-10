@@ -29,11 +29,15 @@ public class iconlogic : MonoBehaviour {
 
 		public void setItemIcon(tk2dSprite ui , GameObject obj){
 				item_property itemproperty = obj.GetComponent<item_property>();
+				GameObject collection = (GameObject)Resources.LoadAssetAtPath ("Assets/Sprites/sheet/itemicon/itemIconCollection Data/itemIconCollection.prefab", typeof(Object));
+				tk2dSpriteCollectionData collectionData = collection.GetComponent<tk2dSpriteCollectionData> ();
 				int iconId = itemproperty.ID;
-				if(iconId!=0){
-						GameObject collection = (GameObject)Resources.LoadAssetAtPath("Assets/Sprites/sheet/itemicon/itemIconCollection Data/itemIconCollection.prefab" , typeof(Object));
-						tk2dSpriteCollectionData collectionData = collection.GetComponent<tk2dSpriteCollectionData>();
+				if (iconId != 0) {
+						ui.gameObject.GetComponent<MeshRenderer>().enabled = true;
 						ui.SetSprite (collectionData, "item_" + iconId);
+				} else 
+				{
+						ui.gameObject.GetComponent<MeshRenderer>().enabled = false;
 				}
 
 		}

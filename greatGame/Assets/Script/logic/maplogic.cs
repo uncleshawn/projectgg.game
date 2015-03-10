@@ -253,10 +253,18 @@ public class maplogic : MonoBehaviour  {
 			}
 		}
 
+				if (colliderTag.Equals (constant.TAG_PLAYER)) {
+						if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
+								//购买道具
+								//buyItem(collider, beCollider);
+						}
+				}
+
 	}
-
+		//非trigger类型enter判断
 		private void CollisionEnter(GameObject collider, GameObject beCollider){
-
+				string colliderTag = collider.tag;
+				string beColliderTag = beCollider.tag;
 		}
 
 

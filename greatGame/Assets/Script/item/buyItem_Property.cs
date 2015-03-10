@@ -55,6 +55,10 @@ public class buyItem_Property : MonoBehaviour {
 				}
 		}
 
+		void OnCollisionEnter(Collision other){
+
+		}
+
 }
 
 
