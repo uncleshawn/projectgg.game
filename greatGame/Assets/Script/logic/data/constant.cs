@@ -92,5 +92,5 @@ public static class constant {
 	private static bool isConflict(base_property pro1, base_property pro2){
 		return pro1.isConflict (pro2);
 	}
-
+			
 }

@@ -33,12 +33,14 @@ public class iconlogic : MonoBehaviour {
 				if(iconId!=0){
 						GameObject collection = (GameObject)Resources.LoadAssetAtPath("Assets/Sprites/sheet/itemicon/itemIconCollection Data/itemIconCollection.prefab" , typeof(Object));
 						tk2dSpriteCollectionData collectionData = collection.GetComponent<tk2dSpriteCollectionData>();
-						ui.SetSprite(collectionData,"item_"+iconId);
+						ui.SetSprite (collectionData, "item_" + iconId);
 				}
 
 		}
 
 		public void resetGameobject(){
+				//Debug.Log("重置道具图标");
 				checkObjectType ();
+
 		}
 }

@@ -15,6 +15,7 @@ public class buyItem_Property : MonoBehaviour {
 		}
 		// Use this for initialization
 		void Start () {
+				checkStock ();
 				presentItem ();
 		}
 
@@ -24,11 +25,26 @@ public class buyItem_Property : MonoBehaviour {
 		}
 
 		void presentItem(){
-				if(soldout==false){
-						item_property picItem = transform.FindChild ("ui").gameObject.transform.FindChild ("picItem").gameObject.GetComponent<item_property> ();
-						if (picItem) {
-								picItem.ID = mID;
-								picItem.gameObject.SendMessage("resetGameobject");
+				if (soldout == false) {
+						//显示道具
+						GameObject itemPic = transform.FindChild ("ui").gameObject.transform.FindChild ("itempic").gameObject;
+						item_property itemProperty = itemPic.GetComponent<item_property> ();
+						if (itemProperty) {
+								itemProperty.ID = mID;
+								itemProperty.itemName = itemName;
+								itemPic.SendMessage ("resetGameobject");
+						}
+				} else {
+						//mId=0 时,隐藏道具
+						itemName = "已售完";
+						mID = 0;
+						GameObject itemPic = transform.FindChild ("ui").gameObject.transform.FindChild ("itempic").gameObject;
+						item_property itemProperty = itemPic.GetComponent<item_property> ();
+						if (itemProperty) {
+								itemProperty.ID = mID;
+								itemProperty.itemName = itemName;
+								itemPic.SendMessage ("resetGameobject");
+
 						}
 				}
 		}
@@ -38,4 +54,7 @@ public class buyItem_Property : MonoBehaviour {
 						soldout = true;
 				}
 		}
+
 }
+
+

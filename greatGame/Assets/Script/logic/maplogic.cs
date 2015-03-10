@@ -225,6 +225,7 @@ public class maplogic : MonoBehaviour  {
 		touchEnter (collider, beCollider);
 	}
 
+	//接触检测OntriggerEnter
 	private void touchEnter(GameObject collider, GameObject beCollider){
 		string colliderTag = collider.tag;
 		string beColliderTag = beCollider.tag;
@@ -253,6 +254,10 @@ public class maplogic : MonoBehaviour  {
 		}
 
 	}
+
+		private void CollisionEnter(GameObject collider, GameObject beCollider){
+
+		}
 
 
 	//攻击
