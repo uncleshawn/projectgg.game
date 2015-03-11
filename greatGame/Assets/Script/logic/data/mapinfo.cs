@@ -20,6 +20,13 @@ public class mapinfo {
 		return info.mFAcc;
 	}
 
+	public roominfo getFirstRoom(){
+		if (mRoomInfos != null && mRoomInfos.Count > 0) {
+			return mRoomInfos[0];
+		}
+		return null;
+	}
+
 	public roominfo getCurRoom(){
 		foreach (roominfo roomInfo in mRoomInfos) {
 			if(roomInfo.mId == mCurRoomId){
@@ -40,4 +47,25 @@ public class mapinfo {
 		}
 		return null;
 	}
+
+	public roominfo getRoomInfo(int roomId){
+		foreach (roominfo info in mRoomInfos) {
+			if(info.mId == roomId){
+				return info;
+			}
+		}
+		return null;
+	}
+
+	public roominfo getNextMainRoomInfo(roominfo info){
+		if (info.mDoorInfos != null) {
+			foreach(doorinfo doorInfo in info.mDoorInfos){
+				if(doorInfo.mMain){
+					return getRoomInfo(doorInfo.mNextRoomId);
+				}
+			}
+		}
+		return null;
+	}
+
 }

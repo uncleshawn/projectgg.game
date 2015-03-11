@@ -10,7 +10,10 @@ public class move_script : MonoBehaviour {
 	void Start () {
 		mFps = mFps;
 	}
-	
+
+	public void stopMove(){
+		rigidbody.velocity = new Vector3 (0,0,0);
+	}
 	// Update is called once per frame
 	void FixedUpdate () {
 

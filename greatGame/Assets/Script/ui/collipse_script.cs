@@ -14,7 +14,7 @@ public class collipse_script : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision collision){
-		Debug.Log ("onCollisionStay");
+		//Debug.Log ("onCollisionStay");
 		constant.getMapLogic ().collideEnter (this.gameObject, collision.gameObject);
 	}
 
@@ -33,7 +33,7 @@ public class collipse_script : MonoBehaviour {
 	void OnTriggerEnter( Collider other ){
 		//other.GetComponent
 		//Debug.Log ("OnTriggerEnter "+other.gameObject.tag);
-		Debug.Log ("OnTriggerEnter " + other.gameObject.tag);	
+		//Debug.Log ("OnTriggerEnter " + other.gameObject.tag);	
 		/*
 		if (other.gameObject.tag.Equals ("Bullet")) {
 			monsterbaselogic monsterLogic = this.gameObject.GetComponent<monsterbaselogic>();

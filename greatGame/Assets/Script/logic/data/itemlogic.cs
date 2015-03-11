@@ -10,7 +10,6 @@ public class itemlogic : monsterbaselogic {
 
 		// Update is called once per frame
 		void Update () {
-
 		}
 
 
@@ -44,7 +43,7 @@ public class itemlogic : monsterbaselogic {
 				if (itemIcon) {
 						itemIcon.GetComponent<iconlogic> ().negativeAni ();
 				}
-				
+			
 		}
 
 		//刷新item

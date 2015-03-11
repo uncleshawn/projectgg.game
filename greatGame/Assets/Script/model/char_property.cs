@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class char_property : base_property {
 	
@@ -43,6 +44,17 @@ public class char_property : base_property {
 	public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
 
 
+	private List<itemtemplate> mItems;
+	public List<itemtemplate> Items{ get { return mItems; } set { mItems = value;} }
+
+	private int mGold;
+	public int Gold { get { return mGold;} set {mGold = value; } }
+
+	private int mKeys;
+	public int Keys { get { return mKeys;} set { mKeys = value; } }
+
+	private itemtemplate mWeapon;
+	public itemtemplate Weapon { get { return mWeapon; } set { mWeapon = value;} }
 
 
 	void Awake() {
@@ -67,6 +79,7 @@ public class char_property : base_property {
 
 		mBattleType = constant.BattleType.Player;
 
+		mItems = new List<itemtemplate> ();
 		mBaseMoveSpeed = 5.0f;
 	}
 	// Use this for initialization
@@ -110,7 +123,17 @@ public class char_property : base_property {
 			shoot.SendMessage("upgradeProperties",this);
 		}
 	}
-	
 
-	
+	public void addItem(itemtemplate item){
+		mItems.Add (item);
+	}
+
+	public void addGold(int value){
+		mGold += value;
+	}
+
+	public void addKey(int value){
+		mKeys += value;
+	}
+
 }

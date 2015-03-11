@@ -2,20 +2,55 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class maplogic : MonoBehaviour  {
+public class maplogic {
 
+	private static maplogic mInstance;
+
+	private maplogic(){
+		mPrefabStr = "Prefabs/char/robot";
+		mFloorIndex = 1;
+	}
+
+	public static maplogic getInstance(){
+		if (mInstance == null) {
+			mInstance = new maplogic();
+		}
+		return mInstance;
+	}
+	
 	public mapinfo mMapInfo;
 	public bool isFinishScene = false;
 	public GameObject mDoor;
 	GameObject[] mDoorSprs;
 	
-	public GameObject mCharPrefabs;		//主角prefab
+	//public GameObject mCharPrefabs;		//主角prefab
+	private string mPrefabStr = "Prefabs/char/robot";
 	public GameObject mChar;
 	
 	public static bool mIsStartGame = false;
 
+	public int mFloorIndex;
+
+	public void Awake(){
+		mPrefabStr = "Prefabs/char/robot";
+		mFloorIndex = 1;
+	}
+
+	public int getFloorTotalRoomNum(){
+		int num = 4 + mFloorIndex*(mFloorIndex+1)/2;
+		return num;
+	}
+
 	public void resetStartGame(){
 		mIsStartGame = false;
+	}
+
+	public roominfo getCurRoom(){
+		if (mMapInfo == null) {
+			return null;
+		}
+		roominfo roomInfo = mMapInfo.getCurRoom ();
+		return roomInfo;
 	}
 
 	public void initCharPos(){
@@ -26,28 +61,33 @@ public class maplogic : MonoBehaviour  {
 
 		doorinfo doorInfo = roomInfo.getDoorInfo (roomInfo.mEnterDoorId);
 		if (doorInfo != null) {
-			switch (doorInfo.mDir) {
-			case constant.Direction.east:
-				x = 4;
-				break;
-			case constant.Direction.west:
-				x = -4;
-				break;
-			case constant.Direction.south:
-				y = -4;
-				break;
-			case constant.Direction.north:
-				y = 4;
-				break;
-			}
+				//Debug.Log ("roomInfoEnterDoorId: " + roomInfo.mEnterDoorId + "，doorInfo:" + doorInfo.mId);
+				//Debug.Log ("doorInfo.mDir:" + doorInfo.mDir);
 
-			GameObject door = getDoorTouchObj (doorInfo.mId);
-			
-			
-			if (door != null) {
-				GameObject role = GameObject.FindGameObjectWithTag(constant.TAG_PLAYER);
-				role.gameObject.transform.position = new Vector3 (door.transform.position.x+x, door.transform.position.y+y, -1);
-			}
+				switch (doorInfo.mDir) {
+				case constant.Direction.east:
+						x = 4;
+						break;
+				case constant.Direction.west:
+						x = -4;
+						break;
+				case constant.Direction.south:
+						y = -4;
+						break;
+				case constant.Direction.north:
+						y = 4;
+						break;
+				}
+
+				GameObject door = getDoorTouchObj (doorInfo.mId);
+	
+	
+				if (door != null) {
+						GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+						role.gameObject.transform.position = new Vector3 (door.transform.position.x + x, door.transform.position.y + y, -1);
+				}
+		} else {
+			//Debug.Log("error roomInfo.mEnterDoorId:" + roomInfo.mEnterDoorId );
 		}
 
 	}
@@ -84,7 +124,8 @@ public class maplogic : MonoBehaviour  {
 		dic.Add ("LeftRoom", constant.Direction.east);
 		dic.Add ("RightRoom", constant.Direction.west);
 
-		List<doorinfo> doorinfos = mMapInfo.getCurRoom ().mDoorInfos;
+		roominfo roomInfo = mMapInfo.getCurRoom ();
+		List<doorinfo> doorinfos = roomInfo.mDoorInfos;
 
 		foreach(KeyValuePair<string, constant.Direction> pair in dic)
 		{
@@ -94,37 +135,63 @@ public class maplogic : MonoBehaviour  {
 					char_enter_script com = obj.GetComponent<char_enter_script>();
 					com.mDir = pair.Value;
 
+					//Debug.Log("obj:" + obj.name);
+
 					room_property pro = obj.GetComponent<room_property>();
-					Debug.Log ("pro:" + pro.mX + "," + pro.mY + "," + (pro.mDoorInfo));
+					//Debug.Log ("pro:" + pro.mX + "," + pro.mY + "," + (pro.mDoorInfo));
 					foreach(doorinfo info in doorinfos){
-						Debug.Log ("info:" + info.mX + "," + info.mY);
+						//Debug.Log ("info:" + info.mX + "," + info.mY);
 						if(pro.mX == info.mX && pro.mY == info.mY){
-							Debug.Log("add roominfo");
+							//Debug.Log("add roominfo");
 							pro.mDoorInfo = info;
-							Debug.Log ("info:" + info);
-							Debug.Log ("pro.mDoorInfo:" + pro.mDoorInfo.mX);
+							//Debug.Log ("info:" + info);
+							//Debug.Log ("pro.mDoorInfo:" + pro.mDoorInfo.mX);
+							if(info.mNextRoomId != 0){
+								GameObject wall = obj.transform.parent.transform.Find("wall").gameObject;
+								wall.SetActive(false);
+							}
 						}
+
 					}
 				}
 			}
 
 		}
 
+		initRoomSceneInfo (roomInfo);
+	}
+
+	//生成房间的道具或者怪物的prefabs的gameobject
+	public void initRoomSceneInfo(roominfo info){
+		//Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
+		//Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
+		foreach (KeyValuePair<itemtemplate, Vector3> pair in info.mItemPrefabs) {
+			Vector3 v = pair.Value;
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+		}
+
+		foreach (KeyValuePair<monstertemplate, Vector3> pair in info.mMonsterPrefabs) {
+			Vector3 v = pair.Value;
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+		}
 	}
 
 	public void initMapInfo(){
-		mMapInfo = mapfactory.getFirstMap ();
+		mFloorIndex = 1;
+		mMapInfo = constant.getMapFactory().getRandomMap (this);
 	}
 
 	void Start () {
 	}
 
 	public void startRoom(){
+		Debug.Log ("startRoom");
 		if (!mIsStartGame) {			
 			Debug.Log ("game start");			
 			startMap ();
 			mIsStartGame = true;
 		}
+		createChar ();
 
 		isFinishScene = true;
 		mDoorSprs = GameObject.FindGameObjectsWithTag("normalDoors");
@@ -135,7 +202,7 @@ public class maplogic : MonoBehaviour  {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		/*
 		if (mDoorSprs == null) {
 			return;
@@ -156,7 +223,24 @@ public class maplogic : MonoBehaviour  {
 	
 	void startMap(){
 		initMapInfo ();
-		createChar ();
+		enterFirstRoom ();
+	}
+
+	void enterFirstRoom(){
+		//GameObject.DontDestroyOnLoad (this.gameObject);
+		//GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+		//DontDestroyOnLoad (role);
+		GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+		if (role != null) {
+			GameObject.DestroyImmediate(role);
+		}
+		roominfo roomInfo = mMapInfo.getFirstRoom ();// mapfactory.getNextRoom (mMapInfo, doorInfo);
+		loadRoom(roomInfo);
+	}
+
+	void loadRoom(roominfo info){
+		//Debug.Log ("enterRoom " + info.mId);
+		Application.LoadLevel(info.mSceneIndex);
 	}
 	
 	void createChar(){
@@ -164,16 +248,22 @@ public class maplogic : MonoBehaviour  {
 		v.x = -6.820158f;
 		v.y = -0.5814921f;
 		v.z = -1f;
-		GameObject charClone = (GameObject)Instantiate(mCharPrefabs,v,Quaternion.identity);
+
+		Debug.Log ("createChar");
+		GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+		if (role == null) {
+			GameObject charClone = (GameObject)GameObject.Instantiate(Resources.Load(mPrefabStr),v,Quaternion.identity);
+		}
+
 	}
-	
+
 	public void enterRoom(GameObject door, GameObject role){
 		doorinfo doorInfo = door.GetComponent<room_property>().mDoorInfo;
-		Debug.Log ("enterRoom doorInfo:" + doorInfo.mX + ","
-		           + doorInfo.mY + "," 
-		           + doorInfo.mDir + ","
-		           + doorInfo.mNextRoomId + ","
-		           + doorInfo.mNextDoorId );
+		//Debug.Log ("enterRoom doorInfo:" + doorInfo.mX + ","
+		//           + doorInfo.mY + "," 
+		//           + doorInfo.mDir + ","
+		//           + doorInfo.mNextRoomId + ","
+		//           + doorInfo.mNextDoorId );
 
 		role.gameObject.rigidbody.velocity = new Vector3 (0,0,0);
 		//role.gameObject.transform.position = new Vector3 (-6, 0, -1);
@@ -181,22 +271,27 @@ public class maplogic : MonoBehaviour  {
 		//char_enter_script enter = door.GetComponent<char_enter_script> ();
 		//Debug.Log ("enterRoom dir:" + enter.mDir);
 		 
-		DontDestroyOnLoad (this.gameObject);
-		DontDestroyOnLoad (role);
-		//Application.LoadLevel(0);
-		roominfo roomInfo = mapfactory.getNextRoom (mMapInfo, doorInfo);
-		Application.LoadLevelAdditive(roomInfo.mSceneIndex);
+		//GameObject.DontDestroyOnLoad (this.gameObject);
+		GameObject.DontDestroyOnLoad (role);
+		roominfo roomInfo = constant.getMapFactory().getNextRoom (mMapInfo, doorInfo);
+		loadRoom(roomInfo);
 	}
 
 	public void openDoor(){
 		GameObject[] doors = GameObject.FindGameObjectsWithTag ("normalDoors");
+		roominfo info = constant.getMapLogic ().getCurRoom ();
 		//Debug.Log ("openDoor");
 		foreach (GameObject door in doors) {
-			tk2dSpriteAnimator ani = door.GetComponent<tk2dSpriteAnimator>();
-			BoxCollider box = ani.gameObject.GetComponent<BoxCollider> ();
-			if(!box.isTrigger){
-				ani.Play("open");
-				ani.AnimationCompleted = playOpenDoorAni;
+			GameObject doorTouch = door.transform.parent.Find("door_touch").gameObject;
+			room_property pro = doorTouch.GetComponent<room_property>();
+			if(pro.mDoorInfo != null && pro.mDoorInfo.hasNext() && info.mEnterDoorId != pro.mDoorInfo.mId){
+				tk2dSpriteAnimator ani = door.GetComponent<tk2dSpriteAnimator>();
+				//Debug.Log("openDoor:" + door.name);
+				BoxCollider box = ani.gameObject.GetComponent<BoxCollider> ();
+				if(!box.isTrigger){
+					ani.Play("open");
+					ani.AnimationCompleted = playOpenDoorAni;
+				}
 			}
 		}
 	}
@@ -229,8 +324,8 @@ public class maplogic : MonoBehaviour  {
 	private void touchEnter(GameObject collider, GameObject beCollider){
 		string colliderTag = collider.tag;
 		string beColliderTag = beCollider.tag;
-		Debug.Log ("colliderTag:" + colliderTag);
-		Debug.Log ("beColliderTag:" + beColliderTag);
+		//Debug.Log ("colliderTag:" + colliderTag);
+		//Debug.Log ("beColliderTag:" + beColliderTag);
 		if (colliderTag.Equals (constant.TAG_ENEMY)) {
 			if(beColliderTag.Equals(constant.TAG_PLAYER)){
 				if(constant.isConflict(collider, beCollider)){
