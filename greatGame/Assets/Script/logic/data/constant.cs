@@ -71,7 +71,8 @@ public static class constant {
 	}
 
 	public static maplogic getMapLogic(){
-		return GameObject.FindGameObjectWithTag("GameLogic").GetComponent<maplogic>();
+		//return GameObject.FindGameObjectWithTag("GameLogic").GetComponent<maplogic>();
+		return maplogic.getInstance ();
 	}
 
 	public static uilogic getUiLogic(){
@@ -126,4 +127,19 @@ public static class constant {
 		return pro1.isConflict (pro2);
 	}
 
+	public static GameObject getChildGameObject(GameObject parent, string childObjName){
+		Transform[] allChildren = parent.GetComponentsInChildren<Transform>();
+		foreach (Transform t in allChildren) {
+			if(t.gameObject.name.Equals(childObjName)){
+				return t.gameObject;
+			}
+			if(!t.gameObject.Equals(parent)){
+				GameObject obj = getChildGameObject(t.gameObject, childObjName);
+				if(obj != null){
+					return obj;
+				}
+			}
+		}
+		return null;
+	}
 }

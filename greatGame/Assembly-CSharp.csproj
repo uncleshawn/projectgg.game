@@ -707,6 +707,7 @@
      <Compile Include="Assets\Script\logic\data\monsterfactory.cs" />
      <Compile Include="Assets\Script\logic\data\monstertemplate.cs" />
      <Compile Include="Assets\Script\logic\data\roominfo.cs" />
+     <Compile Include="Assets\Script\logic\enemy\Enemy1Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemylogic.cs" />
      <Compile Include="Assets\Script\logic\gamelogic.cs" />
