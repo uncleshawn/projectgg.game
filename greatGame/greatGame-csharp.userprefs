@@ -1,12 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/data/itemlogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/maplogic.cs">
     <Files>
       <File FileName="Assets/Script/model/char_property.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/logic/char/charlogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="233" Column="1" />
+      <File FileName="Assets/Script/logic/maplogic.cs" Line="447" Column="2" />
       <File FileName="Assets/Script/logic/data/itemlogic.cs" Line="50" Column="11" />
-      <File FileName="Assets/Script/ui/collipse_script.cs" Line="46" Column="3" />
+      <File FileName="Assets/Script/ui/collipse_script.cs" Line="18" Column="38" />
       <File FileName="Assets/Script/model/item_property.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/item/buyItem_Property.cs" Line="70" Column="35" NotebookId="1" />
       <File FileName="Assets/Script/logic/iconlogic.cs" Line="56" Column="7" NotebookId="1" />

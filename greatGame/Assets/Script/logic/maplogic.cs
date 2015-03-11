@@ -82,6 +82,7 @@ public class maplogic {
 						GameObject door = getDoorTouchObj (doorInfo.mId);
 
 
+
 						if (door != null) {
 								GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
 								role.gameObject.transform.position = new Vector3 (door.transform.position.x + x, door.transform.position.y + y, -1);
@@ -92,8 +93,14 @@ public class maplogic {
 
 		}
 
+
 		public float getRoomInfoFAcc(){
+			if (mMapInfo != null) {
 				return mMapInfo.getRoomInfoFAcc ();
+			}
+
+			//test
+			return 60.0f;
 		}
 
 		public GameObject getDoorTouchObj(int doorId){
