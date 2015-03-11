@@ -55,6 +55,25 @@ public class buyItem_Property : MonoBehaviour {
 				}
 		}
 
+		public void buyItem(bool payment){
+				if (payment) {
+						stock--;
+						checkStock ();
+						itemlogic itemLogic = transform.FindChild ("ui").gameObject.transform.FindChild ("itempic").gameObject.GetComponent<itemlogic> ();
+						if (itemLogic) {
+								itemLogic.canBuyAni ();
+						}
+				} 
+				else {
+						itemlogic itemLogic = transform.FindChild ("ui").gameObject.transform.FindChild ("itempic").gameObject.GetComponent<itemlogic> ();
+						if (itemLogic) {
+								itemLogic.canNotBuyAni ();
+						}	
+				}
+
+				
+		}
+
 		void OnCollisionEnter(Collision other){
 				//constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
 

@@ -15,7 +15,6 @@ public class iconlogic : MonoBehaviour {
 		}
 		void Start () {
 				checkObjectType();
-				positiveAni ();
 		}
 
 		// Update is called once per frame
@@ -49,10 +48,12 @@ public class iconlogic : MonoBehaviour {
 
 		}
 
+		//动画
 		public void positiveAni(){
-				iTween.ScaleBy(gameObject, iTween.Hash("amount", new Vector3(1.1f,1.1f,1), "time" ,0.5 , "loopType", "none" , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
+				iTween.ScaleBy(gameObject, iTween.Hash("amount", new Vector3(1.2f,1.2f,1), "time" ,0.5 , "loopType", "none" , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
 		}
 
+		//动画
 		public void negativeAni(){
 			
 				iTween.ShakePosition(gameObject , iTween.Hash("x" , 1.5 , "loopType", "none" , "time" ,0.5 , "islocal", true ,  "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );

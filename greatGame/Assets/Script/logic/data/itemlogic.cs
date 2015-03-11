@@ -30,21 +30,24 @@ public class itemlogic : monsterbaselogic {
 				}
 		}
 
+		//播放购买成功动画
 		public void canBuyAni(){
 				GameObject itemIcon = transform.FindChild ("UI_itemIcon").gameObject;
 				if (itemIcon) {
-						
+						itemIcon.GetComponent<iconlogic> ().positiveAni ();
 				}
 		}
 
+		//播放购买失败动画
 		public void canNotBuyAni(){
 				GameObject itemIcon = transform.FindChild ("UI_itemIcon").gameObject;
 				if (itemIcon) {
-						
+						itemIcon.GetComponent<iconlogic> ().negativeAni ();
 				}
 				
 		}
 
+		//刷新item
 		public void resetGameobject(){
 				//Debug.Log("重置道具名称");
 				debugShowName();
