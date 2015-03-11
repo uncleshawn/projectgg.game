@@ -93,7 +93,12 @@ public class maplogic {
 	}
 
 	public float getRoomInfoFAcc(){
-		return mMapInfo.getRoomInfoFAcc ();
+		if (mMapInfo != null) {
+			return mMapInfo.getRoomInfoFAcc ();
+		}
+
+		//test
+		return 60.0f;
 	}
 
 	public GameObject getDoorTouchObj(int doorId){
