@@ -6,9 +6,16 @@ public class iconlogic : MonoBehaviour {
 
 		GameObject obj;
 		tk2dSprite icon;
+		Vector3 originPos;
+		Vector3 originScale;
 		// Use this for initialization
+		void Awake(){
+				originPos = transform.localPosition;
+				originScale = transform.localScale;
+		}
 		void Start () {
 				checkObjectType();
+				positiveAni ();
 		}
 
 		// Update is called once per frame
@@ -42,8 +49,22 @@ public class iconlogic : MonoBehaviour {
 
 		}
 
+		public void positiveAni(){
+				iTween.ScaleBy(gameObject, iTween.Hash("amount", new Vector3(1.1f,1.1f,1), "time" ,0.5 , "loopType", "none" , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
+		}
+
+		public void negativeAni(){
+			
+				iTween.ShakePosition(gameObject , iTween.Hash("x" , 1.5 , "loopType", "none" , "time" ,0.5 , "islocal", true ,  "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
+
+		}
+
+
 		public void resetGameobject(){
 				//Debug.Log("重置道具图标");
+
+				transform.localScale = originScale;
+				transform.localPosition = originPos;
 				checkObjectType ();
 
 		}

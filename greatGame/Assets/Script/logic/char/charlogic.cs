@@ -270,6 +270,7 @@ public class charlogic : monsterbaselogic {
 				buyItem_Property buyproperty = shoptable.GetComponent<buyItem_Property> ();
 				int itemId = buyproperty.mID;
 				int itemPrice = buyproperty.itemPrice;
+				return false;
 
 		}
 
