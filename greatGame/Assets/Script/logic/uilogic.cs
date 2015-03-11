@@ -24,7 +24,9 @@ public class uilogic : MonoBehaviour, notifylogic {
 		Debug.Log ("delegate function...");
 		Debug.Log ("application loadlevel");
 		constant.getMapLogic ().resetStartGame ();
-		Application.LoadLevel(0);
+		constant.getMapLogic ().startRoom ();
+		//Application.LoadLevel(0);
+
 	}  
 
 	public void showDieMenu(){

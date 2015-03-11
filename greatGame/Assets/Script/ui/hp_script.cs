@@ -22,13 +22,15 @@ public class hp_script : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GameObject obj = GameObject.FindGameObjectWithTag ("Player");
+		GameObject obj = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
 
 		if (obj == null) {
 			return;
 		}
 
 		char_property pro = obj.GetComponent<char_property> ();
+		//Debug.Log ("pro hp:" + pro.MaxHp + "," + pro.Hp);
+
 		int totalHp = pro.MaxHp;
 		if (mHps.Count > pro.MaxHp) {
 			for(int i = mHps.Count-1; i >= pro.MaxHp; --i){
@@ -54,8 +56,7 @@ public class hp_script : MonoBehaviour {
 		//Component charProperty = obj.GetComponent<"char_property">();
 		//int hp = charProperty.getHp();
 
-		char_property charProperty = obj.GetComponent<char_property>();
-		int hp = charProperty.Hp;
+		int hp = pro.Hp;
 
 		for(int i = 0; i < totalHp; ++i){
 			GameObject hpSprObj = mHps[i]; // GameObject.Find("hp_child" + (i+1));

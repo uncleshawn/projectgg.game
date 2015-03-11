@@ -2,7 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class maplogic : MonoBehaviour  {
+public class maplogic {
+
+	private static maplogic mInstance;
+
+	private maplogic(){
+		mPrefabStr = "Prefabs/char/robot";
+		mFloorIndex = 1;
+	}
+
+	public static maplogic getInstance(){
+		if (mInstance == null) {
+			mInstance = new maplogic();
+		}
+		return mInstance;
+	}
 	
 	public mapinfo mMapInfo;
 	public bool isFinishScene = false;
@@ -149,16 +163,16 @@ public class maplogic : MonoBehaviour  {
 
 	//生成房间的道具或者怪物的prefabs的gameobject
 	public void initRoomSceneInfo(roominfo info){
-		Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
-		Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
+		//Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
+		//Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
 		foreach (KeyValuePair<itemtemplate, Vector3> pair in info.mItemPrefabs) {
 			Vector3 v = pair.Value;
-			GameObject clone = (GameObject)Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
 		}
 
 		foreach (KeyValuePair<monstertemplate, Vector3> pair in info.mMonsterPrefabs) {
 			Vector3 v = pair.Value;
-			GameObject clone = (GameObject)Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
 		}
 	}
 
@@ -171,11 +185,13 @@ public class maplogic : MonoBehaviour  {
 	}
 
 	public void startRoom(){
+		Debug.Log ("startRoom");
 		if (!mIsStartGame) {			
 			Debug.Log ("game start");			
 			startMap ();
 			mIsStartGame = true;
 		}
+		createChar ();
 
 		isFinishScene = true;
 		mDoorSprs = GameObject.FindGameObjectsWithTag("normalDoors");
@@ -186,7 +202,7 @@ public class maplogic : MonoBehaviour  {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		/*
 		if (mDoorSprs == null) {
 			return;
@@ -207,15 +223,17 @@ public class maplogic : MonoBehaviour  {
 	
 	void startMap(){
 		initMapInfo ();
-		createChar ();
-
 		enterFirstRoom ();
 	}
 
 	void enterFirstRoom(){
-		DontDestroyOnLoad (this.gameObject);
+		//GameObject.DontDestroyOnLoad (this.gameObject);
+		//GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+		//DontDestroyOnLoad (role);
 		GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
-		DontDestroyOnLoad (role);
+		if (role != null) {
+			GameObject.DestroyImmediate(role);
+		}
 		roominfo roomInfo = mMapInfo.getFirstRoom ();// mapfactory.getNextRoom (mMapInfo, doorInfo);
 		loadRoom(roomInfo);
 	}
@@ -230,11 +248,12 @@ public class maplogic : MonoBehaviour  {
 		v.x = -6.820158f;
 		v.y = -0.5814921f;
 		v.z = -1f;
-		//GameObject charClone = (GameObject)Instantiate(mCharPrefabs,v,Quaternion.identity);
-		//GameObject charClone = Resources.Load(mPrefabStr) as GameObject;
-		//charClone.transform.position = v;
 
-		GameObject charClone = (GameObject)Instantiate(Resources.Load(mPrefabStr),v,Quaternion.identity);
+		Debug.Log ("createChar");
+		GameObject role = GameObject.FindGameObjectWithTag (constant.TAG_PLAYER);
+		if (role == null) {
+			GameObject charClone = (GameObject)GameObject.Instantiate(Resources.Load(mPrefabStr),v,Quaternion.identity);
+		}
 
 	}
 
@@ -252,8 +271,8 @@ public class maplogic : MonoBehaviour  {
 		//char_enter_script enter = door.GetComponent<char_enter_script> ();
 		//Debug.Log ("enterRoom dir:" + enter.mDir);
 		 
-		DontDestroyOnLoad (this.gameObject);
-		DontDestroyOnLoad (role);
+		//GameObject.DontDestroyOnLoad (this.gameObject);
+		GameObject.DontDestroyOnLoad (role);
 		roominfo roomInfo = constant.getMapFactory().getNextRoom (mMapInfo, doorInfo);
 		loadRoom(roomInfo);
 	}
