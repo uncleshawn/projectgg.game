@@ -262,6 +262,19 @@ public class charlogic : monsterbaselogic {
 				return false;
 		}
 
+
+
+		//玩家购买道具
+		public bool buyItem(GameObject shoptable){
+				char_property charproperty = gameObject.GetComponent<char_property> ();
+				buyItem_Property buyproperty = shoptable.GetComponent<buyItem_Property> ();
+				int itemId = buyproperty.mID;
+				int itemPrice = buyproperty.itemPrice;
+
+		}
+
+
+
 		override public Vector3 getMoveAcc(){
 				Vector3 v = new Vector3 ();
 				v.x = 0;

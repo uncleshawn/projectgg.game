@@ -56,6 +56,7 @@ public class buyItem_Property : MonoBehaviour {
 		}
 
 		void OnCollisionEnter(Collision other){
+				//constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
 
 		}
 
