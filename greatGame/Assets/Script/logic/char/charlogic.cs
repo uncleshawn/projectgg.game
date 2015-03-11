@@ -164,22 +164,7 @@ public class charlogic : monsterbaselogic {
 				enforce_Property enforceProperty = obj.GetComponent<enforce_Property>();
 				char_property charProperty = gameObject.GetComponent<char_property>();
 				if(enforceProperty){
-						charProperty.MaxHp += enforceProperty.MaxHp;
-						charProperty.Hp += enforceProperty.MaxHp;
-						charProperty.MaxNp += enforceProperty.MaxNp;
-						charProperty.Np += enforceProperty.MaxNp;
-						charProperty.MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
-						charProperty.MoveSpeed += enforceProperty.MaxMoveSpeed;
-						charProperty.MaxDamage += enforceProperty.MaxDamage;
-						charProperty.Damage += enforceProperty.MaxDamage;
-						charProperty.MaxAttackSpeed += enforceProperty.MaxAttackSpeed;
-						charProperty.AttackSpeed += enforceProperty.MaxAttackSpeed;
-						charProperty.MaxAttackRate += enforceProperty.MaxAttackRate;
-						charProperty.AttackRate += enforceProperty.MaxAttackRate;
-						charProperty.MaxAttackDistance += enforceProperty.MaxAttackDistance; 
-						charProperty.AttackDistance += enforceProperty.MaxAttackDistance; 
-
-						charProperty.upgradeShootProperties();
+						charProperty.upgradePlayerProperty (enforceProperty);
 						graped += 1; 
 				}
 
@@ -297,6 +282,20 @@ public class charlogic : monsterbaselogic {
 				}
 				return false;
 		}
+
+
+
+		//玩家购买道具
+		public bool buyItem(GameObject shoptable){
+				char_property charproperty = gameObject.GetComponent<char_property> ();
+				buyItem_Property buyproperty = shoptable.GetComponent<buyItem_Property> ();
+				int itemId = buyproperty.mID;
+				int itemPrice = buyproperty.itemPrice;
+				return false;
+
+		}
+
+
 
 		override public Vector3 getMoveAcc(){
 				Vector3 v = new Vector3 ();

@@ -34,6 +34,7 @@ public static class constant {
 	public static string TAG_WALL = "Wall";
 	public static string TAG_ITEM = "Item";
 	public static string TAG_BASEDOORS = "BaseDoors";
+	public static string TAG_SHOPTABLE = "ShopTable";
 
 	public static Direction getOppsiteDir(Direction dir){
 		switch (dir) {
@@ -125,5 +126,5 @@ public static class constant {
 	private static bool isConflict(base_property pro1, base_property pro2){
 		return pro1.isConflict (pro2);
 	}
-
+			
 }

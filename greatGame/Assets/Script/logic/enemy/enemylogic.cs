@@ -56,7 +56,7 @@ public class enemylogic : monsterbaselogic {
 				Vector3 bulletPos = bulletProperty.transform.position;
 				//处理laser特殊击退效果
 				if (weapontype == weaponType.laserNormal) {
-
+						Debug.Log ("激光");
 						Direction laserDirection = bulletProperty.gameObject.GetComponent<laserAniManager> ().BulletDirection;
 						switch(laserDirection){
 						default:

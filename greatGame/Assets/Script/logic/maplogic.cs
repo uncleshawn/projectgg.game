@@ -301,6 +301,7 @@ public class maplogic : MonoBehaviour  {
 		touchEnter (collider, beCollider);
 	}
 
+	//接触检测OntriggerEnter
 	private void touchEnter(GameObject collider, GameObject beCollider){
 		string colliderTag = collider.tag;
 		string beColliderTag = beCollider.tag;
@@ -328,7 +329,19 @@ public class maplogic : MonoBehaviour  {
 			}
 		}
 
+				if (colliderTag.Equals (constant.TAG_PLAYER)) {
+						if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
+								//购买道具
+								//buyItem(collider, beCollider);
+						}
+				}
+
 	}
+		//非trigger类型enter判断
+		private void CollisionEnter(GameObject collider, GameObject beCollider){
+				string colliderTag = collider.tag;
+				string beColliderTag = beCollider.tag;
+		}
 
 
 	//攻击

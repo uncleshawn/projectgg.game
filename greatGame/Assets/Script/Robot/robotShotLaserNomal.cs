@@ -8,6 +8,7 @@ public class robotShotLaserNomal : MonoBehaviour {
 	float laserRate; 					//laser shoot rate, rateTime > laser fullAni time
 	float delayTime;	
 
+
 	public float preTime;
 	public float flyingTime;
 	public float coldDown;
