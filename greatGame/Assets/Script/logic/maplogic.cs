@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class maplogic {
-
+		public bool debugLog;
 	private static maplogic mInstance;
 
 		private maplogic(){
@@ -192,7 +192,8 @@ public class maplogic {
 		}
 
 		public void startRoom(){
-				Debug.Log ("startRoom");
+				Debug.Log ("startRoom"
+				);
 				if (!mIsStartGame) {			
 						Debug.Log ("game start");			
 						startMap ();
@@ -346,9 +347,10 @@ public class maplogic {
 						}
 				}
 
-				if (colliderTag.Equals (constant.TAG_PLAYER)) {
-						if(beColliderTag.Equals(constant.TAG_ITEM)){
-								eatItem(collider, beCollider);
+				if (colliderTag.Equals (constant.TAG_ITEM)) {
+
+						if(beColliderTag.Equals(constant.TAG_PLAYER)){
+								eatItem(beCollider, collider);
 						}
 				}
 
@@ -363,9 +365,10 @@ public class maplogic {
 				if (colliderTag.Equals (constant.TAG_PLAYER)) {
 						if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
 								//购买道具
-								//buyItem(collider, beCollider);
+								buyItem(collider, beCollider);
 						}
 				}
+						
 
 		}
 		//非trigger类型stay判断
@@ -382,9 +385,10 @@ public class maplogic {
 						}
 				}
 
-				if (colliderTag.Equals (constant.TAG_PLAYER)) {
-						if(beColliderTag.Equals(constant.TAG_ITEM)){
-								eatItem(collider, beCollider);
+				if (colliderTag.Equals (constant.TAG_ITEM)) {
+						
+						if(beColliderTag.Equals(constant.TAG_PLAYER)){
+								eatItem(beCollider, collider);
 						}
 				}
 
@@ -398,11 +402,7 @@ public class maplogic {
 		}
 
 
-		//攻击
-		private void attack(GameObject atker, GameObject beAtker){
-				monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
-				beAtkerLogic.beAttack(atker);
-		}
+
 
 		//捡道具	
 		private void eatItem(GameObject player, GameObject item){
@@ -434,21 +434,50 @@ public class maplogic {
 
 		}
 		//背包增加金币
-		public void bagAddGold(int amount){
+		public void bagAddGold(int amount , GameObject player){
+				char_property charProperty = player.GetComponent<char_property> ();
+				charProperty.addGold (amount);
 
 		}
 		//背包增加宝石
-		public void bagAddDiamond(int amount){
-
+		public void bagAddDiamond(int amount , GameObject player){
+				//Debug.Log ("还没有宝石");
 		}
 
 		//背包增加普通钥匙
-		public void bagAddKey(int amount){
+		public void bagAddKey(int amount , GameObject player){
+				char_property charProperty = player.GetComponent<char_property> ();
+				charProperty.addKey (amount);
 		}
 
 		//背包增加金钥匙
-		public void bagAddGoldenKey(int amount){
+		public void bagAddGoldenKey(int amount , GameObject player){
+				//Debug.Log ("还没有金钥匙");
 
 		}
 
+		public void buyItem(GameObject collider, GameObject beCollider){
+				Debug.Log ("玩家开始购买道具");
+				if (collider.GetComponent<charlogic> ().buyItem (beCollider) ){
+						beCollider.GetComponent<buyItem_Property> ().buyItem (true);
+						Debug.Log ("购买成功");
+
+				}
+				else {
+						beCollider.GetComponent<buyItem_Property> ().buyItem (false);
+						Debug.Log ("购买失败");
+				}
+		}
+
+
+
+
+		//攻击
+		private void attack(GameObject atker, GameObject beAtker){
+				monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
+				beAtkerLogic.beAttack(atker);
+		}
+				
 }
+
+

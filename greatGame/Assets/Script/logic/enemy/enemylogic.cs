@@ -3,8 +3,9 @@ using System.Collections;
 
 public class enemylogic : monsterbaselogic {
 
-	// Use this for initialization
-	void Start () {
+
+		// Use this for initialization
+		void Start () {
 
 		}
 
@@ -54,6 +55,9 @@ public class enemylogic : monsterbaselogic {
 				int force = bulletProperty.bulletknock;
 				Vector3 enemyPos = enemyProperty.transform.position;
 				Vector3 bulletPos = bulletProperty.transform.position;
+				if (enemyProperty.heavyBody) {
+						return;
+				}
 				//处理laser特殊击退效果
 				if (weapontype == weaponType.laserNormal) {
 						Debug.Log ("激光");
@@ -89,6 +93,8 @@ public class enemylogic : monsterbaselogic {
 
 
 
+
+
 		public void getEffect(enemy_property enemyProperty){
 
 		}
@@ -100,4 +106,6 @@ public class enemylogic : monsterbaselogic {
 				}
 				return false;
 		}
+
+
 }

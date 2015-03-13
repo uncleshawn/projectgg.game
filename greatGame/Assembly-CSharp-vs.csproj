@@ -673,7 +673,6 @@
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletGetSpeed.cs" />
-     <Compile Include="Assets\Script\Enemy\enemyProperty.cs" />
      <Compile Include="Assets\Script\EnemyAI\followPlayer.cs" />
      <Compile Include="Assets\Script\EnemyAI\spwanEnemy.cs" />
      <Compile Include="Assets\Script\Robot\robotAniManager.cs" />

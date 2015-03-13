@@ -58,7 +58,7 @@ public class char_property : base_property {
 
 
 	void Awake() {
-		mHp = 4;
+		mHp = 3;
 		mNp = 2;
 		mMoveSpeed = 1;
 		mDamage = 1;
@@ -67,7 +67,7 @@ public class char_property : base_property {
 		mAttackDistance = 0;
 		upgradeShootProperties();
 		
-		mMaxHp = 5;
+		mMaxHp = 3;
 		mMaxNp = 2;
 		mMaxMoveSpeed = 1;
 		mMaxDamage = 1;
@@ -80,7 +80,7 @@ public class char_property : base_property {
 		mBattleType = constant.BattleType.Player;
 
 		mItems = new List<itemtemplate> ();
-		mBaseMoveSpeed = 5.0f;
+		mBaseMoveSpeed = 8.0f;
 	}
 	// Use this for initialization
 	void Start () {

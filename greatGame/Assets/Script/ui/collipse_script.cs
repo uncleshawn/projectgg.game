@@ -15,7 +15,7 @@ public class collipse_script : MonoBehaviour {
 
 	void OnCollisionStay(Collision collision){
 		//Debug.Log ("onCollisionStay");
-		constant.getMapLogic ().collideStay (this.gameObject, collision.gameObject);
+				constant.getMapLogic ().collideStay (collision.gameObject, this.gameObject);
 	}
 
 	void OnCollisionEnter(Collision collision) {
@@ -40,7 +40,7 @@ public class collipse_script : MonoBehaviour {
 			monsterLogic.beAttack(other.gameObject);
 		}
 		*/
-		constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
+			constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
 		//Component charProperty = obj.GetComponent<"char_property">();
 	}
 

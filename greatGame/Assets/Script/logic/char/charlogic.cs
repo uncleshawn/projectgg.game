@@ -290,8 +290,35 @@ public class charlogic : monsterbaselogic {
 				char_property charproperty = gameObject.GetComponent<char_property> ();
 				buyItem_Property buyproperty = shoptable.GetComponent<buyItem_Property> ();
 				int itemId = buyproperty.mID;
+				if (itemId == 0) {
+						Debug.Log ("道具已售罄");	
+						return false;
+				}
 				int itemPrice = buyproperty.itemPrice;
-				return false;
+				int charGold = charproperty.Gold;
+				if (charGold >= itemPrice) {
+						string itemPath = itemfactory.getInstance ().getItemTemplate (itemId).PrefabPath;
+						if (itemPath!="") {
+								Vector3 itemTempPos = new Vector3 (0, 0, -100);
+								GameObject itemClone = (GameObject)Instantiate(Resources.Load(itemPath),itemTempPos,Quaternion.identity);
+								if (grapItem (itemClone)) {
+										GameObject.Destroy(itemClone);
+								} 
+								else {
+										Debug.Log ("金币足够,其他原因无法购买道具");
+										GameObject.Destroy(itemClone);
+										return false;
+								}
+						}
+						Debug.Log ("剩余金钱: " + (charGold - itemPrice) + " = " + charGold + " - " + itemPrice);
+						charproperty.Gold = charGold - itemPrice;
+						return true;
+				} 
+				else 
+				{
+						Debug.Log ("金币不足");
+						return false;	
+				}
 
 		}
 
