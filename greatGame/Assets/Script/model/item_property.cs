@@ -43,6 +43,12 @@ class item_property : base_property {
 						mType = itemType.weapon;
 						iType.Add(mType);
 				}
+				if(transform.gameObject.GetComponent<bulletEnforce_Property>()){
+						//Debug.Log("item has special bullet property!");
+						mType = itemType.bulletEnforce;
+						iType.Add(mType);
+				}
+
 
 				mBaseMoveSpeed = 15.0f;
 		}

@@ -7,7 +7,7 @@ public class bullet_property : base_property {
 		public int bulletDamage;
 		public int bulletknock;
 		public float bulletDamageRate;
-		public ElementType bulletElement;
+		public bulletSpeStruct bulletSpe;
 
 		public weaponType WeaponType { get { return weapontype; } set { weapontype = value; }}
 
@@ -22,13 +22,15 @@ public class bullet_property : base_property {
 		void Update () {
 
 		}
-		public void setProperty(weaponType weapon, int damage, int knock, float damamgeRate, ElementType element, constant.BattleType battleType){
+
+		//被外部调用修改子弹的属性
+		public void setProperty(weaponType weapon, int damage, int knock, float damamgeRate, bulletSpeStruct bulletStruct, constant.BattleType battleType){
 				//Debug.Log ("子弹击退效果: " + knock);
 				weapontype = weapon;
 				bulletDamage = damage;
 				bulletknock = knock ;
 				bulletDamageRate = damamgeRate ; 
-				bulletElement = element;
 				mBattleType = battleType;
+				bulletSpe = bulletStruct;
 		}
 }

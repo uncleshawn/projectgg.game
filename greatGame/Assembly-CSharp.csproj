@@ -685,6 +685,7 @@
      <Compile Include="Assets\Script\debug\debug_script.cs" />
      <Compile Include="Assets\Script\equipment\followWaitType.cs" />
      <Compile Include="Assets\Script\equipment\followerAniManager.cs" />
+     <Compile Include="Assets\Script\item\bulletEnforce_Property.cs" />
      <Compile Include="Assets\Script\item\buyItem_Property.cs" />
      <Compile Include="Assets\Script\item\enforce_Property.cs" />
      <Compile Include="Assets\Script\item\equipItem_Property.cs" />
@@ -722,7 +723,7 @@
      <Compile Include="Assets\Script\model\bullet_property.cs" />
      <Compile Include="Assets\Script\model\char_property.cs" />
      <Compile Include="Assets\Script\model\enemy_property.cs" />
-     <Compile Include="Assets\Script\model\follow_property.cs" />
+     <Compile Include="Assets\Script\model\follower_property.cs" />
      <Compile Include="Assets\Script\model\item_property.cs" />
      <Compile Include="Assets\Script\model\room_property.cs" />
      <Compile Include="Assets\Script\packback\backpackData.cs" />

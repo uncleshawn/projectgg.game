@@ -1,22 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/model/enemy_property.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/item/bulletEnforce_Property.cs">
     <Files>
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="293" Column="1" />
-      <File FileName="Assets/Script/ui/collipse_script.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="295" Column="20" />
-      <File FileName="Assets/Script/logic/data/itemlogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/model/item_property.cs" Line="42" Column="9" />
-      <File FileName="Assets/Script/logic/data/itemfactory.cs" Line="27" Column="41" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/model/char_property.cs" Line="115" Column="38" />
-      <File FileName="Assets/Script/logic/monsterbaselogic.cs" Line="35" Column="30" />
-      <File FileName="Assets/Script/ui/move_script.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/EnemyAI/followPlayer.cs" Line="53" Column="41" />
-      <File FileName="Assets/Script/logic/enemy/Enemy1Logic.cs" Line="12" Column="26" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="58" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="113" Column="1" />
-      <File FileName="Assets/Script/model/enemy_property.cs" Line="7" Column="1" />
+      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="140" Column="4" />
+      <File FileName="Assets/Script/Robot/robotShotNormalBullet.cs" Line="262" Column="4" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="56" Column="5" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="10" Column="10" />
+      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="57" Column="27" />
+      <File FileName="Assets/Script/item/bulletEnforce_Property.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
