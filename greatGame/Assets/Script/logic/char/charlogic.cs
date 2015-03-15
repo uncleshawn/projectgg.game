@@ -115,6 +115,13 @@ public class charlogic : monsterbaselogic {
 												boolGrap = true;
 										}
 								}
+								if (itemProperty.iType [index] == itemType.special) {
+										if(addPassitiveSkill(item)){
+												putInBag(item,inbagAlright);
+												inbagAlright = true;
+												boolGrap = true;
+										}
+								}
 						}
 
 				}
@@ -273,6 +280,24 @@ public class charlogic : monsterbaselogic {
 						return true;
 				}
 				Debug.Log ("子弹效果无法强化,请检查系统!");
+				return false;
+		}
+
+
+		//添加被动技能
+		public bool addPassitiveSkill(GameObject obj){
+				GameObject passitiveSkill = this.transform.FindChild ("speSkill").gameObject;
+				if (passitiveSkill) {
+						
+						speItem_property speItemProperty =  obj.GetComponent<speItem_property> ();
+						string scriptName = speItemProperty.scriptName;
+						object skillComponent = passitiveSkill.AddComponent (scriptName) as object;
+						return true;
+
+				} else {
+						Debug.Log ("无法找到存储被动技能的Gameobject");
+						return false;
+				}
 				return false;
 		}
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class maplogic {
 		public bool debugLog;
-	private static maplogic mInstance;
+		private static maplogic mInstance;
 
 		private maplogic(){
 				mPrefabStr = "Prefabs/char/robot";

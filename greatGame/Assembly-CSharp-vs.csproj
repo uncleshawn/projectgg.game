@@ -685,12 +685,14 @@
      <Compile Include="Assets\Script\debug\debug_script.cs" />
      <Compile Include="Assets\Script\equipment\followWaitType.cs" />
      <Compile Include="Assets\Script\equipment\followerAniManager.cs" />
+     <Compile Include="Assets\Script\equipment\passitive\recoverHeartStone.cs" />
      <Compile Include="Assets\Script\item\bulletEnforce_Property.cs" />
      <Compile Include="Assets\Script\item\buyItem_Property.cs" />
      <Compile Include="Assets\Script\item\enforce_Property.cs" />
      <Compile Include="Assets\Script\item\equipItem_Property.cs" />
      <Compile Include="Assets\Script\item\itemAniManager.cs" />
      <Compile Include="Assets\Script\item\recover_Property.cs" />
+     <Compile Include="Assets\Script\item\speItem_property.cs" />
      <Compile Include="Assets\Script\item\treasure_property.cs" />
      <Compile Include="Assets\Script\item\weaponItem_property.cs" />
      <Compile Include="Assets\Script\logic\bullet\bulletlogic.cs" />
@@ -717,6 +719,7 @@
      <Compile Include="Assets\Script\logic\maplogic.cs" />
      <Compile Include="Assets\Script\logic\monsterbaselogic.cs" />
      <Compile Include="Assets\Script\logic\notifylogic.cs" />
+     <Compile Include="Assets\Script\logic\soundLogic.cs" />
      <Compile Include="Assets\Script\logic\startmap.cs" />
      <Compile Include="Assets\Script\logic\uilogic.cs" />
      <Compile Include="Assets\Script\model\base_property.cs" />

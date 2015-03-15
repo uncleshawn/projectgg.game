@@ -48,6 +48,11 @@ class item_property : base_property {
 						mType = itemType.bulletEnforce;
 						iType.Add(mType);
 				}
+				if(transform.gameObject.GetComponent<speItem_property>()){
+						//Debug.Log("item has passitive property!");
+						mType = itemType.special;
+						iType.Add(mType);
+				}
 
 
 				mBaseMoveSpeed = 15.0f;

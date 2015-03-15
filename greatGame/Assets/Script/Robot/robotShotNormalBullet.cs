@@ -235,6 +235,8 @@ public class robotShotNormalBullet : MonoBehaviour {
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(this.gameObject));
 		}
 
+
+		//捡到道具后更新属性
 		public void setBaseProperty(weaponItem_property weapon){
 				baseBulletDamage = weapon.baseBulletDamage;
 				if (weapon.baseBulletDistance != 0) {
