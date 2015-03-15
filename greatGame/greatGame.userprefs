@@ -1,14 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\data\constant.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\maplogic.cs">
     <Files>
-      <File FileName="Assets\Script\logic\iconlogic.cs" Line="73" Column="1" />
-      <File FileName="Assets\Script\logic\data\constant.cs" Line="131" Column="1" />
-      <File FileName="Assets\Script\ui\move_script.cs" Line="95" Column="1" />
-      <File FileName="Assets\Script\ui\collipse_script.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="420" Column="1" />
-      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="45" Column="6" />
-      <File FileName="Assets\Script\Bullets\laser\laserAniManager.cs" Line="92" Column="10" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="318" Column="30" />
+      <File FileName="Assets\Script\logic\enemy\trap1logic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

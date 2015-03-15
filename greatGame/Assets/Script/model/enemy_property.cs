@@ -4,6 +4,7 @@ using System.Collections;
 
 public class enemy_property : base_property {
 
+	public bool mIsBoss;
 
 
 		/// <summary>
