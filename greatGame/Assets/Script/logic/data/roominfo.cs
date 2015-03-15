@@ -20,6 +20,8 @@ public class roominfo  {
 	public float mFAcc; //场地摩擦力
 	public constant.RoomType mRoomType;
 
+	public bool mIsBossRoom;
+
 	public List< KeyValuePair<itemtemplate, Vector3> > mItemPrefabs;
 	public List< KeyValuePair<monstertemplate, Vector3> > mMonsterPrefabs;
 

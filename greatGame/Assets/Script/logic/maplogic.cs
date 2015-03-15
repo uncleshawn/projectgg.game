@@ -5,18 +5,6 @@ using System.Collections.Generic;
 public class maplogic {
 
 	private static maplogic mInstance;
-
-	private maplogic(){
-		mPrefabStr = "Prefabs/char/robot";
-		mFloorIndex = 1;
-	}
-
-	public static maplogic getInstance(){
-		if (mInstance == null) {
-			mInstance = new maplogic();
-		}
-		return mInstance;
-	}
 	
 	public mapinfo mMapInfo;
 	public bool isFinishScene = false;
@@ -25,11 +13,24 @@ public class maplogic {
 	
 	//public GameObject mCharPrefabs;		//主角prefab
 	private string mPrefabStr = "Prefabs/char/robot";
+	private string mBossUIPrefabStr = "Prefabs/ui/boss_hp";
 	public GameObject mChar;
 	
 	public static bool mIsStartGame = false;
 
 	public int mFloorIndex;
+
+	private maplogic(){
+		mPrefabStr = "Prefabs/char/robot";
+		mFloorIndex = 1;
+	}
+	
+	public static maplogic getInstance(){
+		if (mInstance == null) {
+			mInstance = new maplogic();
+		}
+		return mInstance;
+	}
 
 	public void Awake(){
 		mPrefabStr = "Prefabs/char/robot";
@@ -166,10 +167,15 @@ public class maplogic {
 		initRoomSceneInfo (roomInfo);
 	}
 
-	//生成房间的道具或者怪物的prefabs的gameobject
+	//生成房间的地面prefab,道具或者怪物的prefabs的gameobject
 	public void initRoomSceneInfo(roominfo info){
 		//Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
 		//Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
+		SceneTemplate scentemplate = constant.getMapFactory ().getSceneTemplate (info.mSceneIndex);
+		if (scentemplate.ScenePrefab != null) {
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(scentemplate.ScenePrefab),new Vector3(0,0,0),Quaternion.identity);
+		}
+
 		foreach (KeyValuePair<itemtemplate, Vector3> pair in info.mItemPrefabs) {
 			Vector3 v = pair.Value;
 			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
@@ -178,6 +184,17 @@ public class maplogic {
 		foreach (KeyValuePair<monstertemplate, Vector3> pair in info.mMonsterPrefabs) {
 			Vector3 v = pair.Value;
 			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
+		}
+
+		//checkRoomUI (info);
+	}
+
+	public void checkRoomUI(roominfo info){
+		if (info.mIsBossRoom) {
+			GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(mBossUIPrefabStr),new Vector3(),Quaternion.identity);
+			GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+			clone.transform.parent = mainCamera.transform;
+			clone.transform.localPosition = new Vector3(0.29f, 8.5f, 10.23f);
 		}
 	}
 
@@ -353,19 +370,26 @@ public class maplogic {
 			}
 		}
 
-				if (colliderTag.Equals (constant.TAG_PLAYER)) {
-						if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
-								//购买道具
-								//buyItem(collider, beCollider);
-						}
+		if (colliderTag.Equals (constant.TAG_TRAP)) {
+			if(beColliderTag.Equals(constant.TAG_PLAYER)){
+				Debug.Log("trap player");
+				attack(collider, beCollider);
+			}
+		}
+
+		if (colliderTag.Equals (constant.TAG_PLAYER)) {
+				if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
+						//购买道具
+						//buyItem(collider, beCollider);
 				}
+		}
 
 	}
-		//非trigger类型enter判断
-		private void CollisionEnter(GameObject collider, GameObject beCollider){
-				string colliderTag = collider.tag;
-				string beColliderTag = beCollider.tag;
-		}
+	//非trigger类型enter判断
+	private void CollisionEnter(GameObject collider, GameObject beCollider){
+			string colliderTag = collider.tag;
+			string beColliderTag = beCollider.tag;
+	}
 
 
 	//攻击

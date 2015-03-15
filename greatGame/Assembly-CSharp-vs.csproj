@@ -711,6 +711,7 @@
      <Compile Include="Assets\Script\logic\enemy\Enemy1Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemylogic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\trap1logic.cs" />
      <Compile Include="Assets\Script\logic\gamelogic.cs" />
      <Compile Include="Assets\Script\logic\iconlogic.cs" />
      <Compile Include="Assets\Script\logic\mapfactory.cs" />
@@ -726,7 +727,9 @@
      <Compile Include="Assets\Script\model\follow_property.cs" />
      <Compile Include="Assets\Script\model\item_property.cs" />
      <Compile Include="Assets\Script\model\room_property.cs" />
+     <Compile Include="Assets\Script\model\trap_property.cs" />
      <Compile Include="Assets\Script\packback\backpackData.cs" />
+     <Compile Include="Assets\Script\ui\BossHpUpdate.cs" />
      <Compile Include="Assets\Script\ui\accl_script.cs" />
      <Compile Include="Assets\Script\ui\camera_follow_script.cs" />
      <Compile Include="Assets\Script\ui\char_enter_script.cs" />

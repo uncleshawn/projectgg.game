@@ -1,14 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\data\constant.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\collipse_script.cs">
     <Files>
-      <File FileName="Assets\Script\logic\iconlogic.cs" Line="73" Column="1" />
-      <File FileName="Assets\Script\logic\data\constant.cs" Line="131" Column="1" />
-      <File FileName="Assets\Script\ui\move_script.cs" Line="95" Column="1" />
-      <File FileName="Assets\Script\ui\collipse_script.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="420" Column="1" />
-      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="45" Column="6" />
-      <File FileName="Assets\Script\Bullets\laser\laserAniManager.cs" Line="92" Column="10" />
+      <File FileName="Assets\Script\logic\enemy\trap1logic.cs" Line="9" Column="26" />
+      <File FileName="Assets\Script\ui\collipse_script.cs" Line="40" Column="44" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="376" Column="34" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="35" Column="30" />
+      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="16" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

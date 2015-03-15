@@ -50,7 +50,7 @@ public class mapfactory {
 		}
 
 		mSceneTemplateInfos = new SceneTemplate[]{
-			new SceneTemplate(2, itemPos, monsterPos),
+			new SceneTemplate(2, itemPos, monsterPos, "Prefabs/scene/Scene_Trap"),
 		};
 	}
 
@@ -80,6 +80,10 @@ public class mapfactory {
 			if(i == 0){
 				roomInfo.mRoomType = constant.RoomType.Start;
 			}
+			if(i == roomNum-1){
+				roomInfo.mIsBossRoom = true;
+			}
+
 			roomInfo.mSceneIndex = 2;
 			roomInfo.mId = roomId;
 			++roomId;
