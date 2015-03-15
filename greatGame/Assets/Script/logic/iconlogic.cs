@@ -50,14 +50,13 @@ public class iconlogic : MonoBehaviour {
 
 		//动画
 		public void positiveAni(){
-				iTween.ScaleBy(gameObject, iTween.Hash("amount", new Vector3(1.2f,1.2f,1), "time" ,0.5 , "loopType", "none" , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
+				iTween.ScaleBy(gameObject, iTween.Hash("amount", new Vector3(1.4f,1.4f,1), "time" ,0.5 , "loopType", "none" , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
 		}
 
 		//动画
 		public void negativeAni(){
-			
-				iTween.ShakePosition(gameObject , iTween.Hash("x" , 1.5 , "loopType", "none" , "time" ,0.5 , "islocal", true ,  "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject) );
-
+				iTween.ShakePosition(gameObject , iTween.Hash("x" , 0.3  ,"time" ,0.5 , "oncomplete" , "resetGameobject" , "oncompletetarget" , this.gameObject )  );
+				//Debug.Log (gameObject.name);
 		}
 
 

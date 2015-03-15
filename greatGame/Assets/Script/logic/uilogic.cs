@@ -45,5 +45,5 @@ public class uilogic : MonoBehaviour, notifylogic {
 		button.ButtonUpEvent += new tk2dButton.ButtonHandlerDelegate(MyDelegateFunc);
 
 	}
-	  
+				  
 }

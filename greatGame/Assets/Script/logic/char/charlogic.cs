@@ -4,38 +4,38 @@ using System.Collections.Generic;
 
 public class charlogic : monsterbaselogic {
 
-	private float mHurtTime = 0;
+		private float mHurtTime = 0;
 
-	private float mAccSpeed = 16000.0f;
-	// Use this for initialization
-	void Start () {
-		Debug.Log ("charlogic start");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-			if (mHurtTime > 0) {
-					mHurtTime = mHurtTime - Time.deltaTime;
+		private float mAccSpeed = 16000.0f;
+		// Use this for initialization
+		void Start () {
+				Debug.Log ("charlogic start");
+		}
 
-					if (mHurtTime <= 0) {
-							mHurtTime = 0;
-							stopWUDI ();
-					}
-			}
-	}
+		// Update is called once per frame
+		void Update () {
+				if (mHurtTime > 0) {
+						mHurtTime = mHurtTime - Time.deltaTime;
 
-	public void stopWUDI(){
-		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-		mgr.stopWUDI ();
-	}
+						if (mHurtTime <= 0) {
+								mHurtTime = 0;
+								stopWUDI ();
+						}
+				}
+		}
 
-	public void setWUDI(){
-		char_property pro = this.gameObject.GetComponent<char_property> ();
-		mHurtTime = pro.HurtTime;
+		public void stopWUDI(){
+				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+				mgr.stopWUDI ();
+		}
 
-		robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-		mgr.playWUDI ();
-	}
+		public void setWUDI(){
+				char_property pro = this.gameObject.GetComponent<char_property> ();
+				mHurtTime = pro.HurtTime;
+
+				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+				mgr.playWUDI ();
+		}
 		public bool isWUDI(){
 				return mHurtTime > 0;
 		}
@@ -104,7 +104,21 @@ public class charlogic : monsterbaselogic {
 								if (itemProperty.iType [index] == itemType.weapon) {
 										if(switchWeapon(item)){
 												dropWeapon();
-												changeWeapon(item,inbagAlright);
+												changeWeaponIcon(item);
+												boolGrap = true;
+										}
+								}
+								if (itemProperty.iType [index] == itemType.bulletEnforce) {
+										if(enforceWeapon(item)){
+												putInBag(item,inbagAlright);
+												inbagAlright = true;
+												boolGrap = true;
+										}
+								}
+								if (itemProperty.iType [index] == itemType.special) {
+										if(addPassitiveSkill(item)){
+												putInBag(item,inbagAlright);
+												inbagAlright = true;
 												boolGrap = true;
 										}
 								}
@@ -188,10 +202,8 @@ public class charlogic : monsterbaselogic {
 
 				if(equipmentClone){
 						GameObject player = this.gameObject;
-
-
 						equipmentClone.transform.parent = player.gameObject.transform;
-						equipmentClone.transform.localPosition = new Vector3(0,0,0);
+						equipmentClone.transform.localPosition = equipmentClone.GetComponent<follower_property> ().favoritePos;
 						equipmentClone.GetComponent<followerlogic>().startWork();
 						return true;
 				}
@@ -227,8 +239,8 @@ public class charlogic : monsterbaselogic {
 						break;
 
 				}
-			return true;
-		
+				return true;
+
 		}
 
 		//玩家获得武器道具,更换武器
@@ -247,20 +259,49 @@ public class charlogic : monsterbaselogic {
 
 		}
 
-	//在玩家背包里留下物品的图标
-	public bool changeWeapon(GameObject obj, bool checkBag){
-		if(checkBag){
-			return false;
+		//在玩家背包删除旧的武器图标
+		public bool changeWeaponIcon(GameObject obj){
+				item_property itemProperty = obj.GetComponent<item_property>();
+				int itemId = itemProperty.ID;
+				//constant.getMapLogic().bagAddIcon(itemId);
+				char_property charProperty = gameObject.GetComponent<char_property>();
+				charProperty.Weapon = constant.getItemFactory().getItemTemplate(itemId);
+				return true;
 		}
-		item_property itemProperty = obj.GetComponent<item_property>();
-		int itemId = itemProperty.ID;
-		//constant.getMapLogic().bagAddIcon(itemId);
-		char_property charProperty = gameObject.GetComponent<char_property>();
-		charProperty.Weapon = constant.getItemFactory().getItemTemplate(itemId);
-		return true;
-	}
-	
-	//在玩家背包里留下物品的图标
+
+
+		//子弹特殊效果强化
+		public bool enforceWeapon(GameObject obj){
+				bulletEnforce_Property bulletEnforcePro = obj.GetComponent<bulletEnforce_Property> ();
+				bulletSpeStruct bulletSpe = bulletEnforcePro.bulletSpe;
+				char_property charProperty = gameObject.GetComponent<char_property> ();
+				if (charProperty) {
+						charProperty.enforceBullet (bulletSpe);
+						return true;
+				}
+				Debug.Log ("子弹效果无法强化,请检查系统!");
+				return false;
+		}
+
+
+		//添加被动技能
+		public bool addPassitiveSkill(GameObject obj){
+				GameObject passitiveSkill = this.transform.FindChild ("speSkill").gameObject;
+				if (passitiveSkill) {
+						
+						speItem_property speItemProperty =  obj.GetComponent<speItem_property> ();
+						string scriptName = speItemProperty.scriptName;
+						object skillComponent = passitiveSkill.AddComponent (scriptName) as object;
+						return true;
+
+				} else {
+						Debug.Log ("无法找到存储被动技能的Gameobject");
+						return false;
+				}
+				return false;
+		}
+
+		//在玩家背包里留下物品的图标
 		public bool putInBag(GameObject obj, bool checkBag){
 				if(checkBag){
 						return false;
@@ -274,14 +315,7 @@ public class charlogic : monsterbaselogic {
 		}
 
 
-		//玩家是否失败
-		public bool isDie(){
-				char_property charProperty = gameObject.GetComponent<char_property>();
-				if (charProperty.Hp <= 0) {
-						return true;
-				}
-				return false;
-		}
+
 
 
 
@@ -290,9 +324,52 @@ public class charlogic : monsterbaselogic {
 				char_property charproperty = gameObject.GetComponent<char_property> ();
 				buyItem_Property buyproperty = shoptable.GetComponent<buyItem_Property> ();
 				int itemId = buyproperty.mID;
+				if (itemId == 0) {
+						Debug.Log ("道具已售罄");	
+						return false;
+				}
 				int itemPrice = buyproperty.itemPrice;
-				return false;
+				int charGold = charproperty.Gold;
+				if (charGold >= itemPrice) {
+						string itemPath = itemfactory.getInstance ().getItemTemplate (itemId).PrefabPath;
+						if (itemPath!="") {
+								Vector3 itemTempPos = new Vector3 (0, 0, -100);
+								GameObject itemClone = (GameObject)Instantiate(Resources.Load(itemPath),itemTempPos,Quaternion.identity);
+								if (grapItem (itemClone)) {
+										GameObject.Destroy(itemClone);
+								} 
+								else {
+										Debug.Log ("金币足够,其他原因无法购买道具");
+										GameObject.Destroy(itemClone);
+										return false;
+								}
+						}
+						Debug.Log ("剩余金钱: " + (charGold - itemPrice) + " = " + charGold + " - " + itemPrice);
+						charproperty.Gold = charGold - itemPrice;
+						return true;
+				} 
+				else 
+				{
+						Debug.Log ("金币不足");
+						return false;	
+				}
 
+		}
+
+
+
+		public void dropWeapon(){
+				char_property charProperty = gameObject.GetComponent<char_property>();
+				itemtemplate oldWeapon = charProperty.Weapon;
+		}
+
+		//玩家是否失败
+		public bool isDie(){
+				char_property charProperty = gameObject.GetComponent<char_property>();
+				if (charProperty.Hp <= 0) {
+						return true;
+				}
+				return false;
 		}
 
 
@@ -309,10 +386,5 @@ public class charlogic : monsterbaselogic {
 				v.y = y*mAccSpeed;
 				return v;
 		}
-
-	public void dropWeapon(){
-		char_property charProperty = gameObject.GetComponent<char_property>();
-		itemtemplate oldWeapon = charProperty.Weapon;
-	}
 
 }

@@ -24,6 +24,7 @@ public class itemfactory {
 			new itemtemplate("Prefabs/item/item10"),
 			new itemtemplate("Prefabs/item/item11"),
 			new itemtemplate("Prefabs/item/item20"),
+			new itemtemplate("Prefabs/item/item21"),
 			new itemtemplate("Prefabs/item/item100"),
 			new itemtemplate("Prefabs/item/item200"),
 		};

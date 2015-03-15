@@ -9,7 +9,10 @@ public class weaponItem_property : MonoBehaviour {
 		public float baseBulletDistance;		//子弹的origin距离
 		public int baseBulletDamage;			//子弹的基础攻击
 		public int mknockBack;					//子弹的击退效果
-		public ElementType elementType;				//子弹的元素属性
+
+		public ElementType elementType;			//子弹的特效－元素属性
+		public bool pierceBullet;
+		public bulletSpeStruct bulletSpe;		//子弹的特效
 
 		private int mID;
 		public int ID { get { return mID; } set { mID = value; }}
@@ -17,8 +20,11 @@ public class weaponItem_property : MonoBehaviour {
 		void Awake(){
 				item_property itemProperty = gameObject.GetComponent<item_property>();
 				mID = itemProperty.ID;
+				setBulletSpecial ();
+
 		}
 		void Start () {
+				
 				if (mType == 0) {
 						getWeaponType (mID);
 						Debug.LogError ("忘记给武器道具定义类型");
@@ -33,6 +39,17 @@ public class weaponItem_property : MonoBehaviour {
 
 		void getWeaponType(int id){
 				Debug.Log ("武器id搜索匹配失败,请手动定义!");
+
+		}
+
+		void setBulletSpecial(){
+				if (elementType!=0) {
+						bulletSpe.element = elementType;
+				} else {
+						bulletSpe.element = ElementType.normal;
+				}
+
+				bulletSpe.pierceBullet = pierceBullet;
 
 		}
 }

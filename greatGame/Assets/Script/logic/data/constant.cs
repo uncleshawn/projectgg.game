@@ -71,6 +71,10 @@ public static class constant {
 		return obj.GetComponent<gamelogic>();
 	}
 
+		public static soundLogic getSoundLogic(){
+				return soundLogic.getInstance ();
+		}
+
 	public static maplogic getMapLogic(){
 		//return GameObject.FindGameObjectWithTag("GameLogic").GetComponent<maplogic>();
 		return maplogic.getInstance ();

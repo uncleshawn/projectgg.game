@@ -3,9 +3,9 @@ using System.Collections;
 
 public class robotWeaponSwitch : MonoBehaviour {
 
-		GameObject shoot;
-		public robotShotNormalBullet bulletNormal;
-		public robotShotLaserNomal laserNormal;
+		GameObject shoot;							//获得自己以下的shoot gameobject
+		robotShotNormalBullet bulletNormal;			
+		robotShotLaserNomal laserNormal;
 
 		select_name_bool otherStru;
 

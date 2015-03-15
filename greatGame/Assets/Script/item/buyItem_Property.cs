@@ -17,6 +17,7 @@ public class buyItem_Property : MonoBehaviour {
 		void Start () {
 				checkStock ();
 				presentItem ();
+
 		}
 
 		// Update is called once per frame
@@ -70,12 +71,13 @@ public class buyItem_Property : MonoBehaviour {
 								itemLogic.canNotBuyAni ();
 						}	
 				}
+				presentItem ();
 
 				
 		}
 
 		void OnCollisionEnter(Collision other){
-				//constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
+				constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
 
 		}
 
