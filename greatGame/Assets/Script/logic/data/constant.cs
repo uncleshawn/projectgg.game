@@ -35,6 +35,7 @@ public static class constant {
 	public static string TAG_ITEM = "Item";
 	public static string TAG_BASEDOORS = "BaseDoors";
 	public static string TAG_SHOPTABLE = "ShopTable";
+	public static string TAG_TRAP = "Trap";
 
 	public static Direction getOppsiteDir(Direction dir){
 		switch (dir) {

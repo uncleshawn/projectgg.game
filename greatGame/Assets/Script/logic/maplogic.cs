@@ -172,6 +172,11 @@ public class maplogic {
 		public void initRoomSceneInfo(roominfo info){
 				//Debug.Log ("info.mItemPrefabs:" +info.mItemPrefabs.Count);
 				//Debug.Log ("info.mMonsterPrefabs:" +info.mMonsterPrefabs.Count);
+		SceneTemplate scentemplate = constant.getMapFactory ().getSceneTemplate (info.mSceneIndex);
+		if (scentemplate.ScenePrefab != null) {
+			GameObject clone = (GameObject)GameObject.Instantiate (Resources.Load (scentemplate.ScenePrefab), new Vector3 (0, 0, 0), Quaternion.identity);
+		}
+
 				foreach (KeyValuePair<itemtemplate, Vector3> pair in info.mItemPrefabs) {
 						Vector3 v = pair.Value;
 						GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(pair.Key.PrefabPath),v,Quaternion.identity);
@@ -304,22 +309,23 @@ public class maplogic {
 				}
 		}
 
-		public void playOpenDoorAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-				//Debug.Log ("playOpenDoorAni");
-				BoxCollider box = animator.gameObject.GetComponent<BoxCollider> ();
-				box.isTrigger = true;
+	public void playOpenDoorAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+		//Debug.Log ("playOpenDoorAni");
+		BoxCollider box = animator.gameObject.GetComponent<BoxCollider> ();
+		box.isTrigger = true;
+	}
+	
+	public void checkOpenDoor(){
+		GameObject[] enemys = GameObject.FindGameObjectsWithTag (constant.TAG_ENEMY);
+		//Debug.Log ("checkOpenDoor: " +  enemys.Length);
+		if (enemys.Length == 0) {
+			openDoor();
 		}
+	}
 
-		public void checkOpenDoor(){
-				GameObject[] enemys = GameObject.FindGameObjectsWithTag (constant.TAG_ENEMY);
-				//Debug.Log ("checkOpenDoor: " +  enemys.Length);
-				if (enemys.Length == 0) {
-						openDoor();
-				}
-		}
-
-		//碰撞， 不能穿过的物体， 例如人物，怪物，道具
-		public void collideEnter(GameObject collider, GameObject beCollider){
+	
+	//碰撞， 不能穿过的物体， 例如人物，怪物，道具
+	public void collideEnter(GameObject collider, GameObject beCollider){
 				touchEnter (collider, beCollider);
 		}
 
@@ -360,6 +366,13 @@ public class maplogic {
 										attack(beCollider, collider);
 								}
 						}
+				}
+
+				if (colliderTag.Equals (constant.TAG_TRAP)) {
+					if(beColliderTag.Equals(constant.TAG_PLAYER)){
+						Debug.Log("trap player");
+						attack(collider, beCollider);
+					}
 				}
 
 				if (colliderTag.Equals (constant.TAG_PLAYER)) {
