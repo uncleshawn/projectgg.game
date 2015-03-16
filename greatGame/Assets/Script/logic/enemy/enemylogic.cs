@@ -95,6 +95,7 @@ public class enemylogic : monsterbaselogic {
 				}
 				if (weapontype == weaponType.bulletNormal) {
 						Debug.Log ("子弹击退效果 " + knockType);
+						normalKnockBack (bulletProperty, force);
 						switch (knockType) {
 						default:
 								break;
