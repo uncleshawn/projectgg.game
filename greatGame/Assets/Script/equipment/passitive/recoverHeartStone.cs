@@ -8,6 +8,7 @@ using System.Collections;
 public class recoverHeartStone : MonoBehaviour {
 
 		public float recoverTime;
+		float mRecoverTime;
 		float tempTimer;
 
 		public string explain;
@@ -16,6 +17,7 @@ public class recoverHeartStone : MonoBehaviour {
 		// Use this for initialization
 		void Awake(){
 				recoverTime = 10;
+				mRecoverTime = recoverTime + Random.Range (0, 10);
 				explain = "恢复之心:在间隔时间内补充血量";
 				tempTimer = 0;
 				player = gameObject.GetComponentInParent<char_property>();
@@ -42,6 +44,7 @@ public class recoverHeartStone : MonoBehaviour {
 				if (tempTimer >= recoverTime) {
 						recoverHp ();
 						constant.getSoundLogic ().playEffect ();
+						mRecoverTime = recoverTime + Random.Range (0, 10);
 						tempTimer = 0;
 				}
 		}

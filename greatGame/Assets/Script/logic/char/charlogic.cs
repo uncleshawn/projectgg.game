@@ -51,7 +51,7 @@ public class charlogic : monsterbaselogic {
 						char_property charProperty = gameObject.GetComponent<char_property>();
 						charProperty.Hp = charProperty.Hp - 1;
 
-						if(isDie()){
+						if(isDie()){ 
 								constant.getGameLogic().Die();
 						}
 
@@ -144,6 +144,10 @@ public class charlogic : monsterbaselogic {
 				recover_Property recoverProperty =  obj.GetComponent<recover_Property>();
 				char_property charProperty = gameObject.GetComponent<char_property>();
 				if(recoverProperty){
+						if (recoverProperty.extarLifes != 0) {
+								charProperty.ExtarLifes += recoverProperty.extarLifes;
+								graped += 1;
+						}
 
 						if(recoverProperty.recoverHp > 0 && charProperty.Hp < charProperty.MaxHp ) {
 								int hp = charProperty.Hp + recoverProperty.recoverHp;
@@ -367,12 +371,20 @@ public class charlogic : monsterbaselogic {
 		public bool isDie(){
 				char_property charProperty = gameObject.GetComponent<char_property>();
 				if (charProperty.Hp <= 0) {
+						if (charProperty.ExtarLifes > 0) {
+								reBirth (charProperty);
+								return false;
+						}
 						return true;
 				}
 				return false;
 		}
 
-
+		//主角重生
+		public void reBirth(char_property charProperty){
+				charProperty.ExtarLifes = charProperty.ExtarLifes - 1;
+				charProperty.Hp = charProperty.MaxHp;
+		}
 
 		override public Vector3 getMoveAcc(){
 				Vector3 v = new Vector3 ();
