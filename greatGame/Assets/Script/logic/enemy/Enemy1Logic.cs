@@ -77,7 +77,7 @@ public class Enemy1Logic : enemylogic {
 	}
 
 	void onCollision(Collision collision){
-		constant.getMapLogic ().collideEnter (this.gameObject, collision.gameObject);
+		constant.getMapLogic ().colliderEnter (this.gameObject, collision.gameObject);
 		//deleteDistance ();
 		changeDir ();
 	}

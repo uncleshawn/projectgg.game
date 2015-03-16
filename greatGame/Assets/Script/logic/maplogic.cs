@@ -324,14 +324,9 @@ public class maplogic {
 	}
 
 	
-	//碰撞， 不能穿过的物体， 例如人物，怪物，道具
-	public void collideEnter(GameObject collider, GameObject beCollider){
-				touchEnter (collider, beCollider);
-		}
-
 		//碰撞， 不能穿过的物体， 例如人物，怪物，道具
-		public void collideStay(GameObject collider, GameObject beCollider){
-				touchStay (collider, beCollider);
+		public void colliderEnter(GameObject collider, GameObject beCollider){
+				touchEnter (collider, beCollider);
 		}
 
 		//触发，可以穿过的物体，例如子弹
@@ -375,8 +370,8 @@ public class maplogic {
 					}
 				}
 
-				if (colliderTag.Equals (constant.TAG_PLAYER)) {
-						if(beColliderTag.Equals(constant.TAG_SHOPTABLE)){
+				if (colliderTag.Equals (constant.TAG_SHOPTABLE)) {
+						if(beColliderTag.Equals(constant.TAG_PLAYER)){
 								//购买道具
 								buyItem(collider, beCollider);
 						}
@@ -384,37 +379,7 @@ public class maplogic {
 						
 
 		}
-		//非trigger类型stay判断
-		private void touchStay(GameObject collider, GameObject beCollider){
-				string colliderTag = collider.tag;
-				string beColliderTag = beCollider.tag;
-				//Debug.Log ("colliderTag:" + colliderTag);
-				//Debug.Log ("beColliderTag:" + beColliderTag);
-				if (colliderTag.Equals (constant.TAG_ENEMY)) {
-						if(beColliderTag.Equals(constant.TAG_PLAYER)){
-								if(constant.isConflict(collider, beCollider)){
-										attack(collider, beCollider);
-								}
-						}
-				}
-
-				if (colliderTag.Equals (constant.TAG_ITEM)) {
-						
-						if(beColliderTag.Equals(constant.TAG_PLAYER)){
-								eatItem(beCollider, collider);
-						}
-				}
-
-				if (colliderTag.Equals (constant.TAG_ENEMY)) {
-						if(beColliderTag.Equals(constant.TAG_BULLET)){
-								if(constant.isConflict(collider, beCollider)){
-										attack(beCollider, collider);
-								}
-						}
-				}
-		}
-
-
+	
 
 
 		//捡道具	
@@ -471,13 +436,13 @@ public class maplogic {
 
 		public void buyItem(GameObject collider, GameObject beCollider){
 				Debug.Log ("玩家开始购买道具");
-				if (collider.GetComponent<charlogic> ().buyItem (beCollider) ){
-						beCollider.GetComponent<buyItem_Property> ().buyItem (true);
+				if (beCollider.GetComponent<charlogic> ().buyItem (beCollider) ){
+						collider.GetComponent<buyItem_Property> ().buyItem (true);
 						Debug.Log ("购买成功");
 
 				}
 				else {
-						beCollider.GetComponent<buyItem_Property> ().buyItem (false);
+						collider.GetComponent<buyItem_Property> ().buyItem (false);
 						Debug.Log ("购买失败");
 				}
 		}

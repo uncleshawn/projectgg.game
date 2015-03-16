@@ -52,4 +52,9 @@ public class itemlogic : monsterbaselogic {
 				debugShowName();
 				transform.FindChild("UI_itemIcon").gameObject.SendMessage ("resetGameobject");
 		}
+
+
+		void OnTriggerEnter(Collider other){
+				constant.getMapLogic ().colliderEnter (this.gameObject, other.gameObject);
+		}
 }
