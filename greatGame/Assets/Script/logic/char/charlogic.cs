@@ -6,7 +6,7 @@ public class charlogic : monsterbaselogic {
 
 		private float mHurtTime = 0;
 
-		private float mAccSpeed = 16000.0f;
+		private float mAccSpeed = 160.0f;
 		// Use this for initialization
 		void Start () {
 				Debug.Log ("charlogic start");

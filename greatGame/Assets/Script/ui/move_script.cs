@@ -62,9 +62,7 @@ public class move_script : MonoBehaviour {
 				f_acc.y = 0;
 			}
 			actual_acc = self_acc + f_acc;
-
-			//Debug.Log("actual_acc:" + actual_acc.x + "," + actual_acc.y + "," + actual_acc.z);
-			rigidbody.AddForce(actual_acc);
+			//rigidbody.AddForce(actual_acc);
 		}
 
 		{
@@ -75,17 +73,32 @@ public class move_script : MonoBehaviour {
 			//速度上限
 			Vector3 speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
 			//Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
+
+			bool isMaxX = false;
 			if (speed.x > maxSpeed) {
 				speed.x = maxSpeed;
+				isMaxX = true;
 			}else if(speed.x < -maxSpeed){
 				speed.x = -maxSpeed; 
+				isMaxX = true;
 			}
-			
+
+			bool isMaxY = false;
 			if (speed.y > maxSpeed) {
 				speed.y = maxSpeed;
+				isMaxY = true;
 			}else if(speed.y < -maxSpeed){
 				speed.y = -maxSpeed;
+				isMaxY = true;
 			}
+
+			if(isMaxX && actual_acc.x * speed.x > 0){
+				actual_acc.x = 0;
+			}
+			if(isMaxY && actual_acc.y * speed.y > 0){
+				actual_acc.y = 0;
+			}
+			rigidbody.AddForce(actual_acc);
 
 			rigidbody.velocity = speed;
 		}
