@@ -41,16 +41,17 @@ public class bat_logic : enemylogic {
 
 				Vector3 pos = obj.transform.position;
 
+				float add = 160;
 				Vector3 selfPos = this.transform.position;
 				if (selfPos.x > pos.x) {
-						v.x = -40;
+			v.x = -add;
 				} else if (selfPos.x < pos.x) {
-						v.x = 40;
+			v.x = add;
 				}
 				if (selfPos.y > pos.y) {
-						v.y = -40;
+			v.y = -add;
 				}else if (selfPos.y < pos.y) {
-						v.y = 40;
+			v.y = add;
 				}
 				return v;
 		}
