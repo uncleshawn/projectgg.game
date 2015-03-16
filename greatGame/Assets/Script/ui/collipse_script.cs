@@ -32,7 +32,7 @@ public class collipse_script : MonoBehaviour {
 
 	void OnTriggerEnter( Collider other ){
 		//other.GetComponent
-		//Debug.Log ("OnTriggerEnter "+other.gameObject.tag);
+		Debug.Log ("OnTriggerEnter "+other.gameObject.tag);
 		//Debug.Log ("OnTriggerEnter " + other.gameObject.tag);	
 		/*
 		if (other.gameObject.tag.Equals ("Bullet")) {
