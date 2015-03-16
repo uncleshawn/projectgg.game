@@ -33,7 +33,7 @@ public class trap1logic : MonoBehaviour {
 		}
 	}
 
-	void onTriggerEnter(){
+	void OnTriggerEnter(){
 	}
 
 	private void changeStatus(){
