@@ -50,10 +50,17 @@ public enum KnockType
 		explode		= 2
 }
 
+public struct ScaredBullet
+{
+		public bool scaredEffect;
+		public int sacredPercent;
+}
+
 public struct bulletSpeStruct{
 		public bool pierceBullet;
 		public ElementType element;
 		public KnockType knockType;
+		public ScaredBullet scaredBullet;
 }
 
 public class gameNames : MonoBehaviour {

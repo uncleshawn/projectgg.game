@@ -7,7 +7,11 @@ public class bullet_property : base_property {
 		public int bulletDamage;
 		public int bulletknock;
 		public float bulletDamageRate;
+
+
+		//常规效果
 		public bulletSpeStruct bulletSpe;
+
 
 		public weaponType WeaponType { get { return weapontype; } set { weapontype = value; }}
 

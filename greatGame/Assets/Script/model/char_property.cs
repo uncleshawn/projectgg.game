@@ -97,11 +97,17 @@ public class char_property : base_property {
 		}
 
 		public void upgradePlayerProperty(enforce_Property enforceProperty){
-
+				//Debug.Log ("人物强化");
 				MaxHp += enforceProperty.MaxHp;
 				Hp += enforceProperty.MaxHp;
+				if (Hp > MaxHp) {
+						Hp = MaxHp;
+				}
 				MaxNp += enforceProperty.MaxNp;
 				Np += enforceProperty.MaxNp;
+				if (Np > MaxNp) {
+						Np = MaxNp;
+				}
 				MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
 				MoveSpeed += enforceProperty.MaxMoveSpeed;
 				MaxDamage += enforceProperty.MaxDamage;

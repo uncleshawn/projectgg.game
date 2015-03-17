@@ -296,6 +296,8 @@ public class charlogic : monsterbaselogic {
 						speItem_property speItemProperty =  obj.GetComponent<speItem_property> ();
 						string scriptName = speItemProperty.scriptName;
 						object skillComponent = passitiveSkill.AddComponent (scriptName) as object;
+						//更新数据
+						passitiveSkill.SendMessage ("intPassitiveSkill", speItemProperty);
 						return true;
 
 				} else {

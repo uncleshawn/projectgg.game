@@ -254,14 +254,16 @@ public class robotShotNormalBullet : MonoBehaviour {
 						mdamageRate = weapon.baseDamageRate;
 						bulletSpe = weapon.bulletSpe;
 						Debug.Log ("子弹武器更新 基础属性" + "\r\n" +
-						"子弹伤害: " + baseBulletDamage + "\r\n" +
-						"子弹伤害间隔: " + mdamageRate + "\r\n" +
-						"击退效果: " + mknockBack + "\r\n" +
-						"距离: " + baseBulletDistance + "\r\n" +
-						"间隔: " + baseBulletRate + "\r\n" +
-						"速度: " + baseBulletSpeed + "\r\n" +
-						"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
-						"元素类型: " + bulletSpe.element); 
+								"子弹伤害: " + baseBulletDamage + "\r\n" +
+								"子弹伤害间隔: " + mdamageRate + "\r\n" +
+								"击退效果: " + mknockBack + "\r\n" +
+								"距离: " + baseBulletDistance + "\r\n" +
+								"间隔: " + baseBulletRate + "\r\n" +
+								"速度: " + baseBulletSpeed + "\r\n" +
+								"----------特殊效果:--------: " + "\r\n" +
+								"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
+								"恐惧效果: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+								"元素类型: " + bulletSpe.element); 
 				}
 		}
 
@@ -269,6 +271,12 @@ public class robotShotNormalBullet : MonoBehaviour {
 		//修改bullet的special属性
 		public void setBulletSpecial(bulletSpeStruct bullet){
 				bulletSpe = bullet;
+		}
+		public void setScaredBullet(ScaredBullet scaredBullet){
+				bulletSpe.scaredBullet = scaredBullet;
+				Debug.Log ( "子弹特效更新:" + "\r\n" +
+				"恐惧属性: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+				"恐惧概率: " + bulletSpe.scaredBullet.sacredPercent);
 		}
 }
 

@@ -686,6 +686,7 @@
      <Compile Include="Assets\Script\equipment\followWaitType.cs" />
      <Compile Include="Assets\Script\equipment\followerAniManager.cs" />
      <Compile Include="Assets\Script\equipment\passitive\recoverHeartStone.cs" />
+     <Compile Include="Assets\Script\equipment\passitive\scaredBulletEffect.cs" />
      <Compile Include="Assets\Script\item\bulletEnforce_Property.cs" />
      <Compile Include="Assets\Script\item\buyItem_Property.cs" />
      <Compile Include="Assets\Script\item\enforce_Property.cs" />
