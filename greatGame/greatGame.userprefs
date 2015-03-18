@@ -1,18 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ui\move_script.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\maplogic.cs">
     <Files>
-      <File FileName="Assets\Script\ui\pos_update_script.cs" Line="22" Column="45" />
-      <File FileName="Assets\Script\logic\enemy\trap1logic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="20" Column="11" />
-      <File FileName="Assets\Script\logic\char\charlogic.cs" Line="385" Column="22" />
-      <File FileName="Assets\Script\logic\enemy\enemylogic.cs" Line="93" Column="4" />
-      <File FileName="Assets\Script\model\enemy_property.cs" Line="62" Column="19" />
-      <File FileName="Assets\Script\ui\collipse_script.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\logic\data\roominfo.cs" Line="37" Column="17" />
-      <File FileName="Assets\Script\ui\move_script.cs" Line="22" Column="11" />
-      <File FileName="Assets\Script\logic\enemy\bat_logic.cs" Line="25" Column="23" />
-      <File FileName="Assets\Script\item\weaponItem_property.cs" Line="15" Column="35" />
+      <File FileName="Assets\Script\logic\enemy\Shit1Logic.cs" Line="18" Column="18" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="37" Column="3" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="392" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
