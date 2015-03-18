@@ -16,8 +16,13 @@ public class enemy_property : base_property {
 		public string enemyName;
 		public int enemyId;
 		public bool heavyBody;			//敌人是否拥有强硬外壳(不能被击退)
-		public float recoverTime;		//敌人在被某些情况行动停止后的反应时间
+
+
 		public bool acting;				//敌人是否可以行动
+		public float recoverTime;		//敌人在被某些情况行动停止后的反应时间
+
+		public bool scared;				//敌人是否处于恐惧状态
+		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
 
 		public int MaxHp;
 		public float MaxMoveSpeed;
@@ -45,10 +50,6 @@ public class enemy_property : base_property {
 		public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
 
 		void Awake(){
-				
-		}
-		// Use this for initialization
-		void Start () {
 				checkForget ();
 				mHp = MaxHp;
 				mMoveSpeed = MaxMoveSpeed;
@@ -56,14 +57,19 @@ public class enemy_property : base_property {
 				mAttackSpeed = MaxAttackSpeed;
 				mAttackRate = MAxAttackRate;
 				mAttackDistance = MaxAttackDistance;
-
+				acting = true;
+				scared = false;
 				mBattleType = constant.BattleType.Enemy;
 
 				mBaseMoveSpeed = 5.0f;
 		}
+		// Use this for initialization
+		void Start () {
+				
+		}
 
 		// Update is called once per frame
-		void Update () {
+		void FixedUpdate () {
 
 		}
 

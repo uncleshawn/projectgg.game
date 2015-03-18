@@ -22,6 +22,14 @@ public class monsterbaselogic : MonoBehaviour {
 		return v;
 	}
 
+		virtual public Vector3 scaredMovePos(){
+				Vector3 v = new Vector3 ();
+				v.x = 0;
+				v.y = 0;
+				v.z = 0;
+				return v;
+		}
+
 	virtual public Vector3 getFAcc(){
 		Vector3 v = new Vector3 ();
 

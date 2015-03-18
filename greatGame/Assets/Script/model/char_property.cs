@@ -14,6 +14,8 @@ public class char_property : base_property {
 		private float mMaxAttackDistance;
 		private float mHurtTime;	//被攻击后的无敌时间
 
+		private int mExtarLifes;
+
 
 		//tempProperties
 		private int mHp;
@@ -34,6 +36,8 @@ public class char_property : base_property {
 		public int MaxAttackRate { get { return mMaxAttackRate; } set { mMaxAttackRate = value; }}
 		public float MaxAttackDistance { get { return mMaxAttackDistance; } set { mMaxAttackDistance = value; }}
 		public float HurtTime { get { return mHurtTime; } set { mHurtTime = value; }}
+		public int ExtarLifes { get { return mExtarLifes; } set { mExtarLifes = value; }}
+
 
 		public int Hp { get { return mHp; } set { mHp = value; }}
 		public int Np { get { return mNp; } set { mNp = value; }}
@@ -93,11 +97,17 @@ public class char_property : base_property {
 		}
 
 		public void upgradePlayerProperty(enforce_Property enforceProperty){
-
+				//Debug.Log ("人物强化");
 				MaxHp += enforceProperty.MaxHp;
 				Hp += enforceProperty.MaxHp;
+				if (Hp > MaxHp) {
+						Hp = MaxHp;
+				}
 				MaxNp += enforceProperty.MaxNp;
 				Np += enforceProperty.MaxNp;
+				if (Np > MaxNp) {
+						Np = MaxNp;
+				}
 				MaxMoveSpeed += enforceProperty.MaxMoveSpeed;
 				MoveSpeed += enforceProperty.MaxMoveSpeed;
 				MaxDamage += enforceProperty.MaxDamage;

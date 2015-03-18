@@ -12,7 +12,12 @@ public class bat_logic : enemylogic {
 		float deltaTime;
 		float mIntervalTime = 1;
 		float mWaitTime = 1;
+		enemy_property enemySelf;
 		// Use this for initialization
+		void Awake(){
+				enemySelf = gameObject.GetComponent<enemy_property>();
+		}
+
 		void Start () {
 				deltaTime = 0;
 		}
@@ -39,20 +44,38 @@ public class bat_logic : enemylogic {
 						return v;
 				}
 
+				if (enemySelf.acting == false) {
+						return v;
+				}
+
+
 				Vector3 pos = obj.transform.position;
+
+				if (enemySelf.scared == true) {
+						pos = scaredMovePos();
+				}
 
 				float add = 160;
 				Vector3 selfPos = this.transform.position;
 				if (selfPos.x > pos.x) {
-			v.x = -add;
+						v.x = -add;
 				} else if (selfPos.x < pos.x) {
-			v.x = add;
+						v.x = add;
 				}
 				if (selfPos.y > pos.y) {
-			v.y = -add;
+						v.y = -add;
 				}else if (selfPos.y < pos.y) {
-			v.y = add;
+						v.y = add;
 				}
 				return v;
 		}
+
+		override public Vector3 scaredMovePos(){
+				Vector3 pos;
+				pos = this.transform.position;
+				pos.x += Random.Range (-20, 20);
+				pos.y += Random.Range (-20, 20);
+				return pos;
+		}
+				
 }

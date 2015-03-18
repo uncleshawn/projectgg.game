@@ -76,8 +76,9 @@ public class buyItem_Property : MonoBehaviour {
 				
 		}
 
-		void OnCollisionEnter(Collision other){
-				constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
+		void OnTriggerEnter(Collider other){
+				Debug.Log("shopTable OnTriggerEnter: " + other.name);
+				constant.getMapLogic ().triggerEnter (this.gameObject , other.gameObject);
 
 		}
 

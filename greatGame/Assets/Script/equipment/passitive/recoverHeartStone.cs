@@ -7,7 +7,11 @@ using System.Collections;
 
 public class recoverHeartStone : MonoBehaviour {
 
+		public bool startWork;
+
 		public float recoverTime;
+		public int recoverNum;
+		float mRecoverTime;
 		float tempTimer;
 
 		public string explain;
@@ -16,7 +20,7 @@ public class recoverHeartStone : MonoBehaviour {
 		// Use this for initialization
 		void Awake(){
 				recoverTime = 10;
-				explain = "恢复之心:在间隔时间内补充血量";
+				mRecoverTime = recoverTime + Random.Range (0, 10);
 				tempTimer = 0;
 				player = gameObject.GetComponentInParent<char_property>();
 				if (player) {
@@ -42,6 +46,7 @@ public class recoverHeartStone : MonoBehaviour {
 				if (tempTimer >= recoverTime) {
 						recoverHp ();
 						constant.getSoundLogic ().playEffect ();
+						mRecoverTime = recoverTime + Random.Range (0, 10);
 						tempTimer = 0;
 				}
 		}
@@ -49,7 +54,18 @@ public class recoverHeartStone : MonoBehaviour {
 		void recoverHp(){
 				
 				if (player.Hp < player.MaxHp) {
-						player.Hp = player.Hp + 1;
+						player.Hp = player.Hp + recoverNum;
 				}
+		}
+
+		void intPassitiveSkill(speItem_property item){
+				if (startWork == false) {
+						explain = "恢复之心:在间隔时间内补充血量";
+						recoverNum = item.parameterInt;
+						Debug.Log (explain + recoverNum);
+						startWork = true;
+				}
+
+
 		}
 }

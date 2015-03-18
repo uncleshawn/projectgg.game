@@ -14,12 +14,16 @@ public class enemylogic : monsterbaselogic {
 
 		}
 
+
+		//被 -攻击- 逻辑处理
 		override public void beAttack(GameObject obj){
 				if (obj.tag.Equals ("Bullet")) {
 						//Debug.Log("enemy be attacked by bullet.");
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 						getDamage(enemyProperty,bulletProperty);
+
+						//判断击退类型
 						if (bulletProperty.bulletknock != 0) {
 								Debug.Log (gameObject.name + "被击退.武器类型为:");
 								getKnockBack (enemyProperty, bulletProperty);
@@ -29,17 +33,25 @@ public class enemylogic : monsterbaselogic {
 								GameObject.Destroy(this.gameObject);
 								constant.getMapLogic().checkOpenDoor();
 						}
+
+						//判断攻击特效附加效果
+						checkBulletEffect(obj);
 				}
 		}
 
 
+
+		//获得伤害
 		public void getDamage(enemy_property enemyProperty,bullet_property bulletProperty){
 				//Debug.Log("enemy get damage: " + bulletProperty.bulletDamage);
 				enemyProperty.Hp = enemyProperty.Hp - bulletProperty.bulletDamage;
 
 				Vector3 objectPos = this.transform.position;
 
-				//伤害显示------------
+
+
+
+				//伤害显示-------------
 
 				//调整伤害输出的位置
 				objectPos.y += 1;
@@ -146,6 +158,14 @@ public class enemylogic : monsterbaselogic {
 				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
 					this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
 				}
+		}
+
+		void checkBulletEffect(GameObject bullet){
+				bullet_property bulletProperty = bullet.GetComponent<bullet_property> ();
+				if(bulletProperty){
+						
+				}
+				
 		}
 
 		public void getEffect(enemy_property enemyProperty){

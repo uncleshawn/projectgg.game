@@ -231,39 +231,52 @@ public class robotShotNormalBullet : MonoBehaviour {
 
 		//using when shoot a bullet
 		public void setBulletProperty(GameObject bulletClone){
-				if(mdamageRate == 0) {mdamageRate = 0.3f;}
+				//如果忘记输入子弹射击频率,默认为0.5秒间隔
+				if(mdamageRate == 0) {mdamageRate = 0.5f;}
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(this.gameObject));
 		}
 
 
 		//捡到道具后更新属性
 		public void setBaseProperty(weaponItem_property weapon){
-				baseBulletDamage = weapon.baseBulletDamage;
-				if (weapon.baseBulletDistance != 0) {
-						baseBulletDistance = weapon.baseBulletDistance;
+				if (weapon.mType == weaponType.bulletNormal) {
+						baseBulletDamage = weapon.baseBulletDamage;
+						if (weapon.baseBulletDistance != 0) {
+								baseBulletDistance = weapon.baseBulletDistance;
+						}
+						if (weapon.baseBulletRate != 0) {
+								baseBulletRate = weapon.baseBulletRate;
+						}
+						if (weapon.baseBulletSpeed != 0) {
+								baseBulletSpeed = weapon.baseBulletSpeed;
+						}
+						mknockBack =	weapon.mknockBack;
+						mdamageRate = weapon.baseDamageRate;
+						bulletSpe = weapon.bulletSpe;
+						Debug.Log ("子弹武器更新 基础属性" + "\r\n" +
+								"子弹伤害: " + baseBulletDamage + "\r\n" +
+								"子弹伤害间隔: " + mdamageRate + "\r\n" +
+								"击退效果: " + mknockBack + "\r\n" +
+								"距离: " + baseBulletDistance + "\r\n" +
+								"间隔: " + baseBulletRate + "\r\n" +
+								"速度: " + baseBulletSpeed + "\r\n" +
+								"----------特殊效果:--------: " + "\r\n" +
+								"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
+								"恐惧效果: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+								"元素类型: " + bulletSpe.element); 
 				}
-				if (weapon.baseBulletRate != 0) {
-						baseBulletRate = weapon.baseBulletRate;
-				}
-				if(weapon.baseBulletSpeed!=0){
-						baseBulletSpeed = weapon.baseBulletSpeed;
-				}
-				mknockBack =	weapon.mknockBack;
-				bulletSpe = weapon.bulletSpe;
-				Debug.Log("子弹武器更新 基础属性" + "\r\n" + 
-						"子弹伤害: " + baseBulletDamage + "\r\n" + 
-						"击退效果: " + mknockBack + "\r\n" + 
-						"距离: " + baseBulletDistance + "\r\n" + 
-						"间隔: " + baseBulletRate + "\r\n" + 
-						"速度: " + baseBulletSpeed + "\r\n" + 
-						"穿透性: " + bulletSpe.pierceBullet + "\r\n" + 
-						"元素类型: " + bulletSpe.element); 
 		}
 
 
 		//修改bullet的special属性
 		public void setBulletSpecial(bulletSpeStruct bullet){
 				bulletSpe = bullet;
+		}
+		public void setScaredBullet(ScaredBullet scaredBullet){
+				bulletSpe.scaredBullet = scaredBullet;
+				Debug.Log ( "子弹特效更新:" + "\r\n" +
+				"恐惧属性: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+				"恐惧概率: " + bulletSpe.scaredBullet.sacredPercent);
 		}
 }
 

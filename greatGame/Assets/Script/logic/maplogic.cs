@@ -436,7 +436,7 @@ public class maplogic {
 
 		public void buyItem(GameObject collider, GameObject beCollider){
 				Debug.Log ("玩家开始购买道具");
-				if (beCollider.GetComponent<charlogic> ().buyItem (beCollider) ){
+				if (beCollider.GetComponent<charlogic> ().buyItem (collider) ){
 						collider.GetComponent<buyItem_Property> ().buyItem (true);
 						Debug.Log ("购买成功");
 

@@ -4,12 +4,15 @@ using System.Collections;
 public class weaponItem_property : MonoBehaviour {
 		public weaponType mType;
 
+		public float baseDamageRate;
+
 		public float baseBulletRate;			//子弹origin间隔时间
 		public float baseBulletSpeed;			//子弹的origin速度
 		public float baseBulletDistance;		//子弹的origin距离
 		public int baseBulletDamage;			//子弹的基础攻击
 		public int mknockBack;					//子弹的击退效果
 
+		public KnockType knockType;
 		public ElementType elementType;			//子弹的特效－元素属性
 		public bool pierceBullet;
 		public bulletSpeStruct bulletSpe;		//子弹的特效
@@ -48,7 +51,11 @@ public class weaponItem_property : MonoBehaviour {
 				} else {
 						bulletSpe.element = ElementType.normal;
 				}
-
+				if (knockType != 0) {
+						bulletSpe.knockType = knockType;
+				} else {
+						bulletSpe.knockType = KnockType.none;
+				}
 				bulletSpe.pierceBullet = pierceBullet;
 
 		}

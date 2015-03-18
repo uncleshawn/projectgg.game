@@ -117,24 +117,34 @@ public class robotShotLaserNomal : MonoBehaviour {
 
 		//SEND PROPERTY TO BULLETS
 		public void setBulletProperty(GameObject bulletClone){
-				if(mdamageRate == 0) {mdamageRate = 10;}
+				if(mdamageRate == 0) {mdamageRate = 0.5f;}
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype ,mbulletDamage,mknockBack,mdamageRate, bulletSpe , constant.getBattleType(this.gameObject));
 		}
 
 
 		//捡到道具后更新属性
 		public void setBaseProperty(weaponItem_property weapon){
-				laserDamage = weapon.baseBulletDamage;
-				mknockBack = weapon.mknockBack;
-				if (weapon.baseBulletRate != 0) {
-						mcoldDown = weapon.baseBulletRate;
+				if (weapon.mType == weaponType.laserNormal) {
+						laserDamage = weapon.baseBulletDamage;
+						mknockBack = weapon.mknockBack;
+						if (weapon.baseBulletRate != 0) {
+								mcoldDown = weapon.baseBulletRate;
+								laserRate = preTime + flyingTime + mcoldDown;
+						}
+						if (weapon.baseDamageRate != 0) {
+								mdamageRate = weapon.baseDamageRate;
+						}
+						bulletSpe = weapon.bulletSpe;
+						Debug.Log ("激光武器更新 基础属性" + "\r\n" +
+								"激光伤害: " + laserDamage + "\r\n" +
+								"伤害间隔: " + mdamageRate + "\r\n" +
+								"激光冷却: " + laserRate + "\r\n" +
+								"击退效果: " + mknockBack + "\r\n" +
+								"----------特殊效果:--------: " + "\r\n" +
+								"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
+								"恐惧效果: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+								"元素类型: " + bulletSpe.element); 
 				}
-				bulletSpe = weapon.bulletSpe;
-				Debug.Log("激光武器更新 基础属性" + "\r\n"  +
-						"激光伤害: " + laserDamage + "\r\n" + 
-						"击退效果: " + mknockBack + "\r\n" + 
-						"穿透性: " + bulletSpe.pierceBullet + "\r\n" + 
-						"元素类型: " + bulletSpe.element);
 
 		}
 
@@ -142,5 +152,12 @@ public class robotShotLaserNomal : MonoBehaviour {
 		//修改bullet的special属性
 		public void setBulletSpecial(bulletSpeStruct bullet){
 				bulletSpe = bullet;
+		}
+
+		public void setScaredBullet(ScaredBullet scaredBullet){
+				bulletSpe.scaredBullet = scaredBullet;
+				Debug.Log ("子弹特效更新:" + "\r\n" +
+						"恐惧属性: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+						"恐惧概率: " + bulletSpe.scaredBullet.sacredPercent);
 		}
 }
