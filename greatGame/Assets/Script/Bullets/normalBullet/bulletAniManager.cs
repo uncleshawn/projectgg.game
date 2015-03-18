@@ -7,7 +7,9 @@ public class bulletAniManager : MonoBehaviour {
 		tk2dSprite bulletSprite;				//子弹的精灵图	
 		tk2dSpriteAnimator bulletAni;			//子弹动画
 
-		public Direction bulletDirection;
+		Direction bulletDirection;
+
+		public Direction BulletDirection { get { return bulletDirection; } set { bulletDirection = value; }}
 
 		bool bulletDie;
 		// Use this for initialization

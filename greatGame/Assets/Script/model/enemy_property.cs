@@ -49,8 +49,9 @@ public class enemy_property : base_property {
 		public int AttackRate { get { return mAttackRate; } set { mAttackRate = value; }}
 		public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
 
+		float deltaTime;
+
 		void Awake(){
-				checkForget ();
 				mHp = MaxHp;
 				mMoveSpeed = MaxMoveSpeed;
 				mDamage = MaxDamage;
@@ -60,8 +61,10 @@ public class enemy_property : base_property {
 				acting = true;
 				scared = false;
 				mBattleType = constant.BattleType.Enemy;
+				checkForget ();
 
-				mBaseMoveSpeed = 5.0f;
+				deltaTime = 0;
+				//mBaseMoveSpeed = 10.0f;
 		}
 		// Use this for initialization
 		void Start () {
@@ -77,5 +80,9 @@ public class enemy_property : base_property {
 				if (MaxHp == 0) {
 						Debug.Log (gameObject.name + " 怪物物体警告: " + "怪物属性没有初始化,请检查inspector!");
 				}
+				if (mBaseMoveSpeed == 0) {
+						mBaseMoveSpeed = 10;
+				}
 		}
+
 }

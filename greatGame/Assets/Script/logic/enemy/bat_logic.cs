@@ -13,28 +13,35 @@ public class bat_logic : enemylogic {
 		float mIntervalTime = 1;
 		float mWaitTime = 1;
 		enemy_property enemySelf;
+
 		// Use this for initialization
 		void Awake(){
 				enemySelf = gameObject.GetComponent<enemy_property>();
 		}
 
 		void Start () {
+
 				deltaTime = 0;
 		}
 
 		// Update is called once per frame
 		void FixedUpdate () {
+				superFixedUpdate ();
+				
 				GameObject obj  = constant.getPlayer ();
 				//		enemy_property pro = this.gameObject.GetComponent<>enemy_property();
 
 				//		pro.MoveSpeed;
 				deltaTime = deltaTime + Time.fixedDeltaTime;
+
 		}
 
 		override public Vector3 getMoveAcc(){
 				Vector3 v = new Vector3 ();
 				//Debug.Log ("bat getMoveAcc");
 				GameObject obj  = constant.getPlayer ();
+				Vector3 pos = obj.transform.position;
+
 				if (obj == null) {
 						return v;
 				}
@@ -47,10 +54,7 @@ public class bat_logic : enemylogic {
 				if (enemySelf.acting == false) {
 						return v;
 				}
-
-
-				Vector3 pos = obj.transform.position;
-
+						
 				if (enemySelf.scared == true) {
 						pos = scaredMovePos();
 				}

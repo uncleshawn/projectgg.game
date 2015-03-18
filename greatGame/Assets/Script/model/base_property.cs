@@ -6,7 +6,7 @@ public class base_property : MonoBehaviour {
 	//private float mFAcc = 60.0f; //摩擦力
 	//public float FAcc { get { return mFAcc; } set { mFAcc = value; }}
 
-	protected float mBaseMoveSpeed = 10.0f;	//最快移动速度
+	protected float mBaseMoveSpeed = 15.0f;	//最快移动速度
 	public float BaseMoveSpeed { get { return mBaseMoveSpeed; } set { mBaseMoveSpeed = value; }}
 
 	protected constant.BattleType mBattleType;
