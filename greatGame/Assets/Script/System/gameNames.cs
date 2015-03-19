@@ -57,11 +57,18 @@ public struct ScaredBullet
 		public int sacredPercent;
 }
 
-public struct bulletSpeStruct{
+public struct bulletSpeStruct
+{
 		public bool pierceBullet;
 		public ElementType element;
 		public KnockType knockType;
 		public ScaredBullet scaredBullet;
+}
+
+public struct stateColor
+{
+		public static Color normal = new Color(255,255,255);
+		public static Color scared = new Color (230, 0, 255);
 }
 
 public class gameNames : MonoBehaviour {

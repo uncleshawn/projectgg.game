@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class maplogic {
+public class maplogic{
 		public bool debugLog;
 		private static maplogic mInstance;
 
@@ -454,6 +454,23 @@ public class maplogic {
 		private void attack(GameObject atker, GameObject beAtker){
 				monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
 				beAtkerLogic.beAttack(atker);
+		}
+
+
+
+
+
+
+
+		//在gameobject播放一次性动画
+		public void onceEffectAni(GameObject obj, string aniPath , string aniLibPath , string aniName){
+				//使用播放一次性动画的prefab
+				GameObject itemEffectClone = (GameObject)GameObject.Instantiate(Resources.Load(aniPath),obj.transform.position,Quaternion.identity);
+				itemEffectClone.transform.parent = obj.gameObject.transform;
+				itemEffectClone.transform.localPosition = new Vector3 (0, 0, -2);
+				onceAniManager aniManager = itemEffectClone.GetComponent<onceAniManager> ();
+				aniManager.setAniLib (aniLibPath);
+				aniManager.playAni(aniName);	
 		}
 				
 }

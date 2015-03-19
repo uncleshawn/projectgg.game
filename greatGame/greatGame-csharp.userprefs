@@ -1,14 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Enemy/enemyAniManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayMaker/Editor/PlayMakerGUIInspector.cs">
     <Files>
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="218" Column="24" />
-      <File FileName="Assets/Script/Enemy/enemyAniManager.cs" Line="17" Column="1" />
-      <File FileName="Assets/Script/Bullets/laser/laserAniManager.cs" Line="32" Column="18" NotebookId="1" />
-      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="10" Column="3" NotebookId="1" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="6" Column="13" NotebookId="1" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="36" Column="5" NotebookId="1" />
-      <File FileName="Assets/Script/model/enemy_property.cs" Line="25" Column="33" NotebookId="1" />
+      <File FileName="Assets/PlayMaker/Editor/PlayMakerGUIInspector.cs" Line="26" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

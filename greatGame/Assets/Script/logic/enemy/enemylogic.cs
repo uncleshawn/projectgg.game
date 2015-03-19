@@ -223,6 +223,8 @@ public class enemylogic : monsterbaselogic {
 
 		}
 
+
+		//判断玩家是否死亡
 		public bool isDie(){
 				enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 				if (enemyProperty.Hp <= 0) {

@@ -669,6 +669,7 @@
      <Compile Include="Assets\PlayMaker\Actions\iTween\iTweenShakeScale.cs" />
      <Compile Include="Assets\PlayMaker\Actions\iTween\iTweenStop.cs" />
      <Compile Include="Assets\PlayMaker\Include\iTweenFSMEvents.cs" />
+     <Compile Include="Assets\Script\AniEffect\onceAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\laser\laserAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" />
