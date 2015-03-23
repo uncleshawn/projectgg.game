@@ -30,6 +30,10 @@ public class monsterbaselogic : MonoBehaviour {
 				return v;
 		}
 
+		virtual public void scaredMove(){
+				
+		}
+
 	virtual public Vector3 getFAcc(){
 		Vector3 v = new Vector3 ();
 

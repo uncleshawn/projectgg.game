@@ -31,10 +31,10 @@ public class onceAniManager : MonoBehaviour {
 				constant.getSoundLogic ().playEffect ();
 
 				animator.Play (aniName);
-				animator.AnimationCompleted = afterAni;
+				animator.AnimationCompleted = destroyAfter;
 		}
 
-		void afterAni(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+		void destroyAfter(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
 				GameObject.Destroy(this.gameObject);	
 		}
 }
