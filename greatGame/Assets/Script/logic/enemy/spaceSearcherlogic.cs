@@ -46,7 +46,7 @@ public class spaceSearcherlogic : MonoBehaviour {
 
 		void finishMove(){
 				moveRange = 800;
-				Debug.Log ("成功搜索到移动位置:" + this.transform.position);
+				//Debug.Log ("成功搜索到移动位置:" + this.transform.position);
 				employ.SendMessage ("moveNearByPos", this.transform.position);
 				this.transform.localPosition = employ.transform.position;
 				GameObject.Destroy (this.gameObject);
@@ -56,9 +56,12 @@ public class spaceSearcherlogic : MonoBehaviour {
 
 		void OnTriggerStay(Collider other){
 				if (other.gameObject != employ) {
-						Debug.Log ("moveRange: " + moveRange + " 在地下移动遇到碰撞,碰撞的物体是: " + other.name);
+						//Debug.Log ("moveRange: " + moveRange + " 在地下移动遇到碰撞,碰撞的物体是: " + other.name);
 						iTween.Stop ();
-						moveRange = moveRange - 10;
+						moveRange = moveRange - 30;
+						if (moveRange < 0) {
+								moveRange = 0;
+						}
 						this.transform.position = employ.transform.position;
 						iTweenWork = false;
 

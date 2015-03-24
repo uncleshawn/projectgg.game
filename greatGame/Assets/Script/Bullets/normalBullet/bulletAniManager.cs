@@ -12,11 +12,15 @@ public class bulletAniManager : MonoBehaviour {
 		public Direction BulletDirection { get { return bulletDirection; } set { bulletDirection = value; }}
 
 		bool bulletDie;
+
+		bullet_property bulletProperty;
 		// Use this for initialization
+
 		void Awake(){
 				bulletDie = false;
 				bulletSprite = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSprite>();
 				bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
+				bulletProperty = gameObject.GetComponent<bullet_property> ();
 		}
 		void Start () {
 				if(bulletDie == false) {
@@ -150,10 +154,23 @@ public class bulletAniManager : MonoBehaviour {
 								hitWall();
 								return ;
 						}
-						enemy_property enemyPro = other.gameObject.GetComponent<enemy_property>();
-						if(enemyPro){
-								hitEnemies();
+
+						if (bulletProperty.BattleType == constant.BattleType.Player) {
+								enemy_property enemyPro = other.gameObject.GetComponent<enemy_property> ();
+								if (enemyPro) {
+										Debug.Log("子弹动画击中怪物.");
+										hitEnemies ();
+								}
 						}
+						if (bulletProperty.BattleType == constant.BattleType.Enemy) {
+								char_property charPro = other.gameObject.GetComponent<char_property> ();
+								if (charPro) {
+										Debug.Log ("子弹动画击中玩家.");
+										hitEnemies ();
+										 
+								}
+						}
+
 				}
 		}
 }

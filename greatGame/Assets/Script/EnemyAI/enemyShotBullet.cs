@@ -29,6 +29,7 @@ public class enemyShotBullet : MonoBehaviour {
 		float delayTime=0;	
 
 		void Awake(){
+				checkForget ();
 				weapontype = weaponType.bulletNormal;
 
 		}
@@ -69,6 +70,14 @@ public class enemyShotBullet : MonoBehaviour {
 				//如果忘记输入子弹射击频率,默认为0.5秒间隔
 				if(mdamageRate == 0) {mdamageRate = 0.5f;}
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(this.gameObject));
+		}
+
+		public void upgradeProperties(enemy_property property){
+				mbulletSpeed = baseBulletSpeed + property.AttackSpeed;
+				mbulletRate = baseBulletRate - (baseBulletRate-0.1f)*property.AttackRate/10;
+				mbulletDistance = baseBulletDistance + property.AttackDistance;
+				mbulletDamage = baseBulletDamage + property.Damage*5;
+
 		}
 
 		void checkForget(){

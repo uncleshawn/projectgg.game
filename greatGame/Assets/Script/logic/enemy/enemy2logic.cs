@@ -19,18 +19,24 @@ public class enemy2logic : enemylogic {
 
 		// Use this for initialization
 		void Awake(){
+				//自己的属性
 				enemySelf = gameObject.GetComponent<enemy_property>();
+				//动画控制
 				ani = transform.FindChild ("ui").FindChild ("ani").gameObject;
+				//寻路工具
 				spaceSearcherPath = "Prefabs/logic/spaceSearch";
+				//动画脚本
 				enemyAni = ani.GetComponent<tk2dSpriteAnimator> ();
+				//攻击射击脚本
 				shooter = gameObject.GetComponent<enemyShotBullet> ();
+				//判断是否开始重复行动
 				completeMove = true;
 		}
 
 		// Use this for initialization
 
 		void Start () {
-
+				shooter.upgradeProperties (enemySelf);
 		}
 
 		// Update is called once per frame
@@ -50,12 +56,14 @@ public class enemy2logic : enemylogic {
 		}
 
 		void shootBullet(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-				int notShoot = Random.Range (0, 2);
+				enemyAni.Play ("attack");
+				int notShoot = Random.Range (0, 4);
 				if (notShoot != 0) {
 						//shooter.shootBullet ();
+						shooter.shootBullet ();
 						StartCoroutine (waitMove (waitTime));
 				} else {
-						StartCoroutine (waitMove (0.2f));
+						StartCoroutine (waitMove (0.25f));
 				}
 		}
 
