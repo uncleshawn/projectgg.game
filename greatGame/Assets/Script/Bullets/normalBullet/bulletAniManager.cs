@@ -21,6 +21,7 @@ public class bulletAniManager : MonoBehaviour {
 				bulletSprite = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSprite>();
 				bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
 				bulletProperty = gameObject.GetComponent<bullet_property> ();
+
 		}
 		void Start () {
 				if(bulletDie == false) {
@@ -73,6 +74,7 @@ public class bulletAniManager : MonoBehaviour {
 
 		//子弹达到最远距离
 		public void distanceEnd() {
+				bulletDie = true;
 				destroyAfterAni("end");
 		}
 
@@ -154,8 +156,17 @@ public class bulletAniManager : MonoBehaviour {
 								hitWall();
 								return ;
 						}
+						if(other.gameObject.tag == "Wall"){
+								hitWall();
+								return ;
+						}
+						if(other.gameObject.tag == "Door"){
+								hitWall();
+								return ;
+						}
 
 						if (bulletProperty.BattleType == constant.BattleType.Player) {
+								
 								enemy_property enemyPro = other.gameObject.GetComponent<enemy_property> ();
 								if (enemyPro) {
 										Debug.Log("子弹动画击中怪物.");

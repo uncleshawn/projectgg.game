@@ -34,7 +34,7 @@ public class bullet_property : base_property {
 				bulletDamage = damage;
 				bulletknock = knock ;
 				bulletDamageRate = damamgeRate ; 
-				mBattleType = battleType;
 				bulletSpe = bulletStruct;
+				mBattleType = battleType;
 		}
 }

@@ -32,7 +32,9 @@ public class enemylogic : monsterbaselogic {
 						//Debug.Log("enemy be attacked by bullet.");
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
-						getDamage(enemyProperty,bulletProperty);
+						if(enemyProperty.invincible == false){
+							getDamage(enemyProperty,bulletProperty);
+						}
 
 						//判断击退类型
 						if (bulletProperty.bulletknock != 0) {
@@ -71,10 +73,9 @@ public class enemylogic : monsterbaselogic {
 				string showDamagePath = "Prefabs/ui/UI_showDamage";
 				GameObject showDamageClone = (GameObject)Instantiate(Resources.Load(showDamagePath),objectPos,Quaternion.identity);
 				if(showDamageClone){
-
 						string damage = "-" + bulletProperty.bulletDamage.ToString();
-						showDamageClone.GetComponent<enemy_showDamage>().mNum = damage;
-						showDamageClone.GetComponent<enemy_showDamage>().showDamage();
+						showDamageClone.GetComponent<enemy_showDamage>().showDamage(damage);
+
 				}
 
 				//伤害显示------------
@@ -232,6 +233,17 @@ public class enemylogic : monsterbaselogic {
 				}
 				return false;
 		}
+
+
+		void OnTriggerEnter(Collider obj){
+				
+		}
+
+		void OnCollisionEnter (Collision obj){
+				
+		}
+
+
 
 
 }

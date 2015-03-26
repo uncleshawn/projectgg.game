@@ -15,6 +15,7 @@ public class enemy_property : base_property {
 
 		public string enemyName;
 		public int enemyId;
+		public bool invincible;
 		public bool heavyBody;			//敌人是否拥有强硬外壳(不能被击退)
 
 
@@ -25,11 +26,13 @@ public class enemy_property : base_property {
 		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
 
 		public int MaxHp;
+
 		public float MaxMoveSpeed;
-		public int MaxDamage;
-		public int MaxAttackSpeed;
-		public int MAxAttackRate;
-		public float MaxAttackDistance;
+
+		int MaxDamage;
+		int MaxAttackSpeed;
+		int MAxAttackRate;
+		float MaxAttackDistance;
 
 
 
@@ -52,6 +55,8 @@ public class enemy_property : base_property {
 		float deltaTime;
 
 		void Awake(){
+				enemyId = constant.getMonsterFactory ().getMonsterId ();
+				this.gameObject.name = this.gameObject.name + enemyId;
 				mHp = MaxHp;
 				mMoveSpeed = MaxMoveSpeed;
 				mDamage = MaxDamage;
@@ -60,6 +65,7 @@ public class enemy_property : base_property {
 				mAttackDistance = MaxAttackDistance;
 				acting = true;
 				scared = false;
+				invincible = false;
 				mBattleType = constant.BattleType.Enemy;
 				checkForget ();
 

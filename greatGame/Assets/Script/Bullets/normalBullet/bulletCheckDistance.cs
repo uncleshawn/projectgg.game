@@ -38,7 +38,7 @@ public class bulletCheckDistance : MonoBehaviour {
 				if(bulletDistance < distance)
 				{
 						//调用aniManager的距离函数处理结果
-						Debug.Log("子弹达到最远距离: " + bulletDistance);
+						//Debug.Log("子弹达到最远距离: " + bulletDistance);
 						this.gameObject.GetComponent<bulletAniManager>().distanceEnd();
 						this.enabled = false;
 				}

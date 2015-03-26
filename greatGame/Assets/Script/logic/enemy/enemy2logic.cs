@@ -6,23 +6,24 @@ using UnityEngine;
 using System.Collections;
 
 public class enemy2logic : enemylogic {
-		
+
 		enemy_property enemySelf;
 		GameObject ani;
 		string spaceSearcherPath;
 		tk2dSpriteAnimator enemyAni;
 		enemyShotBullet shooter;
-		public float waitTime;
+		public int waitTime;
 
 		//蚯蚓是否重新开始做AI行为
 		bool completeMove;
+		bool halfComplete;
 
 		// Use this for initialization
 		void Awake(){
 				//自己的属性
 				enemySelf = gameObject.GetComponent<enemy_property>();
 				//动画控制
-				ani = transform.FindChild ("ui").FindChild ("ani").gameObject;
+				ani = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;
 				//寻路工具
 				spaceSearcherPath = "Prefabs/logic/spaceSearch";
 				//动画脚本
@@ -31,16 +32,18 @@ public class enemy2logic : enemylogic {
 				shooter = gameObject.GetComponent<enemyShotBullet> ();
 				//判断是否开始重复行动
 				completeMove = true;
+
+				shooter.upgradeProperties (enemySelf);
 		}
 
 		// Use this for initialization
 
 		void Start () {
-				shooter.upgradeProperties (enemySelf);
+
 		}
 
 		// Update is called once per frame
-		void Update () {
+		void FixedUpdate () {
 				if (completeMove == true) {
 						completeMove = false;
 						attackMove ();
@@ -48,32 +51,46 @@ public class enemy2logic : enemylogic {
 
 		}
 
-	
+
 
 		void attackMove(){
+
 				enemyAni.Play ("comeOut");
-				enemyAni.AnimationCompleted = shootBullet;
+				enemyAni.AnimationCompleted = shotBullet;
 		}
 
-		void shootBullet(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+		void shotBullet(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
 				enemyAni.Play ("attack");
 				int notShoot = Random.Range (0, 4);
 				if (notShoot != 0) {
 						//shooter.shootBullet ();
-						shooter.shootBullet ();
+						if (enemySelf.scared) {
+								shooter.shootBullet (EnemyShotType.random);
+						} else {
+								//Debug.Log ("敌人射击");
+								shooter.shootBullet (EnemyShotType.directPlayer);
+						}
+
 						StartCoroutine (waitMove (waitTime));
+						defendMove ();
+
 				} else {
-						StartCoroutine (waitMove (0.25f));
+						StartCoroutine (waitMove (1));
+						defendMove ();
 				}
 		}
 
-		IEnumerator waitMove(float waitTime){
-				enemyAni.Play ("wait");
+		IEnumerator waitMove(int waitTime){
+				//Debug.Log ("敌人射击");
+				if (enemyAni.IsPlaying ("wait")) {
+						enemyAni.Play ("wait");
+				}
+
 				if (waitTime == 0) {
 						waitTime = 3;
 				}
+				waitTime = Random.Range (waitTime-1, waitTime + 2);
 				yield return new WaitForSeconds(waitTime);
-				defendMove ();
 		}
 
 		void defendMove(){
@@ -82,17 +99,18 @@ public class enemy2logic : enemylogic {
 
 		}
 
-		//隐藏地鼠图片
+		//隐藏地鼠图片 并 开始寻路
 		void disappearAfter(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-	
-				ani.GetComponent<MeshRenderer> ().enabled = false;
+
 				BoxCollider box = ani.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
-				if(box){
-					box.isTrigger = true;
-				} else{
-						Debug.Log("出错请检查");
+				if (box) {
+						box.isTrigger = true;
+				} else {
+						Debug.Log ("出错请检查");
 				}
-				GameObject searcherClone = (GameObject)Instantiate(Resources.Load(spaceSearcherPath),this.transform.position,Quaternion.identity);
+				ani.GetComponent<MeshRenderer> ().enabled = false;
+				GameObject searcherClone = (GameObject)Instantiate (Resources.Load (spaceSearcherPath), this.transform.position, Quaternion.identity);
+				enemySelf.invincible = true;
 				searcherClone.GetComponent<spaceSearcherlogic> ().startWork (this.gameObject);
 				//然后spaceSearch会调本object的moveNearByPos
 				//moveNearByPos ();
@@ -101,11 +119,12 @@ public class enemy2logic : enemylogic {
 
 
 		public void moveNearByPos(Vector3 pos){
-				
-				iTween.MoveTo(gameObject, iTween.Hash("position", pos,  "easeType", "linear", "loopType", "none" , "time" , 3 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
+				enemySelf.invincible = true;
+				iTween.MoveTo(gameObject, iTween.Hash("position", pos,  "easeType", "linear", "loopType", "none" , "time" , 2 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
 		}
 
 		void finishMove(){
+				enemySelf.invincible = false;
 				BoxCollider box =  ani.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
 				box.isTrigger = false;
 				ani.GetComponent<MeshRenderer> ().enabled = true;
@@ -113,15 +132,6 @@ public class enemy2logic : enemylogic {
 		}
 
 
-		override public void scaredMove(){
-				//iTween.MoveBy(gameObject, iTween.Hash("y", Random.Range(-10,11),  "x" , Random.Range(-10,11),  "easeType", "easeInOutQuad", "loopType", "none" , "time" , 3 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
-		}
-
 		void OnTriggerEnter(Collider other){
-//				BoxCollider box =  ani.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
-//				box.isTrigger = false;
-//				Debug.Log ("蚯蚓遇到碰撞: " + .name );
-//				iTween.Stop ();
-//				finishMove ();
 		}
 }

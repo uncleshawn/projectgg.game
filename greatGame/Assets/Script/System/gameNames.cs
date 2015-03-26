@@ -71,6 +71,18 @@ public struct stateColor
 		public static Color scared = new Color (230, 0, 255);
 }
 
+public enum EnemyShotType
+{
+		//指向玩家
+		directPlayer		 	= 1,
+		//随机方向及角度
+		random		 			= 2,
+		//某方向随机
+		directRandom			= 3,
+		//方向发散型
+		directDiverging			= 4,
+}
+
 public class gameNames : MonoBehaviour {
 
 		// Use this for initialization

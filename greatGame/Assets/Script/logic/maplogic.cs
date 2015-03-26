@@ -340,6 +340,7 @@ public class maplogic{
 				string beColliderTag = beCollider.tag;
 				//Debug.Log ("colliderTag:" + colliderTag);
 				//Debug.Log ("beColliderTag:" + beColliderTag);
+
 				if (colliderTag.Equals (constant.TAG_ENEMY)) {
 						if(beColliderTag.Equals(constant.TAG_PLAYER)){
 								if(constant.isConflict(collider, beCollider)){
@@ -359,6 +360,14 @@ public class maplogic{
 						if(beColliderTag.Equals(constant.TAG_BULLET)){
 								if(constant.isConflict(collider, beCollider)){
 										attack(beCollider, collider);
+								}
+						}
+				}
+
+				if (colliderTag.Equals (constant.TAG_PLAYER)) {
+						if(beColliderTag.Equals(constant.TAG_BULLET)){
+								if(constant.isConflict(collider, beCollider)){
+										attackByBullet(beCollider, collider);
 								}
 						}
 				}
@@ -450,13 +459,16 @@ public class maplogic{
 
 
 
-		//攻击
+		//攻击 伤害
 		private void attack(GameObject atker, GameObject beAtker){
 				monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
 				beAtkerLogic.beAttack(atker);
 		}
-
-
+				
+		private void attackByBullet(GameObject atker, GameObject beAtker){
+				monsterbaselogic beAtkerLogic = beAtker.GetComponent<monsterbaselogic>();
+				beAtkerLogic.beAttackByBullet(atker);
+		}
 
 
 
