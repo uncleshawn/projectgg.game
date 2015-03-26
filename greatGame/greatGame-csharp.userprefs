@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/ui/camera_effect_script.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Enemy/enemyAniManager.cs">
     <Files>
       <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="22" Column="38" />
       <File FileName="Assets/Script/logic/enemy/enemy3logic.cs" Line="42" Column="36" />
@@ -11,11 +11,7 @@
       <File FileName="Assets/Script/model/base_property.cs" Line="13" Column="39" />
       <File FileName="Assets/Script/logic/char/charlogic.cs" Line="63" Column="1" />
       <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="11" Column="1" />
-      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="37" Column="39" />
-      <File FileName="Assets/Script/ui/pos_update_script.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/data/itemlogic.cs" Line="44" Column="38" />
-      <File FileName="Assets/Script/logic/iconlogic.cs" Line="53" Column="112" />
-      <File FileName="Assets/Script/ui/camera_effect_script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Enemy/enemyAniManager.cs" Line="41" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

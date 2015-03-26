@@ -6,6 +6,7 @@ public class camera_effect_script : MonoBehaviour {
 		public bool cameraEffect;
 		// Use this for initialization
 		void Start () {
+				shakeCamera ();
 		}
 
 		// Update is called once per frame
