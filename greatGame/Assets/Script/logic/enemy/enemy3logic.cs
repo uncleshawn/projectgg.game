@@ -39,7 +39,7 @@ public class enemy3logic : enemylogic {
 
 		// Update is called once per frame
 		void FixedUpdate () {
-				tempTime += Time.deltaTime;
+				tempTime += Time.fixedDeltaTime;
 				if (tempTime > waitTime) {
 						stoneAttack ();
 						tempTime = 0;

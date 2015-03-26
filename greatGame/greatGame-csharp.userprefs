@@ -1,18 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/bullet/bulletlogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/ui/camera_effect_script.cs">
     <Files>
-      <File FileName="Assets/Script/logic/enemy/spaceSearcherlogic.cs" Line="35" Column="7" />
-      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/enemy2logic.cs" Line="123" Column="27" />
-      <File FileName="Assets/Script/model/enemy_property.cs" Line="26" Column="24" />
-      <File FileName="Assets/Script/EnemyAI/enemyShotBullet.cs" Line="69" Column="49" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="63" Column="30" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="213" Column="79" />
-      <File FileName="Assets/Script/Enemy/enemyAniManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/enemy3logic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="15" Column="27" />
-      <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="30" Column="5" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="22" Column="38" />
+      <File FileName="Assets/Script/logic/enemy/enemy3logic.cs" Line="42" Column="36" />
+      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="35" Column="48" />
+      <File FileName="Assets/Script/EnemyAI/enemyShotBullet.cs" Line="101" Column="58" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="166" Column="8" />
+      <File FileName="Assets/Script/model/bullet_property.cs" Line="20" Column="45" />
+      <File FileName="Assets/Script/model/base_property.cs" Line="13" Column="39" />
+      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="63" Column="1" />
+      <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="11" Column="1" />
+      <File FileName="Assets/Script/ui/enemy_showDamage.cs" Line="37" Column="39" />
+      <File FileName="Assets/Script/ui/pos_update_script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/data/itemlogic.cs" Line="44" Column="38" />
+      <File FileName="Assets/Script/logic/iconlogic.cs" Line="53" Column="112" />
+      <File FileName="Assets/Script/ui/camera_effect_script.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -34,7 +34,7 @@ public class enemy_showDamage : MonoBehaviour {
 
 		// Update is called once per frame
 		void FixedUpdate () {
-				time = time + Time.deltaTime;
+				time = time + Time.fixedDeltaTime;
 				if (time >= 1) {
 						Debug.Log ("伤害数字超过时间, 请解决问题");
 						GameObject.Destroy (this.gameObject);

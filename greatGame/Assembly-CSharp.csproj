@@ -741,6 +741,7 @@
      <Compile Include="Assets\Script\packback\backpackData.cs" />
      <Compile Include="Assets\Script\ui\BossHpUpdate.cs" />
      <Compile Include="Assets\Script\ui\accl_script.cs" />
+     <Compile Include="Assets\Script\ui\camera_effect_script.cs" />
      <Compile Include="Assets\Script\ui\camera_follow_script.cs" />
      <Compile Include="Assets\Script\ui\char_enter_script.cs" />
      <Compile Include="Assets\Script\ui\collipse_script.cs" />

@@ -19,7 +19,7 @@ public class enemylogic : monsterbaselogic {
 		}
 
 		protected void superFixedUpdate(){
-				scaredTime += Time.deltaTime;
+				scaredTime += Time.fixedDeltaTime;
 				checkScaredRecover (scaredTime);
 		}
 
