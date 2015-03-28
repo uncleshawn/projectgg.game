@@ -158,14 +158,14 @@ public class bulletAniManager : MonoBehaviour {
 								
 								enemy_property enemyPro = other.gameObject.GetComponent<enemy_property> ();
 								if (enemyPro) {
-										Debug.Log("子弹动画击中怪物.");
+										//Debug.Log("子弹击中怪物.");
 										hitEnemies ();
 								}
 						}
 						if (bulletProperty.BattleType == constant.BattleType.Enemy) {
 								char_property charPro = other.gameObject.GetComponent<char_property> ();
 								if (charPro) {
-										Debug.Log ("子弹动画击中玩家.");
+										//Debug.Log ("子弹击中玩家.");
 										hitEnemies ();
 										 
 								}
