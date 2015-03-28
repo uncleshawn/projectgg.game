@@ -75,16 +75,16 @@ public class enemyShotBullet : MonoBehaviour {
 
 		}
 
-		public void shootMultiBullets(EnemyShotType shotType , int bulletAmount , int missLevel){
+		public void shootMultiBullets(EnemyShotType shotType , int bulletAmount , int angle){
 				//子弹是向着主角方向发散型
 				if (shotType == EnemyShotType.directDiverging) {
-						Vector3 playerPos = getPlayerPosExcur (missLevel);
+						Vector3 playerPos = getPlayerPosExcur (20);
 						for (int i = 1; i <= bulletAmount; i++) {
 								GameObject bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),this.transform.position,Quaternion.identity);	
 								bulletClone.GetComponent<bulletCheckDistance> ().setDistance (mbulletDistance);
 								setBulletProperty (bulletClone);
 								shotScript = bulletClone.GetComponent<bulletGetSpeed> ();
-								setDirectionDivergingSpeed (shotScript, mbulletSpeed , playerPos , i);
+								setDirectionDivergingSpeed (shotScript, mbulletSpeed , playerPos , i , angle);
 						}
 				}
 		}
@@ -103,7 +103,7 @@ public class enemyShotBullet : MonoBehaviour {
 		}
 
 		//设置子弹飞行方向
-		void setDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 pos , int num){
+		void setDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 pos , int num , int angle){
 				Vector3 speedDir = new Vector3(0,0,0);
 				Vector3 enemyPos = this.transform.position;
 				speedDir = pos - enemyPos;
@@ -114,9 +114,9 @@ public class enemyShotBullet : MonoBehaviour {
 				Quaternion rot;
 				if (num % 2 == 1) {
 						num -= 1;
-						rot = Quaternion.Euler (0f, 0f, -1 * (num / 2) * 7f);
+						rot = Quaternion.Euler (0f, 0f, -1 * (num / 2) * angle);
 				} else {
-						rot = Quaternion.Euler (0f, 0f, (num / 2) * 7f);
+						rot = Quaternion.Euler (0f, 0f, (num / 2) * angle);
 				}
 				speedDir = rot * speedDir;
 				//Debug.Log (num + " num : new Vector = " + speedDir);

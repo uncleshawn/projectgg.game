@@ -16,11 +16,18 @@ public class bulletAniManager : MonoBehaviour {
 		bullet_property bulletProperty;
 		// Use this for initialization
 
+		public bool getShadow;
+		public bool dynamicShadow;
+		tk2dSprite shadowSprite;
+
 		void Awake(){
 				bulletDie = false;
 				bulletSprite = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSprite>();
 				bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
 				bulletProperty = gameObject.GetComponent<bullet_property> ();
+				if (getShadow) {
+						shadowSprite = intiShadow ();
+				}
 
 		}
 		void Start () {
@@ -51,6 +58,14 @@ public class bulletAniManager : MonoBehaviour {
 				}
 				return Direction.left;
 
+		}
+
+		//生成子弹的影子
+		tk2dSprite intiShadow(){
+				GameObject shadow = constant.getMapLogic ().initBulletShadow (bulletSprite , bulletSprite.gameObject , dynamicShadow);
+				shadow.transform.localPosition = new Vector3 (0, -0.55f, 1);
+				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+				return shadowSprite;
 		}
 
 
@@ -92,13 +107,23 @@ public class bulletAniManager : MonoBehaviour {
 				{ 
 				default: 
 						break; 
-				case Direction.up:	 	setSpriteDirection(bulletSprite,bulletAni,0);		bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x),bulletSprite.scale.y,bulletSprite.scale.z);	  break;	
-				case Direction.down:	setSpriteDirection(bulletSprite,bulletAni,0);		bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);   break;	
-				case Direction.left: 	setSpriteDirection(bulletSprite,bulletAni,1);		bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);	  break;		
-				case Direction.right: 	setSpriteDirection(bulletSprite,bulletAni,1);		bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x),bulletSprite.scale.y,bulletSprite.scale.z);	  break;	
+				case Direction.up:
+						setSpriteDirection (bulletSprite, bulletAni, 0);		
+						bulletSprite.scale = new Vector3 (Mathf.Abs (bulletSprite.scale.x), bulletSprite.scale.y, bulletSprite.scale.z);
+						break;	
+				case Direction.down:	setSpriteDirection(bulletSprite,bulletAni,0);		
+						bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);   
+						break;	
+				case Direction.left: 	setSpriteDirection(bulletSprite,bulletAni,1);		
+						bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x)*-1,bulletSprite.scale.y,bulletSprite.scale.z);	  
+						break;		
+				case Direction.right: 	setSpriteDirection(bulletSprite,bulletAni,1);		
+						bulletSprite.scale = new Vector3(Mathf.Abs(bulletSprite.scale.x),bulletSprite.scale.y,bulletSprite.scale.z);	  
+						break;	
 
 						break; 
 				} 
+				shadowSprite.scale = new Vector3 (bulletSprite.scale.x * 0.9f, bulletSprite.scale.y * 0.7f, bulletSprite.scale.z);
 
 		}
 

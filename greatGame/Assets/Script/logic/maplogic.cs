@@ -484,6 +484,19 @@ public class maplogic{
 				aniManager.setAniLib (aniLibPath);
 				aniManager.playAni(aniName);	
 		}
+
+
+		//生成物体的影子
+		public GameObject initBulletShadow(tk2dSprite sprite , GameObject father , bool dynamicShadow){
+				string shadowPath =  "Prefabs/aniEffect/shadow_bullet";
+				GameObject bulletShadowClone = (GameObject)GameObject.Instantiate(Resources.Load(shadowPath),father.transform.localPosition,Quaternion.identity);
+				bulletShadowClone.transform.parent = father.transform;
+				bulletShadowClone.transform.localPosition =	father.transform.localPosition;
+				//bulletShadowClone.transform.localPosition = new Vector3 (obj.transform.localPosition.x, obj.transform.localPosition.y, obj.transform.localPosition.z + 1);
+				bulletShadowClone.GetComponent<shadowAniManager>().setUp(sprite , dynamicShadow);
+				return bulletShadowClone;
+
+		}
 				
 }
 
