@@ -39,7 +39,7 @@ public class enemyAniManager : MonoBehaviour {
 
 		tk2dSprite intiShadow(){
 				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , enemySprite.gameObject.transform.parent.gameObject , dynamicShadow);
-				shadow.transform.localPosition = new Vector3 (0, -1.2f, 1);
+				shadow.transform.localPosition = new Vector3 (0, -1.2f*Mathf.Abs(enemySprite.scale.y)/2, 1);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * 0.2f, enemySprite.scale.z);
 				return shadowSprite;

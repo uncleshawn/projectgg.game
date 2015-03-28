@@ -111,6 +111,7 @@ public class enemyShotBullet : MonoBehaviour {
 				//Debug.Log (num + " num : old Vector = " + speedDir);
 				//speedDir.Normalize ();
 				//Quaternion rot =  new Quaternion(0,0, Mathf.Sin(num*10/2) , Mathf.Cos(num*10/2) );
+				speedScript.gameObject.transform.position += speedDir.normalized;
 				Quaternion rot;
 				if (num % 2 == 1) {
 						num -= 1;

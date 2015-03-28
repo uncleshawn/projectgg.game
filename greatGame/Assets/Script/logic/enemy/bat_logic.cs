@@ -17,6 +17,7 @@ public class bat_logic : enemylogic {
 		// Use this for initialization
 		void Awake(){
 				enemySelf = gameObject.GetComponent<enemy_property>();
+				GameObject obj  = constant.getPlayer ();
 		}
 
 		void Start () {
@@ -26,12 +27,7 @@ public class bat_logic : enemylogic {
 
 		// Update is called once per frame
 		void FixedUpdate () {
-				superFixedUpdate ();
-				
-				GameObject obj  = constant.getPlayer ();
-				//		enemy_property pro = this.gameObject.GetComponent<>enemy_property();
-
-				//		pro.MoveSpeed;
+				stateFixedUpdate ();
 				deltaTime = deltaTime + Time.fixedDeltaTime;
 
 		}

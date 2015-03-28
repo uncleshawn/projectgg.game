@@ -27,7 +27,7 @@ public class enemy_property : base_property {
 
 		public int MaxHp;
 
-		public float MaxMoveSpeed;
+		public float enemySpeed;
 
 		int MaxDamage;
 		int MaxAttackSpeed;
@@ -46,7 +46,6 @@ public class enemy_property : base_property {
 
 
 		public int Hp { get { return mHp; } set { mHp = value; }}
-		public float MoveSpeed { get { return mMoveSpeed; } set { mMoveSpeed = value; }}
 		public int Damage { get { return mDamage; } set { mDamage = value; }}
 		public int AttackSpeed { get { return mAttackSpeed; } set { mAttackSpeed = value; }}
 		public int AttackRate { get { return mAttackRate; } set { mAttackRate = value; }}
@@ -55,22 +54,25 @@ public class enemy_property : base_property {
 		float deltaTime;
 
 		void Awake(){
+				
 				enemyId = constant.getMonsterFactory ().getMonsterId ();
 				this.gameObject.name = this.gameObject.name + enemyId;
 				mHp = MaxHp;
-				mMoveSpeed = MaxMoveSpeed;
 				mDamage = MaxDamage;
 				mAttackSpeed = MaxAttackSpeed;
 				mAttackRate = MAxAttackRate;
 				mAttackDistance = MaxAttackDistance;
+
 				acting = true;
 				scared = false;
 				invincible = false;
 				mBattleType = constant.BattleType.Enemy;
+
+				BaseMoveSpeed = enemySpeed;
+
 				checkForget ();
 
 				deltaTime = 0;
-				//mBaseMoveSpeed = 10.0f;
 		}
 		// Use this for initialization
 		void Start () {
@@ -86,8 +88,8 @@ public class enemy_property : base_property {
 				if (MaxHp == 0) {
 						Debug.Log (gameObject.name + " 怪物物体警告: " + "怪物属性没有初始化,请检查inspector!");
 				}
-				if (mBaseMoveSpeed == 0) {
-						mBaseMoveSpeed = 10;
+				if (enemySpeed == 0) {
+						BaseMoveSpeed = 5;
 				}
 		}
 

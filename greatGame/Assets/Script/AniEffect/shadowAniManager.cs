@@ -46,4 +46,8 @@ public class shadowAniManager : MonoBehaviour {
 				}
 				working = true;
 		}
+
+		public void shadowRotate(Vector3 rotation){
+				transform.Rotate(rotation);
+		}
 }

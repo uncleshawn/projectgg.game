@@ -79,7 +79,7 @@ public class char_property : base_property {
 				mMaxAttackRate = 1;
 				mMaxAttackDistance = 0;
 
-				mHurtTime = 2;
+				mHurtTime = 1;
 
 				mBattleType = constant.BattleType.Player;
 

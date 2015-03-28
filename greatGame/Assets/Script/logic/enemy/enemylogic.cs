@@ -15,10 +15,11 @@ public class enemylogic : monsterbaselogic {
 
 		// Update is called once per frame
 		void FixedUpdate () {
-				superFixedUpdate ();
+				stateFixedUpdate ();
 		}
 
-		protected void superFixedUpdate(){
+		//处理怪物状态刷新
+		protected void stateFixedUpdate(){
 				scaredTime += Time.fixedDeltaTime;
 				checkScaredRecover (scaredTime);
 		}
