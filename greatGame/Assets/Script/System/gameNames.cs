@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum Direction
 { 
+		none 	= 0,
 		up 		= 1,
 		down 	= 2,
 		left	= 3,
@@ -56,11 +57,30 @@ public struct ScaredBullet
 		public int sacredPercent;
 }
 
-public struct bulletSpeStruct{
+public struct bulletSpeStruct
+{
 		public bool pierceBullet;
 		public ElementType element;
 		public KnockType knockType;
 		public ScaredBullet scaredBullet;
+}
+
+public struct stateColor
+{
+		public static Color normal = new Color(255,255,255);
+		public static Color scared = new Color (230, 0, 255);
+}
+
+public enum EnemyShotType
+{
+		//指向玩家
+		directPlayer		 	= 1,
+		//随机方向及角度
+		random		 			= 2,
+		//某方向随机
+		directRandom			= 3,
+		//方向发散型
+		directDiverging			= 4,
 }
 
 public class gameNames : MonoBehaviour {

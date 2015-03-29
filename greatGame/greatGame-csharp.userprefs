@@ -1,21 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/model/enemy_property.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Bullets/normalBullet/bulletAniManager.cs">
     <Files>
-      <File FileName="Assets/Script/Robot/robotShotNormalBullet.cs" Line="277" Column="24" />
-      <File FileName="Assets/Script/equipment/passitive/scaredBulletEffect.cs" Line="53" Column="36" />
-      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="300" Column="73" />
-      <File FileName="Assets/Script/Robot/robotShotLaserNomal.cs" Line="159" Column="23" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="63" Column="12" />
-      <File FileName="Assets/Script/model/bullet_property.cs" Line="38" Column="30" />
-      <File FileName="Assets/Script/item/bulletEnforce_Property.cs" Line="9" Column="11" />
-      <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="45" Column="17" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="78" Column="16" />
-      <File FileName="Assets/Script/ui/move_script.cs" Line="30" Column="68" />
-      <File FileName="Assets/Script/logic/monsterbaselogic.cs" Line="25" Column="39" />
-      <File FileName="Assets/Script/logic/enemy/Enemy1Logic.cs" Line="67" Column="29" />
-      <File FileName="Assets/Script/model/enemy_property.cs" Line="82" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="166" Column="7" />
+      <File FileName="Assets/Script/logic/enemy/enemy3logic.cs" Line="86" Column="22" />
+      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="12" Column="19" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="18" Column="21" />
+      <File FileName="Assets/Script/model/enemy_property.cs" Line="71" Column="18" />
+      <File FileName="Assets/Script/model/base_property.cs" Line="9" Column="32" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="177" Column="1" />
+      <File FileName="Assets/Script/Bullets/laser/laserAniManager.cs" Line="118" Column="6" />
+      <File FileName="Assets/Script/AniEffect/shadowAniManager.cs" Line="50" Column="27" />
+      <File FileName="Assets/Script/Robot/robotWeaponSwitch.cs" Line="11" Column="3" />
+      <File FileName="Assets/Script/Robot/robotAniManager.cs" Line="51" Column="3" />
+      <File FileName="Assets/Script/Enemy/enemyAniManager.cs" Line="42" Column="97" />
+      <File FileName="Assets/Script/logic/char/charlogic.cs" Line="34" Column="29" />
+      <File FileName="Assets/Script/model/char_property.cs" Line="82" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

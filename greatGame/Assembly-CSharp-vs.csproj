@@ -670,10 +670,14 @@
      <Compile Include="Assets\PlayMaker\Actions\iTween\iTweenShakeScale.cs" />
      <Compile Include="Assets\PlayMaker\Actions\iTween\iTweenStop.cs" />
      <Compile Include="Assets\PlayMaker\Include\iTweenFSMEvents.cs" />
+     <Compile Include="Assets\Script\AniEffect\onceAniManager.cs" />
+     <Compile Include="Assets\Script\AniEffect\shadowAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\laser\laserAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletGetSpeed.cs" />
+     <Compile Include="Assets\Script\Enemy\enemyAniManager.cs" />
+     <Compile Include="Assets\Script\EnemyAI\enemyShotBullet.cs" />
      <Compile Include="Assets\Script\EnemyAI\followPlayer.cs" />
      <Compile Include="Assets\Script\EnemyAI\spwanEnemy.cs" />
      <Compile Include="Assets\Script\Robot\robotAniManager.cs" />
@@ -717,7 +721,10 @@
      <Compile Include="Assets\Script\logic\enemy\FallStoneLogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\Shit1Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\enemy2logic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\enemy3logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemylogic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\spaceSearcherlogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\trap1logic.cs" />
      <Compile Include="Assets\Script\logic\gamelogic.cs" />
      <Compile Include="Assets\Script\logic\iconlogic.cs" />
@@ -739,6 +746,7 @@
      <Compile Include="Assets\Script\packback\backpackData.cs" />
      <Compile Include="Assets\Script\ui\BossHpUpdate.cs" />
      <Compile Include="Assets\Script\ui\accl_script.cs" />
+     <Compile Include="Assets\Script\ui\camera_effect_script.cs" />
      <Compile Include="Assets\Script\ui\camera_follow_script.cs" />
      <Compile Include="Assets\Script\ui\char_enter_script.cs" />
      <Compile Include="Assets\Script\ui\collipse_script.cs" />

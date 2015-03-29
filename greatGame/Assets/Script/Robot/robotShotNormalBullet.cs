@@ -233,7 +233,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 		public void setBulletProperty(GameObject bulletClone){
 				//如果忘记输入子弹射击频率,默认为0.5秒间隔
 				if(mdamageRate == 0) {mdamageRate = 0.5f;}
-				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(this.gameObject));
+				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(player));
 		}
 
 
