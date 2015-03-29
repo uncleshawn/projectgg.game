@@ -3,6 +3,8 @@ using System.Collections;
 
 public class monsterfactory {
 
+		private int monsterId;
+
 	private monstertemplate[] mPrefabs;
 
 	private monsterfactory(){
@@ -16,11 +18,17 @@ public class monsterfactory {
 		}
 		return mInstance;
 	}
+		public int getMonsterId(){
+				int oldMonsterId = monsterId;
+				monsterId++;
+				return oldMonsterId;
+
+		}
 	
 	public void initTemplate(){
 		mPrefabs = new monstertemplate[]{
 			//new monstertemplate("Prefabs/enemy/bat"),
-			new monstertemplate("Prefabs/enemy/enemy1"),
+			new monstertemplate("Prefabs/enemy/boss1"),
 		};
 	}
 	

@@ -15,6 +15,7 @@ public class enemy_property : base_property {
 
 		public string enemyName;
 		public int enemyId;
+		public bool invincible;
 		public bool heavyBody;			//敌人是否拥有强硬外壳(不能被击退)
 
 
@@ -25,11 +26,13 @@ public class enemy_property : base_property {
 		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
 
 		public int MaxHp;
-		public float MaxMoveSpeed;
-		public int MaxDamage;
-		public int MaxAttackSpeed;
-		public int MAxAttackRate;
-		public float MaxAttackDistance;
+
+		public float enemySpeed;
+
+		int MaxDamage;
+		int MaxAttackSpeed;
+		int MAxAttackRate;
+		float MaxAttackDistance;
 
 
 
@@ -43,25 +46,33 @@ public class enemy_property : base_property {
 
 
 		public int Hp { get { return mHp; } set { mHp = value; }}
-		public float MoveSpeed { get { return mMoveSpeed; } set { mMoveSpeed = value; }}
 		public int Damage { get { return mDamage; } set { mDamage = value; }}
 		public int AttackSpeed { get { return mAttackSpeed; } set { mAttackSpeed = value; }}
 		public int AttackRate { get { return mAttackRate; } set { mAttackRate = value; }}
 		public float AttackDistance { get { return mAttackDistance; } set { mAttackDistance = value; }}
 
+		float deltaTime;
+
 		void Awake(){
-				checkForget ();
+				
+				enemyId = constant.getMonsterFactory ().getMonsterId ();
+				this.gameObject.name = this.gameObject.name + enemyId;
 				mHp = MaxHp;
-				mMoveSpeed = MaxMoveSpeed;
 				mDamage = MaxDamage;
 				mAttackSpeed = MaxAttackSpeed;
 				mAttackRate = MAxAttackRate;
 				mAttackDistance = MaxAttackDistance;
+
 				acting = true;
 				scared = false;
+				invincible = false;
 				mBattleType = constant.BattleType.Enemy;
 
-				mBaseMoveSpeed = 5.0f;
+				BaseMoveSpeed = enemySpeed;
+
+				checkForget ();
+
+				deltaTime = 0;
 		}
 		// Use this for initialization
 		void Start () {
@@ -77,5 +88,9 @@ public class enemy_property : base_property {
 				if (MaxHp == 0) {
 						Debug.Log (gameObject.name + " 怪物物体警告: " + "怪物属性没有初始化,请检查inspector!");
 				}
+				if (enemySpeed == 0) {
+						BaseMoveSpeed = 5;
+				}
 		}
+
 }

@@ -27,14 +27,22 @@ public class move_script : MonoBehaviour {
 			return;
 		}
 
+                Vector3 speed = rigidbody.velocity;
+
 		Vector3 self_acc = baseLogic.getMoveAcc ();//new Vector3();	//加速度
-		Vector3 f_acc = baseLogic.getFAcc ();//new Vector3 ();		//阻力减速度
+		//Vector3 f_acc = baseLogic.getFAcc ();//new Vector3 ();		//阻力减速度
+                Vector3 f_acc = baseLogic.getFAcc();
+                float fAcc = f_acc.x;
+                float speedD = Mathf.Sqrt(speed.x * speed.x + speed.y * speed.y);
+                if (speedD > 0) {
+                        f_acc = new Vector3(speed.x / speedD * fAcc, speed.y / speedD * fAcc, 0);
+                }
+
 		//Debug.Log("self_acc:" + self_acc.x + "," + self_acc.y + "," + self_acc.z);
 		bool isXZero = false;
 		bool isYZero = false;
 		Vector3 actual_acc = new Vector3 ();
 		{
-			Vector3 speed = rigidbody.velocity;
 			//Debug.Log("speed:" + speed.x + "," + speed.y + "," + speed.z);
 			if (speed.x == 0) {
 				f_acc.x = 0;
@@ -65,13 +73,13 @@ public class move_script : MonoBehaviour {
 			//rigidbody.AddForce(actual_acc);
 		}
 
-		{
+                if(this.gameObject.tag == constant.TAG_PLAYER){
 			float maxSpeed = pro.BaseMoveSpeed;
 			if(Mathf.Abs(self_acc.x)>0 && Mathf.Abs(self_acc.y)>0){
 				maxSpeed = pro.BaseMoveSpeed*0.7f;
 			}
 			//速度上限
-			Vector3 speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
+			speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
 			//Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
 
 			bool isMaxX = false;
@@ -101,7 +109,18 @@ public class move_script : MonoBehaviour {
 			rigidbody.AddForce(actual_acc);
 
 			rigidbody.velocity = speed;
-		}
+                } else if(tag == constant.TAG_ENEMY){
+                        //Debug.Log("actual_acc:" + actual_acc.x + "," + actual_acc.y);
+                        //Debug.Log("speed:" + speed.x + "," + speed.y);
+                        //Debug.Log("pro.BaseMoveSpeed:" + pro.BaseMoveSpeed);
+                        float x = actual_acc.x * mFps + speed.x;
+                        float y = actual_acc.y * mFps + speed.y;
+                        if (speed.x * speed.x + speed.y * speed.y < pro.BaseMoveSpeed * pro.BaseMoveSpeed) {
+                                rigidbody.AddForce(actual_acc);
+                        } else if (x * x + y * y < pro.BaseMoveSpeed * pro.BaseMoveSpeed) {
+                                rigidbody.AddForce(actual_acc);
+                        }
+                }
 
 	}
 }

@@ -117,8 +117,8 @@ public class robotShotLaserNomal : MonoBehaviour {
 
 		//SEND PROPERTY TO BULLETS
 		public void setBulletProperty(GameObject bulletClone){
-				if(mdamageRate == 0) {mdamageRate = 0.5f;}
-				bulletClone.GetComponent<bullet_property>().setProperty(weapontype ,mbulletDamage,mknockBack,mdamageRate, bulletSpe , constant.getBattleType(this.gameObject));
+				if(mdamageRate == 0) {mdamageRate = 1f;}
+				bulletClone.GetComponent<bullet_property>().setProperty(weapontype ,mbulletDamage,mknockBack,mdamageRate, bulletSpe , constant.getBattleType(this.transform.parent.gameObject));
 		}
 
 

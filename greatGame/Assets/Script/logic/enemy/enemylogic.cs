@@ -3,16 +3,28 @@ using System.Collections;
 
 public class enemylogic : monsterbaselogic {
 
+		float scaredTime;
 
 		// Use this for initialization
+		void Awake(){
+				scaredTime = 0;
+		}
 		void Start () {
 
 		}
 
 		// Update is called once per frame
-		void Update () {
-
+		void FixedUpdate () {
+				stateFixedUpdate ();
 		}
+
+		//处理怪物状态刷新
+		protected void stateFixedUpdate(){
+				scaredTime += Time.fixedDeltaTime;
+				checkScaredRecover (scaredTime);
+		}
+
+
 
 
 		//被 -攻击- 逻辑处理
@@ -21,7 +33,9 @@ public class enemylogic : monsterbaselogic {
 						//Debug.Log("enemy be attacked by bullet.");
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
-						getDamage(enemyProperty,bulletProperty);
+						if(enemyProperty.invincible == false){
+							getDamage(enemyProperty,bulletProperty);
+						}
 
 						//判断击退类型
 						if (bulletProperty.bulletknock != 0) {
@@ -29,13 +43,13 @@ public class enemylogic : monsterbaselogic {
 								getKnockBack (enemyProperty, bulletProperty);
 						}
 
-						if(isDie()){
-								GameObject.Destroy(this.gameObject);
-								constant.getMapLogic().checkOpenDoor();
-						}
-
 						//判断攻击特效附加效果
-						checkBulletEffect(obj);
+						checkBulletEffect(enemyProperty,obj);
+
+                                                if (isDie()) {
+                                                        GameObject.Destroy(this.gameObject);
+                                                        constant.getMapLogic().checkOpenDoor();
+                                                }
 				}
 		}
 
@@ -60,10 +74,9 @@ public class enemylogic : monsterbaselogic {
 				string showDamagePath = "Prefabs/ui/UI_showDamage";
 				GameObject showDamageClone = (GameObject)Instantiate(Resources.Load(showDamagePath),objectPos,Quaternion.identity);
 				if(showDamageClone){
-
 						string damage = "-" + bulletProperty.bulletDamage.ToString();
-						showDamageClone.GetComponent<enemy_showDamage>().mNum = damage;
-						showDamageClone.GetComponent<enemy_showDamage>().showDamage();
+						showDamageClone.GetComponent<enemy_showDamage>().showDamage(damage);
+
 				}
 
 				//伤害显示------------
@@ -126,7 +139,21 @@ public class enemylogic : monsterbaselogic {
 
 		//普通击退效果
 		void normalKnockBack(bullet_property bulletProperty,int force){
-				Direction bulletDirection = bulletProperty.gameObject.GetComponent<bulletAniManager> ().bulletDirection;
+				Direction bulletDirection;
+				bulletDirection = Direction.none;
+				if (bulletProperty.WeaponType == weaponType.laserNormal) {
+						bulletDirection = bulletProperty.gameObject.GetComponent<laserAniManager> ().BulletDirection;
+				}
+				if (bulletProperty.WeaponType == weaponType.bulletNormal) {
+						bulletDirection = bulletProperty.gameObject.GetComponent<bulletAniManager> ().BulletDirection;
+				}
+
+				if (bulletDirection == Direction.none) {
+						Debug.Log("击退时:获取武器类型出错");
+						return;
+				}
+
+
 				switch(bulletDirection){
 				default:
 						break;
@@ -160,18 +187,46 @@ public class enemylogic : monsterbaselogic {
 				}
 		}
 
-		void checkBulletEffect(GameObject bullet){
+		void checkBulletEffect(enemy_property enemyProperty , GameObject bullet){
 				bullet_property bulletProperty = bullet.GetComponent<bullet_property> ();
 				if(bulletProperty){
-						
+						//是否具有恐惧效果
+						if (bulletProperty.bulletSpe.scaredBullet.scaredEffect) {
+								ScaredBullet scaredBullet = bulletProperty.bulletSpe.scaredBullet;
+								getScared (enemyProperty , scaredBullet);
+						}
 				}
 				
 		}
 
-		public void getEffect(enemy_property enemyProperty){
+
+		//判断恐惧效果
+		public void getScared(enemy_property enemyProperty  , ScaredBullet scaredBullet){
+				int num = Random.Range (1, 101);
+				if (num <= scaredBullet.sacredPercent) {
+						Debug.Log ("敌人被恐惧");
+						enemyProperty.scared = true;
+				}
+		}
+
+		//判断解除恐惧效果
+		public void checkScaredRecover(float deltaTime){
+				enemy_property enemyProperty = gameObject.GetComponent<enemy_property> ();
+				if (enemyProperty.scared == true) {
+						float scaredRecoverTime = enemyProperty.scaredRecoverTime;
+						if (deltaTime >= scaredRecoverTime) {
+								//Debug.Log (deltaTime + "--" + scaredRecoverTime + ": " + this.name + "解除恐惧");
+								enemyProperty.scared = false;
+								scaredTime = 0;
+						}
+				} else {
+						scaredTime = 0;
+				}
 
 		}
 
+
+		//判断玩家是否死亡
 		public bool isDie(){
 				enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 				if (enemyProperty.Hp <= 0) {
@@ -179,6 +234,21 @@ public class enemylogic : monsterbaselogic {
 				}
 				return false;
 		}
+
+
+                public void stopMove() {
+                        move_script script = this.GetComponent<move_script>();
+                        script.stopMove();
+                }
+		void OnTriggerEnter(Collider obj){
+				
+		}
+
+		void OnCollisionEnter (Collision obj){
+				
+		}
+
+
 
 
 }

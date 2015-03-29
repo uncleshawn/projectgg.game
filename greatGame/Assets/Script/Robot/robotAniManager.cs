@@ -18,7 +18,7 @@ public class robotAniManager : MonoBehaviour {
 	Direction robotDirection;
 	Direction feetDirection;
 	
-	private float mWUDIInterval = 0.15f;
+	private float mWUDIInterval = 0.05f;
 	
 	void Start () {
 

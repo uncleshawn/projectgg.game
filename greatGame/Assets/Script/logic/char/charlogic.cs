@@ -59,6 +59,24 @@ public class charlogic : monsterbaselogic {
 				}
 		}
 
+		override public void beAttackByBullet(GameObject obj){
+				Debug.Log ("玩家被子弹攻击");
+				if (isWUDI ()) {
+						return;
+				}
+				bullet_property bulletProperty = obj.GetComponent<bullet_property>();
+				if(bulletProperty != null){
+						char_property charProperty = gameObject.GetComponent<char_property>();
+						charProperty.Hp = charProperty.Hp - bulletProperty.bulletDamage;
+
+						if(isDie()){ 
+								constant.getGameLogic().Die();
+						}
+
+						setWUDI();
+				}
+		}
+
 
 		//玩家是否捡起道具
 		public bool grapItem(GameObject item){
