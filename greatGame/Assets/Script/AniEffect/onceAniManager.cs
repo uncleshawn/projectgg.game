@@ -28,7 +28,7 @@ public class onceAniManager : MonoBehaviour {
 		}
 
 		public void playAni(string aniName){
-				constant.getSoundLogic ().playEffect ();
+				constant.getSoundLogic ().playEffect ("");
 
 				animator.Play (aniName);
 				animator.AnimationCompleted = destroyAfter;

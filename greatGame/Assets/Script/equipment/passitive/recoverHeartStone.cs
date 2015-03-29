@@ -47,7 +47,7 @@ public class recoverHeartStone : MonoBehaviour {
 				//Debug.Log("tempTimer:recoverTime" + tempTimer + " : " + recoverTime );
 				if (tempTimer >= mRecoverTime) {
 						recoverHp ();
-						constant.getSoundLogic ().playEffect ();
+                                                //constant.getSoundLogic ().playEffect ();
 						mRecoverTime = recoverTime + Random.Range (-5, 6);
 						//Debug.Log ("恢复之心下次恢复时间: " + mRecoverTime);
 						tempTimer = 0;

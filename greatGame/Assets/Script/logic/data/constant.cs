@@ -36,6 +36,13 @@ public static class constant {
 	public static string TAG_BASEDOORS = "BaseDoors";
 	public static string TAG_SHOPTABLE = "ShopTable";
 	public static string TAG_TRAP = "Trap";
+	public static string TAG_SHIT = "Shit";
+        public static string TAG_STONE = "Stone";
+
+        public static string TAG_CAMERA = "MainCamera";
+
+        public static string TAG_FLOORLBPOINT = "FloorLBPoint";
+        public static string TAG_FLOORRTPOINT = "FloorRTPoint";
 
 	public static Direction getOppsiteDir(Direction dir){
 		switch (dir) {
@@ -101,6 +108,10 @@ public static class constant {
 		return GameObject.FindGameObjectWithTag("RightUpPoint");
 	}
 
+        public static GameObject getCamera() {
+                return GameObject.FindGameObjectWithTag(TAG_CAMERA);
+        }
+
 	public static mapfactory getMapFactory(){
 		return mapfactory.getInstance ();
 	}
@@ -148,4 +159,29 @@ public static class constant {
 		}
 		return null;
 	}
+
+        public static GameObject getBaseParentGameObject(GameObject obj){
+                if(obj.transform.parent != null){
+                        return getBaseParentGameObject(obj.transform.parent.gameObject);
+                }
+                return obj;
+        }
+
+        public static Rect getFloorRect() {
+                GameObject floorLBObj = GameObject.FindGameObjectWithTag(TAG_FLOORLBPOINT);
+                GameObject floorRTObj = GameObject.FindGameObjectWithTag(TAG_FLOORRTPOINT);
+
+                float l = floorLBObj.transform.position.x;
+                float t = floorLBObj.transform.position.y;
+                float w = floorRTObj.transform.position.x - l;
+                float h = floorRTObj.transform.position.y - t;
+                return new Rect(l,t,w,h);
+        }
+
+        public static Vector2 getRandomPosInFloor() {
+                Rect rect = getFloorRect();
+                float x = Random.Range(rect.xMin, rect.xMax);
+                float y = Random.Range(rect.yMin, rect.yMax);
+                return new Vector2(x,y);
+        }
 }
