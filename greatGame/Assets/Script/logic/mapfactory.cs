@@ -50,7 +50,8 @@ public class mapfactory {
 		}
 
 		mSceneTemplateInfos = new SceneTemplate[]{
-			new SceneTemplate(2, itemPos, monsterPos, "Prefabs/scene/Scene_Trap"),
+                        //new SceneTemplate(2, itemPos, monsterPos, "Prefabs/scene/Scene_Trap"),
+                        new SceneTemplate(2, itemPos, monsterPos),
 		};
 	}
 

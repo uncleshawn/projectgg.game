@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\maplogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\logic\data\itemlogic.cs">
     <Files>
-      <File FileName="Assets\Script\logic\enemy\Shit1Logic.cs" Line="18" Column="18" />
-      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="37" Column="3" />
-      <File FileName="Assets\Script\logic\maplogic.cs" Line="392" Column="52" />
+      <File FileName="Assets\Script\logic\data\itemlogic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\item\recover_Property.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\enemy\Shit1Logic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\monsterbaselogic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\maplogic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\logic\data\constant.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -191,6 +191,9 @@ public class maplogic {
 		public void initMapInfo(){
 				mFloorIndex = 1;
 				mMapInfo = constant.getMapFactory().getRandomMap (this);
+
+                                //播放背景音乐
+                                soundLogic.getInstance().playBackGround("musicbk");
 		}
 
 		void Start () {
@@ -348,6 +351,14 @@ public class maplogic {
 						}
 				}
 
+				if (colliderTag.Equals (constant.TAG_SHIT)) {
+					if(beColliderTag.Equals(constant.TAG_PLAYER)){
+						if(constant.isConflict(collider, beCollider)){
+							attack(collider, beCollider);
+						}
+					}
+				}
+
 				if (colliderTag.Equals (constant.TAG_ITEM)) {
 
 						if(beColliderTag.Equals(constant.TAG_PLAYER)){
@@ -369,6 +380,13 @@ public class maplogic {
 						attack(collider, beCollider);
 					}
 				}
+
+                                if (colliderTag.Equals(constant.TAG_STONE)) {
+                                        if (beColliderTag.Equals(constant.TAG_PLAYER)) {
+                                                Debug.Log("stone player");
+                                                attack(collider, beCollider);
+                                        }
+                                }
 
 				if (colliderTag.Equals (constant.TAG_SHOPTABLE)) {
 						if(beColliderTag.Equals(constant.TAG_PLAYER)){
@@ -456,6 +474,11 @@ public class maplogic {
 				beAtkerLogic.beAttack(atker);
 		}
 				
+        public void shakeCamera(){
+                GameObject camera = constant.getCamera();
+                camera_follow_script follow = camera.GetComponent<camera_follow_script>();
+                follow.shake();
+        }
 }
 
 

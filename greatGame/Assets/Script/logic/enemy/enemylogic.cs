@@ -29,13 +29,13 @@ public class enemylogic : monsterbaselogic {
 								getKnockBack (enemyProperty, bulletProperty);
 						}
 
-						if(isDie()){
-								GameObject.Destroy(this.gameObject);
-								constant.getMapLogic().checkOpenDoor();
-						}
-
 						//判断攻击特效附加效果
 						checkBulletEffect(obj);
+
+                                                if (isDie()) {
+                                                        GameObject.Destroy(this.gameObject);
+                                                        constant.getMapLogic().checkOpenDoor();
+                                                }
 				}
 		}
 
@@ -181,4 +181,8 @@ public class enemylogic : monsterbaselogic {
 		}
 
 
+                public void stopMove() {
+                        move_script script = this.GetComponent<move_script>();
+                        script.stopMove();
+                }
 }

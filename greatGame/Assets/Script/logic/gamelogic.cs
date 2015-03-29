@@ -14,4 +14,5 @@ public class gamelogic : MonoBehaviour {
 	public void Die(){
 		constant.getUiLogic ().Die ();
 	}
+
 }

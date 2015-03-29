@@ -30,7 +30,7 @@ public class BossHpUpdate : MonoBehaviour {
 
 				enemy_property pro = mBoss.GetComponent<enemy_property> ();
 				float w = ((float)pro.Hp) / pro.MaxHp;
-				Debug.Log ("hp:" + pro.Hp + "," + pro.MaxHp + "," + w);
+				//Debug.Log ("hp:" + pro.Hp + "," + pro.MaxHp + "," + w);
 				//spr.clipTopRight = new Vector2(0, w);
 				spr.ClipRect = new Rect (0, 0, w, 1);
 		} else {
