@@ -24,9 +24,9 @@ public class enemy3logic : enemylogic {
 
 		float deltaTime;
 		//活动时间
-		float mIntervalTime = 2;
+		float mIntervalTime = 3;
 		//等待时间
-		float mWaitTime = 2;
+		float mWaitTime = 1;
 
 		GameObject player;
 
@@ -99,6 +99,7 @@ public class enemy3logic : enemylogic {
 						return v;
 				}
 
+				attackTempTime = 0;
 				deltaTime = deltaTime % (mIntervalTime + mWaitTime);
 				if (deltaTime <= mWaitTime) {
 						attackTempTime += Time.fixedDeltaTime;

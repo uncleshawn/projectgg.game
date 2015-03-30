@@ -7,9 +7,9 @@ public class bulletAniManager : MonoBehaviour {
 		tk2dSprite bulletSprite;				//子弹的精灵图	
 		tk2dSpriteAnimator bulletAni;			//子弹动画
 
-		Direction bulletDirection;
+		Direction crossDirection;
 
-		public Direction BulletDirection { get { return bulletDirection; } set { bulletDirection = value; }}
+		public Direction BulletDirection { get { return crossDirection; } set { crossDirection = value; }}
 
 		bool bulletDie;
 
@@ -19,6 +19,8 @@ public class bulletAniManager : MonoBehaviour {
 		public bool getShadow;
 		public bool dynamicShadow;
 		tk2dSprite shadowSprite;
+
+
 
 		void Awake(){
 				bulletDie = false;
@@ -42,6 +44,7 @@ public class bulletAniManager : MonoBehaviour {
 		void setBulletDirection(){
 				Vector3 axisX = new Vector3 (1, 0, 0);
 				Vector3 bulletDirection = getDirection ();
+				crossDirection = getCrossDirection (bulletDirection);
 				Vector3 angle = new Vector3(0,0,angle_360 (new Vector3 (1, 0, 0), bulletDirection));
 				//Debug.Log ("子弹和X轴角度: " + angle);
 				bulletSprite.transform.Rotate (angle);
@@ -52,6 +55,24 @@ public class bulletAniManager : MonoBehaviour {
 				}
 				flying ();
 
+		}
+
+		Direction getCrossDirection(Vector3 bulletDirection){
+				
+				if (Mathf.Abs (bulletDirection.x) >= Mathf.Abs (bulletDirection.y)) {
+						if (bulletDirection.x >= 0) {
+								return Direction.left;
+						} else {
+								return Direction.right;
+						}
+				} else {
+						if (bulletDirection.y >= 0) {
+								return Direction.up;
+						} else {
+								return Direction.down;
+						}
+						
+				}
 		}
 
 		Vector3 getDirection(){
