@@ -51,6 +51,8 @@ public class charlogic : monsterbaselogic {
 						char_property charProperty = gameObject.GetComponent<char_property>();
 						charProperty.Hp = charProperty.Hp - 1;
 
+                                                constant.getSoundLogic().playEffect("player_beattack");
+
 						if(isDie()){ 
 								constant.getGameLogic().Die();
 						}
