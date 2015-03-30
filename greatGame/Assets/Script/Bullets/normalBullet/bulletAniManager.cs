@@ -11,7 +11,7 @@ public class bulletAniManager : MonoBehaviour {
 
 		public Direction BulletDirection { get { return crossDirection; } set { crossDirection = value; }}
 
-		bool bulletDie;
+		public bool bulletDie;
 
 		bullet_property bulletProperty;
 		// Use this for initialization
@@ -23,12 +23,15 @@ public class bulletAniManager : MonoBehaviour {
 
 
 		void Awake(){
-				bulletDie = false;
-				bulletSprite = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSprite>();
-				bulletAni = transform.FindChild("ui").FindChild("bulletPic").GetComponent<tk2dSpriteAnimator>();
-				bulletProperty = gameObject.GetComponent<bullet_property> ();
-				if (getShadow) {
-						shadowSprite = intiShadow ();
+				if (bulletDie == false) {
+						bulletSprite = transform.FindChild ("ui").FindChild ("bulletPic").GetComponent<tk2dSprite> ();
+						bulletAni = transform.FindChild ("ui").FindChild ("bulletPic").GetComponent<tk2dSpriteAnimator> ();
+						bulletProperty = gameObject.GetComponent<bullet_property> ();
+						if (getShadow) {
+								shadowSprite = intiShadow ();
+						}
+				} else {
+						GameObject.Destroy (this.gameObject);
 				}
 
 		}
@@ -53,7 +56,9 @@ public class bulletAniManager : MonoBehaviour {
 						shadowSprite.GetComponent<shadowAniManager> ().shadowRotate (angle);
 
 				}
-				flying ();
+				if (bulletDie == false) {
+						flying ();
+				}
 
 		}
 
@@ -134,9 +139,11 @@ public class bulletAniManager : MonoBehaviour {
 		}
 
 		public void destroyAfterAni(string aniName){
-				if(bulletAni){
-						bulletAni.Play(aniName);
+				if (bulletAni) {
+						bulletAni.Play (aniName);
 						bulletAni.AnimationCompleted = afterAni;
+				} else {
+						Debug.Log ("子弹动画系统还没生成");
 				}
 		}
 
@@ -150,9 +157,10 @@ public class bulletAniManager : MonoBehaviour {
 				bullet_property bulletPro =  bullet.GetComponent<bullet_property> ();
 				bool canPierce;
 				if (bulletPro) {
+						//Debug.Log("bulletPro.bulletSpe.pierceBullet " + bulletPro.bulletSpe.pierceBullet);
 						canPierce = bulletPro.bulletSpe.pierceBullet;
 				} else {
-						return false;
+						return true;
 				}
 
 				//如果子弹有穿透属性，则返回false 不做动画处理
@@ -186,7 +194,7 @@ public class bulletAniManager : MonoBehaviour {
 						if (bulletProperty.BattleType == constant.BattleType.Enemy) {
 								char_property charPro = other.gameObject.GetComponent<char_property> ();
 								if (charPro) {
-										//Debug.Log ("子弹击中玩家.");
+										Debug.Log ("子弹击中玩家.");
 										hitEnemies ();
 										 
 								}

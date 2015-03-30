@@ -58,6 +58,7 @@ public class bulletlogic : MonoBehaviour {
 										if (enemyDictionary[other.name] >= bulletPro.bulletDamageRate) {
 
 												constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
+												//gameObject.GetComponent<bulletAniManager> ().buuletHit = true;
 												//vibrate.joystickVibrate(0.2f,1,1);
 												enemyDictionary[other.name] = 0;
 										} else {
@@ -66,12 +67,14 @@ public class bulletlogic : MonoBehaviour {
 								}
 						}
 
+						//敌人发出的子弹
 						if (bulletPro.BattleType == constant.BattleType.Enemy) {
 								char_property logic = other.gameObject.GetComponent<char_property> ();
 								if (logic) { 
 
 										if (cTime >= bulletPro.bulletDamageRate) {
 												constant.getMapLogic ().triggerEnter (other.gameObject, this.gameObject);
+												//gameObject.GetComponent<bulletAniManager> ().buuletHit = true;
 												//vibrate.joystickVibrate(0.2f,1,1);
 												cTime = 0;
 										} else {

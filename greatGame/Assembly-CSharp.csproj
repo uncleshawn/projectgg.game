@@ -676,7 +676,7 @@
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletAniManager.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletCheckDistance.cs" />
      <Compile Include="Assets\Script\Bullets\normalBullet\bulletGetSpeed.cs" />
-     <Compile Include="Assets\Script\Enemy\enemyAniManager.cs" />
+     <Compile Include="Assets\Script\EnemyAI\enemyAniManager.cs" />
      <Compile Include="Assets\Script\EnemyAI\enemyShotBullet.cs" />
      <Compile Include="Assets\Script\EnemyAI\followPlayer.cs" />
      <Compile Include="Assets\Script\EnemyAI\spwanEnemy.cs" />
@@ -723,6 +723,7 @@
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemy2logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemy3logic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\enemy4logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemylogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\spaceSearcherlogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\trap1logic.cs" />

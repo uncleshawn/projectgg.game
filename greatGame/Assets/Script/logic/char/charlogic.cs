@@ -435,7 +435,7 @@ public class charlogic : monsterbaselogic {
 		}
 
 		override public void beAttackByBullet(GameObject obj){
-				Debug.Log ("玩家被子弹攻击");
+				//Debug.Log ("玩家被子弹攻击");
 				if (isWUDI ()) {
 						return;
 				}

@@ -6,10 +6,11 @@ public class enemy3logic : enemylogic {
 		enemy_property enemySelf;
 
 		string spaceSearcherPath;
+		GameObject ani;
 		tk2dSpriteAnimator enemyAni;
 		enemyShotBullet shooter;
 
-		GameObject ani;
+
 
 		//等下来攻击等待时间
 		public float attackWaitTime;
@@ -24,9 +25,9 @@ public class enemy3logic : enemylogic {
 
 		float deltaTime;
 		//活动时间
-		float mIntervalTime = 3;
+		float mIntervalTime = 2;
 		//等待时间
-		float mWaitTime = 1;
+		float mWaitTime = 2;
 
 		GameObject player;
 
@@ -75,6 +76,23 @@ public class enemy3logic : enemylogic {
 						lockTarget ();
 						lockTempTime = 0;
 				}
+				//Debug.Log ("deltaTime:mWaitTime= " + deltaTime + ":" + mWaitTime);
+				//deltaTime = deltaTime % (mIntervalTime + mWaitTime);
+				if (deltaTime > mWaitTime) {
+						attackTempTime += Time.fixedDeltaTime;
+						//Debug.Log ("attackTempTime:attackWaitTime= " + attackTempTime + ":" + attackWaitTime);
+						if (attackTempTime > attackWaitTime) {
+								
+								stoneAttack ();
+								attackTempTime = 0;
+
+						}
+
+				}
+				if (deltaTime > mWaitTime+mIntervalTime) {
+						deltaTime = 0;
+				}
+
 		}
 
 		//获得玩家位置
@@ -89,49 +107,49 @@ public class enemy3logic : enemylogic {
 
 
 
-		override public Vector3 getMoveAcc(){
-				Vector3 v = new Vector3 ();
-				//Debug.Log ("bat getMoveAcc");
-
-				Vector3 pos = playerPos;
-
-				if (player == null) {
-						return v;
-				}
-
-				attackTempTime = 0;
-				deltaTime = deltaTime % (mIntervalTime + mWaitTime);
-				if (deltaTime <= mWaitTime) {
-						attackTempTime += Time.fixedDeltaTime;
-						if (attackTempTime > attackWaitTime) {
-								stoneAttack ();
-								attackTempTime = 0;
-						}
-						return v;
-				}
-
-				if (enemySelf.acting == false) {
-						return v;
-				}
-
-				if (enemySelf.scared == true) {
-						pos = scaredMovePos();
-				}
-
-				float add = 160;
-				Vector3 selfPos = this.transform.position;
-				if (selfPos.x > pos.x) {
-						v.x = -add;
-				} else if (selfPos.x < pos.x) {
-						v.x = add;
-				}
-				if (selfPos.y > pos.y) {
-						v.y = -add;
-				}else if (selfPos.y < pos.y) {
-						v.y = add;
-				}
-				return v;
-		}
+//		override public Vector3 getMoveAcc(){
+//				Vector3 v = new Vector3 ();
+//				//Debug.Log ("bat getMoveAcc");
+//
+//				Vector3 pos = playerPos;
+//
+//				if (player == null) {
+//						return v;
+//				}
+//
+////				//attackTempTime = 0;
+////				deltaTime = deltaTime % (mIntervalTime + mWaitTime);
+////				if (deltaTime <= mWaitTime) {
+////						attackTempTime += Time.fixedDeltaTime;
+////						if (attackTempTime > attackWaitTime) {
+////								stoneAttack ();
+////								attackTempTime = 0;
+////						}
+////						return v;
+////				}
+//
+//				if (enemySelf.acting == false) {
+//						return v;
+//				}
+//
+//				if (enemySelf.scared == true) {
+//						pos = scaredMovePos();
+//				}
+//
+//				float add = 160;
+//				Vector3 selfPos = this.transform.position;
+//				if (selfPos.x > pos.x) {
+//						v.x = -add;
+//				} else if (selfPos.x < pos.x) {
+//						v.x = add;
+//				}
+//				if (selfPos.y > pos.y) {
+//						v.y = -add;
+//				}else if (selfPos.y < pos.y) {
+//						v.y = add;
+//				}
+//				return v;
+//		}
 
 		override public Vector3 scaredMovePos(){
 				Vector3 pos;
