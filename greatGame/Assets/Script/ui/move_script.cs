@@ -4,7 +4,7 @@ using System.Collections;
 public class move_script : MonoBehaviour {
 
 	//private float mSpeed = 10.0f;	//最快速度
-	private float mFps = 0.02f;
+	protected float mFps = 0.02f;
 
 	// Use this for initialization
 	void Start () {
@@ -73,54 +73,41 @@ public class move_script : MonoBehaviour {
 			//rigidbody.AddForce(actual_acc);
 		}
 
-                if(this.gameObject.tag == constant.TAG_PLAYER){
-			float maxSpeed = pro.BaseMoveSpeed;
-			if(Mathf.Abs(self_acc.x)>0 && Mathf.Abs(self_acc.y)>0){
-				maxSpeed = pro.BaseMoveSpeed*0.7f;
-			}
-			//速度上限
-			speed = new Vector3 (isXZero?0:rigidbody.velocity.x, isYZero?0:rigidbody.velocity.y, rigidbody.velocity.z);
-			//Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
-
-			bool isMaxX = false;
-			if (speed.x > maxSpeed) {
-				speed.x = maxSpeed;
-				isMaxX = true;
-			}else if(speed.x < -maxSpeed){
-				speed.x = -maxSpeed; 
-				isMaxX = true;
-			}
-
-			bool isMaxY = false;
-			if (speed.y > maxSpeed) {
-				speed.y = maxSpeed;
-				isMaxY = true;
-			}else if(speed.y < -maxSpeed){
-				speed.y = -maxSpeed;
-				isMaxY = true;
-			}
-
-			if(isMaxX && actual_acc.x * speed.x > 0){
-				actual_acc.x = 0;
-			}
-			if(isMaxY && actual_acc.y * speed.y > 0){
-				actual_acc.y = 0;
-			}
-			rigidbody.AddForce(actual_acc);
-
-			rigidbody.velocity = speed;
-                } else if(tag == constant.TAG_ENEMY){
-                        //Debug.Log("actual_acc:" + actual_acc.x + "," + actual_acc.y);
-                        //Debug.Log("speed:" + speed.x + "," + speed.y);
-                        //Debug.Log("pro.BaseMoveSpeed:" + pro.BaseMoveSpeed);
-                        float x = actual_acc.x * mFps + speed.x;
-                        float y = actual_acc.y * mFps + speed.y;
-                        if (speed.x * speed.x + speed.y * speed.y < pro.BaseMoveSpeed * pro.BaseMoveSpeed) {
-                                rigidbody.AddForce(actual_acc);
-                        } else if (x * x + y * y < pro.BaseMoveSpeed * pro.BaseMoveSpeed) {
-                                rigidbody.AddForce(actual_acc);
-                        }
+                float maxSpeed = pro.BaseMoveSpeed;
+                if (Mathf.Abs(self_acc.x) > 0 && Mathf.Abs(self_acc.y) > 0) {
+                        maxSpeed = pro.BaseMoveSpeed * 0.7f;
                 }
+                //速度上限
+                speed = new Vector3(isXZero ? 0 : rigidbody.velocity.x, isYZero ? 0 : rigidbody.velocity.y, rigidbody.velocity.z);
+                //Debug.Log(this.gameObject.tag + " speedx:" + speed.x + "," + maxSpeed);
+
+                bool isMaxX = false;
+                if (speed.x > maxSpeed) {
+                        speed.x = maxSpeed;
+                        isMaxX = true;
+                } else if (speed.x < -maxSpeed) {
+                        speed.x = -maxSpeed;
+                        isMaxX = true;
+                }
+
+                bool isMaxY = false;
+                if (speed.y > maxSpeed) {
+                        speed.y = maxSpeed;
+                        isMaxY = true;
+                } else if (speed.y < -maxSpeed) {
+                        speed.y = -maxSpeed;
+                        isMaxY = true;
+                }
+
+                if (isMaxX && actual_acc.x * speed.x > 0) {
+                        actual_acc.x = 0;
+                }
+                if (isMaxY && actual_acc.y * speed.y > 0) {
+                        actual_acc.y = 0;
+                }
+                rigidbody.AddForce(actual_acc);
+
+                rigidbody.velocity = speed;
 
 	}
 }

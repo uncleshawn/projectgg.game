@@ -753,6 +753,7 @@
      <Compile Include="Assets\Script\ui\collipse_script.cs" />
      <Compile Include="Assets\Script\ui\enemy_showDamage.cs" />
      <Compile Include="Assets\Script\ui\hp_script.cs" />
+     <Compile Include="Assets\Script\ui\move_boss_script.cs" />
      <Compile Include="Assets\Script\ui\move_script.cs" />
      <Compile Include="Assets\Script\ui\pos_update_script.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" />

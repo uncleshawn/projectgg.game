@@ -79,12 +79,12 @@ public class Boss1Logic : enemylogic {
                                 }
                                 break;
                         case Status.Walk:
-                                //if (Random.Range(0, 1.0f) < 0.5f) {
-                                //        return Status.Sprint;
-                                //} else {
-                                //        return Status.Jump;
-                                //}
-                                return Status.Jump;
+                                if (Random.Range(0, 1.0f) < 0.5f) {
+                                        return Status.Sprint;
+                                } else {
+                                        return Status.Jump;
+                                }
+                                //return Status.Jump;
                                 break;
                         case Status.Sprint:
                                 return Status.Rest;
@@ -261,6 +261,7 @@ public class Boss1Logic : enemylogic {
                 }
 
                 setIsTrigger(true);
+                constant.getSoundLogic().playEffect("boss1_jump");
         }
 
         private void jumpMove() {
@@ -309,6 +310,7 @@ public class Boss1Logic : enemylogic {
                 v.z = 0;
                 obj.transform.localPosition = v;
 
+                constant.getSoundLogic().playEffect("boss1_fall");
                 setIsTrigger(false);
                 scaleBoxCollider();
                 changeNextStatus();
@@ -490,9 +492,11 @@ public class Boss1Logic : enemylogic {
                         pushPlayer();
                 }
                 if (mStatus == Status.Sprint) {
+                        constant.getSoundLogic().playEffect("boss1_attack");
                         startFall();
                         changeNextStatus();
                 } else if (mStatus == Status.Follow) {
+                        constant.getSoundLogic().playEffect("boss1_attack");
                         changeNextStatus();
                 }
 
