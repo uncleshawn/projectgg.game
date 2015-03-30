@@ -8,6 +8,7 @@ public class enemyAniManager : MonoBehaviour {
 		MeshRenderer mesh;
 		public AniDimension aniDimension; 
 		public bool getShadow;
+		public bool shadowParentUI;
 		public bool dynamicShadow;
 		public bool uniqueSetting;
 		public float shadowPosY;
@@ -49,24 +50,45 @@ public class enemyAniManager : MonoBehaviour {
 						shadowPosY = 1;
 						shadowScaleY = 0.3f;
 				}
-				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , enemySprite.gameObject.transform.parent.gameObject , dynamicShadow);
+				GameObject shadowParent;
+				if (shadowParentUI) {
+						shadowParent = enemySprite.gameObject.transform.parent.gameObject;
+				} else {
+						shadowParent = enemySprite.gameObject;
+				}
+
+				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , shadowParent, dynamicShadow);
 				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
 				return shadowSprite;
 		}
 
-		public void switchAniSide(Direction direction){
+		public void setAniSide(Direction direction){
+				//Debug.Log ("动画方向: " + direction);
 				switch (direction) {
 				default:
 						break;
-				case Direction.left:
-						enemySprite.scale = new Vector3 (Mathf.Abs(enemySprite.scale.x),enemySprite.scale.y, enemySprite.scale.x);
-						break;
 				case Direction.right:
-						enemySprite.scale = new Vector3 (-1*Mathf.Abs(enemySprite.scale.x),enemySprite.scale.y, enemySprite.scale.x);
+						enemySprite.transform.localScale = new Vector3 (1,1,1);
+						break;
+				case Direction.left:
+						enemySprite.transform.localScale = new Vector3 (-1,1,1);
 						break;
 						break;
+				}
+				if (shadowParentUI&&getShadow) {
+						switch (direction) {
+						default:
+								break;
+						case Direction.right:
+								shadowSprite.transform.localScale = new Vector3 (1,1,1);
+								break;
+						case Direction.left:
+								shadowSprite.transform.localScale = new Vector3 (-1,1,1);
+								break;
+								break;
+						}	
 				}
 		}
 
