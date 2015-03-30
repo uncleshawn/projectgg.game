@@ -201,7 +201,7 @@ public class Boss1Logic : enemylogic {
                 float x = player.transform.position.x - this.transform.position.x;
                 float y = player.transform.position.y - this.transform.position.y;
 
-                BoxCollider collider = this.GetComponent<BoxCollider>();
+                SphereCollider collider = this.GetComponent<SphereCollider>();
                 Debug.Log("collider.bounds.size:" + collider.bounds.size.x + "," + collider.bounds.size.y);
                 Debug.Log("dis:" + x + "," + y);
                 if (collider.bounds.size.x / 2 > Mathf.Abs(x)) {
@@ -259,6 +259,8 @@ public class Boss1Logic : enemylogic {
 
                         iTween.ScaleTo(shadowObj, args);
                 }
+
+                setIsTrigger(true);
         }
 
         private void jumpMove() {
@@ -306,6 +308,9 @@ public class Boss1Logic : enemylogic {
                 Vector3 v = obj.transform.localPosition;
                 v.z = 0;
                 obj.transform.localPosition = v;
+
+                setIsTrigger(false);
+                scaleBoxCollider();
                 changeNextStatus();
         }
 
@@ -345,9 +350,10 @@ public class Boss1Logic : enemylogic {
         public void AnimationEnd() {
                 Debug.Log("AnimationEnd");
                 //碰撞体变大
-                BoxCollider collider = this.gameObject.GetComponent<BoxCollider>();
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
                 //collider.size.Set(4,4,1);
-                collider.size = new Vector3(4,4,1);
+                //collider.size = new Vector3(2.5,4,1);
+                collider.radius = 1.5f*1.5f;
                 changeNextStatus();
         }
 
@@ -372,7 +378,7 @@ public class Boss1Logic : enemylogic {
                 float x = player.transform.position.x - this.transform.position.x;
                 float y = player.transform.position.y - this.transform.position.y;
 
-                BoxCollider collider = this.GetComponent<BoxCollider>();
+                SphereCollider collider = this.GetComponent<SphereCollider>();
                 Debug.Log("collider.bounds.size:" + collider.bounds.size.x + "," + collider.bounds.size.y);
                 Debug.Log("dis:" + x + "," + y);
                 if (collider.bounds.size.x / 2 > Mathf.Abs(x)) {
@@ -480,6 +486,9 @@ public class Boss1Logic : enemylogic {
         //}
 
         private void onCollision(Collision collision) {
+                if (collision.gameObject.tag == constant.TAG_PLAYER) {
+                        pushPlayer();
+                }
                 if (mStatus == Status.Sprint) {
                         startFall();
                         changeNextStatus();
@@ -489,12 +498,51 @@ public class Boss1Logic : enemylogic {
 
         }
 
+        private void pushPlayer() {
+                Debug.Log("pushPlayer");
+                GameObject player = constant.getPlayer();
+
+                Vector3 v = player.transform.position - this.gameObject.transform.position;
+                float force = 2000f;
+
+                player.transform.rigidbody.AddForce(v.normalized * force);
+        }
+
         private void startFall() {
                 int num = 5;
                 for (int i = 0; i < 5; ++i) {
                         float deltaTime = Random.Range(0,1.0f);
                         InvokeRepeating("fallStone", deltaTime, 0);  
                 }
+        }
+
+        private void setIsTrigger(bool ret) {
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+                collider.isTrigger = ret;
+        }
+
+        private void scaleBoxCollider() {
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+
+                //collider.size = new Vector3(0, 0, 1);
+                collider.radius = 0;
+
+                InvokeRepeating("finshScaleBoxCollider", 0f, 0.01f);
+        }
+
+        private void finshScaleBoxCollider() {
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+                float x = collider.radius;
+                float maxX = 1.5f;
+                if (mHasAngry) {
+                        maxX = 1.5f * 1.5f;
+                }
+                x = x + 0.1f;
+                if (x > maxX) {
+                        x = maxX;
+                        CancelInvoke("finshScaleBoxCollider");
+                }
+                collider.radius = x;
         }
 
         private void fallStone() {

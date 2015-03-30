@@ -19,7 +19,7 @@ public class collipse_script : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
+		//Debug.Log("OnCollisionEnter : " + collision.gameObject.tag); 
 
 		/*
 		if (collision.gameObject.tag.Equals ("Player")) {
