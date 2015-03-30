@@ -47,7 +47,7 @@ public class enemy3logic : enemylogic {
 
 
 				//动画
-				ani = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;	
+				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;	
 				//寻路工具
 
 				//动画脚本

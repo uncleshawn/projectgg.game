@@ -23,7 +23,7 @@ public class enemy4logic : enemylogic {
 				enemySelf = gameObject.GetComponent<enemy_property>();
 
 				//动画
-				ani = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;	
+				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;	
 
 				//动画脚本
 				enemyAni = ani.GetComponent<tk2dSpriteAnimator> ();

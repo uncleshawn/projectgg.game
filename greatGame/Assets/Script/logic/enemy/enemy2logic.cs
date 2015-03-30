@@ -23,7 +23,7 @@ public class enemy2logic : enemylogic {
 				//自己的属性
 				enemySelf = gameObject.GetComponent<enemy_property>();
 				//动画控制
-				ani = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;
+				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;
 				//寻路工具
 				spaceSearcherPath = "Prefabs/logic/spaceSearch";
 				//动画脚本
