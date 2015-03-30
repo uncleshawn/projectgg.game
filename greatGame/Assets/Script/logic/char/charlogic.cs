@@ -33,62 +33,7 @@ public class charlogic : monsterbaselogic {
 		void stateFixedUpdate(){
 				deltaTime_scared += Time.fixedDeltaTime;
 				checkScaredRecover (deltaTime_scared);
-
-		public void stopWUDI(){
-				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-				mgr.stopWUDI ();
 		}
-
-		public void setWUDI(){
-				char_property pro = this.gameObject.GetComponent<char_property> ();
-				mHurtTime = pro.HurtTime;
-
-				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-				mgr.playWUDI ();
-		}
-		public bool isWUDI(){
-				return mHurtTime > 0;
-		}
-
-		//player beattacked must edit in next 玩家收到伤害 将要修改
-		override public void beAttack(GameObject obj){
-				Debug.Log ("char beAttack");
-				if (isWUDI ()) {
-						return;
-				}
-				enemy_property enemyProperty = obj.GetComponent<enemy_property>();
-				if(enemyProperty != null){
-						char_property charProperty = gameObject.GetComponent<char_property>();
-						charProperty.Hp = charProperty.Hp - 1;
-
-                                                constant.getSoundLogic().playEffect("player_beattack");
-
-						if(isDie()){ 
-								constant.getGameLogic().Die();
-						}
-
-						setWUDI();
-				}
-		}
-
-		override public void beAttackByBullet(GameObject obj){
-				Debug.Log ("玩家被子弹攻击");
-				if (isWUDI ()) {
-						return;
-				}
-				bullet_property bulletProperty = obj.GetComponent<bullet_property>();
-				if(bulletProperty != null){
-						char_property charProperty = gameObject.GetComponent<char_property>();
-						charProperty.Hp = charProperty.Hp - bulletProperty.bulletDamage;
-
-						if(isDie()){ 
-								constant.getGameLogic().Die();
-						}
-
-						setWUDI();
-				}
-		}
-
 
 		//玩家是否捡起道具
 		public bool grapItem(GameObject item){
