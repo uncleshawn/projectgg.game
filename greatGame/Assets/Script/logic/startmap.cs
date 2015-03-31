@@ -4,7 +4,10 @@ using System.Collections;
 public class startmap : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		if (Application.loadedLevel == 0) {
+			return;
+		}
 		maplogic mapLogic = constant.getMapLogic ();
 		mapLogic.startRoom ();
 	}

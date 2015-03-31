@@ -15,12 +15,14 @@ public class laserAniManager : MonoBehaviour {
 	Direction bulletDirection = Direction.down;		//射击方向
 	GameObject shoot;								//射出的位置
 
-	public tk2dSprite bulletSprite;					//子弹的精灵图	
-	public tk2dSpriteAnimator bulletAni;			//子弹动画
+	tk2dSprite bulletSprite;					//子弹的精灵图	
+	tk2dSpriteAnimator bulletAni;			//子弹动画
 
 	float totalClipLength;							//动画总时间
 	float preTime = 0.25f;							//激光蓄力时间
 	float flyingTime = 1.5f;						//激光持续时间
+
+	public Direction BulletDirection { get { return bulletDirection; } set { bulletDirection = value; }}
 
 	void Start () {
 			//use setShooterFirst() !!!
@@ -119,19 +121,19 @@ public class laserAniManager : MonoBehaviour {
 //	}
 
 	void laserPre(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = false;
 		StartCoroutine(shotAfterPre());
 	}
 
 	void laserFlying(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = true;
 		StartCoroutine(endAfterShot());
 	}
 
 	void laserEnd(){
-		bulletDamage bulletEnable = gameObject.GetComponent<bulletDamage>();
+		bulletlogic bulletEnable = gameObject.GetComponent<bulletlogic>();
 		bulletEnable.doDamage = false;
 		destroyAfterAni("end");
 	}

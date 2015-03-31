@@ -2,50 +2,78 @@
 using System.Collections;
 
 public class bat_logic : enemylogic {
+		
+		//父类参数
+		//public bool working;
+		//
+		//
+		//
 
-	float deltaTime;
-	float mIntervalTime = 1;
-	float mWaitTime = 1;
-	// Use this for initialization
-	void Start () {
-		deltaTime = 0;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-		GameObject obj  = constant.getPlayer ();
-//		enemy_property pro = this.gameObject.GetComponent<>enemy_property();
+		float deltaTime;
+		float mIntervalTime = 1;
+		float mWaitTime = 1;
+		enemy_property enemySelf;
 
-//		pro.MoveSpeed;
-		deltaTime = deltaTime + Time.fixedDeltaTime;
-	}
-
-	override public Vector3 getMoveAcc(){
-		Vector3 v = new Vector3 ();
-		//Debug.Log ("bat getMoveAcc");
-		GameObject obj  = constant.getPlayer ();
-		if (obj == null) {
-			return v;
+		// Use this for initialization
+		void Awake(){
+				enemySelf = gameObject.GetComponent<enemy_property>();
+				GameObject obj  = constant.getPlayer ();
 		}
 
-		deltaTime = deltaTime % (mIntervalTime + mWaitTime);
-		if (deltaTime <= mWaitTime) {
-			return v;
+		void Start () {
+
+				deltaTime = 0;
 		}
 
-		Vector3 pos = obj.transform.position;
+		// Update is called once per frame
+		void FixedUpdate () {
+				stateFixedUpdate ();
+				deltaTime = deltaTime + Time.fixedDeltaTime;
 
-		Vector3 selfPos = this.transform.position;
-		if (selfPos.x > pos.x) {
-			v.x = -40;
-		} else if (selfPos.x < pos.x) {
-			v.x = 40;
 		}
-		if (selfPos.y > pos.y) {
-			v.y = -40;
-		}else if (selfPos.y < pos.y) {
-			v.y = 40;
+
+		override public Vector3 getMoveAcc(){
+				Vector3 v = new Vector3 ();
+				//Debug.Log ("bat getMoveAcc");
+				GameObject obj  = constant.getPlayer ();
+				Vector3 pos = obj.transform.position;
+
+				if (obj == null) {
+						return v;
+				}
+
+				deltaTime = deltaTime % (mIntervalTime + mWaitTime);
+				if (deltaTime <= mWaitTime) {
+						return v;
+				}
+
+				if (enemySelf.acting == false) {
+						return v;
+				}
+						
+				if (enemySelf.scared == true) {
+						pos = scaredMovePos();
+				}
+
+				float add = 160;
+				Vector3 selfPos = this.transform.position;
+                                float disX = pos.x - selfPos.x;
+                                float disY = pos.y - selfPos.y;
+
+                                float dis = Mathf.Sqrt(disX*disX+disY*disY);
+                                float x = add * disX / dis;
+                                float y = add * disY / dis;
+                                v.x = x;
+                                v.y = y;
+				return v;
 		}
-		return v;
-	}
+
+		override public Vector3 scaredMovePos(){
+				Vector3 pos;
+				pos = this.transform.position;
+				pos.x += Random.Range (-20, 20);
+				pos.y += Random.Range (-20, 20);
+				return pos;
+		}
+				
 }

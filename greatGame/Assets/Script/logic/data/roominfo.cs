@@ -17,6 +17,14 @@ public class roominfo  {
 
 	public List<doorinfo> mDoorInfos;
 
+	public float mFAcc; //场地摩擦力
+	public constant.RoomType mRoomType;
+
+	public bool mIsBossRoom;
+
+	public List< KeyValuePair<itemtemplate, Vector3> > mItemPrefabs;
+	public List< KeyValuePair<monstertemplate, Vector3> > mMonsterPrefabs;
+
 	public roominfo(){
 		mDoorInfos = new List<doorinfo> ();
 
@@ -26,6 +34,10 @@ public class roominfo  {
 		mDoorInfos.Add (doorInfo);
 
 		mSceneIndex = 0;
+		mFAcc = 60.0f;
+
+		mItemPrefabs = new List< KeyValuePair<itemtemplate, Vector3> > ();
+		mMonsterPrefabs = new List< KeyValuePair<monstertemplate, Vector3> > ();
 	}
 
 	public doorinfo getDoorInfo(int doorId){
@@ -48,5 +60,49 @@ public class roominfo  {
 			}
 		}
 		return 0;
+	}
+
+	//剩余可以选择的方向
+	public List<constant.Direction> getRemainDirs(){
+		List<constant.Direction> dirs = new List<constant.Direction>();
+		dirs.Add(constant.Direction.east);
+		dirs.Add(constant.Direction.west);
+		dirs.Add(constant.Direction.south);
+		dirs.Add(constant.Direction.north);
+		foreach(doorinfo info in this.mDoorInfos){
+			foreach(constant.Direction dir in dirs){
+				if(constant.Equals(info.mDir,dir)){
+					dirs.Remove(dir);
+					break;
+				}
+			}
+		}
+		return dirs;
+	}
+
+	public List<constant.Direction> getCanUseDirs(roominfo roomInfo){
+		List<constant.Direction> dirs = getRemainDirs ();
+		List<constant.Direction> nextDirs = roomInfo.getRemainDirs ();
+
+		List<constant.Direction> getDirs = new List<constant.Direction> ();
+		foreach (constant.Direction dir in dirs) {
+			foreach(constant.Direction nextDir in nextDirs){
+				if(constant.Equals(dir,constant.getOppsiteDir(nextDir))){
+					getDirs.Add(dir);
+					break;
+				}
+			}
+		}
+
+		return getDirs;
+	}
+
+
+	public void addItemPrefabs(itemtemplate template, Vector3 v){
+		mItemPrefabs.Add (new KeyValuePair<itemtemplate, Vector3>(template, v));
+	}
+
+	public void addMonsterPrefabs(monstertemplate template, Vector3 v){
+		mMonsterPrefabs.Add (new KeyValuePair<monstertemplate, Vector3>(template, v));
 	}
 }

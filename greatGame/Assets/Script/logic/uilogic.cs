@@ -4,7 +4,7 @@ using System.Collections;
 public class uilogic : MonoBehaviour, notifylogic {
 
 	public GameObject mDieMenuPrefabs;		//主角prefab
-
+	public bool debugText;
 	// Use this for initialization
 	void Start () {
 		
@@ -22,9 +22,11 @@ public class uilogic : MonoBehaviour, notifylogic {
 	void MyDelegateFunc(tk2dButton source)
 	{
 		Debug.Log ("delegate function...");
-
+		Debug.Log ("application loadlevel");
 		constant.getMapLogic ().resetStartGame ();
-		Application.LoadLevel(0);
+		constant.getMapLogic ().startRoom ();
+		//Application.LoadLevel(0);
+
 	}  
 
 	public void showDieMenu(){
@@ -43,5 +45,5 @@ public class uilogic : MonoBehaviour, notifylogic {
 		button.ButtonUpEvent += new tk2dButton.ButtonHandlerDelegate(MyDelegateFunc);
 
 	}
-	  
+				  
 }

@@ -10,16 +10,22 @@ public class doorinfo {
 
 	public float mX;
 	public float mY;
+	public bool mMain;
 
 	public doorinfo(){
 		mDir = constant.Direction.east;
-		mId = 1;
-		mNextRoomId = 1;
+		mId = 0;
+		mNextRoomId = 0;
+		mMain = false;
 	}
 
 	public override string ToString ()
 	{
 		return string.Format ("[doorinfo]");
+	}
+
+	public bool hasNext(){
+		return mNextRoomId != 0 && mNextDoorId != 0;
 	}
 
 }

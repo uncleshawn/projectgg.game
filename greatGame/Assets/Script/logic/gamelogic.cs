@@ -8,9 +8,11 @@ public class gamelogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		constant.getMapLogic ().Update ();
 	}
 
 	public void Die(){
 		constant.getUiLogic ().Die ();
 	}
+
 }
