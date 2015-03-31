@@ -14,7 +14,7 @@ public class enemyAniManager : MonoBehaviour {
 
 		// Use this for initialization
 		void Awake(){
-				enemyUI = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;
+                                enemyUI = transform.FindChild("ui").FindChild("AnimatedSprite").gameObject;
 				enemySprite = enemyUI.GetComponent<tk2dSprite> ();
 				mesh = enemyUI.GetComponent<MeshRenderer> ();
 				if (getShadow) {
