@@ -62,10 +62,16 @@ public class bat_logic : enemylogic {
 				} else if (selfPos.x < pos.x) {
 						v.x = add;
 				}
+				if (selfPos.x == pos.x) {
+						v.x = 0;
+				}
 				if (selfPos.y > pos.y) {
 						v.y = -add;
 				}else if (selfPos.y < pos.y) {
 						v.y = add;
+				}
+				if (selfPos.y == pos.y) {
+						v.y = 0;
 				}
 				return v;
 		}

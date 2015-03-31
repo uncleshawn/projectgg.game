@@ -15,18 +15,18 @@ public class enemy4logic : enemylogic {
 		Vector3 playerPos;
 
 		//活动时间
-		float mIntervalTime = 4;
+		public float mIntervalTime = 6;
 		//等待时间
-		float mWaitTime = 0.5f;
+		public float mWaitTime = 0.5f;
 
 		float deltaTime;
 
 		void Awake(){
 				//玩家的位置
 				player = constant.getPlayer ();
-				playerPos = player.transform.position;	
 				//自己的属性
 				enemySelf = gameObject.GetComponent<enemy_property>();
+				//动画管理器
 				enemyAniManager = gameObject.GetComponent<enemyAniManager>();
 				//动画
 				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;	
@@ -34,13 +34,14 @@ public class enemy4logic : enemylogic {
 				//动画脚本
 				enemyAni = ani.GetComponent<tk2dSpriteAnimator> ();
 
+
 				lockTempTime = 0;
 		}
 
 
 
 		void Start () {
-
+				lockTarget ();
 		}
 
 
@@ -94,17 +95,8 @@ public class enemy4logic : enemylogic {
 
 				float add = 160;
 				Vector3 selfPos = this.transform.position;
-				if (selfPos.x > pos.x) {
-						v.x = -add;
-				} else if (selfPos.x < pos.x) {
-						v.x = add;
-				}
-				if (selfPos.y > pos.y) {
-						v.y = -add;
-				}else if (selfPos.y < pos.y) {
-						v.y = add;
-				}
-				return v;
+				v = playerPos - selfPos;
+				return v.normalized * add;
 		}
 
 

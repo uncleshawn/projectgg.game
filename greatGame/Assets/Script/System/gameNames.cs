@@ -75,8 +75,9 @@ public struct bulletSpeStruct
 
 public struct stateColor
 {
-		public static Color normal = new Color(255,255,255);
-		public static Color scared = new Color (230, 0, 255);
+		public static Color normal = new Color(255/255,255/255,255/255);
+		public static Color scared = new Color (230/255, 0, 255/255);
+		public static Color hurt = new Color (255/255,60/255,60/255);
 }
 
 public enum EnemyShotType

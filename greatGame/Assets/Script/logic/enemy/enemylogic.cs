@@ -29,12 +29,16 @@ public class enemylogic : monsterbaselogic {
 		//被 -攻击- 逻辑处理
 		override public void beAttack(GameObject obj){
 				if (obj.tag.Equals ("Bullet")) {
-					
+
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 						if(enemyProperty.invincible == false){
-							getDamage(enemyProperty,bulletProperty);
+								getDamage(enemyProperty,bulletProperty);
+								enemyAniManager enemyAni = gameObject.GetComponent<enemyAniManager> ();
+								if (enemyAni) {
+										enemyAni.colorEffectHurt ();
+								}
 						}
 
 						//判断击退类型
@@ -46,10 +50,10 @@ public class enemylogic : monsterbaselogic {
 						//判断攻击特效附加效果
 						checkBulletEffect(gameObject,obj);
 
-                                                if (isDie()) {
-                                                        GameObject.Destroy(this.gameObject);
-                                                        constant.getMapLogic().checkOpenDoor();
-                                                }
+						if (isDie()) {
+								GameObject.Destroy(this.gameObject);
+								constant.getMapLogic().checkOpenDoor();
+						}
 				}
 		}
 
@@ -163,7 +167,7 @@ public class enemylogic : monsterbaselogic {
 				Vector3 bulletPos = bulletProperty.transform.position;		
 				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
 				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
-					this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
+						this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
 				}
 		}
 
@@ -178,7 +182,7 @@ public class enemylogic : monsterbaselogic {
 								getScared (enemyProperty , scaredBullet);
 						}
 				}
-				
+
 		}
 
 
@@ -217,16 +221,16 @@ public class enemylogic : monsterbaselogic {
 		}
 
 
-                public void stopMove() {
-                        move_script script = this.GetComponent<move_script>();
-                        script.stopMove();
-                }
+		public void stopMove() {
+				move_script script = this.GetComponent<move_script>();
+				script.stopMove();
+		}
 		void OnTriggerEnter(Collider obj){
-				
+
 		}
 
 		void OnCollisionEnter (Collision obj){
-				
+
 		}
 
 
