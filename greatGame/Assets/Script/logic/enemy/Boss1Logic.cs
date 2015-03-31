@@ -79,12 +79,12 @@ public class Boss1Logic : enemylogic {
                                 }
                                 break;
                         case Status.Walk:
-                                if (Random.Range(0, 1.0f) < 0.5f) {
-                                        return Status.Sprint;
-                                } else {
-                                        return Status.Jump;
-                                }
-                                //return Status.Jump;
+                                //if (Random.Range(0, 1.0f) < 0.5f) {
+                                //        return Status.Sprint;
+                                //} else {
+                                //        return Status.Jump;
+                                //}
+                                return Status.Sprint;
                                 break;
                         case Status.Sprint:
                                 return Status.Rest;
@@ -143,10 +143,11 @@ public class Boss1Logic : enemylogic {
 
         public void setWalkAI() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
 
-                spr.SetSprite("boss1_04");
+                //spr.SetSprite("boss1_04");
+                ani.Play("walk");
 
                 resetWalkDir();
 
@@ -166,7 +167,7 @@ public class Boss1Logic : enemylogic {
 
         public void setRestAI() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
 
                 ani.Play("rest");
@@ -187,10 +188,11 @@ public class Boss1Logic : enemylogic {
                 pro.BaseMoveSpeed = this.mFollowMaxSpeed;
 
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
 
-                spr.SetSprite("boss1_01");
+                //spr.SetSprite("boss1_01");
+                ani.Play("follow");
                 updateFollowAcc();
 
                 mUseTime = mFollowTime;
@@ -219,7 +221,7 @@ public class Boss1Logic : enemylogic {
 
         public void stopAni() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
                 ani.Stop();
         }
@@ -230,7 +232,7 @@ public class Boss1Logic : enemylogic {
 
         private void jumpToSky() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
                 tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>(); 
                 
@@ -272,7 +274,7 @@ public class Boss1Logic : enemylogic {
 
         private void jumpBackSky() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
                 tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>();
 
@@ -302,7 +304,7 @@ public class Boss1Logic : enemylogic {
 
         private void finishJump() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
                 tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>();
 
@@ -321,7 +323,7 @@ public class Boss1Logic : enemylogic {
                 mHasAngry = true;
 
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
 
                 ani.Play("angry");
@@ -372,10 +374,11 @@ public class Boss1Logic : enemylogic {
                 }
 
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-                tk2dSprite spr = obj.GetComponent<tk2dSprite>();
+
                 tk2dSpriteAnimator ani = obj.GetComponent<tk2dSpriteAnimator>();
 
-                spr.SetSprite("boss1_01");
+                //spr.SetSprite("boss1_01");
+                ani.Play("sprint");
 
                 float x = player.transform.position.x - this.transform.position.x;
                 float y = player.transform.position.y - this.transform.position.y;
