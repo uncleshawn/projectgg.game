@@ -5,15 +5,19 @@ using System.Collections.Generic;
 public class charlogic : monsterbaselogic {
 
 		private float mHurtTime = 0;
-
 		private float mAccSpeed = 160.0f;
+
+		//float deltaTime_scared;
+		void Awake(){
+				deltaTime_scared = 0;
+		}
 		// Use this for initialization
 		void Start () {
-				Debug.Log ("charlogic start");
+
 		}
 
 		// Update is called once per frame
-		void Update () {
+		void FixedUpdate () {
 				if (mHurtTime > 0) {
 						mHurtTime = mHurtTime - Time.deltaTime;
 
@@ -22,63 +26,14 @@ public class charlogic : monsterbaselogic {
 								stopWUDI ();
 						}
 				}
+				stateFixedUpdate ();
 		}
 
-		public void stopWUDI(){
-				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-				mgr.stopWUDI ();
+
+		void stateFixedUpdate(){
+				deltaTime_scared += Time.fixedDeltaTime;
+				checkScaredRecover (deltaTime_scared);
 		}
-
-		public void setWUDI(){
-				char_property pro = this.gameObject.GetComponent<char_property> ();
-				mHurtTime = pro.HurtTime;
-
-				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
-				mgr.playWUDI ();
-		}
-		public bool isWUDI(){
-				return mHurtTime > 0;
-		}
-
-		//player beattacked must edit in next 玩家收到伤害 将要修改
-		override public void beAttack(GameObject obj){
-				Debug.Log ("char beAttack");
-				if (isWUDI ()) {
-						return;
-				}
-				enemy_property enemyProperty = obj.GetComponent<enemy_property>();
-				if(enemyProperty != null){
-						char_property charProperty = gameObject.GetComponent<char_property>();
-						charProperty.Hp = charProperty.Hp - 1;
-
-                                                constant.getSoundLogic().playEffect("player_beattack");
-
-						if(isDie()){ 
-								constant.getGameLogic().Die();
-						}
-
-						setWUDI();
-				}
-		}
-
-		override public void beAttackByBullet(GameObject obj){
-				Debug.Log ("玩家被子弹攻击");
-				if (isWUDI ()) {
-						return;
-				}
-				bullet_property bulletProperty = obj.GetComponent<bullet_property>();
-				if(bulletProperty != null){
-						char_property charProperty = gameObject.GetComponent<char_property>();
-						charProperty.Hp = charProperty.Hp - bulletProperty.bulletDamage;
-
-						if(isDie()){ 
-								constant.getGameLogic().Die();
-						}
-
-						setWUDI();
-				}
-		}
-
 
 		//玩家是否捡起道具
 		public bool grapItem(GameObject item){
@@ -420,5 +375,96 @@ public class charlogic : monsterbaselogic {
 				v.y = y*mAccSpeed;
 				return v;
 		}
+
+
+
+
+
+
+		//----------------------------------------------------------战斗相关-----------------------------------------------
+		//----------------------------------------------------------战斗相关-----------------------------------------------
+
+		public void stopWUDI(){
+				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+				mgr.stopWUDI ();
+		}
+
+		public void setWUDI(){
+				char_property pro = this.gameObject.GetComponent<char_property> ();
+				mHurtTime = pro.HurtTime;
+
+				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
+				mgr.playWUDI ();
+		}
+		public bool isWUDI(){
+				return mHurtTime > 0;
+		}
+
+		//检查恢复恐惧效果
+		override public void checkScaredRecover(float deltaTime){
+				char_property charProperty = gameObject.GetComponent<char_property> ();
+				if (charProperty.scared == true) {
+						float scaredRecoverTime = charProperty.scaredRecoverTime;
+						if (deltaTime >= scaredRecoverTime) {
+								//Debug.Log (deltaTime + "--" + scaredRecoverTime + ": " + this.name + "解除恐惧");
+								charProperty.scared = false;
+						}
+				} else {
+						deltaTime_scared = 0;
+				}
+
+		}
+
+		//player beattacked must edit in next 玩家收到伤害 将要修改
+		override public void beAttack(GameObject obj){
+				Debug.Log ("char beAttack");
+				if (isWUDI ()) {
+						return;
+				}
+				enemy_property enemyProperty = obj.GetComponent<enemy_property>();
+				if(enemyProperty != null){
+						char_property charProperty = gameObject.GetComponent<char_property>();
+						charProperty.Hp = charProperty.Hp - 1;
+
+						if(isDie()){ 
+								constant.getGameLogic().Die();
+						}
+
+						setWUDI();
+				}
+		}
+
+		override public void beAttackByBullet(GameObject obj){
+				//Debug.Log ("玩家被子弹攻击");
+				if (isWUDI ()) {
+						return;
+				}
+				bullet_property bulletProperty = obj.GetComponent<bullet_property>();
+				if(bulletProperty != null){
+						char_property charProperty = gameObject.GetComponent<char_property>();
+						charProperty.Hp = charProperty.Hp - bulletProperty.bulletDamage;
+
+						if (bulletProperty.bulletknock != 0) {
+								//Debug.Log (gameObject.name + "被击退.武器类型为:");
+								getKnockBack (charProperty, bulletProperty);
+						}
+
+
+
+
+						if(isDie()){ 
+								constant.getGameLogic().Die();
+						}
+						if (bulletProperty.bulletDamage > 0) {
+								setWUDI ();
+						}
+				}
+		}
+
+		public void getKnockBack(char_property player, bullet_property bullet){
+				
+		}
+
+
 
 }

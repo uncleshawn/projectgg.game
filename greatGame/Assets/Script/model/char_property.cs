@@ -27,6 +27,9 @@ public class char_property : base_property {
 		private float mAttackDistance;
 
 
+		public bool scared;				//敌人是否处于恐惧状态
+		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
+
 
 		public int MaxHp { get { return mMaxHp; } set { mMaxHp = value; }}
 		public int MaxNp { get { return mMaxNp; } set { mMaxNp = value; }}
@@ -80,6 +83,7 @@ public class char_property : base_property {
 				mMaxAttackDistance = 0;
 
 				mHurtTime = 1;
+				scaredRecoverTime = 1.5f;
 
 				mBattleType = constant.BattleType.Player;
 
