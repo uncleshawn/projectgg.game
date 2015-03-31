@@ -3,11 +3,10 @@ using System.Collections;
 
 public class enemylogic : monsterbaselogic {
 
-		float scaredTime;
-
+		//float deltaTime_scared;
 		// Use this for initialization
 		void Awake(){
-				scaredTime = 0;
+				deltaTime_scared = 0;
 		}
 		void Start () {
 
@@ -20,8 +19,8 @@ public class enemylogic : monsterbaselogic {
 
 		//处理怪物状态刷新
 		protected void stateFixedUpdate(){
-				scaredTime += Time.fixedDeltaTime;
-				checkScaredRecover (scaredTime);
+				deltaTime_scared += Time.fixedDeltaTime;
+				checkScaredRecover (deltaTime_scared);
 		}
 
 
@@ -30,8 +29,9 @@ public class enemylogic : monsterbaselogic {
 		//被 -攻击- 逻辑处理
 		override public void beAttack(GameObject obj){
 				if (obj.tag.Equals ("Bullet")) {
-						//Debug.Log("enemy be attacked by bullet.");
+					
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
+
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 						if(enemyProperty.invincible == false){
 							getDamage(enemyProperty,bulletProperty);
@@ -39,12 +39,12 @@ public class enemylogic : monsterbaselogic {
 
 						//判断击退类型
 						if (bulletProperty.bulletknock != 0) {
-								Debug.Log (gameObject.name + "被击退.武器类型为:");
-								getKnockBack (enemyProperty, bulletProperty);
+								//Debug.Log (gameObject.name + "被击退.武器类型为:");
+								getKnockBack (enemyProperty.gameObject, bulletProperty);
 						}
 
 						//判断攻击特效附加效果
-						checkBulletEffect(enemyProperty,obj);
+						checkBulletEffect(gameObject,obj);
 
                                                 if (isDie()) {
                                                         GameObject.Destroy(this.gameObject);
@@ -61,9 +61,6 @@ public class enemylogic : monsterbaselogic {
 				enemyProperty.Hp = enemyProperty.Hp - bulletProperty.bulletDamage;
 
 				Vector3 objectPos = this.transform.position;
-
-
-
 
 				//伤害显示-------------
 
@@ -82,10 +79,11 @@ public class enemylogic : monsterbaselogic {
 				//伤害显示------------
 		}
 
-		public void getKnockBack(enemy_property enemyProperty,bullet_property bulletProperty){
+		override public void getKnockBack(GameObject enemy,bullet_property bulletProperty){
+				enemy_property enemyProperty = enemy.GetComponent<enemy_property> ();
 				//子弹的类型
-				weaponType weapontype = bulletProperty.WeaponType;
-
+				//weaponType weapontype = bulletProperty.WeaponType;
+				//Debug.Log("bulletProperty.weaponType: " +weapontype);
 				//击退的力度
 				int force = bulletProperty.bulletknock;
 
@@ -102,37 +100,19 @@ public class enemylogic : monsterbaselogic {
 
 				KnockType knockType = bulletProperty.bulletSpe.knockType;
 
-				//处理laser特殊击退效果
-				if (weapontype == weaponType.laserNormal) {
-						Debug.Log ("激光击退效果: " + knockType);
-						switch (knockType) {
-						default:
-								break;
-						case KnockType.normal:
-								normalKnockBack (bulletProperty, force);
-								break;
-						case KnockType.explode:
-								explodeKnockBack (enemyProperty, bulletProperty, force);
-								break;
-						}
-
-
-				}
-				if (weapontype == weaponType.bulletNormal) {
-						Debug.Log ("子弹击退效果 " + knockType);
+				switch (knockType) {
+				default:
+						break;
+				case KnockType.none:
+						break;
+				case KnockType.normal:
 						normalKnockBack (bulletProperty, force);
-						switch (knockType) {
-						default:
-								break;
-						case KnockType.normal:
-								normalKnockBack (bulletProperty, force);
-								break;
-						case KnockType.explode:
-								explodeKnockBack (enemyProperty, bulletProperty, force);
-								break;
-						}
+						break;
+				case KnockType.explode:
+						explodeKnockBack (bulletProperty, force);
+						break;
+						break;
 				}
-
 
 		}
 
@@ -175,10 +155,10 @@ public class enemylogic : monsterbaselogic {
 		}
 
 		//爆炸击退效果
-		void explodeKnockBack(enemy_property enemyProperty,bullet_property bulletProperty,int force){
+		override public void explodeKnockBack(bullet_property bulletProperty,int force){
 
 				//敌人位置
-				Vector3 enemyPos = enemyProperty.transform.position;
+				Vector3 enemyPos = this.transform.position;
 				//子弹位置
 				Vector3 bulletPos = bulletProperty.transform.position;		
 				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
@@ -187,8 +167,10 @@ public class enemylogic : monsterbaselogic {
 				}
 		}
 
-		void checkBulletEffect(enemy_property enemyProperty , GameObject bullet){
+		//检查子弹的特殊效果
+		override public void checkBulletEffect(GameObject enemy , GameObject bullet){
 				bullet_property bulletProperty = bullet.GetComponent<bullet_property> ();
+				enemy_property enemyProperty = enemy.GetComponent<enemy_property> ();
 				if(bulletProperty){
 						//是否具有恐惧效果
 						if (bulletProperty.bulletSpe.scaredBullet.scaredEffect) {
@@ -210,17 +192,16 @@ public class enemylogic : monsterbaselogic {
 		}
 
 		//判断解除恐惧效果
-		public void checkScaredRecover(float deltaTime){
+		override public void checkScaredRecover(float deltaTime){
 				enemy_property enemyProperty = gameObject.GetComponent<enemy_property> ();
 				if (enemyProperty.scared == true) {
 						float scaredRecoverTime = enemyProperty.scaredRecoverTime;
 						if (deltaTime >= scaredRecoverTime) {
 								//Debug.Log (deltaTime + "--" + scaredRecoverTime + ": " + this.name + "解除恐惧");
 								enemyProperty.scared = false;
-								scaredTime = 0;
 						}
 				} else {
-						scaredTime = 0;
+						deltaTime_scared = 0;
 				}
 
 		}

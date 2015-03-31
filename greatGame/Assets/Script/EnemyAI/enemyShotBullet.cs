@@ -78,7 +78,7 @@ public class enemyShotBullet : MonoBehaviour {
 		public void shootMultiBullets(EnemyShotType shotType , int bulletAmount , int angle){
 				//子弹是向着主角方向发散型
 				if (shotType == EnemyShotType.directDiverging) {
-						Vector3 playerPos = getPlayerPosExcur (20);
+						Vector3 playerPos = getPlayerPosExact ();
 						for (int i = 1; i <= bulletAmount; i++) {
 								GameObject bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),this.transform.position,Quaternion.identity);	
 								bulletClone.GetComponent<bulletCheckDistance> ().setDistance (mbulletDistance);

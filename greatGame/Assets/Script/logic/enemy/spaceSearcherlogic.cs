@@ -51,6 +51,7 @@ public class spaceSearcherlogic : MonoBehaviour {
 				//Debug.Log ("成功搜索到移动位置:" + this.transform.position);
 
 				employ.SendMessage ("moveNearByPos", this.transform.position);
+				iTween.Stop (this.gameObject.name);
 				GameObject.Destroy (this.gameObject);
 		}
 
@@ -76,6 +77,7 @@ public class spaceSearcherlogic : MonoBehaviour {
 				}
 				else {
 						Debug.Log ("怪物被击败,寻路取消");
+						iTween.Stop (this.gameObject.name);
 						GameObject.Destroy (this.gameObject);	
 				}
 		}
