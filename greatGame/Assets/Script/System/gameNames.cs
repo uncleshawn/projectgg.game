@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+public enum AniDimension{
+		two		= 1,
+		four	= 2
+}
+
+
+
 public enum Direction
 { 
 		none 	= 0,

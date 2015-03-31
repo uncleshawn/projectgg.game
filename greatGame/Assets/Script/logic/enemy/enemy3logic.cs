@@ -6,10 +6,11 @@ public class enemy3logic : enemylogic {
 		enemy_property enemySelf;
 
 		string spaceSearcherPath;
+		GameObject ani;
 		tk2dSpriteAnimator enemyAni;
 		enemyShotBullet shooter;
 
-		GameObject ani;
+
 
 		//等下来攻击等待时间
 		public float attackWaitTime;
@@ -46,7 +47,7 @@ public class enemy3logic : enemylogic {
 
 
 				//动画
-				ani = transform.FindChild ("ui").FindChild ("enemySprite").gameObject;	
+				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;	
 				//寻路工具
 
 				//动画脚本
@@ -75,6 +76,7 @@ public class enemy3logic : enemylogic {
 						lockTarget ();
 						lockTempTime = 0;
 				}
+
 		}
 
 		//获得玩家位置
@@ -99,6 +101,7 @@ public class enemy3logic : enemylogic {
 						return v;
 				}
 
+				attackTempTime = 0;
 				deltaTime = deltaTime % (mIntervalTime + mWaitTime);
 				if (deltaTime <= mWaitTime) {
 						attackTempTime += Time.fixedDeltaTime;
@@ -117,7 +120,7 @@ public class enemy3logic : enemylogic {
 						pos = scaredMovePos();
 				}
 
-				float add = 160;
+				float add = 230;
 				Vector3 selfPos = this.transform.position;
 				if (selfPos.x > pos.x) {
 						v.x = -add;

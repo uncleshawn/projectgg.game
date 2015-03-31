@@ -3,7 +3,7 @@ using System.Collections;
 
 public class monsterfactory {
 
-		private int monsterId;
+		private int monsterId = 1;
 
 	private monstertemplate[] mPrefabs;
 

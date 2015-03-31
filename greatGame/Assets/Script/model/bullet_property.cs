@@ -36,5 +36,6 @@ public class bullet_property : base_property {
 				bulletDamageRate = damamgeRate ; 
 				bulletSpe = bulletStruct;
 				mBattleType = battleType;
+				//Debug.Log ("子弹类型: " + weapontype);
 		}
 }

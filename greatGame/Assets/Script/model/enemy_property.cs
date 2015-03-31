@@ -89,7 +89,7 @@ public class enemy_property : base_property {
 						Debug.Log (gameObject.name + " 怪物物体警告: " + "怪物属性没有初始化,请检查inspector!");
 				}
 				if (enemySpeed == 0) {
-						BaseMoveSpeed = 5;
+						BaseMoveSpeed = 3;
 				}
 		}
 

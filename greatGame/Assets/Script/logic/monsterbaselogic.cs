@@ -3,6 +3,8 @@ using System.Collections;
 
 public class monsterbaselogic : MonoBehaviour {
 
+		protected float deltaTime_scared;
+
 		//private float mFAcc = 20.0f;
 		// Use this for initialization
 		void Start () {
@@ -49,6 +51,28 @@ public class monsterbaselogic : MonoBehaviour {
 		}
 		virtual public void beAttackByBullet(GameObject obj){
 
+		}
+
+		virtual public void getKnockBack(GameObject obj , bullet_property bullet){
+				Debug.Log ("敌人击退override函数没写,请注意");
+		}
+
+		virtual public void normalKnockBack(bullet_property bullet, int force){
+				Debug.Log ("敌人击退override函数没写,请注意");
+		}
+
+		virtual public void explodeKnockBack(bullet_property bullet, int force){
+				Debug.Log ("敌人击退override函数没写,请注意");
+		}
+		virtual public void checkBulletEffect(GameObject enemy , GameObject bullet){
+				Debug.Log ("子弹特殊效果override函数没写,请注意");
+		}
+		virtual public void checkScaredRecover(float deltaTime){
+				Debug.Log ("恐惧恢复override函数没写,请注意");
+		}
+
+		virtual public void getSlow(float slowDown){
+				Debug.Log ("减速效果override函数没写,请注意");
 		}
 
 		virtual public void destroy(){
