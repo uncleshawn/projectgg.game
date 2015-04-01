@@ -48,6 +48,7 @@ public class enemy4logic : enemylogic {
 
 		// Update is called once per frame
 		void FixedUpdate () {
+				stateFixedUpdate ();
 				deltaTime +=Time.fixedDeltaTime;
 				lockTempTime += Time.fixedDeltaTime;
 				if (lockTempTime >= lockTargetTime) {

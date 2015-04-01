@@ -278,6 +278,14 @@ public class robotShotNormalBullet : MonoBehaviour {
 				"恐惧属性: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
 				"恐惧概率: " + bulletSpe.scaredBullet.sacredPercent);
 		}
+		public void setSlowBullet(SlowBullet slowBullet){
+				bulletSpe.slowBullet = slowBullet;
+				Debug.Log ( "子弹特效更新:" + "\r\n" +
+						"减速属性: " + bulletSpe.slowBullet.slowEffect + "\r\n" +
+						"减速概率: " + bulletSpe.slowBullet.slowPercent + "\r\n" +
+						"减速至百分比: " + bulletSpe.slowBullet.slowLevel
+				);
+		}
 }
 
 

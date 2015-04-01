@@ -3,21 +3,33 @@ using System.Collections;
 
 public class enemyAniManager : MonoBehaviour {
 
+		//怪物动画物体
 		GameObject enemyUI;
+		//怪物动画精灵
 		tk2dSprite enemySprite;
+		//怪物动画控制器
 		tk2dSpriteAnimator enemyAnimated;
+		//怪物动画的mesh
 		MeshRenderer mesh;
+		//怪物动画方向数(2或者4)
 		public AniDimension aniDimension; 
+		//是否有影子
 		public bool getShadow;
+		//影子的父节点是否是UI
 		public bool shadowParentUI;
+		//是否是动态影子
 		public bool dynamicShadow;
+		//影子的属性是否特殊处理
 		public bool uniqueSetting;
+		//影子相对位置Y 越大越低
 		public float shadowPosY;
+		//影子Y轴缩放
 		public float shadowScaleY;
-
+		//影子的gameobject
 		private GameObject shadowObj;
+		//影子动画sprite
 		private tk2dSprite shadowSprite;
-
+		//怪物的logic脚本
 		bool aniStart;
 
 		// Use this for initialization
@@ -30,14 +42,13 @@ public class enemyAniManager : MonoBehaviour {
 						shadowSprite = intiShadow ();
 				}
 				aniStart = true;
-
 		}
 
 		void Start () {
 				if (enemyUI == null) {
 						Debug.Log("敌人没有sprite object");
 				}
-				setSpriteColor (stateColor.normal);
+				setSpriteColor (StateColor.normal);
 
 				//renderer.material.color = c;
 				//settransparency (0.5f);
@@ -105,17 +116,25 @@ public class enemyAniManager : MonoBehaviour {
 		}
 
 		public void colorEffectHurt(){
-				Color oldColor = enemySprite.color;
 				//Debug.Log ("颜色:oldColor: " + oldColor );
-				enemySprite.color = stateColor.hurt;
+				enemySprite.color = StateColor.hurt;
 				//Debug.Log ("颜色:受伤Color: " + enemySprite.color );
-				StartCoroutine (resetColor (oldColor));
+				Color stateColor = constant.getMapLogic().getStateColor(gameObject);
+				StartCoroutine (resetColor () );
+		}
+		public void colorSlowDown(){
+				enemySprite.color = StateColor.slowDown;
+		}
+
+		public void resetStateColor(){
+				Color stateColor = constant.getMapLogic().getStateColor(gameObject);
+				enemySprite.color = stateColor;
 		}
 
 
-		IEnumerator resetColor(Color color){
+		IEnumerator resetColor(){
 				yield return new WaitForSeconds (0.16f);
-				enemySprite.color = color;
+				resetStateColor ();
 		}
 
 		public void setSpriteColor(Color color){

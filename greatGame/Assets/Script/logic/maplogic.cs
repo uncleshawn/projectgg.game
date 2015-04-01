@@ -520,7 +520,32 @@ public class maplogic{
 				return bulletShadowClone;
 
 		}
-				
+
+		//获得状态对应的颜色
+		public Color getStateColor(GameObject obj){
+				enemylogic enemyLogic = obj.GetComponent<enemylogic> ();
+				//获得object最优先的状态颜色
+				BattleStates battleState = enemyLogic.getStates ();
+				Color stateColor = StateColor.normal;
+
+				if (battleState == BattleStates.slowDown) {
+						stateColor = StateColor.slowDown;	
+						return stateColor;
+				}
+
+				if (battleState == BattleStates.scared) {
+						stateColor = StateColor.scared;	
+						return stateColor;
+				}
+
+
+				if (battleState == BattleStates.normal) {
+						stateColor = StateColor.normal;	
+						return stateColor;
+				}
+
+				return stateColor;
+		}
 }
 
 

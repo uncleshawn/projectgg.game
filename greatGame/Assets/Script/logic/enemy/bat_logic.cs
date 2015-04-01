@@ -57,33 +57,16 @@ public class bat_logic : enemylogic {
 
 				float add = 160;
 				Vector3 selfPos = this.transform.position;
-<<<<<<< HEAD
-				if (selfPos.x > pos.x) {
-						v.x = -add;
-				} else if (selfPos.x < pos.x) {
-						v.x = add;
-				}
-				if (selfPos.x == pos.x) {
-						v.x = 0;
-				}
-				if (selfPos.y > pos.y) {
-						v.y = -add;
-				}else if (selfPos.y < pos.y) {
-						v.y = add;
-				}
-				if (selfPos.y == pos.y) {
-						v.y = 0;
-				}
-=======
-                                float disX = pos.x - selfPos.x;
-                                float disY = pos.y - selfPos.y;
 
-                                float dis = Mathf.Sqrt(disX*disX+disY*disY);
-                                float x = add * disX / dis;
-                                float y = add * disY / dis;
-                                v.x = x;
-                                v.y = y;
->>>>>>> origin/project_3_29
+				float disX = pos.x - selfPos.x;
+				float disY = pos.y - selfPos.y;
+
+				float dis = Mathf.Sqrt(disX*disX+disY*disY);
+				float x = add * disX / dis;
+				float y = add * disY / dis;
+				v.x = x;
+				v.y = y;
+
 				return v;
 		}
 
