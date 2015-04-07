@@ -109,6 +109,8 @@ public class enemy2logic : enemylogic {
 						Debug.Log ("出错请检查");
 				}
 				ani.GetComponent<MeshRenderer> ().enabled = false;
+
+				//生成位置搜索器
 				GameObject searcherClone = (GameObject)Instantiate (Resources.Load (spaceSearcherPath), this.transform.position, Quaternion.identity);
 				enemySelf.invincible = true;
 				searcherClone.GetComponent<spaceSearcherlogic> ().startWork (this.gameObject);

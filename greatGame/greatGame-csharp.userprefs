@@ -2,18 +2,17 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/equipment/passitive/slowDownBulletEffect.cs">
     <Files>
-      <File FileName="Assets/Script/logic/enemy/enemy4logic.cs" Line="26" Column="36" />
-      <File FileName="Assets/Script/System/gameNames.cs" Line="72" Column="26" />
-      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="192" Column="3" />
-      <File FileName="Assets/Script/logic/maplogic.cs" Line="532" Column="41" />
-      <File FileName="Assets/Script/model/enemy_property.cs" Line="106" Column="32" />
-      <File FileName="Assets/Script/logic/monsterbaselogic.cs" Line="74" Column="39" />
-      <File FileName="Assets/Script/model/base_property.cs" Line="27" Column="37" />
-      <File FileName="Assets/Script/item/speItem_property.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/equipment/passitive/scaredBulletEffect.cs" Line="5" Column="1" />
-      <File FileName="Assets/Script/equipment/passitive/slowDownBulletEffect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="60" Column="1" NotebookId="1" />
-      <File FileName="Assets/Script/EnemyAI/enemyAniManager.cs" Line="129" Column="30" NotebookId="1" />
+      <File FileName="Assets/Script/equipment/passitive/slowDownBulletEffect.cs" Line="59" Column="1" />
+      <File FileName="Assets/Script/equipment/passitive/scaredBulletEffect.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/enemylogic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/model/enemy_property.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/monsterbaselogic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/enemy4logic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/maplogic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets/Script/EnemyAI/enemyAniManager.cs" Line="44" Column="21" NotebookId="1" />
+      <File FileName="Assets/Sprites/shader/Sprite.shader" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets/TK2DROOT/tk2d/Code/Sprites/tk2dSprite.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

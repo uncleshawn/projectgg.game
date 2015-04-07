@@ -30,7 +30,7 @@ public class shadowAniManager : MonoBehaviour {
 								selfAni.Play (targetAni.CurrentClip);
 								selfAni.PlayFromFrame (targetAni.CurrentFrame);
 						} else {
-								Debug.Log ("影子无法捕捉目标动作");
+								//Debug.Log ("影子无法捕捉目标动作");
 						}
 				}
 

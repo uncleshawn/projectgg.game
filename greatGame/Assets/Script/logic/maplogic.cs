@@ -493,8 +493,21 @@ public class maplogic{
 				beAtkerLogic.beAttackByBullet(atker);
 		}
 
+		//敌人设置子弹属性
+		public bulletSpeStruct setUpBulletSpeStruct(enemyShotBullet bulletProperty){
+				
+				bulletSpeStruct bulletSpe;
+				bulletSpe.pierceBullet = bulletProperty.pierceBullet;
+				bulletSpe.knockType = bulletProperty.knockType;
+				bulletSpe.element = bulletProperty.enemyType;
+				bulletSpe.scaredBullet.scaredEffect = bulletProperty.scaredEffect;
+				bulletSpe.scaredBullet.sacredPercent = bulletProperty.scaredPercent;
+				bulletSpe.slowBullet.slowEffect = bulletProperty.slowEffect;
+				bulletSpe.slowBullet.slowLevel = bulletProperty.slowLevel;
+				bulletSpe.slowBullet.slowPercent = bulletProperty.slowPercent;
 
-
+				return bulletSpe;
+		}
 
 
 		//在gameobject播放一次性动画
@@ -521,7 +534,7 @@ public class maplogic{
 
 		}
 
-		//获得状态对应的颜色
+		//怪物恢复颜色时候获得状态对应的颜色
 		public Color getStateColor(GameObject obj){
 				enemylogic enemyLogic = obj.GetComponent<enemylogic> ();
 				//获得object最优先的状态颜色

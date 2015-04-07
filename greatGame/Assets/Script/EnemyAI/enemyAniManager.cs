@@ -10,7 +10,7 @@ public class enemyAniManager : MonoBehaviour {
 		//怪物动画控制器
 		tk2dSpriteAnimator enemyAnimated;
 		//怪物动画的mesh
-		MeshRenderer mesh;
+		MeshRenderer meshRenderer;
 		//怪物动画方向数(2或者4)
 		public AniDimension aniDimension; 
 		//是否有影子
@@ -37,11 +37,12 @@ public class enemyAniManager : MonoBehaviour {
 				enemyUI = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;
 				enemySprite = enemyUI.GetComponent<tk2dSprite> ();
 				enemyAnimated = enemyUI.GetComponent<tk2dSpriteAnimator> ();
-				mesh = enemyUI.GetComponent<MeshRenderer> ();
+				meshRenderer = enemyUI.GetComponent<MeshRenderer> ();
 				if (getShadow) {
 						shadowSprite = intiShadow ();
 				}
 				aniStart = true;
+
 		}
 
 		void Start () {

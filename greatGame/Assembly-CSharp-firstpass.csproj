@@ -52,6 +52,7 @@
      <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
      <None Include="Assets\Photon Unity Networking\PlayMaker\ReleaseNotes.txt" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\Sprites\shader\Sprite.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\PlayMaker\Readme.txt" />
      <None Include="Assets\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />

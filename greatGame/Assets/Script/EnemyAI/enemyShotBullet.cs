@@ -11,6 +11,8 @@ public class enemyShotBullet : MonoBehaviour {
 		bulletGetSpeed shotScript;				//子弹用script(设定速度)
 		Direction bulletDirection;				//子弹的射出方向
 
+		public Vector3 shotPos;
+
 		//子弹的属性
 		public float baseBulletRate;			//子弹origin间隔时间
 		float mbulletRate;
@@ -20,12 +22,32 @@ public class enemyShotBullet : MonoBehaviour {
 		float mbulletDistance;
 		public int baseBulletDamage;				//bullet damage
 		int mbulletDamage;
-
-		//子弹的击退效果
-		public int mknockBack;
+		//伤害频率
 		public float mdamageRate;
 
+		//子弹属性
+		public ElementType enemyType;
+
+		//子弹的击退效果
+		public KnockType knockType;
+		public int mknockBack;
+	
+
+
 		public bulletSpeStruct bulletSpe;
+		//穿透
+		public bool pierceBullet;
+		//恐惧
+		public bool scaredEffect;
+		public int scaredPercent;
+		//减速
+		public bool slowEffect;
+		public int slowPercent;
+		public float slowLevel;
+
+
+
+
 
 		float delayTime=0;	
 
@@ -40,7 +62,7 @@ public class enemyShotBullet : MonoBehaviour {
 
 		// Use this for initialization
 		void Start () {
-
+				setUpBullet ();
 		}
 
 		// Update is called once per frame
@@ -48,10 +70,15 @@ public class enemyShotBullet : MonoBehaviour {
 
 		}
 
+		void setUpBullet(){
+				bulletSpe = constant.getMapLogic ().setUpBulletSpeStruct (this);
+		}
+
 		public void shootBullet(EnemyShotType shotType)
 		{
 				GameObject bulletClone;
-				bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),this.transform.position,Quaternion.identity);
+				Vector3 shotBulletPos = this.transform.position + shotPos;
+				bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),shotBulletPos,Quaternion.identity);
 
 				if (shotType == EnemyShotType.directRandom) {
 						
@@ -105,7 +132,7 @@ public class enemyShotBullet : MonoBehaviour {
 		//设置子弹飞行方向
 		void setDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 pos , int num , int angle){
 				Vector3 speedDir = new Vector3(0,0,0);
-				Vector3 enemyPos = this.transform.position;
+				Vector3 enemyPos = this.transform.position + shotPos;
 				speedDir = pos - enemyPos;
 				speedDir.z = 0;
 				//Debug.Log (num + " num : old Vector = " + speedDir);
@@ -137,7 +164,7 @@ public class enemyShotBullet : MonoBehaviour {
 		//设置子弹飞行方向
 		void setBulletSpeed(bulletGetSpeed speedScript,float Speed){
 				Vector3 speedDir = new Vector3(0,0,0);
-				Vector3 enemyPos = this.transform.position;
+				Vector3 enemyPos = this.transform.position+shotPos;
 				Vector3 playerPos = getPlayerPosExact ();
 				speedDir = playerPos - enemyPos;
 				speedDir.z = 0;
@@ -166,7 +193,7 @@ public class enemyShotBullet : MonoBehaviour {
 				mbulletSpeed = baseBulletSpeed + property.AttackSpeed;
 				mbulletRate = baseBulletRate - (baseBulletRate-0.1f)*property.AttackRate/10;
 				mbulletDistance = baseBulletDistance + property.AttackDistance;
-				mbulletDamage = baseBulletDamage + property.Damage*5;
+				mbulletDamage = baseBulletDamage + property.Damage;
 
 		}
 

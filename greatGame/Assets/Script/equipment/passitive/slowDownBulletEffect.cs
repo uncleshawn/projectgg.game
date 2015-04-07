@@ -40,7 +40,7 @@ public class slowDownBulletEffect : MonoBehaviour {
 
 		}
 
-		void disableScaredEffect(){
+		void disableBulletEffect(){
 				slowPercent = 0;
 				slowEffect = false;
 				slowLevel = 1;

@@ -263,6 +263,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 								"----------特殊效果:--------: " + "\r\n" +
 								"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
 								"恐惧效果: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+								"减速效果: " + bulletSpe.slowBullet.slowEffect + "\r\n" +
 								"元素类型: " + bulletSpe.element); 
 				}
 		}
