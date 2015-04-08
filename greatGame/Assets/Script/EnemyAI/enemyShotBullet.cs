@@ -153,6 +153,9 @@ public class enemyShotBullet : MonoBehaviour {
 				speedScript.shotBullet(speedDir.normalized * Speed);
 		}
 
+
+
+
 		//设置子弹飞行方向
 		void setRandomSpeed(bulletGetSpeed speedScript,float Speed){
 				int randomX = Random.Range (-180, 181);
@@ -170,6 +173,9 @@ public class enemyShotBullet : MonoBehaviour {
 				speedDir.z = 0;
 				speedScript.shotBullet(speedDir.normalized * Speed);
 		}
+
+		//360度射击
+		void 
 
 
 
