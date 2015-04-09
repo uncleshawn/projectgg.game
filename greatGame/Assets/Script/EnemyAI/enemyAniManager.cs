@@ -29,9 +29,6 @@ public class enemyAniManager : MonoBehaviour {
 		private GameObject shadowObj;
 		//影子动画sprite
 		private tk2dSprite shadowSprite;
-		//怪物的logic脚本
-                private GameObject shadowObj;
-		private tk2dSprite shadowSprite;
 
 		bool aniStart;
 

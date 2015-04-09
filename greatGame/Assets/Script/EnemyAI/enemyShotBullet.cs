@@ -174,20 +174,6 @@ public class enemyShotBullet : MonoBehaviour {
 				speedScript.shotBullet(speedDir.normalized * Speed);
 		}
 
-		//360度射击
-		void 
-
-
-
-
-
-
-
-
-
-
-
-
 		public void setBulletProperty(GameObject bulletClone){
 				//如果忘记输入子弹射击频率,默认为0.5秒间隔
 				if(mdamageRate == 0) {mdamageRate = 0.5f;}
