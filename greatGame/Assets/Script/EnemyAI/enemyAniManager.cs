@@ -13,7 +13,9 @@ public class enemyAniManager : MonoBehaviour {
 		public bool uniqueSetting;
 		public float shadowPosY;
 		public float shadowScaleY;
-		tk2dSprite shadowSprite;
+
+                private GameObject shadowObj;
+		private tk2dSprite shadowSprite;
 
 		bool aniStart;
 
@@ -58,8 +60,12 @@ public class enemyAniManager : MonoBehaviour {
 				}
 
 				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , shadowParent, dynamicShadow);
-				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
-				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+
+                                shadowObj = shadow;
+
+                                shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
+                                shadow.transform.localScale = enemySprite.gameObject.transform.localScale;
+                                tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
 				return shadowSprite;
 		}
@@ -101,4 +107,8 @@ public class enemyAniManager : MonoBehaviour {
 				alphaColor.a = alpha;
 				enemySprite.color = alphaColor;
 		}
+
+                public GameObject getShadowObj() {
+                        return shadowObj;
+                }
 }

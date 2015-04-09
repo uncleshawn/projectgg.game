@@ -520,7 +520,13 @@ public class maplogic{
 				return bulletShadowClone;
 
 		}
-				
+
+
+                public void normalShake() {
+                        GameObject camera = constant.getCamera();
+                        camera_follow_script follow = camera.GetComponent<camera_follow_script>();
+                        follow.normalShake();
+                }
 }
 
 

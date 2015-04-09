@@ -13,7 +13,7 @@ public class Boss1Logic : enemylogic {
 
 
         private float mFollowTime = 3.0f;
-
+        
         public enum Status { 
                 Rest = 1,       //原地休息
                 Walk = 2,       //小步走
@@ -42,6 +42,14 @@ public class Boss1Logic : enemylogic {
         private bool mHasJump;
         private float mJumpTime;
 
+        AudioSource mAudio;
+
+        private float mShadowOffsetY;
+
+        private float mColliderRadius;
+
+        private float mJumpHeight;
+
         void Start() {
                 mWalkAcc = 30;
                 mWalkMaxSpeed = 2;
@@ -50,8 +58,8 @@ public class Boss1Logic : enemylogic {
                 mSprintMaxSpeed = 10;
                 mAngrySprintMaxSpeed = 40;
 
-                mFollowAcc = 80;
-                mFollowMaxSpeed = 8;
+                mFollowAcc = 100;
+                mFollowMaxSpeed = 6;
 
                 mHasAngry = false;
                 mAngryPer = 0.5f;
@@ -59,9 +67,23 @@ public class Boss1Logic : enemylogic {
                 mStatus = Status.Walk;
 
                 mHasJump = false;
-                mJumpTime = 1.0f;
+                mJumpTime = 0.4f;
+
+                mShadowOffsetY = -1.7f;
+
+                mJumpHeight = 20;
+
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+                mColliderRadius = collider.radius;
 
                 setWalkAI();
+        }
+
+        public float getScale() {
+                if (mHasAngry) {
+                        return 3;
+                }
+                return 2;
         }
 
         private Status getNextStatus() { 
@@ -79,12 +101,12 @@ public class Boss1Logic : enemylogic {
                                 }
                                 break;
                         case Status.Walk:
-                                //if (Random.Range(0, 1.0f) < 0.5f) {
-                                //        return Status.Sprint;
-                                //} else {
-                                //        return Status.Jump;
-                                //}
-                                return Status.Sprint;
+                                if (Random.Range(0, 1.0f) < 0.5f) {
+                                        return Status.Sprint;
+                                } else {
+                                        return Status.Jump;
+                                }
+                                //return Status.Jump;
                                 break;
                         case Status.Sprint:
                                 return Status.Rest;
@@ -148,7 +170,7 @@ public class Boss1Logic : enemylogic {
 
                 //spr.SetSprite("boss1_04");
                 ani.Play("walk");
-
+                mAudio = constant.getSoundLogic().playEffect("boss1_walk");
                 resetWalkDir();
 
                 mUseTime = mWalkTime;
@@ -195,6 +217,9 @@ public class Boss1Logic : enemylogic {
                 ani.Play("follow");
                 updateFollowAcc();
 
+
+                mAudio = constant.getSoundLogic().playEffect("boss1_fly", false, 1);
+
                 mUseTime = mFollowTime;
         }
 
@@ -204,8 +229,8 @@ public class Boss1Logic : enemylogic {
                 float y = player.transform.position.y - this.transform.position.y;
 
                 SphereCollider collider = this.GetComponent<SphereCollider>();
-                Debug.Log("collider.bounds.size:" + collider.bounds.size.x + "," + collider.bounds.size.y);
-                Debug.Log("dis:" + x + "," + y);
+                //Debug.Log("collider.bounds.size:" + collider.bounds.size.x + "," + collider.bounds.size.y);
+                //Debug.Log("dis:" + x + "," + y);
                 if (collider.bounds.size.x / 2 > Mathf.Abs(x)) {
                         x = 0;
                 }
@@ -227,22 +252,84 @@ public class Boss1Logic : enemylogic {
         }
 
         public void setJumpAI() {
-                jumpToSky();
+                startJumpToSky();
+        }
+
+        private void squashStart1() {
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+
+                float time = 0.1f;
+                //播放弹性效果
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 0.5f);
+                        args.Add("x", 1.25f);
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutCirc);
+                        args.Add("oncomplete", "squashEnd1");
+                        args.Add("oncompletetarget", gameObject);
+
+                        iTween.ScaleBy(obj, args);
+                }
+
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", -0.8f);
+
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutCirc);
+
+                        iTween.MoveBy(obj, args);
+                }
+        }
+
+        private void squashEnd1() {
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+
+                float time = 0.2f;
+                float per = 1.5f;
+                //播放弹性效果
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 2f * per);
+                        args.Add("x", 0.8f / per);
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeInCirc);
+                        args.Add("oncomplete", "jumpToSky");
+                        args.Add("oncompletetarget", gameObject);
+                        iTween.ScaleBy(obj, args);
+                }
+
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 0.8f * per);
+
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeInCirc);
+
+                        iTween.MoveBy(obj, args);
+                }
+        }
+
+        private void startJumpToSky() {
+                squashStart1();
         }
 
         private void jumpToSky() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
 
-                GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
-                tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>(); 
-                
+                //GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
+                //tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>(); 
+                enemyAniManager ani = this.GetComponent<enemyAniManager>();
+                GameObject shadowObj = ani.getShadowObj();
+
                 {
-                        float y = obj.transform.position.y;
+                        float y = obj.transform.position.y - obj.transform.localPosition.y;
                         Vector3 v = obj.transform.position;
                         v.z = -5;
                         obj.transform.position = v; //.z = 5;
                         Hashtable args = new Hashtable();
-                        args.Add("y", y+30);
+                        args.Add("y", y + mJumpHeight);
 
                         args.Add("time", mJumpTime);
                         //args.Add("easetype", iTween.EaseType.easeInCirc);
@@ -259,8 +346,11 @@ public class Boss1Logic : enemylogic {
                         args.Add("time", mJumpTime);
                         args.Add("easetype", iTween.EaseType.easeInCirc);
 
-                        iTween.ScaleTo(shadowObj, args);
+                        iTween.ScaleBy(shadowObj, args);
                 }
+
+                SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
+                collider.radius = 0;
 
                 setIsTrigger(true);
                 constant.getSoundLogic().playEffect("boss1_jump");
@@ -269,19 +359,25 @@ public class Boss1Logic : enemylogic {
         private void jumpMove() {
                 GameObject player = constant.getPlayer();
                 this.gameObject.transform.position = player.transform.position;
+
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+                obj.transform.localScale = new Vector3(1, 1, 1);
+                //obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y - 0.8f * (1.5f - 1), obj.transform.localPosition.z);
                 jumpBackSky();
         }
 
         private void jumpBackSky() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
-
-                GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
-                tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>();
+                
+                //GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
+                enemyAniManager ani = this.GetComponent<enemyAniManager>();
+                GameObject shadowObj = ani.getShadowObj();
+                //tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>();
 
                 {
                         float y = obj.transform.position.y;
                         Hashtable args = new Hashtable();
-                        args.Add("y", y - 30);
+                        args.Add("y", y - mJumpHeight);
 
                         args.Add("time", mJumpTime);
                         args.Add("easetype", iTween.EaseType.easeInCubic);
@@ -292,29 +388,92 @@ public class Boss1Logic : enemylogic {
 
                 {
                         Hashtable args = new Hashtable();
-                        args.Add("x", 1f);
-                        args.Add("y", 1f);
+                        args.Add("x", 5f);
+                        args.Add("y", 5f);
 
                         args.Add("time", mJumpTime);
                         args.Add("easetype", iTween.EaseType.easeInCirc);
 
-                        iTween.ScaleTo(shadowObj, args);
+                        iTween.ScaleBy(shadowObj, args);
+                }
+        }
+
+        private void squashStart() {
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+                
+                float time = 0.1f;
+                //播放弹性效果
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 0.5f);
+                        args.Add("x", 1.25f);
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutCirc);
+                        args.Add("oncomplete", "squashEnd");
+                        args.Add("oncompletetarget", gameObject);
+
+                        iTween.ScaleBy(obj, args);
+                }
+
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", -0.8f);
+
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutCirc);
+
+                        iTween.MoveBy(obj, args);
+                }
+        }
+
+        private void squashEnd() {
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+
+                float time = 0.2f;
+                //播放弹性效果
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 2f);
+                        args.Add("x", 0.8f);
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutBack);
+                        args.Add("oncomplete", "totalFinishJump");
+                        args.Add("oncompletetarget", gameObject);
+                        iTween.ScaleBy(obj, args);
+                }
+
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("y", 0.8f);
+
+                        args.Add("time", time);
+                        args.Add("easetype", iTween.EaseType.easeOutBack);
+
+                        iTween.MoveBy(obj, args);
                 }
         }
 
         private void finishJump() {
+                constant.getSoundLogic().playEffect("boss1_fall");
+                setIsTrigger(false);
+                scaleBackBoxCollider();
+                constant.getMapLogic().normalShake();
+
+                //createYellowWater();
+                squashStart();
+        }
+
+        private void totalFinishJump() {
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
 
-                GameObject shadowObj = constant.getChildGameObject(this.gameObject, "Shadow");
-                tk2dSprite shadow = shadowObj.GetComponent<tk2dSprite>();
+                enemyAniManager ani = this.GetComponent<enemyAniManager>();
+                GameObject shadowObj = ani.getShadowObj();
 
                 Vector3 v = obj.transform.localPosition;
                 v.z = 0;
                 obj.transform.localPosition = v;
 
-                constant.getSoundLogic().playEffect("boss1_fall");
-                setIsTrigger(false);
-                scaleBoxCollider();
+                createYellowWater();
                 changeNextStatus();
         }
 
@@ -357,7 +516,7 @@ public class Boss1Logic : enemylogic {
                 SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
                 //collider.size.Set(4,4,1);
                 //collider.size = new Vector3(2.5,4,1);
-                collider.radius = 1.5f*1.5f;
+                collider.radius = mColliderRadius * 1.5f;
                 changeNextStatus();
         }
 
@@ -398,6 +557,8 @@ public class Boss1Logic : enemylogic {
                 mAddX = mSprintAcc * Mathf.Cos(d);
                 mAddY = mSprintAcc * Mathf.Sin(d);
 
+                mAudio = constant.getSoundLogic().playEffect("boss1_sprint");
+
                 //Debug.Log("mAddX,mAddY:" + mAddX + "," + mAddY);
         }
 
@@ -406,6 +567,8 @@ public class Boss1Logic : enemylogic {
                 //Debug.Log("changeToNextStatus：" + mStatus);
                 stopAni();
                 stopMove();
+                stopFollowEffect();
+
                 switch (mStatus) {
                         case Status.Rest:
                                 setRestAI();
@@ -434,6 +597,8 @@ public class Boss1Logic : enemylogic {
                 v.y = 0;
                 v.z = 0;
 
+                float mass = this.GetComponent<Rigidbody>().mass;
+
                 switch (mStatus) {
                         case Status.Rest:
                                 break;
@@ -451,7 +616,8 @@ public class Boss1Logic : enemylogic {
                                 v.y = mAddY;
                                 break;
                 }
-
+                v.x = v.x * mass;
+                v.y = v.y * mass;
                 return v;
         }
 
@@ -475,12 +641,12 @@ public class Boss1Logic : enemylogic {
         }
 
         private void OnCollisionEnter(Collision collision) {
-                Debug.Log("OnCollisionEnter:" + collision.gameObject.name);
+                //Debug.Log("OnCollisionEnter:" + collision.gameObject.name);
                 onCollision(collision);
         }
 
         private void OnCollisionExit(Collision collision) {
-                Debug.Log("OnCollisionEnter:" + collision.gameObject.name);
+                //Debug.Log("OnCollisionEnter:" + collision.gameObject.name);
                 //onCollision(collision);
                 stopMove();
 
@@ -506,7 +672,7 @@ public class Boss1Logic : enemylogic {
         }
 
         private void pushPlayer() {
-                Debug.Log("pushPlayer");
+                //Debug.Log("pushPlayer");
                 GameObject player = constant.getPlayer();
 
                 Vector3 v = player.transform.position - this.gameObject.transform.position;
@@ -526,28 +692,29 @@ public class Boss1Logic : enemylogic {
         private void setIsTrigger(bool ret) {
                 SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
                 collider.isTrigger = ret;
+                //collider.active = !ret;
         }
 
-        private void scaleBoxCollider() {
+        private void scaleBackBoxCollider() {
                 SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
 
                 //collider.size = new Vector3(0, 0, 1);
                 collider.radius = 0;
 
-                InvokeRepeating("finshScaleBoxCollider", 0f, 0.01f);
+                InvokeRepeating("finshScaleBackBoxCollider", 0f, 0.01f);
         }
 
-        private void finshScaleBoxCollider() {
+        private void finshScaleBackBoxCollider() {
                 SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
                 float x = collider.radius;
-                float maxX = 1.5f;
+                float maxX = mColliderRadius;
                 if (mHasAngry) {
-                        maxX = 1.5f * 1.5f;
+                        maxX = mColliderRadius * 1.5f;
                 }
                 x = x + 0.1f;
                 if (x > maxX) {
                         x = maxX;
-                        CancelInvoke("finshScaleBoxCollider");
+                        CancelInvoke("finshScaleBackBoxCollider");
                 }
                 collider.radius = x;
         }
@@ -575,5 +742,20 @@ public class Boss1Logic : enemylogic {
                         v.y = rect.yMax - h / 2;
                 }
                 //clone.transform.position = v;
+        }
+
+        private void stopFollowEffect() {
+                if (mAudio != null) {
+                        constant.getSoundLogic().stopEffect(mAudio);
+                        mAudio = null;
+                }
+        }
+
+        private void createYellowWater() {
+                string waterPrefabStr = "Prefabs/scene/yellowwater";
+                Vector3 v = this.gameObject.transform.position;
+                v.z = 0.1f;
+                v.y = v.y + mShadowOffsetY;
+                GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(waterPrefabStr), v, Quaternion.identity);
         }
 }
