@@ -559,6 +559,13 @@ public class maplogic{
 
 				return stateColor;
 		}
+
+
+                public void normalShake() {
+                        GameObject camera = constant.getCamera();
+                        camera_follow_script follow = camera.GetComponent<camera_follow_script>();
+                        follow.normalShake();
+                }
 }
 
 

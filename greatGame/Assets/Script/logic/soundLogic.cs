@@ -68,14 +68,23 @@ public class soundLogic {
 
 		}
 
-		public void playEffect(string name){
+                public void stopEffect(AudioSource src) {
+                        src.Stop();
+                }
+
+                public AudioSource playEffect(string name, bool isLoop = false, float effectVal = 0) {
                         if (!name.StartsWith("audio/")) {
                                 name = "audio/" + name;
                         }
                         AudioSource src = getUnUseAudioSrc();
                         src.clip = (AudioClip)Resources.Load(name, typeof(AudioClip));//调用Resources方法加载AudioClip资源
                         src.volume = mEffectVal;
+                        if (effectVal != 0) {
+                                src.volume = effectVal;
+                        }
+                        src.loop = isLoop;
                         src.Play();
+                        return src;
 		}
 
                 public void playBackGround(string name) {

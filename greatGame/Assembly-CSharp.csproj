@@ -721,6 +721,9 @@
      <Compile Include="Assets\Script\logic\enemy\Enemy1Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\FallStoneLogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\Shit1Logic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\WaterLogic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\WaterSpriteLogic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\YellowWaterLogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\bat_logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemy2logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\enemy3logic.cs" />

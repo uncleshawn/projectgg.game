@@ -38,6 +38,9 @@ public static class constant {
 	public static string TAG_TRAP = "Trap";
 	public static string TAG_SHIT = "Shit";
         public static string TAG_STONE = "Stone";
+        public static string TAG_WATER = "Water";
+
+        public static string TAG_ANIMATEDSPRITE = "AnimatedSprite";
 
         public static string TAG_CAMERA = "MainCamera";
 
