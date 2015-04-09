@@ -25,6 +25,9 @@ public class enemy_property : base_property {
 		public bool scared;				//敌人是否处于恐惧状态
 		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
 
+		public bool slowDown;
+		public float slowDownRecoverTime;
+
 		public int MaxHp;
 
 		public float enemySpeed;
@@ -65,6 +68,7 @@ public class enemy_property : base_property {
 
 				acting = true;
 				scared = false;
+				slowDown = false;
 				invincible = false;
 				mBattleType = constant.BattleType.Enemy;
 
@@ -91,6 +95,18 @@ public class enemy_property : base_property {
 				if (enemySpeed == 0) {
 						BaseMoveSpeed = 3;
 				}
+		}
+
+		public void upgradeMoveSpeed(float slowLevel){
+				BaseMoveSpeed = enemySpeed*slowLevel;
+				Debug.Log ("物体减速到: " + BaseMoveSpeed);
+				mMoveSpeed = BaseMoveSpeed;
+		}
+
+		public void resetMoveSpeed(){
+				BaseMoveSpeed = enemySpeed;
+				Debug.Log ("物体恢复速度到: " + BaseMoveSpeed);
+				mMoveSpeed = BaseMoveSpeed;
 		}
 
 }

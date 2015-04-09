@@ -194,7 +194,7 @@ public class bulletAniManager : MonoBehaviour {
 						if (bulletProperty.BattleType == constant.BattleType.Enemy) {
 								char_property charPro = other.gameObject.GetComponent<char_property> ();
 								if (charPro) {
-										Debug.Log ("子弹击中玩家.");
+										//Debug.Log ("子弹击中玩家.");
 										hitEnemies ();
 										 
 								}

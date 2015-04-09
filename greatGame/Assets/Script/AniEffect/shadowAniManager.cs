@@ -26,8 +26,12 @@ public class shadowAniManager : MonoBehaviour {
 		// Update is called once per frame
 		void FixedUpdate () {
 				if (working&&dynamicShadow) {
-						selfAni.Play (targetAni.CurrentClip);
-						selfAni.PlayFromFrame (targetAni.CurrentFrame);
+						if (targetAni.Playing) {
+								selfAni.Play (targetAni.CurrentClip);
+								selfAni.PlayFromFrame (targetAni.CurrentFrame);
+						} else {
+								//Debug.Log ("影子无法捕捉目标动作");
+						}
 				}
 
 		}

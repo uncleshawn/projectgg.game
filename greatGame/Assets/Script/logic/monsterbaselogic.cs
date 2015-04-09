@@ -4,6 +4,7 @@ using System.Collections;
 public class monsterbaselogic : MonoBehaviour {
 
 		protected float deltaTime_scared;
+		protected float deltaTime_slowDown;
 
 		//private float mFAcc = 20.0f;
 		// Use this for initialization
@@ -70,10 +71,10 @@ public class monsterbaselogic : MonoBehaviour {
 		virtual public void checkScaredRecover(float deltaTime){
 				Debug.Log ("恐惧恢复override函数没写,请注意");
 		}
-
-		virtual public void getSlow(float slowDown){
-				Debug.Log ("减速效果override函数没写,请注意");
+		virtual public void checkSlowDownRecover(float deltaTime){
+				Debug.Log ("减速恢复override函数没写,请注意");
 		}
+
 
 		virtual public void destroy(){
 				Destroy (this.gameObject);

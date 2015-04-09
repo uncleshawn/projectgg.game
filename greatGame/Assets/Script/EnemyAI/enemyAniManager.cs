@@ -3,25 +3,41 @@ using System.Collections;
 
 public class enemyAniManager : MonoBehaviour {
 
+		//怪物动画物体
 		GameObject enemyUI;
+		//怪物动画精灵
 		tk2dSprite enemySprite;
-		MeshRenderer mesh;
+		//怪物动画控制器
+		tk2dSpriteAnimator enemyAnimated;
+		//怪物动画的mesh
+		MeshRenderer meshRenderer;
+		//怪物动画方向数(2或者4)
 		public AniDimension aniDimension; 
+		//是否有影子
 		public bool getShadow;
+		//影子的父节点是否是UI
 		public bool shadowParentUI;
+		//是否是动态影子
 		public bool dynamicShadow;
+		//影子的属性是否特殊处理
 		public bool uniqueSetting;
+		//影子相对位置Y 越大越低
 		public float shadowPosY;
+		//影子Y轴缩放
 		public float shadowScaleY;
-		tk2dSprite shadowSprite;
-
+		//影子的gameobject
+		private GameObject shadowObj;
+		//影子动画sprite
+		private tk2dSprite shadowSprite;
+		//怪物的logic脚本
 		bool aniStart;
 
 		// Use this for initialization
 		void Awake(){
 				enemyUI = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;
 				enemySprite = enemyUI.GetComponent<tk2dSprite> ();
-				mesh = enemyUI.GetComponent<MeshRenderer> ();
+				enemyAnimated = enemyUI.GetComponent<tk2dSpriteAnimator> ();
+				meshRenderer = enemyUI.GetComponent<MeshRenderer> ();
 				if (getShadow) {
 						shadowSprite = intiShadow ();
 				}
@@ -33,7 +49,7 @@ public class enemyAniManager : MonoBehaviour {
 				if (enemyUI == null) {
 						Debug.Log("敌人没有sprite object");
 				}
-				setSpriteColor (stateColor.normal);
+				setSpriteColor (StateColor.normal);
 
 				//renderer.material.color = c;
 				//settransparency (0.5f);
@@ -44,6 +60,7 @@ public class enemyAniManager : MonoBehaviour {
 				if (aniStart) {
 				}
 		}
+				
 
 		tk2dSprite intiShadow(){
 				if (!uniqueSetting) {
@@ -58,6 +75,9 @@ public class enemyAniManager : MonoBehaviour {
 				}
 
 				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , shadowParent, dynamicShadow);
+
+				shadowObj = shadow;
+
 				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
@@ -92,6 +112,32 @@ public class enemyAniManager : MonoBehaviour {
 				}
 		}
 
+		public void enemyDie(){
+				enemyAnimated.Play ("defeat");
+		}
+
+		public void colorEffectHurt(){
+				//Debug.Log ("颜色:oldColor: " + oldColor );
+				enemySprite.color = StateColor.hurt;
+				//Debug.Log ("颜色:受伤Color: " + enemySprite.color );
+				Color stateColor = constant.getMapLogic().getStateColor(gameObject);
+				StartCoroutine (resetColor () );
+		}
+		public void colorSlowDown(){
+				enemySprite.color = StateColor.slowDown;
+		}
+
+		public void resetStateColor(){
+				Color stateColor = constant.getMapLogic().getStateColor(gameObject);
+				enemySprite.color = stateColor;
+		}
+
+
+		IEnumerator resetColor(){
+				yield return new WaitForSeconds (0.16f);
+				resetStateColor ();
+		}
+
 		public void setSpriteColor(Color color){
 				enemySprite.color = color;	
 		}
@@ -100,5 +146,9 @@ public class enemyAniManager : MonoBehaviour {
 				Color alphaColor = enemySprite.color;
 				alphaColor.a = alpha;
 				enemySprite.color = alphaColor;
+		}
+
+		public GameObject getShadowObj() {
+				return shadowObj;
 		}
 }

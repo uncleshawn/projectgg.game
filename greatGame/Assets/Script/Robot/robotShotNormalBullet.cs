@@ -263,6 +263,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 								"----------特殊效果:--------: " + "\r\n" +
 								"穿透性: " + bulletSpe.pierceBullet + "\r\n" +
 								"恐惧效果: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
+								"减速效果: " + bulletSpe.slowBullet.slowEffect + "\r\n" +
 								"元素类型: " + bulletSpe.element); 
 				}
 		}
@@ -277,6 +278,14 @@ public class robotShotNormalBullet : MonoBehaviour {
 				Debug.Log ( "子弹特效更新:" + "\r\n" +
 				"恐惧属性: " + bulletSpe.scaredBullet.scaredEffect + "\r\n" +
 				"恐惧概率: " + bulletSpe.scaredBullet.sacredPercent);
+		}
+		public void setSlowBullet(SlowBullet slowBullet){
+				bulletSpe.slowBullet = slowBullet;
+				Debug.Log ( "子弹特效更新:" + "\r\n" +
+						"减速属性: " + bulletSpe.slowBullet.slowEffect + "\r\n" +
+						"减速概率: " + bulletSpe.slowBullet.slowPercent + "\r\n" +
+						"减速至百分比: " + bulletSpe.slowBullet.slowLevel
+				);
 		}
 }
 

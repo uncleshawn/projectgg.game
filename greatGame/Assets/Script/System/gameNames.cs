@@ -65,18 +65,28 @@ public struct ScaredBullet
 		public int sacredPercent;
 }
 
+public struct SlowBullet
+{
+		public bool slowEffect;
+		public int slowPercent;
+		public float slowLevel;
+}
+
 public struct bulletSpeStruct
 {
 		public bool pierceBullet;
 		public ElementType element;
 		public KnockType knockType;
 		public ScaredBullet scaredBullet;
+		public SlowBullet slowBullet;
 }
 
-public struct stateColor
+public struct StateColor
 {
-		public static Color normal = new Color(255,255,255);
-		public static Color scared = new Color (230, 0, 255);
+		public static Color normal = new Color(255/255,255/255,255/255);
+		public static Color scared = new Color (230/255, 0, 255/255);
+		public static Color hurt = new Color (255/255,60/255,60/255);
+		public static Color slowDown = new Color (223 / 255, 255 / 255, 255 / 255);
 }
 
 public enum EnemyShotType
@@ -89,6 +99,15 @@ public enum EnemyShotType
 		directRandom			= 3,
 		//方向发散型
 		directDiverging			= 4,
+}
+
+public enum BattleStates
+{
+		normal		= 1,
+		poisoned 	= 2, 
+		slowDown 	= 3,
+		dizzy		= 4,
+		scared		= 5
 }
 
 public class gameNames : MonoBehaviour {

@@ -7,6 +7,7 @@ public class enemylogic : monsterbaselogic {
 		// Use this for initialization
 		void Awake(){
 				deltaTime_scared = 0;
+				deltaTime_slowDown = 0;
 		}
 		void Start () {
 
@@ -20,7 +21,9 @@ public class enemylogic : monsterbaselogic {
 		//处理怪物状态刷新
 		protected void stateFixedUpdate(){
 				deltaTime_scared += Time.fixedDeltaTime;
+				deltaTime_slowDown += Time.fixedDeltaTime;
 				checkScaredRecover (deltaTime_scared);
+				checkSlowDownRecover(deltaTime_slowDown);
 		}
 
 
@@ -29,12 +32,16 @@ public class enemylogic : monsterbaselogic {
 		//被 -攻击- 逻辑处理
 		override public void beAttack(GameObject obj){
 				if (obj.tag.Equals ("Bullet")) {
-					
+
 						bullet_property bulletProperty = obj.GetComponent<bullet_property>();
 
 						enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 						if(enemyProperty.invincible == false){
-							getDamage(enemyProperty,bulletProperty);
+								getDamage(enemyProperty,bulletProperty);
+								enemyAniManager enemyAni = gameObject.GetComponent<enemyAniManager> ();
+								if (enemyAni) {
+										enemyAni.colorEffectHurt ();
+								}
 						}
 
 						//判断击退类型
@@ -46,10 +53,10 @@ public class enemylogic : monsterbaselogic {
 						//判断攻击特效附加效果
 						checkBulletEffect(gameObject,obj);
 
-                                                if (isDie()) {
-                                                        GameObject.Destroy(this.gameObject);
-                                                        constant.getMapLogic().checkOpenDoor();
-                                                }
+						if (isDie()) {
+								GameObject.Destroy(this.gameObject);
+								constant.getMapLogic().checkOpenDoor();
+						}
 				}
 		}
 
@@ -117,6 +124,7 @@ public class enemylogic : monsterbaselogic {
 		}
 
 
+
 		//普通击退效果
 		void normalKnockBack(bullet_property bulletProperty,int force){
 				Direction bulletDirection;
@@ -163,7 +171,7 @@ public class enemylogic : monsterbaselogic {
 				Vector3 bulletPos = bulletProperty.transform.position;		
 				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
 				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
-					this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
+						this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
 				}
 		}
 
@@ -177,8 +185,14 @@ public class enemylogic : monsterbaselogic {
 								ScaredBullet scaredBullet = bulletProperty.bulletSpe.scaredBullet;
 								getScared (enemyProperty , scaredBullet);
 						}
+						//是否具有减速效果
+						if (bulletProperty.bulletSpe.slowBullet.slowEffect) {
+								SlowBullet  slowBullet = bulletProperty.bulletSpe.slowBullet;
+								getSlowDown (enemyProperty , slowBullet);
+
+						}
 				}
-				
+
 		}
 
 
@@ -206,8 +220,64 @@ public class enemylogic : monsterbaselogic {
 
 		}
 
+		//判断减速
+		public void getSlowDown(enemy_property enemyProperty  , SlowBullet slowBullet){
+				int num = Random.Range (1, 101);
+				if (num <= slowBullet.slowPercent) {
+						Debug.Log ("敌人被减速");
+						enemyProperty.slowDown = true;
+						Debug.Log ("enemyProperty.slowDown: " + enemyProperty.slowDown);
+						enemyProperty.upgradeMoveSpeed (slowBullet.slowLevel);
+						enemyAniManager enemyAni = gameObject.GetComponent<enemyAniManager> ();
+						if (enemyAni) {
+								enemyAni.colorSlowDown ();
+						}
 
-		//判断玩家是否死亡
+				}	
+		}
+
+		//判断减速减免
+		override public void checkSlowDownRecover(float deltaTime){
+				enemy_property enemyProperty = gameObject.GetComponent<enemy_property> ();
+				//Debug.Log ("enemyName: " + enemyProperty.gameObject.name);
+				if (enemyProperty.slowDown == true) {
+						float slowRecoverTime = enemyProperty.slowDownRecoverTime;
+						//Debug.Log (deltaTime + "--" + slowRecoverTime + ": " + this.name + "解除减速");
+						if (deltaTime >= slowRecoverTime) {
+								
+								enemyProperty.slowDown = false;
+								enemyProperty.resetMoveSpeed ();
+								enemyAniManager enemyAni = gameObject.GetComponent<enemyAniManager> ();
+								if (enemyAni) {
+										enemyAni.resetStateColor ();
+								}
+						}
+				} else {
+						deltaTime_slowDown = 0;
+				}
+
+		}
+
+		//获取怪物现在身上的状态
+		public BattleStates getStates(){
+				enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
+				BattleStates battleState = BattleStates.normal;
+				//判断状态
+				if (enemyProperty.slowDown == true) {
+						battleState = BattleStates.slowDown;	
+						return battleState;
+				}
+
+				if (enemyProperty.scared == true) {
+						battleState = BattleStates.scared;	
+						return battleState;
+				}
+
+				return battleState;
+		}
+
+
+		//判断怪物是否死亡
 		public bool isDie(){
 				enemy_property enemyProperty = gameObject.GetComponent<enemy_property>();
 				if (enemyProperty.Hp <= 0) {
@@ -216,17 +286,19 @@ public class enemylogic : monsterbaselogic {
 				return false;
 		}
 
+	
 
-                public void stopMove() {
-                        move_script script = this.GetComponent<move_script>();
-                        script.stopMove();
-                }
+
+		public void stopMove() {
+				move_script script = this.GetComponent<move_script>();
+				script.stopMove();
+		}
 		void OnTriggerEnter(Collider obj){
-				
+
 		}
 
 		void OnCollisionEnter (Collision obj){
-				
+
 		}
 
 
