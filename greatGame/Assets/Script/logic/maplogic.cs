@@ -566,6 +566,19 @@ public class maplogic{
                         camera_follow_script follow = camera.GetComponent<camera_follow_script>();
                         follow.normalShake();
                 }
+
+        public void setPlayerCanCotroll(bool ret){
+                GameObject player = constant.getPlayer();
+                charlogic logic = player.GetComponent<charlogic>();
+                logic.CanControll = ret;
+
+        }
+
+        public void setNormalLight() {
+                Light light = constant.getLight();
+                light.type = LightType.Directional;
+                light.intensity = 0.3f;
+        }
 }
 
 

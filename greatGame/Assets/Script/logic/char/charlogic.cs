@@ -7,9 +7,13 @@ public class charlogic : monsterbaselogic {
 		private float mHurtTime = 0;
 		private float mAccSpeed = 160.0f;
 
+                bool mCanControll;
+                public bool CanControll { get { return mCanControll; } set { mCanControll = value; } }
+
 		//float deltaTime_scared;
 		void Awake(){
 				deltaTime_scared = 0;
+                                mCanControll = true;
 		}
 		// Use this for initialization
 		void Start () {
@@ -364,10 +368,14 @@ public class charlogic : monsterbaselogic {
 		}
 
 		override public Vector3 getMoveAcc(){
-				Vector3 v = new Vector3 ();
-				v.x = 0;
-				v.y = 0;
-				v.z = 0;
+                        Vector3 v = new Vector3();
+                        v.x = 0;
+                        v.y = 0;
+                        v.z = 0;
+
+                        if (!mCanControll) {
+                                return v;
+                        }
 
 				float x = Input.GetAxisRaw ("Horizontal");
 				float y = Input.GetAxisRaw ("Vertical");

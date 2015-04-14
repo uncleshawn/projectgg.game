@@ -13,6 +13,11 @@ public class Boss1Logic : enemylogic {
 
 
         private float mFollowTime = 3.0f;
+
+        private int mStartFallStone = 0;
+        private int mTotalFallStone = 5;
+
+        private float mScaleMoveY = 2f;
         
         public enum Status { 
                 Rest = 1,       //原地休息
@@ -20,7 +25,9 @@ public class Boss1Logic : enemylogic {
                 Sprint = 3,     //冲向主角
                 Angry = 4,      //生气变大
                 Follow = 5,     //跟随主角
-                Jump = 6,
+                Jump = 6,       //跳跃
+
+                StartJump = 7,  //开场跳出来
         }
         private Status mStatus;
         private float mAddX;
@@ -64,8 +71,6 @@ public class Boss1Logic : enemylogic {
                 mHasAngry = false;
                 mAngryPer = 0.5f;
 
-                mStatus = Status.Walk;
-
                 mHasJump = false;
                 mJumpTime = 0.4f;
 
@@ -76,7 +81,10 @@ public class Boss1Logic : enemylogic {
                 SphereCollider collider = this.gameObject.GetComponent<SphereCollider>();
                 mColliderRadius = collider.radius;
 
-                setWalkAI();
+                //mStatus = Status.Walk;
+                //setWalkAI();
+                mStatus = Status.StartJump;
+                setStartJumpAI();
         }
 
         public float getScale() {
@@ -118,6 +126,9 @@ public class Boss1Logic : enemylogic {
                                 break;
                         case Status.Jump:
                                 return Status.Rest;
+                                break;
+                        case Status.StartJump:
+                                return Status.Walk;
                                 break;
                 }
                 return Status.Walk;
@@ -274,7 +285,7 @@ public class Boss1Logic : enemylogic {
 
                 {
                         Hashtable args = new Hashtable();
-                        args.Add("y", -0.8f);
+                        args.Add("y", -mScaleMoveY);
 
                         args.Add("time", time);
                         args.Add("easetype", iTween.EaseType.easeOutCirc);
@@ -302,7 +313,7 @@ public class Boss1Logic : enemylogic {
 
                 {
                         Hashtable args = new Hashtable();
-                        args.Add("y", 0.8f * per);
+                        args.Add("y", mScaleMoveY * per);
 
                         args.Add("time", time);
                         args.Add("easetype", iTween.EaseType.easeInCirc);
@@ -417,7 +428,7 @@ public class Boss1Logic : enemylogic {
 
                 {
                         Hashtable args = new Hashtable();
-                        args.Add("y", -0.8f);
+                        args.Add("y", -mScaleMoveY);
 
                         args.Add("time", time);
                         args.Add("easetype", iTween.EaseType.easeOutCirc);
@@ -444,7 +455,7 @@ public class Boss1Logic : enemylogic {
 
                 {
                         Hashtable args = new Hashtable();
-                        args.Add("y", 0.8f);
+                        args.Add("y", mScaleMoveY);
 
                         args.Add("time", time);
                         args.Add("easetype", iTween.EaseType.easeOutBack);
@@ -478,7 +489,7 @@ public class Boss1Logic : enemylogic {
         }
 
         public void setAngryAI() {
-
+                iTween.Stop(this.gameObject);
                 mHasAngry = true;
 
                 GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
@@ -587,6 +598,9 @@ public class Boss1Logic : enemylogic {
                                 break;
                         case Status.Jump:
                                 setJumpAI();
+                                break;
+                        case Status.StartJump:
+                                setStartJumpAI();
                                 break;
                 }
         }
@@ -757,5 +771,120 @@ public class Boss1Logic : enemylogic {
                 v.z = 0.1f;
                 v.y = v.y + mShadowOffsetY;
                 GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(waterPrefabStr), v, Quaternion.identity);
+        }
+
+        private void endStartJump() {
+                maplogic logic = constant.getMapLogic();
+                logic.setPlayerCanCotroll(true);
+
+                finishJump();
+        }
+
+        private void startStartJump() {
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+
+                enemyAniManager ani = this.GetComponent<enemyAniManager>();
+                GameObject shadowObj = ani.getShadowObj();
+
+                {
+                        float y = obj.transform.position.y;
+                        Hashtable args = new Hashtable();
+                        args.Add("y", y - mJumpHeight);
+
+                        args.Add("time", mJumpTime);
+                        args.Add("easetype", iTween.EaseType.easeInCubic);
+                        args.Add("oncomplete", "endStartJump");
+                        args.Add("oncompletetarget", gameObject);
+                        iTween.MoveTo(obj, args);
+                }
+
+                {
+                        Hashtable args = new Hashtable();
+                        args.Add("x", 5f);
+                        args.Add("y", 5f);
+
+                        args.Add("time", mJumpTime);
+                        args.Add("easetype", iTween.EaseType.easeInCirc);
+
+                        iTween.ScaleBy(shadowObj, args);
+                }
+        }
+        private void setStartJumpAI() {
+                maplogic logic = constant.getMapLogic();
+                logic.setPlayerCanCotroll(false);
+
+                GameObject obj = constant.getChildGameObject(this.gameObject, "AnimatedSprite");
+
+                enemyAniManager ani = this.GetComponent<enemyAniManager>();
+                GameObject shadowObj = ani.getShadowObj();
+
+                Vector2 v = constant.getMiddlePos();
+                this.transform.position = new Vector3(v.x, v.y, obj.transform.position.z);
+
+
+                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y + mJumpHeight, obj.transform.position.z);
+                shadowObj.transform.localScale = new Vector3(obj.transform.localScale.x * 0.2f, obj.transform.localScale.y * 0.2f, obj.transform.localScale.z);
+
+                startJumpFallStone();
+                //startStartJump();
+        }
+
+        private void jumpFllStoneFloor() {
+
+                //mStartFallStone = mStartFallStone - 1;
+                //if (mStartFallStone < 1) {
+                //        CancelInvoke("jumpFllStoneFloor");
+                //        return;
+                //}
+                Vector2 center = constant.getMiddlePos();
+                int t = 8;
+                float startR = 1;
+                float w_interval = 1;
+
+                float r = startR + w_interval * mStartFallStone;
+                //for (int j = 0; j < t; ++j) {
+                //        //float d = Mathf.Deg2Rad * Random.Range(0, 359);
+                //        float k = mStartFallStone % 2 == 1 ? 0.5f : 0;
+                //        float y = Mathf.Sin(Mathf.Deg2Rad * (360.0f / t * (j+k))) * r;
+                //        float x = Mathf.Cos(Mathf.Deg2Rad * (360.0f / t * (j+k))) * r;
+
+                //        Vector3 v = new Vector3(center.x + x, center.y+y, -1);
+                //        string fallStonePrefabStr = "Prefabs/scene/fallstone";
+                //        GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(fallStonePrefabStr), v, Quaternion.identity);
+
+                //}
+
+                //float y = Mathf.Sin(Mathf.Deg2Rad * (360.0f / t * (j + k))) * r;
+                //float x = Mathf.Cos(Mathf.Deg2Rad * (360.0f / t * (j + k))) * r;
+                float r1 = Random.Range(1.0f, 6.0f) ;
+                float p = Random.Range(0, 2*Mathf.PI);
+                float x = r1 * Mathf.Cos(p);
+                float y = r1 * Mathf.Sin(p);
+                Vector3 v = new Vector3(center.x + x, center.y + y, -1);
+                string fallStonePrefabStr = "Prefabs/scene/fallstone";
+                GameObject clone = (GameObject)GameObject.Instantiate(Resources.Load(fallStonePrefabStr), v, Quaternion.identity);
+        }
+
+        private void startJumpFallStone() {
+                Rect rect = constant.getFloorRect();
+
+                Vector2 v2 = constant.getMiddlePos();
+                int f = 5;
+                float intervalTime = 0.5f;
+
+                mStartFallStone = mTotalFallStone;
+                //for (int i = f; i > 0; --i) {
+                //        {
+                //                mStartFallStone = i;
+                //                Invoke("jumpFllStoneFloor", intervalTime*i);
+                //        }
+                //}
+                //InvokeRepeating("jumpFllStoneFloor", intervalTime, intervalTime);
+                for (int i = 0; i < 30; ++i) {
+                        float time = Random.Range(0, intervalTime * f);
+                        Invoke("jumpFllStoneFloor", time);
+                }
+                Invoke("startStartJump", intervalTime * f+1);
+                
         }
 }
