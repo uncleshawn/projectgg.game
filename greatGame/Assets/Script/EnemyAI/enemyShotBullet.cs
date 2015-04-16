@@ -31,7 +31,7 @@ public class enemyShotBullet : MonoBehaviour {
 		//子弹的击退效果
 		public KnockType knockType;
 		public int mknockBack;
-	
+
 
 
 		public bulletSpeStruct bulletSpe;
@@ -81,7 +81,7 @@ public class enemyShotBullet : MonoBehaviour {
 				bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),shotBulletPos,Quaternion.identity);
 
 				if (shotType == EnemyShotType.directRandom) {
-						
+
 				}
 
 				if (shotType == EnemyShotType.directPlayer) {
@@ -114,7 +114,32 @@ public class enemyShotBullet : MonoBehaviour {
 								setDirectionDivergingSpeed (shotScript, mbulletSpeed , playerPos , i , angle);
 						}
 				}
+
+				//射向主角多个
+				if (shotType == EnemyShotType.directPlayer) {
+						Vector3 playerPos = getPlayerPosExact ();
+						for (int i = 1; i <= bulletAmount; i++) {
+								GameObject bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),this.transform.position,Quaternion.identity);	
+								bulletClone.GetComponent<bulletCheckDistance> ().setDistance (mbulletDistance);
+								setBulletProperty (bulletClone);
+								shotScript = bulletClone.GetComponent<bulletGetSpeed> ();
+								setDirectionDivergingSpeed (shotScript, mbulletSpeed , playerPos , i , angle);
+						}
+				}
 		}
+
+		public void shootMultiBulletsOnePos( Vector3 targetPos, int bulletPerAmount , int angle , int excurAngle){
+				Vector3 playerPos = targetPos;
+				//int excurAngle = Random.Range (-15, 16);
+				for (int i = 1; i <= bulletPerAmount; i++) {
+						GameObject bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath),this.transform.position,Quaternion.identity);	
+						bulletClone.GetComponent<bulletCheckDistance> ().setDistance (mbulletDistance);
+						setBulletProperty (bulletClone);
+						shotScript = bulletClone.GetComponent<bulletGetSpeed> ();
+						setExcurDirectionDivergingSpeed (shotScript, mbulletSpeed , playerPos , i , angle , excurAngle);
+				}
+		}
+
 
 		//获得玩家的精确位置
 		Vector3 getPlayerPosExact(){
@@ -130,10 +155,10 @@ public class enemyShotBullet : MonoBehaviour {
 		}
 
 		//设置子弹飞行方向
-		void setDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 pos , int num , int angle){
+		void setDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 playerPos , int num , int angle){
 				Vector3 speedDir = new Vector3(0,0,0);
 				Vector3 enemyPos = this.transform.position + shotPos;
-				speedDir = pos - enemyPos;
+				speedDir = playerPos - enemyPos;
 				speedDir.z = 0;
 				//Debug.Log (num + " num : old Vector = " + speedDir);
 				//speedDir.Normalize ();
@@ -153,6 +178,29 @@ public class enemyShotBullet : MonoBehaviour {
 				speedScript.shotBullet(speedDir.normalized * Speed);
 		}
 
+		//有偏差的飞行方向
+		void setExcurDirectionDivergingSpeed(bulletGetSpeed speedScript,float Speed , Vector3 playerPos , int num , int angle , int excurAngle){
+				Vector3 speedDir = new Vector3(0,0,0);
+				Vector3 enemyPos = this.transform.position + shotPos;
+				speedDir = playerPos - enemyPos;
+				speedDir.z = 0;
+				//Debug.Log (num + " num : old Vector = " + speedDir);
+				//speedDir.Normalize ();
+				//Quaternion rot =  new Quaternion(0,0, Mathf.Sin(num*10/2) , Mathf.Cos(num*10/2) );
+				speedScript.gameObject.transform.position += speedDir.normalized;
+				Quaternion rot;
+				if (num % 2 == 1) {
+						num -= 1;
+						rot = Quaternion.Euler (0f, 0f, -1 * (num / 2) * angle + excurAngle);
+				} else {
+						rot = Quaternion.Euler (0f, 0f, (num / 2) * angle + excurAngle);
+				}
+				speedDir = rot * speedDir;
+				//Debug.Log (num + " num : new Vector = " + speedDir);
+				//speedDir.Normalize ();
+				//speedDir.x += (num-1)*4;
+				speedScript.shotBullet(speedDir.normalized * Speed);
+		}
 
 
 
@@ -174,8 +222,11 @@ public class enemyShotBullet : MonoBehaviour {
 				speedScript.shotBullet(speedDir.normalized * Speed);
 		}
 
+
 		//360度射击
-		void 
+		public void fullAngleShot(){
+
+		}
 
 
 

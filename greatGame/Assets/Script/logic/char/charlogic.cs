@@ -456,13 +456,86 @@ public class charlogic : monsterbaselogic {
 								constant.getGameLogic().Die();
 						}
 						if (bulletProperty.bulletDamage > 0) {
+								//进入无敌状态
 								setWUDI ();
+								//短时间硬直
+
 						}
 				}
 		}
 
-		public void getKnockBack(char_property player, bullet_property bullet){
-				
+		public void getKnockBack(char_property player, bullet_property bulletProperty){
+				char_property charProperty = player.GetComponent<char_property> ();	
+				int force = bulletProperty.bulletknock;
+				if (charProperty.heavyBody) {
+						return;
+				}
+				KnockType knockType = bulletProperty.bulletSpe.knockType;
+				switch (knockType) {
+				default:
+						break;
+				case KnockType.none:
+						break;
+				case KnockType.normal:
+						normalKnockBack (bulletProperty, force);
+						break;
+				case KnockType.explode:
+						explodeKnockBack (bulletProperty, force);
+						break;
+						break;
+				}
+		}
+		//普通击退效果
+		void normalKnockBack(bullet_property bulletProperty,int force){
+				Direction bulletDirection;
+				bulletDirection = Direction.none;
+				if (bulletProperty.WeaponType == weaponType.laserNormal) {
+						bulletDirection = bulletProperty.gameObject.GetComponent<laserAniManager> ().BulletDirection;
+				}
+				if (bulletProperty.WeaponType == weaponType.bulletNormal) {
+						bulletDirection = bulletProperty.gameObject.GetComponent<bulletAniManager> ().BulletDirection;
+				}
+
+				if (bulletDirection == Direction.none) {
+						Debug.Log("击退时:获取武器类型出错");
+						return;
+				}
+
+
+				switch(bulletDirection){
+				default:
+						break;
+				case Direction.up:
+						//Debug.Log("子弹方向: 上");
+						this.gameObject.rigidbody.AddForce (Vector3.up * force);		
+						break;
+				case Direction.down:
+						//Debug.Log("子弹方向: 下");
+						this.gameObject.rigidbody.AddForce (-1 * Vector3.up * force);	
+						break;
+				case Direction.left:
+						//Debug.Log("子弹方向: 左");
+						this.gameObject.rigidbody.AddForce (-1 * Vector3.right * force);
+						break;
+				case Direction.right:
+						//Debug.Log("子弹方向: 右");
+						this.gameObject.rigidbody.AddForce (Vector3.right * force);		
+						break;
+
+						break;
+				}	
+		}
+		//爆炸击退效果
+		override public void explodeKnockBack(bullet_property bulletProperty,int force){
+
+				//敌人位置
+				Vector3 enemyPos = this.transform.position;
+				//子弹位置
+				Vector3 bulletPos = bulletProperty.transform.position;		
+				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
+				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
+						this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
+				}
 		}
 
 

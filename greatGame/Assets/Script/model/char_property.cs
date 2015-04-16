@@ -26,7 +26,7 @@ public class char_property : base_property {
 		private int mAttackRate;
 		private float mAttackDistance;
 
-
+		public bool heavyBody;			//是否不被击退
 		public bool scared;				//敌人是否处于恐惧状态
 		public float scaredRecoverTime; //敌人从恐惧钟恢复时间
 

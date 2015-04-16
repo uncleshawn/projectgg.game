@@ -718,6 +718,7 @@
      <Compile Include="Assets\Script\logic\data\monstertemplate.cs" />
      <Compile Include="Assets\Script\logic\data\roominfo.cs" />
      <Compile Include="Assets\Script\logic\enemy\Boss1Logic.cs" />
+     <Compile Include="Assets\Script\logic\enemy\Boss2Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\Enemy1Logic.cs" />
      <Compile Include="Assets\Script\logic\enemy\FallStoneLogic.cs" />
      <Compile Include="Assets\Script\logic\enemy\Shit1Logic.cs" />

@@ -78,7 +78,7 @@ public class enemyAniManager : MonoBehaviour {
 
 				shadowObj = shadow;
 
-				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
+				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 0.5f);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
 				return shadowSprite;
