@@ -577,7 +577,7 @@ public class maplogic{
         public void setNormalLight() {
                 Light light = constant.getLight();
                 light.type = LightType.Directional;
-                light.intensity = 0.3f;
+                light.intensity = 0.35f;
         }
 }
 

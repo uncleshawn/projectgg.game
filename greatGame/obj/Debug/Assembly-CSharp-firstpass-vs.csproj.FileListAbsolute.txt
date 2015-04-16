@@ -1,0 +1,15 @@
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Photon3Unity3D.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\PlayMaker.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\UnityEditor.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\UnityEngine.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\nunit.framework.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\yaode\Documents\projectgg\greatGame\Temp\bin\Debug\Photon3Unity3D.xml
+C:\Users\yaode\Documents\projectgg\greatGame\obj\Debug\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
+C:\Users\yaode\Documents\projectgg\greatGame\obj\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\yaode\Documents\projectgg\greatGame\obj\Debug\Assembly-CSharp-firstpass.pdb

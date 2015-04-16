@@ -9,6 +9,8 @@ public class move_script : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		mFps = mFps;
+
+                stopMove();
 	}
 
 	public void stopMove(){
@@ -81,7 +83,6 @@ public class move_script : MonoBehaviour {
                 //        rigidbody.AddForce(actual_acc);
                 //}
 
-
                 rigidbody.AddForce(actual_acc);
                 ////速度上限
                 speed = new Vector3(isXZero ? 0 : rigidbody.velocity.x, isYZero ? 0 : rigidbody.velocity.y, rigidbody.velocity.z);
@@ -93,6 +94,7 @@ public class move_script : MonoBehaviour {
 
                         speed = new Vector3(x,y, speed.z);
                 }
+
                 rigidbody.velocity = speed;
 
                 //float maxSpeed = pro.BaseMoveSpeed;
