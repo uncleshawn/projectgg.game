@@ -62,13 +62,13 @@ public class bulletAniManager : MonoBehaviour {
 
 		}
 
-		Direction getCrossDirection(Vector3 bulletDirection){
+		public Direction getCrossDirection(Vector3 bulletDirection){
 				
 				if (Mathf.Abs (bulletDirection.x) >= Mathf.Abs (bulletDirection.y)) {
 						if (bulletDirection.x >= 0) {
-								return Direction.left;
-						} else {
 								return Direction.right;
+						} else {
+								return Direction.left;
 						}
 				} else {
 						if (bulletDirection.y >= 0) {
@@ -95,7 +95,7 @@ public class bulletAniManager : MonoBehaviour {
 		//生成子弹的影子
 		tk2dSprite intiShadow(){
 				GameObject shadow = constant.getMapLogic ().initBulletShadow (bulletSprite , bulletSprite.transform.parent.gameObject , dynamicShadow);
-				shadow.transform.localPosition = new Vector3 (0, -0.55f, 1);
+				shadow.transform.localPosition = new Vector3 (0, -0.6f, 0.5f);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 				return shadowSprite;
 		}
@@ -140,7 +140,10 @@ public class bulletAniManager : MonoBehaviour {
 
 		public void destroyAfterAni(string aniName){
 				if (bulletAni) {
+
 						bulletAni.Play (aniName);
+						//BoxCollider box = GetComponent<BoxCollider> ();
+						//box.enabled = false;
 						bulletAni.AnimationCompleted = afterAni;
 				} else {
 						Debug.Log ("子弹动画系统还没生成");
