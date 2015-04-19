@@ -140,7 +140,10 @@ public class bulletAniManager : MonoBehaviour {
 
 		public void destroyAfterAni(string aniName){
 				if (bulletAni) {
+
 						bulletAni.Play (aniName);
+						//BoxCollider box = GetComponent<BoxCollider> ();
+						//box.enabled = false;
 						bulletAni.AnimationCompleted = afterAni;
 				} else {
 						Debug.Log ("子弹动画系统还没生成");

@@ -143,7 +143,9 @@ public class enemyShotBullet : MonoBehaviour {
 
 		//获得玩家的精确位置
 		Vector3 getPlayerPosExact(){
-				return constant.getPlayer ().transform.position;
+				Vector3 playerPos = constant.getPlayer ().transform.position;
+				playerPos = new Vector3 (playerPos.x, playerPos.y + 0.5f, playerPos.z);
+				return playerPos;
 		}
 
 		Vector3 getPlayerPosExcur(int amount){
