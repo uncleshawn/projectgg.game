@@ -10,13 +10,17 @@ public class bat_logic : enemylogic {
 		//
 
 		float deltaTime;
-		float mIntervalTime = 1;
-		float mWaitTime = 1;
+		public float mIntervalTime = 1;
+		public float mWaitTime = 1;
 		enemy_property enemySelf;
+		enemyAniManager aniManager;
+		Direction aniDir;
 
 		// Use this for initialization
 		void Awake(){
 				enemySelf = gameObject.GetComponent<enemy_property>();
+				aniManager = gameObject.GetComponent<enemyAniManager> ();
+				aniDir = Direction.down;
 				GameObject obj  = constant.getPlayer ();
 		}
 
@@ -61,6 +65,29 @@ public class bat_logic : enemylogic {
 				float disX = pos.x - selfPos.x;
 				float disY = pos.y - selfPos.y;
 
+				if (Mathf.Abs (disX) >= Mathf.Abs (disY)) {
+						if (disX >= 0) {
+								aniDir = Direction.right;
+								aniManager.playSameAni ("fly_left");
+								aniManager.setAniSide (aniDir);
+
+						} else {
+								aniDir = Direction.left;
+								aniManager.playSameAni ("fly_left");
+								aniManager.setAniSide (aniDir);
+						}
+				} else {
+						if (disY >= 0) {
+								aniDir = Direction.up;	
+								aniManager.playSameAni ("fly_up");
+						} else {
+								aniDir = Direction.down;
+								aniManager.playSameAni ("fly_down");
+						}
+				}
+
+
+
 				float dis = Mathf.Sqrt(disX*disX+disY*disY);
 				float x = add * disX / dis;
 				float y = add * disY / dis;
@@ -69,6 +96,7 @@ public class bat_logic : enemylogic {
 
 				return v;
 		}
+				
 
 		override public Vector3 scaredMovePos(){
 				Vector3 pos;

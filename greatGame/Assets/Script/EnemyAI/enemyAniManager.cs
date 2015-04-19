@@ -78,9 +78,14 @@ public class enemyAniManager : MonoBehaviour {
 
                                 shadowObj = shadow;
 
+<<<<<<< HEAD
                                 shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
                                 shadow.transform.localScale = enemySprite.gameObject.transform.localScale;
                                 tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+=======
+				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 0.5f);
+				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+>>>>>>> e573b79dce18f29ac143136d9a35986c0997fddb
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
 				return shadowSprite;
 		}
@@ -91,10 +96,11 @@ public class enemyAniManager : MonoBehaviour {
 				default:
 						break;
 				case Direction.right:
-						enemySprite.transform.localScale = new Vector3 (1,1,1);
+						enemySprite.transform.localScale = new Vector3 (-1,1,1);
 						break;
 				case Direction.left:
-						enemySprite.transform.localScale = new Vector3 (-1,1,1);
+						
+						enemySprite.transform.localScale = new Vector3 (1,1,1);
 						break;
 						break;
 				}
@@ -103,14 +109,38 @@ public class enemyAniManager : MonoBehaviour {
 						default:
 								break;
 						case Direction.right:
-								shadowSprite.transform.localScale = new Vector3 (1,1,1);
+								shadowSprite.transform.localScale = new Vector3 (-1,1,1);
 								break;
 						case Direction.left:
-								shadowSprite.transform.localScale = new Vector3 (-1,1,1);
+								shadowSprite.transform.localScale = new Vector3 (1,1,1);
 								break;
 								break;
 						}	
 				}
+		}
+
+		public void playAni(string aniName) {
+				enemyAnimated.Play (aniName);
+		}
+
+		public void stopAni(){
+				enemyAnimated.Stop ();
+		}
+
+		public void playSameAni(string aniName){
+				int aniFrames = enemyAnimated.CurrentFrame;
+				//Debug.Log ("正在播放第" + aniFrames + "frame");
+				if (!enemyAnimated.IsPlaying (aniName)) {
+						
+						enemyAnimated.Play (aniName);
+						//enemyAnimated.SetFrame (aniFrames);
+						enemyAnimated.PlayFromFrame (aniFrames);
+
+						//Debug.Log ("正在播放第" + aniFrames + "frame");
+				} else {
+						//Debug.Log ("正在播放同一动画");
+				}
+
 		}
 
 		public void enemyDie(){
