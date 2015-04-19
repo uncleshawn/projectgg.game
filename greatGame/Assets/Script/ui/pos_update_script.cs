@@ -19,6 +19,7 @@ public class pos_update_script : MonoBehaviour {
 		}
 
 		void FixedUpdate(){
+				//Transform parentTransform = this.GetComponentInParent<Transform>();
 				Transform parentTransform = this.gameObject.transform.parent.gameObject.transform;
 				float z = originPos.z + parentTransform.position.y*0.01f;
 				//m_transform.position.Set (m_transform.position.x, m_transform.position.y, 100);

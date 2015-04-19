@@ -97,4 +97,10 @@ public class soundLogic {
                         mBkAudioSrc.Play();	
 		}
 
+                public void stopBackGround() {
+                        if (mBkAudioSrc != null) {
+                                mBkAudioSrc.Stop();
+                        }
+                }
+
 }
