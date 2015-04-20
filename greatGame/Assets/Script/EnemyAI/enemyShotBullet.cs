@@ -102,6 +102,21 @@ public class enemyShotBullet : MonoBehaviour {
 
 		}
 
+                public void shootBullet(float dir) {
+                        GameObject bulletClone;
+                        Vector3 shotBulletPos = this.transform.position + shotPos;
+                        bulletClone = (GameObject)Instantiate(Resources.Load(bulletPath), shotBulletPos, Quaternion.identity);
+
+                        bulletClone.GetComponent<bulletCheckDistance>().setDistance(mbulletDistance);
+                        //子弹的damage + 速度 +方向
+                        setBulletProperty(bulletClone);
+                        //shotScript = bulletClone.GetComponent<bulletGetSpeed>();
+                        //setRandomSpeed(shotScript, mbulletSpeed);
+                        shotScript = bulletClone.GetComponent<bulletGetSpeed>();
+                        Vector3 speedDir = new Vector3(Mathf.Cos(dir), Mathf.Sin(dir), 0);
+                        shotScript.shotBullet(speedDir.normalized * mbulletSpeed);
+                }
+
 		public void shootMultiBullets(EnemyShotType shotType , int bulletAmount , int angle){
 				//子弹是向着主角方向发散型
 				if (shotType == EnemyShotType.directDiverging) {
@@ -229,17 +244,6 @@ public class enemyShotBullet : MonoBehaviour {
 		public void fullAngleShot(){
 
 		}
-
-
-
-
-
-
-
-
-
-
-
 
 		public void setBulletProperty(GameObject bulletClone){
 				//如果忘记输入子弹射击频率,默认为0.5秒间隔

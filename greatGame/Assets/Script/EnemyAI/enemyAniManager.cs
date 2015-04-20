@@ -29,7 +29,7 @@ public class enemyAniManager : MonoBehaviour {
 		private GameObject shadowObj;
 		//影子动画sprite
 		private tk2dSprite shadowSprite;
-		//怪物的logic脚本
+
 		bool aniStart;
 
 		// Use this for initialization
@@ -76,10 +76,15 @@ public class enemyAniManager : MonoBehaviour {
 
 				GameObject shadow = constant.getMapLogic ().initBulletShadow (enemySprite , shadowParent, dynamicShadow);
 
-				shadowObj = shadow;
+                                shadowObj = shadow;
+
+                                //shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 1);
+                                //shadow.transform.localScale = enemySprite.gameObject.transform.localScale;
+                                //tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
 
 				shadow.transform.localPosition = new Vector3 (0, -shadowPosY*Mathf.Abs(enemySprite.scale.y)/2, 0.5f);
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+
 				shadowSprite.scale = new Vector3 (enemySprite.scale.x * 0.9f, enemySprite.scale.y * shadowScaleY, enemySprite.scale.z);
 				return shadowSprite;
 		}

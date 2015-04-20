@@ -38,6 +38,10 @@ public static class constant {
 	public static string TAG_TRAP = "Trap";
 	public static string TAG_SHIT = "Shit";
         public static string TAG_STONE = "Stone";
+        public static string TAG_WATER = "Water";
+        public static string TAG_LIGHT = "Light";
+
+        public static string TAG_ANIMATEDSPRITE = "AnimatedSprite";
 
         public static string TAG_CAMERA = "MainCamera";
 
@@ -178,10 +182,20 @@ public static class constant {
                 return new Rect(l,t,w,h);
         }
 
+        public static Vector2 getMiddlePos() {
+                Rect rect = getFloorRect();
+                return rect.center;
+        }
+
         public static Vector2 getRandomPosInFloor() {
                 Rect rect = getFloorRect();
                 float x = Random.Range(rect.xMin, rect.xMax);
                 float y = Random.Range(rect.yMin, rect.yMax);
                 return new Vector2(x,y);
+        }
+
+        public static Light getLight() {
+                GameObject light = GameObject.FindGameObjectWithTag(TAG_LIGHT);
+                return light.GetComponent<Light>();
         }
 }

@@ -14,6 +14,11 @@ public class camera_follow_script : MonoBehaviour {
         float mShakePer = 0.6f;
         float mShakeMul = 1.08f;
         float mStartShakeTimes = 0.05f;
+
+        float mNormalShakeTime = 0;
+        float mNormalShakeTotalTime = 0.2f;
+        float mNormalShakePer = 0.1f;
+
 	// Use this for initialization
 	void Start () {
 		mLeftDownPoint = constant.getLeftDownPoint ();
@@ -23,6 +28,10 @@ public class camera_follow_script : MonoBehaviour {
         public void shake() {
                 mStartShake = true;
                 mShakeTime = mStartShakeTimes;
+        }
+
+        public void normalShake() {
+                mNormalShakeTime = mNormalShakeTotalTime;
         }
 
 	// Update is called once per frame
@@ -62,6 +71,13 @@ public class camera_follow_script : MonoBehaviour {
                                 mShakeTime = mShakeTime / mShakeMul;
                         }
                 }
+
+                if (mNormalShakeTime > 0) {
+                        mNormalShakeTime = mNormalShakeTime - Time.deltaTime;
+                        v.x = v.x + Random.Range(-mNormalShakePer, mNormalShakePer);
+                        v.y = v.y + Random.Range(-mNormalShakePer, mNormalShakePer);
+                }
+
 
 		this.gameObject.transform.position = v;
 	}

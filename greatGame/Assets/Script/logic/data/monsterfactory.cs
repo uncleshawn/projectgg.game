@@ -28,7 +28,7 @@ public class monsterfactory {
 	public void initTemplate(){
 		mPrefabs = new monstertemplate[]{
 			//new monstertemplate("Prefabs/enemy/bat"),
-			new monstertemplate("Prefabs/enemy/boss1"),
+			new monstertemplate("Prefabs/enemy/boss3"),
 		};
 	}
 	
