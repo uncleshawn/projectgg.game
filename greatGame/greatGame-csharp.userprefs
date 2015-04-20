@@ -1,9 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/bat_logic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/enemy4logic.cs">
     <Files>
-      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="44" Column="5" />
-      <File FileName="Assets/Script/logic/enemy/enemy4logic.cs" Line="37" Column="6" NotebookId="1" />
+      <File FileName="Assets/Script/logic/enemy/enemy4logic.cs" Line="130" Column="33" />
+      <File FileName="Assets/Script/EnemyAI/enemyShotBullet.cs" Line="145" Column="31" />
+      <File FileName="Assets/Script/EnemyAI/enemyAniManager.cs" Line="130" Column="9" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="194" Column="21" />
+      <File FileName="Assets/Script/logic/enemy/bat_logic.cs" Line="59" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
