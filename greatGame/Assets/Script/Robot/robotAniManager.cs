@@ -238,16 +238,26 @@ public class robotAniManager : MonoBehaviour {
 
 				}
 				if (shotDir == Direction.none && moveDir != Direction.none) {
-						walkShotAniPlaying = false;
-						playerUpperSprite.renderer.enabled = false;
-						upperShadowSprite.renderer.enabled = false;
-						playerWalk (moveDir);
+						if (walkShotAniPlaying) {
+								playerUpperSprite.renderer.enabled = true;
+								upperShadowSprite.renderer.enabled = true;
+								playerLowerWalk (moveShotDir);
+						} else {
+								playerUpperSprite.renderer.enabled = false;
+								upperShadowSprite.renderer.enabled = false;
+								playerWalk (moveDir);
+						}
 				}
 				if (shotDir != Direction.none && moveDir != Direction.none) {
-	
-						playerUpperSprite.renderer.enabled = true;
-						upperShadowSprite.renderer.enabled = true;
-						playerLowerWalk (moveShotDir);
+						if (walkShotAniPlaying) {
+								playerUpperSprite.renderer.enabled = true;
+								upperShadowSprite.renderer.enabled = true;
+								playerLowerWalk (moveShotDir);
+						} else {
+								playerUpperSprite.renderer.enabled = false;
+								upperShadowSprite.renderer.enabled = false;
+								playerWalk (moveDir);
+						}
 				}
 		}
 
@@ -308,58 +318,11 @@ public class robotAniManager : MonoBehaviour {
 
 						break;
 				}
+
 		}
+
+
 			
-		public void playerLowerWalk(Direction shotDir){
-				if (shotDir == moveDir) {
-						switch (shotDir) {
-						default:
-								break;
-						case Direction.down:
-								setAniSide (Direction.left);
-								playerAni.Play ("walkShot_down");
-								break;
-						case Direction.up:
-								setAniSide (Direction.left);
-								playerAni.Play ("walkShot_up");
-								break;
-						case Direction.left:
-								setAniSide (Direction.left);
-								playerAni.Play ("walkShot_left");
-								break;
-						case Direction.right:
-								setAniSide (Direction.right);
-								playerAni.Play ("walkShot_left");
-								break;
-
-								break;
-						}
-				}else{
-						switch (shotDir) {
-						default:
-								break;
-						case Direction.down:
-								setAniSide (Direction.left);
-								playerAni.Play ("backShot_down");
-								break;
-						case Direction.up:
-								setAniSide (Direction.left);
-								playerAni.Play ("backShot_up");
-								break;
-						case Direction.left:
-								setAniSide (Direction.left);
-								playerAni.Play ("backShot_left");
-								break;
-						case Direction.right:
-								setAniSide (Direction.right);
-								playerAni.Play ("backShot_left");
-								break;
-
-								break;
-
-						}
-				}
-		}
 
 		void playerStandShot(){
 
@@ -388,72 +351,98 @@ public class robotAniManager : MonoBehaviour {
 						break;
 				}
 
+
 		}
 
 		//移动射击 上半身
 		public void playerWalkShot(){
+				//Debug.Log ("射击方向: " + shotDir);
 				walkShotAniPlaying = true;
-				if (shotDir == moveDir) {
-						//前进射击
-						switch (shotDir) {
-						default:
-								break;
-						case Direction.down:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_down");
-								break;
-						case Direction.up:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_up");
-								break;
-						case Direction.left:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_left");
-								break;
-						case Direction.right:
-								setUpperAniSide (Direction.right);
-								playerUpperAni.Play ("walkShotUpper_left");
-								break;
+				switch (shotDir) {
+				default:
+						break;
+				case Direction.down:
+						setUpperAniSide (Direction.left);
+						playerUpperAni.Play ("walkShotUpper_down");
+						break;
+				case Direction.up:
+						setUpperAniSide (Direction.left);
+						playerUpperAni.Play ("walkShotUpper_up");
+						break;
+				case Direction.left:
+						setUpperAniSide (Direction.left);
+						playerUpperAni.Play ("walkShotUpper_left");
+						break;
+				case Direction.right:
+						setUpperAniSide (Direction.right);
+						playerUpperAni.Play ("walkShotUpper_left");
+						break;
 
-								break;
-						}
-				} else {
-						//后腿射击
-						switch (shotDir) {
-						default:
-								break;
-						case Direction.down:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_down");
-								break;
-						case Direction.up:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_up");
-								break;
-						case Direction.left:
-								setUpperAniSide (Direction.left);
-								playerUpperAni.Play ("walkShotUpper_left");
-								break;
-						case Direction.right:
-								setUpperAniSide (Direction.right);
-								playerUpperAni.Play ("walkShotUpper_left");
-								break;
-
-								break;
-						}
+						break;
 				}
 				moveShotDir = shotDir;
+				playerUpperAni.AnimationCompleted = afterShot;
+				//Debug.Log ("上半身射击方向: " + moveShotDir);
 		}
 
+		public void afterShot(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+				walkShotAniPlaying = false;
+		}
 
+		//移动射击 下半身脚移动
+		public void playerLowerWalk(Direction moveShotDir){
+				//Debug.Log ("下半身移动方向: " + moveShotDir);
+				if (moveShotDir == moveDir) {
+						switch (shotDir) {
+						default:
+								break;
+						case Direction.down:
+								setAniSide (Direction.left);
+								playerAni.Play ("walkShot_down");
+								break;
+						case Direction.up:
+								setAniSide (Direction.left);
+								playerAni.Play ("walkShot_up");
+								break;
+						case Direction.left:
+								setAniSide (Direction.left);
+								playerAni.Play ("walkShot_left");
+								break;
+						case Direction.right:
+								setAniSide (Direction.right);
+								playerAni.Play ("walkShot_left");
+								break;
 
-		public void playerShot(){
-				if (moveDir == Direction.none) {
-						playerStandShot ();
-				} else {
-						playerWalkShot ();
+								break;
+						}
+				}else{
+						switch (moveShotDir) {
+						default:
+								break;
+						case Direction.down:
+								setAniSide (Direction.left);
+								playerAni.Play ("backShot_down");
+								break;
+						case Direction.up:
+								setAniSide (Direction.left);
+								playerAni.Play ("backShot_up");
+								break;
+						case Direction.left:
+								setAniSide (Direction.left);
+								playerAni.Play ("backShot_left");
+								break;
+						case Direction.right:
+								setAniSide (Direction.right);
+								playerAni.Play ("backShot_left");
+								break;
+
+								break;
+
+						}
 				}
 		}
+
+
 
 
 		public void playSameAni(string aniName){
@@ -466,6 +455,14 @@ public class robotAniManager : MonoBehaviour {
 						playerAni.Play (aniName);
 				}
 
+		}
+
+		public void playerShot(){
+				if (moveDir == Direction.none) {
+						playerStandShot ();
+				} else {
+						playerWalkShot ();
+				}
 		}
 
 		////////////////////人物动作////////////////////
