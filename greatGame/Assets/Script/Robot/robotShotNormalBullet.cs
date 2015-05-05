@@ -3,6 +3,7 @@ using System.Collections;
 
 public class robotShotNormalBullet : MonoBehaviour {
 
+		bool canShot;
 
 		string  bulletPath = "Prefabs/bullets/normalBullet";	//子弹prefab
 		weaponType weapontype;
@@ -52,6 +53,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 		void Awake(){
 				weapontype = weaponType.bulletNormal;
 
+
 		}
 				
 		void Start () {
@@ -72,6 +74,8 @@ public class robotShotNormalBullet : MonoBehaviour {
 				posLeft = transform.FindChild("left").gameObject;
 				posRight = transform.FindChild("right").gameObject;
 
+				canShot = true;
+
 		}
 
 		// Update is called once per frame
@@ -81,7 +85,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 
 				//时间间隔
 				delayTime+=Time.deltaTime;
-				if( Mathf.Abs(Input.GetAxis("shotHorizontal")) == 1 ||  Mathf.Abs(Input.GetAxis("shotVertical")) == 1  ){
+				if( Mathf.Abs(Input.GetAxis("shotHorizontal")) >= 0.6f ||  Mathf.Abs(Input.GetAxis("shotVertical")) >= 0.6f ){
 						if(delayTime>mbulletRate)
 						{
 								delayTime = 0;
@@ -123,6 +127,8 @@ public class robotShotNormalBullet : MonoBehaviour {
 				shotScript = bulletClone.GetComponent<bulletGetSpeed>();
 				setBulletSpeed(shotScript,mbulletSpeed);
 
+				//播放动画
+				player.GetComponent<robotAniManager>().playerShot();
 
 
 		}
@@ -131,19 +137,19 @@ public class robotShotNormalBullet : MonoBehaviour {
 
 		void getBulletDirection()
 		{
-				if(Input.GetAxis ("shotHorizontal")==1)
+				if(Input.GetAxis ("shotHorizontal") >= 0.6f)
 				{
 						bulletDirection = Direction.right;
 				}		
-				if(Input.GetAxis ("shotHorizontal")==-1)
+				if(Input.GetAxis ("shotHorizontal") <= -0.6f)
 				{
 						bulletDirection = Direction.left;
 				}
-				if(Input.GetAxis ("shotVertical")==1)
+				if(Input.GetAxis ("shotVertical") >= 0.6f)
 				{
 						bulletDirection = Direction.up;
 				}
-				if(Input.GetAxis ("shotVertical")==-1)
+				if(Input.GetAxis ("shotVertical") <= -0.6f)
 				{
 						bulletDirection = Direction.down;
 				}
@@ -198,7 +204,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 				}
 		}
 
-		//only being used by other scripts
+		//message方法调用----
 		public void setEnabled(select_name_bool other){
 				if(other.name == this.GetType().ToString()  ){
 						this.enabled = other.choose;
@@ -208,10 +214,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 		public void disableAll(){
 				this.enabled = false;
 		}
-
-
-
-		//only being used by other scripts
+				
 		public void upgradeProperties(char_property property){
 				mbulletSpeed = baseBulletSpeed + property.AttackSpeed;
 				mbulletRate = baseBulletRate - (baseBulletRate-0.1f)*property.AttackRate/10;
@@ -235,7 +238,7 @@ public class robotShotNormalBullet : MonoBehaviour {
 				if(mdamageRate == 0) {mdamageRate = 0.5f;}
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype,mbulletDamage,mknockBack,mdamageRate,bulletSpe, constant.getBattleType(player));
 		}
-
+		//message方法调用over
 
 		//捡到道具后更新属性
 		public void setBaseProperty(weaponItem_property weapon){

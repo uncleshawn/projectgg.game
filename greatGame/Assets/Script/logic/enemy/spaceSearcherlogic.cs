@@ -32,7 +32,7 @@ public class spaceSearcherlogic : MonoBehaviour {
 		public void startWork(GameObject obj){
 				//Debug.Log (obj.name + "开始寻路");
 				employ = obj;
-				this.gameObject.name = employ + "pathSearch";
+				this.gameObject.name = employ.name + "pathSearch";
 				working = true;
 				if(!employ){
 						Debug.Log("请检查错误");
@@ -41,44 +41,43 @@ public class spaceSearcherlogic : MonoBehaviour {
 		}
 
 		public void searchFreeSpace(){
+				
+				iTween.MoveBy(gameObject, iTween.Hash("name" , this.gameObject.name , "y", Random.Range(-moveRange,moveRange)/150, "x" , Random.Range(-moveRange,moveRange)/150 , "easeType", "linear", "loopType", "none" , "time" , 1 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
 				iTweenWork = true;
-				iTween.MoveBy(gameObject, iTween.Hash("y", Random.Range(-moveRange,moveRange)/100, "x" , Random.Range(-moveRange,moveRange)/100 , "easeType", "linear", "loopType", "none" , "time" , 1 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
-
 		}
 
 		void finishMove(){
-				//Debug.Log (employ.name + "寻路成功");
-				//Debug.Log ("成功搜索到移动位置:" + this.transform.position);
-
 				employ.SendMessage ("moveNearByPos", this.transform.position);
-				iTween.Stop (this.gameObject.name);
+				searchDone = true;
 				GameObject.Destroy (this.gameObject);
 		}
 
 
 
 		void OnTriggerEnter(Collider other){
-				if (employ) {
-						//Debug.Log (employ.name + "的寻路器处理碰撞中: 面对" + other.name);
-						if (other.gameObject.name != employ.name && other.tag != "Bullet" && other.name != "spaceSearch(Clone)") {
-								//Debug.Log (employ.name + "寻路失败,发生碰撞: " + other.name);
-								iTween.StopByName (this.gameObject.name);
-								iTweenWork = false;
+				if (!searchDone) {
+						if (employ) {
+								//Debug.Log (employ.name + "的寻路器处理碰撞中: 面对" + other.name);
+								if (other.gameObject.name != employ.name && other.tag != "Bullet" && other.name != "spaceSearch(Clone)") {
+										//Debug.Log (employ.name + "寻路失败,发生碰撞: " + other.name);
+										//Debug.Log ("碰撞,寻路取消");
+										//iTween.StopByName (this.gameObject.name);
+										iTweenWork = false;
 
-								//缩小寻路范围
-								moveRange = moveRange - 30;
-								if (moveRange < 0) {
-										moveRange = 0;
+										//缩小寻路范围
+										moveRange = moveRange - 30;
+										if (moveRange < 0) {
+												moveRange = 0;
+										}
+
+										this.transform.position = employ.transform.position;
+
 								}
-
-								this.transform.position = employ.transform.position;
-
+						} else {
+								Debug.Log ("怪物被击败,寻路取消");
+								iTween.StopByName (this.gameObject.name);
+								GameObject.Destroy (this.gameObject);	
 						}
-				}
-				else {
-						Debug.Log ("怪物被击败,寻路取消");
-						iTween.Stop (this.gameObject.name);
-						GameObject.Destroy (this.gameObject);	
 				}
 		}
 

@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class robotShotLaserNomal : MonoBehaviour {
+		
+		//是否可以射出子弹
+		bool canShot;
+
 		//子弹类型
 		weaponType weapontype;
 		string laserPath; 
@@ -34,6 +38,7 @@ public class robotShotLaserNomal : MonoBehaviour {
 				weapontype = weaponType.laserNormal;
 				laserRate = preTime + flyingTime + mcoldDown;
 				laserPath = "Prefabs/bullets/normalLaser";
+				canShot = true;
 
 		}
 
@@ -90,7 +95,7 @@ public class robotShotLaserNomal : MonoBehaviour {
 
 
 
-
+		//message方法调用----
 		public void setEnabled(select_name_bool other){
 				if(other.name == this.GetType().ToString() ){
 						this.enabled = other.choose;
@@ -114,13 +119,17 @@ public class robotShotLaserNomal : MonoBehaviour {
 				mbulletDamage = laserDamage + property.Damage*5;
 		}
 
+		public void setCanShot(bool setCanShot){
+				canShot = setCanShot;
+		}
+	
 
 		//SEND PROPERTY TO BULLETS
 		public void setBulletProperty(GameObject bulletClone){
 				if(mdamageRate == 0) {mdamageRate = 1f;}
 				bulletClone.GetComponent<bullet_property>().setProperty(weapontype ,mbulletDamage,mknockBack,mdamageRate, bulletSpe , constant.getBattleType(this.transform.parent.gameObject));
 		}
-
+		//message方法调用 over-----------
 
 		//捡到道具后更新属性
 		public void setBaseProperty(weaponItem_property weapon){

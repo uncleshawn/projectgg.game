@@ -164,15 +164,14 @@ public class enemylogic : monsterbaselogic {
 
 		//爆炸击退效果
 		override public void explodeKnockBack(bullet_property bulletProperty,int force){
-
+				//Debug.Log ("爆炸击退效果");
 				//敌人位置
 				Vector3 enemyPos = this.transform.position;
 				//子弹位置
 				Vector3 bulletPos = bulletProperty.transform.position;		
-				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
-				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
-						this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
-				}
+				Vector3 forceDir = enemyPos - bulletPos;
+				forceDir.Normalize ();
+				this.gameObject.rigidbody.AddForce (forceDir * force);	
 		}
 
 		//检查子弹的特殊效果

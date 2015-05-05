@@ -3,6 +3,7 @@ using System.Collections;
 
 public class bulletAniManager : MonoBehaviour {
 
+		public bool isArrow;
 
 		tk2dSprite bulletSprite;				//子弹的精灵图	
 		tk2dSpriteAnimator bulletAni;			//子弹动画
@@ -10,6 +11,7 @@ public class bulletAniManager : MonoBehaviour {
 		Direction crossDirection;
 
 		public Direction BulletDirection { get { return crossDirection; } set { crossDirection = value; }}
+
 
 		public bool bulletDie;
 
@@ -19,14 +21,21 @@ public class bulletAniManager : MonoBehaviour {
 		public bool getShadow;
 		public bool dynamicShadow;
 		tk2dSprite shadowSprite;
-
-
+		bool shadowParentUI;
+		public bool uniqueSetting;
+		public float shadowScaleX;
+		public float shadowScaleY;
+		public float shadowPosY;
+		bulletGetSpeed getSpeed;
+		Vector3 bulletDir;
+		string bulletFlickPath = "Prefabs/aniEffect/effect_arrowHitWall";
 
 		void Awake(){
 				if (bulletDie == false) {
 						bulletSprite = transform.FindChild ("ui").FindChild ("bulletPic").GetComponent<tk2dSprite> ();
 						bulletAni = transform.FindChild ("ui").FindChild ("bulletPic").GetComponent<tk2dSpriteAnimator> ();
 						bulletProperty = gameObject.GetComponent<bullet_property> ();
+						getSpeed = GetComponent<bulletGetSpeed> ();
 						if (getShadow) {
 								shadowSprite = intiShadow ();
 						}
@@ -46,13 +55,15 @@ public class bulletAniManager : MonoBehaviour {
 
 		void setBulletDirection(){
 				Vector3 axisX = new Vector3 (1, 0, 0);
-				Vector3 bulletDirection = getDirection ();
-				crossDirection = getCrossDirection (bulletDirection);
-				Vector3 angle = new Vector3(0,0,angle_360 (new Vector3 (1, 0, 0), bulletDirection));
+				bulletDir = getDirection ();
+				crossDirection = getCrossDirection (bulletDir);
+				Vector3 angle = new Vector3(0,0,angle_360 (new Vector3 (1, 0, 0), bulletDir));
 				//Debug.Log ("子弹和X轴角度: " + angle);
 				bulletSprite.transform.Rotate (angle);
 				if (getShadow) {
-						shadowSprite.scale = new Vector3 (bulletSprite.scale.x * 0.9f, bulletSprite.scale.y * 0.7f, bulletSprite.scale.z);
+						if(!uniqueSetting){
+							shadowSprite.scale = new Vector3 (bulletSprite.scale.x * 0.9f, bulletSprite.scale.y * 0.7f, bulletSprite.scale.z);
+						}
 						shadowSprite.GetComponent<shadowAniManager> ().shadowRotate (angle);
 
 				}
@@ -94,10 +105,28 @@ public class bulletAniManager : MonoBehaviour {
 
 		//生成子弹的影子
 		tk2dSprite intiShadow(){
-				GameObject shadow = constant.getMapLogic ().initBulletShadow (bulletSprite , bulletSprite.transform.parent.gameObject , dynamicShadow);
-				shadow.transform.localPosition = new Vector3 (0, -0.6f, 0.5f);
+				if (!uniqueSetting) {
+						shadowScaleX = 1;
+						shadowScaleY = 1;
+						shadowPosY = 1.6f;
+				}
+				GameObject shadowParent;
+				shadowParent = bulletSprite.gameObject.transform.parent.gameObject;
+
+				GameObject shadow = constant.getMapLogic ().initBulletShadow (bulletSprite , shadowParent , dynamicShadow);
+				shadow.transform.localPosition = new Vector3 (0, -1f, 0.5f);
+
 				tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite> ();
+
+
+
+				if (uniqueSetting) {
+						shadowSprite.scale = new Vector3 (shadowSprite.scale.x * shadowScaleX, shadowSprite.scale.y * shadowScaleY, shadowSprite.scale.z);
+						shadow.transform.localPosition = new Vector3 (0, -shadowPosY, 0.5f);
+				}
+
 				return shadowSprite;
+
 		}
 
 
@@ -105,6 +134,10 @@ public class bulletAniManager : MonoBehaviour {
 		public void hitWall() {
 				bulletStop();
 				//Debug.Log ("collision: bullet hit wall.");
+				//生成一个弹箭的prefab
+				if (isArrow) {
+						initBulletFlickAni ();
+				}
 				destroyAfterAni("hit");
 		}
 
@@ -153,6 +186,16 @@ public class bulletAniManager : MonoBehaviour {
 		void bulletStop(){
 				bulletDie = true;
 				rigidbody.velocity = new Vector3(0,0,0);
+		}
+
+		//击中反弹效果
+		void initBulletFlickAni(){
+				GameObject bulletFlick = (GameObject)GameObject.Instantiate(Resources.Load(bulletFlickPath),gameObject.transform.position,Quaternion.identity);
+				//修改方向
+				Vector3 angle = new Vector3(0,0,angle_360 (new Vector3 (1, 0, 0), bulletDir));
+				bulletFlick.transform.Rotate (angle);
+				bulletFlick.GetComponent<arrowFlickAni> ().OriginDir = bulletDir;
+				constant.getSoundLogic ().playEffect ("effect/arrowHitWall");
 		}
 
 		bool checkBulletPierce(){

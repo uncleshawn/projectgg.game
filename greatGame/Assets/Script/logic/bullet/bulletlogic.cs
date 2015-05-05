@@ -21,8 +21,6 @@ public class bulletlogic : MonoBehaviour {
 		void Start () {
 				//初始化时间,让子弹第一时间能造成伤害
 				cTime = 99;
-
-
 		}
 
 		// Update is called once per frame
@@ -30,6 +28,7 @@ public class bulletlogic : MonoBehaviour {
 				
 				cTime += Time.deltaTime;
 
+				//敌人+字典
 				string[] keys = new string[enemyDictionary.Count];
 				int i = 0;
 				foreach (string key in enemyDictionary.Keys) keys[i++] = key;

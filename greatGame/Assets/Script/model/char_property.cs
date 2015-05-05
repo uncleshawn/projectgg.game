@@ -88,7 +88,7 @@ public class char_property : base_property {
 				mBattleType = constant.BattleType.Player;
 
 				mItems = new List<itemtemplate> ();
-				mBaseMoveSpeed = 8.0f;
+				mBaseMoveSpeed = 6.0f;
 		}
 		// Use this for initialization
 		void Start () {

@@ -42,7 +42,7 @@ public class shadowAniManager : MonoBehaviour {
 				selfSprite.Collection = targetSprite.Collection;
 				selfSprite.spriteId = targetSprite.spriteId;
 				Color shadowColor = new Color (0, 0, 0);
-				shadowColor.a = 0.3f;
+				shadowColor.a = 0.5f;
 				selfSprite.color = shadowColor;
 				if (dynamicShadow == true) {
 						targetAni = targetSprite.gameObject.GetComponent<tk2dSpriteAnimator>();

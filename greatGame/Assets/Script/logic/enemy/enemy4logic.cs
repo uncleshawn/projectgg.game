@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//骷髅弓箭手
 
 public class enemy4logic : enemylogic {
 		
@@ -23,10 +24,12 @@ public class enemy4logic : enemylogic {
 		public float mWaitTime = 2;
 
 		Direction aniDir;
-
+		bool enemyShooting;
 		float deltaTime;
-		public float aniDelay = 0.2f;
+		public float aniDelay = 0.2f; 
 		float aniDelayDelta;
+
+		float damageDeltaTime;
 
 		void Awake(){
 				//玩家的位置
@@ -46,6 +49,7 @@ public class enemy4logic : enemylogic {
 				shooter.upgradeProperties (enemySelf);
 				aniDir = Direction.down;
 				deltaTime = Random.Range (0, mIntervalTime + mWaitTime);
+				damageDeltaTime = 99;
 		}
 
 
@@ -64,6 +68,7 @@ public class enemy4logic : enemylogic {
 				stateFixedUpdate ();
 				deltaTime += Time.fixedDeltaTime;
 				aniDelayDelta += Time.fixedDeltaTime;
+				damageDeltaTime += Time.fixedDeltaTime;
 		}
 				
 
@@ -97,12 +102,21 @@ public class enemy4logic : enemylogic {
 						return v;
 				}
 
+				if (enemyShooting) {
+						return v; 
+				}
+
 				float add = 160;
 				Vector3 selfPos = this.transform.position;
 				lockTarget ();
 				v = playerPos - selfPos;
 
-
+				if (Mathf.Abs (v.x) <= 0.8f && Mathf.Abs (v.y) <= 0.8f) {
+					//非常接近主角 不再移动
+						//Debug.Log("非常接近主角 不再移动");
+						aniWait();
+						return new Vector3 ();
+				}
 				//播放走路动画
 				playWalkAni (v);
 				zombieAi_canShot = true;
@@ -168,7 +182,7 @@ public class enemy4logic : enemylogic {
 		public void aniShot(){
 				if (zombieAi_canShot) {
 						//Debug.Log ("射击");
-
+						enemyShooting = true;
 						getAniDir ();
 						if (aniDelayDelta >= aniDelay) {
 								switch (aniDir) {
@@ -202,6 +216,7 @@ public class enemy4logic : enemylogic {
 
 		}
 		void AnimationCompleteDelegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+				enemyShooting = false;
 				aniWait ();
 		}
 
@@ -243,8 +258,30 @@ public class enemy4logic : enemylogic {
 		}
 
 
-		
+		void hitPlayer(GameObject obj){
+				constant.getMapLogic ().triggerEnter (obj, this.gameObject);
+		}
 
-
+		void OnCollisionEnter(Collision other){
+				Debug.Log ("enemy4碰撞: " + other.collider.gameObject.tag);
+				if (other.collider.gameObject.tag == "Player") {
+						Debug.Log ("碰到主角");
+						if (damageDeltaTime >= 2) {
+								
+								hitPlayer (other.gameObject);
+								damageDeltaTime = 0;
+						}
+				}
+		}
+//		void OnTriggerStay(Collider other){
+//				if (other.tag == "Player") {
+//						if (damageDeltaTime >= 2) {
+//								Debug.Log ("碰到主角");
+//								hitPlayer (other.gameObject);
+//								damageDeltaTime = 0;
+//						}
+//				}
+//		}
 
 }
+ 

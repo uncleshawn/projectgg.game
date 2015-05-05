@@ -7,8 +7,10 @@ public class charlogic : monsterbaselogic {
 		private float mHurtTime = 0;
 		private float mAccSpeed = 160.0f;
 
-                bool mCanControll;
-                public bool CanControll { get { return mCanControll; } set { mCanControll = value; } }
+		bool mCanControll;
+		public bool CanControll { get { return mCanControll; } set { mCanControll = value; } }
+		float mStunTime;
+		public float StunTime { get { return mStunTime; } set { mStunTime = value; } }
 
 		//float deltaTime_scared;
 		void Awake(){
@@ -37,6 +39,8 @@ public class charlogic : monsterbaselogic {
 		void stateFixedUpdate(){
 				deltaTime_scared += Time.fixedDeltaTime;
 				checkScaredRecover (deltaTime_scared);
+				deltaTime_stun += Time.fixedDeltaTime;
+				checkStunRecover (deltaTime_stun);
 		}
 
 		//玩家是否捡起道具
@@ -395,6 +399,8 @@ public class charlogic : monsterbaselogic {
 		public void stopWUDI(){
 				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
 				mgr.stopWUDI ();
+				BoxCollider box = GetComponent<BoxCollider> ();
+				box.center = new Vector3 (box.center.x, box.center.y, 0);
 		}
 
 		public void setWUDI(){
@@ -403,9 +409,16 @@ public class charlogic : monsterbaselogic {
 
 				robotAniManager mgr = gameObject.GetComponent<robotAniManager> ();
 				mgr.playWUDI ();
+				BoxCollider box = GetComponent<BoxCollider> ();
+				box.center = new Vector3 (box.center.x, box.center.y, -5);
 		}
 		public bool isWUDI(){
 				return mHurtTime > 0;
+		}
+		public void beStun(float stunTime){
+				//Debug.Log ("主角硬直");
+				constant.getMapLogic ().setPlayerCanCotroll (false);
+				mStunTime = stunTime;
 		}
 
 		//检查恢复恐惧效果
@@ -413,7 +426,7 @@ public class charlogic : monsterbaselogic {
 				char_property charProperty = gameObject.GetComponent<char_property> ();
 				if (charProperty.scared == true) {
 						float scaredRecoverTime = charProperty.scaredRecoverTime;
-						if (deltaTime >= scaredRecoverTime) {
+						if (deltaTime_scared >= scaredRecoverTime) {
 								//Debug.Log (deltaTime + "--" + scaredRecoverTime + ": " + this.name + "解除恐惧");
 								charProperty.scared = false;
 						}
@@ -421,6 +434,25 @@ public class charlogic : monsterbaselogic {
 						deltaTime_scared = 0;
 				}
 
+		}
+
+		//检查不再stun
+		override public void checkStunRecover(float deltaTime){
+				if ( mStunTime == 0) {
+						deltaTime_stun = 0;
+						return;
+				}
+				if (mCanControll == false) {
+						//Debug.Log ("主角硬直中");
+						//Debug.log ("deltaTime_stun: " + deltaTime_stun);
+						if (deltaTime_stun >= mStunTime) {
+								mCanControll = true;
+								mStunTime = 0;
+						}
+				} else {
+						Debug.Log ("主角没有硬直");
+						deltaTime_stun = 0;
+				}
 		}
 
 		//player beattacked must edit in next 玩家收到伤害 将要修改
@@ -433,6 +465,9 @@ public class charlogic : monsterbaselogic {
 				if(enemyProperty != null){
 						char_property charProperty = gameObject.GetComponent<char_property>();
 						charProperty.Hp = charProperty.Hp - 1;
+						beStun (0.3f);
+
+						getTouchHit (charProperty, enemyProperty);
 
 						if(isDie()){ 
 								constant.getGameLogic().Die();
@@ -451,14 +486,16 @@ public class charlogic : monsterbaselogic {
 				if(bulletProperty != null){
 						char_property charProperty = gameObject.GetComponent<char_property>();
 						charProperty.Hp = charProperty.Hp - bulletProperty.bulletDamage;
+						beStun (0.3f);
+
+						//特殊效果动画
+						hitAnimation ();
 
 						if (bulletProperty.bulletknock != 0) {
 								//Debug.Log (gameObject.name + "被击退.武器类型为:");
 								getKnockBack (charProperty, bulletProperty);
 						}
-
-
-
+								
 
 						if(isDie()){ 
 								constant.getGameLogic().Die();
@@ -471,7 +508,26 @@ public class charlogic : monsterbaselogic {
 						}
 				}
 		}
+		public void getTouchHit(char_property player , enemy_property enemy){
+				char_property charProperty = player.GetComponent<char_property> ();	
+				int force = 600;
+				if (charProperty.heavyBody) {
+						return;
+				}
 
+				//Debug.Log ("爆炸击退效果");
+				//敌人位置
+				Vector3 playPos = this.transform.position;
+				//子弹位置
+				Vector3 enemyPos = enemy.transform.position;		
+				Vector3 forceDir = playPos - enemyPos;
+				forceDir.Normalize ();
+				this.gameObject.rigidbody.AddForce (forceDir * force);	
+
+
+		}
+
+		//击退效果
 		public void getKnockBack(char_property player, bullet_property bulletProperty){
 				char_property charProperty = player.GetComponent<char_property> ();	
 				int force = bulletProperty.bulletknock;
@@ -479,6 +535,7 @@ public class charlogic : monsterbaselogic {
 						return;
 				}
 				KnockType knockType = bulletProperty.bulletSpe.knockType;
+				//Debug.Log ("击退类型: " + knockType);
 				switch (knockType) {
 				default:
 						break;
@@ -495,8 +552,11 @@ public class charlogic : monsterbaselogic {
 		}
 		//普通击退效果
 		void normalKnockBack(bullet_property bulletProperty,int force){
+				
 				Direction bulletDirection;
 				bulletDirection = Direction.none;
+
+				//获得方向
 				if (bulletProperty.WeaponType == weaponType.laserNormal) {
 						bulletDirection = bulletProperty.gameObject.GetComponent<laserAniManager> ().BulletDirection;
 				}
@@ -535,17 +595,25 @@ public class charlogic : monsterbaselogic {
 		}
 		//爆炸击退效果
 		override public void explodeKnockBack(bullet_property bulletProperty,int force){
-
+				//Debug.Log ("爆炸击退效果");
 				//敌人位置
 				Vector3 enemyPos = this.transform.position;
 				//子弹位置
 				Vector3 bulletPos = bulletProperty.transform.position;		
-				Vector3 bulletSpeed = bulletProperty.transform.rigidbody.velocity;
-				if (bulletSpeed.x!=0 || bulletSpeed.y!=0) {
-						this.gameObject.rigidbody.AddForce (new Vector3 (enemyPos.x - bulletPos.x, enemyPos.y - bulletPos.y, 0) * force);	
-				}
+				Vector3 forceDir = enemyPos - bulletPos;
+				forceDir.Normalize ();
+				this.gameObject.rigidbody.AddForce (forceDir * force);	
+
 		}
 
-
+		//被子弹击中喷血效果
+		void hitAnimation(){
+				GameObject obj = gameObject;
+				string effectPath = "Prefabs/aniEffect/effect_bloodHit";
+				string effectName = "bloodHit";
+				string aniLibPath = "Assets/Sprites/animation/effect/hitEffect.prefab";
+				Vector3 pos = new Vector3 (0, 0.2f, 0);
+				constant.getMapLogic ().onceEffectAni (obj, effectPath , effectName, pos);
+		}
 
 }

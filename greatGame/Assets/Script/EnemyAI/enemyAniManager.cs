@@ -30,6 +30,8 @@ public class enemyAniManager : MonoBehaviour {
 		//影子动画sprite
 		private tk2dSprite shadowSprite;
 
+		public GameObject ShadowObject  { get { return shadowObj; } set { shadowObj = value; }}
+
 		bool aniStart;
 
 		// Use this for initialization

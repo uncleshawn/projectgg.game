@@ -19,17 +19,16 @@ public class onceAniManager : MonoBehaviour {
 		}
 
 
-
-		public void setAniLib(string aniLibPath){
-				
-				Debug.Log ("播放一次性动画: " + aniLibPath);
-				animator.Library =  Resources.LoadAssetAtPath(aniLibPath, typeof(tk2dSpriteAnimation)) as tk2dSpriteAnimation;
-				
-		}
+//
+//		public void setAniLib(string aniLibPath){
+//				
+//				Debug.Log ("播放一次性动画: " + aniLibPath);
+//				animator.Library =  Resources.LoadAssetAtPath(aniLibPath, typeof(tk2dSpriteAnimation)) as tk2dSpriteAnimation;
+//				
+//		}
 
 		public void playAni(string aniName){
 				constant.getSoundLogic ().playEffect ("");
-
 				animator.Play (aniName);
 				animator.AnimationCompleted = destroyAfter;
 		}

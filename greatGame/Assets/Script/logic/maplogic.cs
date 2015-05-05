@@ -382,6 +382,13 @@ public class maplogic{
 								}
 						}
 				}
+				if (colliderTag.Equals (constant.TAG_PLAYER)) {
+						if(beColliderTag.Equals(constant.TAG_ENEMY)){
+								if(constant.isConflict(collider, beCollider)){
+										attack(beCollider, collider);
+								}
+						}
+				}
 
 				if (colliderTag.Equals (constant.TAG_TRAP)) {
 					if(beColliderTag.Equals(constant.TAG_PLAYER)){
@@ -511,13 +518,13 @@ public class maplogic{
 
 
 		//在gameobject播放一次性动画
-		public void onceEffectAni(GameObject obj, string aniPath , string aniLibPath , string aniName){
+		public void onceEffectAni(GameObject obj, string aniPath , string aniName , Vector3 pos = new Vector3() ){
 				//使用播放一次性动画的prefab
-				GameObject itemEffectClone = (GameObject)GameObject.Instantiate(Resources.Load(aniPath),obj.transform.position,Quaternion.identity);
+				GameObject itemEffectClone = (GameObject)GameObject.Instantiate(Resources.Load(aniPath), obj.transform.position + pos ,Quaternion.identity);
 				itemEffectClone.transform.parent = obj.gameObject.transform;
 				itemEffectClone.transform.localPosition = new Vector3 (0, 0, -2);
 				onceAniManager aniManager = itemEffectClone.GetComponent<onceAniManager> ();
-				aniManager.setAniLib (aniLibPath);
+				//aniManager.setAniLib (aniLibPath);
 				aniManager.playAni(aniName);	
 		}
 
@@ -567,11 +574,10 @@ public class maplogic{
                         follow.normalShake();
                 }
 
-        public void setPlayerCanCotroll(bool ret){
+		public void setPlayerCanCotroll(bool ret){
                 GameObject player = constant.getPlayer();
                 charlogic logic = player.GetComponent<charlogic>();
                 logic.CanControll = ret;
-
         }
 
         public void setNormalLight() {

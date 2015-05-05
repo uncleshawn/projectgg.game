@@ -68,9 +68,9 @@ public class recoverHeartStone : MonoBehaviour {
 				GameObject obj = player.gameObject;
 				string effectPath = "Prefabs/aniEffect/effect_item";
 				string effectName = "item60";
-				string aniLibPath = "Assets/Sprites/animation/item/itemEffectAni.prefab";
-
-				constant.getMapLogic ().onceEffectAni (obj, effectPath, aniLibPath , effectName);
+				//string aniLibPath = "Assets/Sprites/animation/item/itemEffectAni.prefab";
+				//Vector3 pos = new Vector3 (0, 0, 0);
+				constant.getMapLogic ().onceEffectAni (obj, effectPath , effectName);
 
 		}
 

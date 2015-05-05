@@ -8,9 +8,11 @@ using System.Collections;
 public class enemy2logic : enemylogic {
 
 		enemy_property enemySelf;
-		GameObject ani;
-		string spaceSearcherPath;
 		tk2dSpriteAnimator enemyAni;
+		GameObject aniObject;
+		enemyAniManager aniManager;
+		string spaceSearcherPath;
+		GameObject shadowObject;
 		enemyShotBullet shooter;
 		public int waitTime;
 
@@ -18,16 +20,21 @@ public class enemy2logic : enemylogic {
 		bool completeMove;
 		bool halfComplete;
 
+		//动画方向
+		Direction aniDir;
+
 		// Use this for initialization
 		void Awake(){
 				//自己的属性
 				enemySelf = gameObject.GetComponent<enemy_property>();
 				//动画控制
-				ani = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;
+				aniObject = transform.FindChild ("ui").FindChild ("AnimatedSprite").gameObject;
 				//寻路工具
 				spaceSearcherPath = "Prefabs/logic/spaceSearch";
 				//动画脚本
-				enemyAni = ani.GetComponent<tk2dSpriteAnimator> ();
+				enemyAni = aniObject.GetComponent<tk2dSpriteAnimator> ();
+				//enemyAniManager
+				aniManager = GetComponent<enemyAniManager>();
 				//攻击射击脚本
 				shooter = gameObject.GetComponent<enemyShotBullet> ();
 				//判断是否开始重复行动
@@ -39,7 +46,7 @@ public class enemy2logic : enemylogic {
 		// Use this for initialization
 
 		void Start () {
-
+				shadowObject = aniManager.ShadowObject;
 		}
 
 		// Update is called once per frame
@@ -51,50 +58,82 @@ public class enemy2logic : enemylogic {
 
 		}
 
+		void getDirection(){
+				Vector3 playerPos = constant.getPlayer ().transform.position;
+				Vector3 dirPos = playerPos - transform.position;
+				if (Mathf.Abs (dirPos.x) >= Mathf.Abs (dirPos.y)) {
+						if (dirPos.x >= 0) {
+								//Debug.Log ("右");
+								aniDir = Direction.right;
+								aniManager.setAniSide(aniDir);
 
+						} else {
+								//Debug.Log ("左");
+								aniDir = Direction.left;
+								aniManager.setAniSide(aniDir);
+
+						}
+				} else {
+						if (dirPos.y >= 0) {
+								//Debug.Log ("上");
+								aniDir = Direction.up;	
+
+						} else {
+								//Debug.Log ("下");
+								aniDir = Direction.down;
+						}
+				}
+		}
 
 		void attackMove(){
+				getDirection ();
+				switch (aniDir) {
+				default:
+						break;
+				case Direction.left:
+						enemyAni.Play ("comeOut_left");
+						break;
+				case Direction.right:
+						enemyAni.Play ("comeOut_left");
+						break;
+				case Direction.down:
+						enemyAni.Play ("comeOut_down");
+						break;
+				case Direction.up:
+						enemyAni.Play ("comeOut_up");
+						break;
 
-				enemyAni.Play ("comeOut");
-				enemyAni.AnimationCompleted = shotBullet;
+						break;
+				}
+						
+				enemyAni.AnimationEventTriggered = shotBullet;
+				enemyAni.AnimationCompleted = enemyWait;
 		}
 
-		void shotBullet(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
-				enemyAni.Play ("attack");
-				int notShoot = Random.Range (0, 4);
-				if (notShoot != 0) {
-						//shooter.shootBullet ();
-						if (enemySelf.scared) {
-								shooter.shootBullet (EnemyShotType.random);
-						} else {
-								//Debug.Log ("敌人射击");
-								shooter.shootBullet (EnemyShotType.directPlayer);
-						}
 
-						StartCoroutine (waitMove (waitTime));
-						defendMove ();
 
-				} else {
-						StartCoroutine (waitMove (1));
-						defendMove ();
-				}
-		}
 
-		IEnumerator waitMove(int waitTime){
-				//Debug.Log ("敌人射击");
-				if (enemyAni.IsPlaying ("wait")) {
-						enemyAni.Play ("wait");
+
+		void comInMove(){
+				switch (aniDir) {
+				default:
+						break;
+				case Direction.left:
+						enemyAni.Play ("comeIn_left");
+						break;
+				case Direction.right:
+						enemyAni.Play ("comeIn_left");
+						break;
+				case Direction.down:
+						enemyAni.Play ("comeIn_down");
+						break;
+				case Direction.up:
+						enemyAni.Play ("comeIn_up");
+						break;
+
+						break;
 				}
 
-				if (waitTime == 0) {
-						waitTime = 3;
-				}
-				waitTime = Random.Range (waitTime-1, waitTime + 2);
-				yield return new WaitForSeconds(waitTime);
-		}
-
-		void defendMove(){
-				enemyAni.Play ("comeIn");
 				enemyAni.AnimationCompleted = disappearAfter;
 
 		}
@@ -102,13 +141,14 @@ public class enemy2logic : enemylogic {
 		//隐藏地鼠图片 并 开始寻路
 		void disappearAfter(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
 
-				BoxCollider box = ani.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
+				BoxCollider box = aniObject.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
 				if (box) {
-						box.isTrigger = true;
+						box.enabled = false;
 				} else {
 						Debug.Log ("出错请检查");
 				}
-				ani.GetComponent<MeshRenderer> ().enabled = false;
+				shadowObject.GetComponent<MeshRenderer> ().enabled = false;
+				aniObject.GetComponent<MeshRenderer> ().enabled = false;
 
 				//生成位置搜索器
 				GameObject searcherClone = (GameObject)Instantiate (Resources.Load (spaceSearcherPath), this.transform.position, Quaternion.identity);
@@ -127,11 +167,63 @@ public class enemy2logic : enemylogic {
 
 		void finishMove(){
 				enemySelf.invincible = false;
-				BoxCollider box =  ani.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
-				box.isTrigger = false;
-				ani.GetComponent<MeshRenderer> ().enabled = true;
+				BoxCollider box =  aniObject.transform.parent.parent.gameObject.GetComponent<BoxCollider> ();
+				box.enabled = true;
+				shadowObject.GetComponent<MeshRenderer> ().enabled = true;
+				aniObject.GetComponent<MeshRenderer> ().enabled = true;
+
 				completeMove = true;
 		}
+
+
+
+		//完成动画
+		void enemyWait(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip){
+				StartCoroutine (waitMove (waitTime));
+
+		}
+
+		//wait
+		IEnumerator waitMove(int waitTime){
+				
+				switch (aniDir) {
+				default:
+						break;
+				case Direction.left:
+						enemyAni.Play ("wait_left");
+						break;
+				case Direction.right:
+						enemyAni.Play ("wait_left");
+						break;
+				case Direction.down:
+						enemyAni.Play ("wait_down");
+						break;
+				case Direction.up:
+						enemyAni.Play ("wait_up");
+						break;
+
+						break;
+				}
+
+				if (waitTime == 0) {
+						waitTime = 3;
+				}
+				waitTime = Random.Range (waitTime-2, waitTime + 2);
+				yield return new WaitForSeconds(waitTime);
+				comInMove ();
+		}
+
+		//中间时间
+		void shotBullet(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip,  int frameNum)  {
+				//shooter.shootBullet ();
+				if (enemySelf.scared) {
+						shooter.shootBullet (EnemyShotType.random);
+				} else {
+						//Debug.Log ("敌人射击");
+						shooter.shootBullet (EnemyShotType.directPlayer);
+				}
+		}
+
 
 
 		void OnTriggerEnter(Collider other){

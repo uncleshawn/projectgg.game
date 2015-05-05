@@ -99,13 +99,13 @@ public class enemy_property : base_property {
 
 		public void upgradeMoveSpeed(float slowLevel){
 				BaseMoveSpeed = enemySpeed*slowLevel;
-				Debug.Log ("物体减速到: " + BaseMoveSpeed);
+				//Debug.Log ("物体减速到: " + BaseMoveSpeed);
 				mMoveSpeed = BaseMoveSpeed;
 		}
 
 		public void resetMoveSpeed(){
 				BaseMoveSpeed = enemySpeed;
-				Debug.Log ("物体恢复速度到: " + BaseMoveSpeed);
+				//Debug.Log ("物体恢复速度到: " + BaseMoveSpeed);
 				mMoveSpeed = BaseMoveSpeed;
 		}
 
