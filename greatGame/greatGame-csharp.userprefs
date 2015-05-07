@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp-firstpass-vs.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/enemyPiggy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/logic/enemy/enemy2logic.cs">
     <Files>
       <File FileName="Assets/Script/logic/bullet/bulletlogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Robot/robotAniManager.cs" Line="242" Column="42" />
-      <File FileName="Assets/Script/EnemyAI/enemyAniManager.cs" Line="172" Column="3" />
-      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="176" Column="7" />
-      <File FileName="Assets/Script/Robot/robotShotNormalBullet.cs" Line="107" Column="30" />
-      <File FileName="Assets/Script/logic/enemy/enemyPiggy.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Robot/robotAniManager.cs" Line="184" Column="4" />
+      <File FileName="Assets/Script/EnemyAI/enemyAniManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Bullets/normalBullet/bulletAniManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/enemy3logic.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/logic/enemy/enemy2logic.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

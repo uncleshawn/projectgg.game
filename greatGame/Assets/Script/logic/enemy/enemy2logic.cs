@@ -162,7 +162,7 @@ public class enemy2logic : enemylogic {
 
 		public void moveNearByPos(Vector3 pos){
 				enemySelf.invincible = true;
-				iTween.MoveTo(gameObject, iTween.Hash("position", pos,  "easeType", "linear", "loopType", "none" , "time" , 2 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
+				iTween.MoveTo(gameObject, iTween.Hash("position", pos,  "easeType", "linear", "loopType", "none" , "time" , 1 , "oncomplete" , "finishMove" , "oncompletetarget" , this.gameObject ));
 		}
 
 		void finishMove(){
@@ -206,9 +206,9 @@ public class enemy2logic : enemylogic {
 				}
 
 				if (waitTime == 0) {
-						waitTime = 3;
+						waitTime = 2;
 				}
-				waitTime = Random.Range (waitTime-2, waitTime + 2);
+				waitTime = Random.Range (waitTime-1, waitTime);
 				yield return new WaitForSeconds(waitTime);
 				comInMove ();
 		}

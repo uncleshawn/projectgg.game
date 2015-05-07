@@ -27,6 +27,8 @@ public class enemy3logic : enemylogic {
 
 		string aniName;
 		bool enemyCrawl;
+		BoxCollider enemyBox;
+
 
 		float damageDeltaTime;
 		// Use this for initialization
@@ -45,6 +47,11 @@ public class enemy3logic : enemylogic {
 
 				//动画脚本
 				enemyAni = ani.GetComponent<tk2dSpriteAnimator> ();
+
+				//变化碰撞
+				enemyBox = GetComponent<BoxCollider>();
+				enemyBox.center = new Vector3(0,-0.1f,0);
+				enemyBox.size = new Vector3 (1, 2, 1);
 
 				aniName = "walk_";
 
@@ -111,8 +118,12 @@ public class enemy3logic : enemylogic {
 				if (Mathf.Abs (v.x) <= 0.8f && Mathf.Abs (v.y) <= 0.8f) {
 						//非常接近主角 不再移动
 						//Debug.Log("非常接近主角 不再移动");
+
+						if (enemyCrawl) {
+								return new Vector3 ();
+						}
 						aniWait();
-						return new Vector3 ();
+
 				}
 
 				playWalkAni (v);
@@ -122,8 +133,8 @@ public class enemy3logic : enemylogic {
 		override public Vector3 scaredMovePos(){
 				Vector3 pos;
 				pos = this.transform.position;
-				pos.x += Random.Range (-100, 100);
-				pos.y += Random.Range (-100, 100);
+				pos.x += Random.Range (-5, 5);
+				pos.y += Random.Range (-5, 5);
 				return pos;
 		}
 
@@ -137,8 +148,8 @@ public class enemy3logic : enemylogic {
 		void getRandomPos(){
 				Vector3 pos;
 				pos = this.transform.position;
-				int x = Random.Range (-10, 10);
-				int y = Random.Range (-10, 10);
+				int x = Random.Range (-5, 6);
+				int y = Random.Range (-5, 6);
 				if (Mathf.Abs (x) >= Mathf.Abs (y)) {
 						pos.x += x;	
 				} else {
@@ -212,6 +223,10 @@ public class enemy3logic : enemylogic {
 								aniDir = Direction.right;
 								aniManager.setAniSide (aniDir);
 								aniManager.playSameAni (aniName + "up");
+								if (enemyCrawl) {
+										enemyBox.center = new Vector3(0,-0.4f,0);
+										enemyBox.size = new Vector3 (2, 1.5f, 1);
+								}
 
 
 						} else {
@@ -219,6 +234,10 @@ public class enemy3logic : enemylogic {
 								aniDir = Direction.left;
 								aniManager.setAniSide (aniDir);
 								aniManager.playSameAni (aniName + "up");
+								if (enemyCrawl) {
+										enemyBox.center = new Vector3(0,-0.4f,0);
+										enemyBox.size = new Vector3 (2, 1.5f, 1);
+								}
 
 						}
 				} else {
@@ -226,10 +245,18 @@ public class enemy3logic : enemylogic {
 								//Debug.Log ("上");
 								aniDir = Direction.up;	
 								aniManager.playSameAni (aniName + "up");
+								if (enemyCrawl) {
+										enemyBox.center = new Vector3(0,-0.4f,0);
+										enemyBox.size = new Vector3 (1.5f, 2f, 1);
+								}
 						} else {
 								//Debug.Log ("下");
 								aniDir = Direction.down;
 								aniManager.playSameAni (aniName + "up");
+								if (enemyCrawl) {
+										enemyBox.center = new Vector3(0,-0.4f,0);
+										enemyBox.size = new Vector3 (1.5f, 2f, 1);
+										}
 						}
 				}
 		}
@@ -238,7 +265,7 @@ public class enemy3logic : enemylogic {
 				enemyCrawl = true;
 				aniName = "crawl_";
 				if (!enemySelf.slowDown) {
-						enemySelf.upgradeMoveSpeed (3);
+						enemySelf.addMoveSpeed (4);
 				}
 		}
 
@@ -270,25 +297,25 @@ public class enemy3logic : enemylogic {
 						break;
 
 				case Direction.left:
-						Debug.Log ("开始撞墙移动 右");
+						//Debug.Log ("开始撞墙移动 右");
 						int x1 = Random.Range (2, 8);
 						Vector3 moveRight = new Vector3 (x1, 0, 0);
 						playerPos = enemySelf.transform.position + moveRight;
 						break;
 				case Direction.right:
-						Debug.Log ("开始撞墙移动 左");
+						//Debug.Log ("开始撞墙移动 左");
 						int x2 = Random.Range (2, 8);
 						Vector3 moveLeft = new Vector3 (x2, 0, 0);
 						playerPos = enemySelf.transform.position - moveLeft;
 						break;
 				case Direction.up:
-						Debug.Log ("开始撞墙移动 下");
+						//Debug.Log ("开始撞墙移动 下");
 						int y1 = Random.Range (2, 8);
 						Vector3 moveDown = new Vector3 (0, y1, 0);
 						playerPos = enemySelf.transform.position - moveDown;
 						break;
 				case Direction.down:
-						Debug.Log ("开始撞墙移动 上");
+						//Debug.Log ("开始撞墙移动 上");
 						int y2 = Random.Range (2, 8);
 						Vector3 moveUp = new Vector3 (0, y2, 0);
 						playerPos = enemySelf.transform.position + moveUp;
@@ -324,26 +351,26 @@ public class enemy3logic : enemylogic {
 						break;
 
 				case Direction.left:
-						Debug.Log ("开始撞墙移动 右");
-						int x1 = Random.Range (1, 6);
+						//Debug.Log ("开始撞墙移动 右");
+						int x1 = Random.Range (2, 5);
 						Vector3 moveRight = new Vector3 (x1, 0, 0);
 						playerPos = enemySelf.transform.position + moveRight;
 						break;
 				case Direction.right:
-						Debug.Log ("开始撞墙移动 左");
-						int x2 = Random.Range (1, 6);
+						//Debug.Log ("开始撞墙移动 左");
+						int x2 = Random.Range (2, 5);
 						Vector3 moveLeft = new Vector3 (x2, 0, 0);
 						playerPos = enemySelf.transform.position - moveLeft;
 						break;
 				case Direction.up:
-						Debug.Log ("开始撞墙移动 下");
-						int y1 = Random.Range (1, 6);
+						//Debug.Log ("开始撞墙移动 下");
+						int y1 = Random.Range (2, 5);
 						Vector3 moveDown = new Vector3 (0, y1, 0);
 						playerPos = enemySelf.transform.position - moveDown;
 						break;
 				case Direction.down:
-						Debug.Log ("开始撞墙移动 上");
-						int y2 = Random.Range (1, 6);
+						//Debug.Log ("开始撞墙移动 上");
+						int y2 = Random.Range (2, 5);
 						Vector3 moveUp = new Vector3 (0, y2, 0);
 						playerPos = enemySelf.transform.position + moveUp;
 						break;

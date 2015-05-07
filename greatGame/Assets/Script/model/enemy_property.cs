@@ -103,6 +103,12 @@ public class enemy_property : base_property {
 				mMoveSpeed = BaseMoveSpeed;
 		}
 
+		public void addMoveSpeed(float addSpeed){
+				BaseMoveSpeed = enemySpeed + addSpeed;
+				//Debug.Log ("物体减速到: " + BaseMoveSpeed);
+				mMoveSpeed = BaseMoveSpeed;
+		}
+
 		public void resetMoveSpeed(){
 				BaseMoveSpeed = enemySpeed;
 				//Debug.Log ("物体恢复速度到: " + BaseMoveSpeed);
