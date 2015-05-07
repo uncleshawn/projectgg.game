@@ -36,6 +36,7 @@ public class bulletAniManager : MonoBehaviour {
 						bulletAni = transform.FindChild ("ui").FindChild ("bulletPic").GetComponent<tk2dSpriteAnimator> ();
 						bulletProperty = gameObject.GetComponent<bullet_property> ();
 						getSpeed = GetComponent<bulletGetSpeed> ();
+						bulletSprite.gameObject.GetComponent<MeshRenderer> ().enabled = false;
 						if (getShadow) {
 								shadowSprite = intiShadow ();
 						}
@@ -45,6 +46,7 @@ public class bulletAniManager : MonoBehaviour {
 
 		}
 		void Start () {
+				bulletSprite.gameObject.GetComponent<MeshRenderer> ().enabled = true;
 				setBulletDirection ();
 		}
 
